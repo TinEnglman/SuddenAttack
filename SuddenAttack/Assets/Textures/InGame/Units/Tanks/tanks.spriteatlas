@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: tanks
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 206cafd5eeeb7174ab233ed8b97e6a53, type: 3}
+    - {fileID: 2800000, guid: a995e7aed72a56c4bb5a0dbcd0e51886, type: 3}
+    - {fileID: 2800000, guid: 5f89e57b7927ed84cb86b29fa28c1c4a, type: 3}
+    - {fileID: 2800000, guid: 96c08be76c1d7d740ace2d1f5e2a8abf, type: 3}
+    - {fileID: 2800000, guid: 7ee1849dfed266a47bfc2a44e43ab1b2, type: 3}
+    - {fileID: 2800000, guid: 3b64b29bf54180b49bd92186fabbf344, type: 3}
+    - {fileID: 2800000, guid: d56a57214c2057a47bc10803c28cf894, type: 3}
+    - {fileID: 2800000, guid: 986704ecccde0a94282c477dba96aee8, type: 3}
+    - {fileID: 2800000, guid: 167b36ab57bf5424ab7730afb3e2c331, type: 3}
+    - {fileID: 2800000, guid: 9f67923b52dc90e4ea7b0883cd8515dc, type: 3}
+    - {fileID: 2800000, guid: 8dbe247b7f2130446995e79089552d86, type: 3}
+    - {fileID: 2800000, guid: b7acb43c1d7f9d044a65273f47b2ba5f, type: 3}
+    - {fileID: 2800000, guid: cc67f913648804c468f357a67e83a32e, type: 3}
+    - {fileID: 2800000, guid: a611ac2e8d142e345b0d2033e1916b92, type: 3}
+    - {fileID: 2800000, guid: bc9500a14d7ad3f48a67105b29564950, type: 3}
+    - {fileID: 2800000, guid: 2c8bab04946e5a44aab538ff1ed19f2c, type: 3}
+    - {fileID: 2800000, guid: a34c32f00629a2b47a8945a9ff60d096, type: 3}
+    - {fileID: 2800000, guid: f262571d139e9f746b0fcf8ee366dace, type: 3}
+    - {fileID: 2800000, guid: 8c836562d943d234682f6603a0392d1b, type: 3}
+    - {fileID: 2800000, guid: 4cebe282c629e974e8f66bcf3f22fc79, type: 3}
+    - {fileID: 2800000, guid: 84bc089473ec686469edf09401386044, type: 3}
+    - {fileID: 2800000, guid: c85ecfc7171d0b345a08f265ce5465fa, type: 3}
+    totalSpriteSurfaceArea: 1267920
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a34c32f00629a2b47a8945a9ff60d096, type: 3}
+  - {fileID: 21300000, guid: d56a57214c2057a47bc10803c28cf894, type: 3}
+  - {fileID: 21300000, guid: bc9500a14d7ad3f48a67105b29564950, type: 3}
+  - {fileID: 21300000, guid: 8c836562d943d234682f6603a0392d1b, type: 3}
+  - {fileID: 21300000, guid: 4cebe282c629e974e8f66bcf3f22fc79, type: 3}
+  - {fileID: 21300000, guid: cc67f913648804c468f357a67e83a32e, type: 3}
+  - {fileID: 21300000, guid: 2c8bab04946e5a44aab538ff1ed19f2c, type: 3}
+  - {fileID: 21300000, guid: 84bc089473ec686469edf09401386044, type: 3}
+  - {fileID: 21300000, guid: 206cafd5eeeb7174ab233ed8b97e6a53, type: 3}
+  - {fileID: 21300000, guid: c85ecfc7171d0b345a08f265ce5465fa, type: 3}
+  - {fileID: 21300000, guid: 96c08be76c1d7d740ace2d1f5e2a8abf, type: 3}
+  - {fileID: 21300000, guid: 9f67923b52dc90e4ea7b0883cd8515dc, type: 3}
+  - {fileID: 21300000, guid: 8dbe247b7f2130446995e79089552d86, type: 3}
+  - {fileID: 21300000, guid: 5f89e57b7927ed84cb86b29fa28c1c4a, type: 3}
+  - {fileID: 21300000, guid: 3b64b29bf54180b49bd92186fabbf344, type: 3}
+  - {fileID: 21300000, guid: 167b36ab57bf5424ab7730afb3e2c331, type: 3}
+  - {fileID: 21300000, guid: b7acb43c1d7f9d044a65273f47b2ba5f, type: 3}
+  - {fileID: 21300000, guid: 986704ecccde0a94282c477dba96aee8, type: 3}
+  - {fileID: 21300000, guid: f262571d139e9f746b0fcf8ee366dace, type: 3}
+  - {fileID: 21300000, guid: 7ee1849dfed266a47bfc2a44e43ab1b2, type: 3}
+  - {fileID: 21300000, guid: a611ac2e8d142e345b0d2033e1916b92, type: 3}
+  - {fileID: 21300000, guid: a995e7aed72a56c4bb5a0dbcd0e51886, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - track_heavy_body_blue
+  - tank_light_cannon_red
+  - tank_projectile_large
+  - track_heavy_tower_blue
+  - track_heavy_tower_red
+  - tank_light_wheesl_right_red
+  - tank_projectile_small
+  - track_heavy_wheels_left_blue
+  - tank_heavy_cannon_blue
+  - track_heavy_wheels_right_blue
+  - tank_heavy_wheels_right_red
+  - tank_light_wheels_left_blue
+  - tank_light_wheels_left_red
+  - tank_heavy_wheels_left_red
+  - tank_light_body_red
+  - tank_light_tower_red
+  - tank_light_wheels_right_blue
+  - tank_light_tower_blue
+  - track_heavy_body_red
+  - tank_light_body_blue
+  - tank_ligt_cannon_blue
+  - tank_heavy_cannon_red
+  m_Tag: tanks
+  m_IsVariant: 0
