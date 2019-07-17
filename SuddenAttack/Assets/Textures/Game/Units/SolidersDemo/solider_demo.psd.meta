@@ -1,28 +1,31 @@
 fileFormatVersion: 2
-guid: eca6eed949894b94db6bc7347963949b
+guid: 5c037d1fef3c0c04e8340abfcd14a7b2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7361427497785585851
-    second: solider_demo_0
+      213: 8520871769098475319
+    second: solider_demo 1_0
   - first:
-      213: 5724555638810472225
-    second: solider_demo_1
+      213: -1217516616073122555
+    second: solider_demo 1_1
   - first:
-      213: 8477408655320037913
-    second: solider_demo_2
+      213: 1886641000026757563
+    second: solider_demo 1_2
   - first:
-      213: 4416797802460982084
-    second: solider_demo_3
+      213: 4107284758954093152
+    second: solider_demo 1_3
   - first:
-      213: -3900277110298598107
-    second: solider_demo_4
+      213: 4700743252665422767
+    second: solider_demo 1_4
   - first:
-      213: 4714844928440441189
-    second: solider_demo_5
+      213: 7121103844903039574
+    second: solider_demo 1_5
   - first:
-      213: 5755404502261105180
-    second: solider_demo_6
+      213: 3405472140001320545
+    second: solider_demo 1_6
+  - first:
+      213: -6900025440986882189
+    second: solider_demo 1_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -116,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: solider_demo_0
+      name: solider_demo 1_0
       rect:
         serializedVersion: 2
         x: 49
@@ -130,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67c2eafdb98e22b42989b9c15cb8c5ec
-      internalID: -7361427497785585851
+      spriteID: edcd9113f20bc0d4b95bce5acc1c25e7
+      internalID: 8520871769098475319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: solider_demo_1
+      name: solider_demo 1_1
       rect:
         serializedVersion: 2
         x: 194
@@ -151,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 448c237257c91f446be855bbcc4fa638
-      internalID: 5724555638810472225
+      spriteID: 73ded0e6df4914b4891c56fa61f7299d
+      internalID: -1217516616073122555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: solider_demo_2
+      name: solider_demo 1_2
       rect:
         serializedVersion: 2
         x: 443
@@ -172,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d04979d89d259bd48b1048e4bba3a749
-      internalID: 8477408655320037913
+      spriteID: 3e253c7eb97c0db49b81272f5fcb7b4b
+      internalID: 1886641000026757563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: solider_demo_3
+      name: solider_demo 1_3
       rect:
         serializedVersion: 2
         x: 37
@@ -193,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fe89057ea8507c419aa425e5c5a9ab1
-      internalID: 4416797802460982084
+      spriteID: 2064da23f2a11234e9b6651fc6d749ed
+      internalID: 4107284758954093152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: solider_demo_4
+      name: solider_demo 1_4
       rect:
         serializedVersion: 2
         x: 272
@@ -214,14 +217,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59377900d59d2ec4a87c51b7c9f1b3e3
-      internalID: -3900277110298598107
+      spriteID: 377b5c4a0a730784e892f1848015f2e5
+      internalID: 4700743252665422767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: solider_demo_5
+      name: solider_demo 1_5
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 647
+        width: 126
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22b3afc7ef5d6124ebb672d64a13824b
+      internalID: 7121103844903039574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: solider_demo 1_6
       rect:
         serializedVersion: 2
         x: 89
@@ -235,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 747a1dc1be4f06e4c8160005c9ac7ced
-      internalID: 4714844928440441189
+      spriteID: 9d98669fe00730e4087acc6751d7192b
+      internalID: 3405472140001320545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: solider_demo_6
+      name: solider_demo 1_7
       rect:
         serializedVersion: 2
         x: 250
@@ -256,8 +280,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33dce994ae74f124dbd3d245cab86038
-      internalID: 5755404502261105180
+      spriteID: 7c2426692c45daa42ae7d0e05abbb94a
+      internalID: -6900025440986882189
       vertices: []
       indices: 
       edges: []
@@ -265,7 +289,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0b653fc30bf0afd43a39f436ffda1f21
+    spriteID: 0a03cbff8bd506e4ab72f918ab7d4787
     internalID: 0
     vertices: []
     indices: 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DraggingCameraController : MonoBehaviour
 {
-  
+
+    [SerializeField]
+    private bool _lockCamera = false;
     [SerializeField]
     private float _cameraSpeed = 1.0f;
     [SerializeField]
@@ -23,9 +25,25 @@ public class DraggingCameraController : MonoBehaviour
         _currentDirectionVector = Vector3.zero;
     }
 
-    
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _lockCamera = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            _lockCamera = false;
+        }
+
+
+        if (_lockCamera)
+        {
+            return;
+        }
+
         _currentDirectionVector = Vector3.zero;
 
         if (Input.mousePosition.x < _edgePadding && _camera.transform.position.x >  _cameraPositionMin.x)
@@ -54,8 +72,6 @@ public class DraggingCameraController : MonoBehaviour
 
     void UpdateCameraPosition()
     {
-        Debug.Log("MouseX:" + Input.mousePosition.x);
-        Debug.Log("ScreenW:" + (Screen.width - _edgePadding));
         _camera.transform.position += _currentDirectionVector * _cameraSpeed;
     }
 }
