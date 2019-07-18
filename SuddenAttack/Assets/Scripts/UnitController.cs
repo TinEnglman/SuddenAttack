@@ -8,17 +8,31 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     private float _currentAngle = 0f;
     [SerializeField]
-    private Animator animator;
-    private Vector2 _direction;
-    
+    private Animator _animator;
+    [SerializeField]
+    private Vector3 _destination;
+    [SerializeField]
+    private float _moveSpeed = 1.0f;
+
 
     void Awake()
     {
-        _direction = Vector2.up;
+        _destination = GetComponent<Transform>().position;
     }
 
     void Update()
     {
-        animator.SetFloat("Angle", _currentAngle);
+        _animator.SetFloat("Angle", _currentAngle);
+
+        if (_destination != transform.position)
+        {
+            Vector3 direction = (_destination - transform.position).normalized;
+            transform.position += direction * _moveSpeed * Time.deltaTime;
+            _currentAngle = Vector3.Angle(direction, Vector3.up) * (direction.x / Mathf.Abs(direction.x));
+            if ((_destination - transform.position).sqrMagnitude < 0.01f)
+            {
+                transform.position = _destination;
+            }
+        }
     }
 }

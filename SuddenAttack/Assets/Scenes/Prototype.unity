@@ -26132,6 +26132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc578768f6d8648897c52bd8826584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lockCamera: 0
   _cameraSpeed: 0.25
   _edgePadding: 10
   _cameraPositionMin: {x: -20, y: 7, z: -10}
@@ -31332,8 +31333,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760484968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.16, y: -4.55, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.23, y: -14.39, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -31350,7 +31351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402603aaa4d7a7540a9f1d5dee74a1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1760484969}
+  _currentAngle: 0
+  _animator: {fileID: 1760484969}
+  _destination: {x: 0, y: 0, z: 0}
+  _moveSpeed: 0.25
 --- !u!1 &2102169781
 GameObject:
   m_ObjectHideFlags: 0
