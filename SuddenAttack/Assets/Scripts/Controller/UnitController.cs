@@ -28,7 +28,22 @@ public class UnitController : MonoBehaviour
         {
             Vector3 direction = (_destination - transform.position).normalized;
             transform.position += direction * _moveSpeed * Time.deltaTime;
-            _currentAngle = Vector3.Angle(direction, Vector3.up) * (direction.x / Mathf.Abs(direction.x));
+            if (Mathf.Abs(direction.x) == 0)
+            { 
+                if (direction == Vector3.up)
+                {
+                    _currentAngle = 0.0f;
+                }
+                else
+                {
+                    _currentAngle = 180.0f;
+                }
+            }
+            else
+            { 
+                _currentAngle = Vector3.Angle(direction, Vector3.up) * (direction.x / Mathf.Abs(direction.x));
+            }
+
             if ((_destination - transform.position).sqrMagnitude < 0.01f)
             {
                 transform.position = _destination;
