@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class GameManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private List<IUnit> _units;
+    private List<IBuilding> _buildings;
 
-    // Update is called once per frame
-    void Update()
+    public GameManager()
     {
-        
+
     }
 }
