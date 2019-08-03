@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Animator _animator;
+    [SerializeField]
+    private GameObject _target;
+
+    void Awake()
     {
-        
+        _target = gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float targetAngle = 0.0f;
+        Vector3 direction = (_target.transform.position - transform.position).normalized;
+        if (Mathf.Abs(direction.x) == 0)
+        {
+            if (direction == Vector3.up)
+            {
+                targetAngle = 0.0f;
+            }
+            else
+            {
+                targetAngle = 180.0f;
+            }
+        }
+        else
+        {
+            targetAngle = Vector3.Angle(direction, Vector3.up) * (direction.x / Mathf.Abs(direction.x));
+        }
+        _animator.SetFloat("Angle", targetAngle);
     }
 }

@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: 1330009949571703248
     second: TigerTankTurret_11
+  - first:
+      213: -6437404587994496282
+    second: TigerTankTurret_12
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -138,8 +141,8 @@ TextureImporter:
         y: 1711
         width: 141
         height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.39226472, y: 0.35758653}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -159,8 +162,8 @@ TextureImporter:
         y: 1729
         width: 219
         height: 162
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.30578166, y: 0.40622965}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -180,8 +183,8 @@ TextureImporter:
         y: 1756
         width: 255
         height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.2617149, y: 0.5595691}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -201,8 +204,8 @@ TextureImporter:
         y: 1315
         width: 234
         height: 147
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.3052483, y: 0.6446716}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -222,8 +225,8 @@ TextureImporter:
         y: 1246
         width: 165
         height: 210
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.38952228, y: 0.7170079}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -243,8 +246,8 @@ TextureImporter:
         y: 1276
         width: 99
         height: 210
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49999753, y: 0.7025396}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -264,8 +267,8 @@ TextureImporter:
         y: 709
         width: 165
         height: 210
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.610477, y: 0.717007}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -285,8 +288,8 @@ TextureImporter:
         y: 835
         width: 219
         height: 162
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.7219634, y: 0.36872205}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,12 +305,12 @@ TextureImporter:
       name: TigerTankTurret_8
       rect:
         serializedVersion: 2
-        x: 1462
+        x: 1459
         y: 868
         width: 141
         height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.6292794, y: 0.35758623}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -327,8 +330,8 @@ TextureImporter:
         y: 277
         width: 234
         height: 147
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.69475144, y: 0.62400395}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -348,8 +351,8 @@ TextureImporter:
         y: 295
         width: 255
         height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.77402633, y: 0.5595706}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -369,8 +372,8 @@ TextureImporter:
         y: 295
         width: 102
         height: 213
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5595691, y: 0.3145739}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -378,6 +381,27 @@ TextureImporter:
       bones: []
       spriteID: 4b952d6a19646bf43b1290cb24d09bc8
       internalID: 1330009949571703248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TigerTankTurret_12
+      rect:
+        serializedVersion: 2
+        x: 1925
+        y: 570
+        width: 123
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d810c6943882e34686fc63f26f4f590
+      internalID: -6437404587994496282
       vertices: []
       indices: 
       edges: []

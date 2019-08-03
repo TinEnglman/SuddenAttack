@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Tank : Unit
 {
-    //rotate turret
+    //rotate turret angle
 }
