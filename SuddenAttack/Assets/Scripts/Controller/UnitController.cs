@@ -14,6 +14,20 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     private float _moveSpeed = 1.0f;
 
+    public void Select()
+    {
+        //todo add circle animation
+    }
+
+    public void Deselect()
+    {
+        //todo add circle animation
+    }
+
+    public void SetDestination(Vector3 destination)
+    {
+        _destination = destination;
+    }
 
     void Awake()
     {

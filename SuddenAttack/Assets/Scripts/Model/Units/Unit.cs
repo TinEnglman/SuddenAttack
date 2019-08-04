@@ -13,9 +13,18 @@ public abstract class Unit : IUnit
         set { _unitData = value; }
     }
 
-    public GameObject Prefab
+    public void Move(Vector3 destination)
     {
-        get { return _prefab; }
-        set { _prefab = value; }
+        _prefab.GetComponent<UnitController>().SetDestination(destination);
+    }
+
+    public void Select()
+    {
+        _prefab.GetComponent<UnitController>().Select();
+    }
+
+    public void Deselect()
+    {
+        _prefab.GetComponent<UnitController>().Deselect();
     }
 }
