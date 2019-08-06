@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class SoliderFactory : IUnitFactory
 {
-    
+    public Unit CreateUnit()
+    {
+        return new Solider();
+    }
 }

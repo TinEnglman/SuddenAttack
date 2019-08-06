@@ -4,4 +4,5 @@ using UnityEngine;
 
 public interface IUnitFactory
 {
+    Unit CreateUnit(float x, float y);
 }
