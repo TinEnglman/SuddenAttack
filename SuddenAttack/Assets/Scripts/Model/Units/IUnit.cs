@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IUnit
 {
     UnitData Data{get; set;}
+    GameObject Prefab{get; set;}
 
     void Move(Vector3 destination);
     void Select();

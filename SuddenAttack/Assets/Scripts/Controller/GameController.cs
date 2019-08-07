@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
     private void InitLevel()
     {
         var newTank = _tankFactory.CreateUnit(-8, -20, _tankPrefab);
-
+        AddUnit(newTank);
     }
 
     // Update is called once per frame
@@ -69,10 +69,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void AddUnit(IUnit unit, GameObject unitPrefab) // need factory
+    public void AddUnit(IUnit unit)
     {
         _gameManager.AddUnit(unit);
-
     }
 
     private void OnRightMouseDown()
@@ -93,6 +92,12 @@ public class GameController : MonoBehaviour
     private void OnLeftMouseUp()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        foreach (IUnit unit in _gameManager.Units)
+        {
+            _selectedUnit = unit;
+        }
+           
         _gameManager.SelectUnit(_selectedUnit);
     }
 
