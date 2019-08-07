@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _tankPrefab;
+    [SerializeField]
+    private GameObject _soliderPrefab;
+
     private const int LeftButtonIndex = 0;
     private const int RightButtonIndex = 1;
     private GameManager _gameManager = null;
@@ -36,7 +41,7 @@ public class GameController : MonoBehaviour
 
     private void InitLevel()
     {
-        var newTank = _tankFactory.CreateUnit(-8, -20);
+        var newTank = _tankFactory.CreateUnit(-8, -20, _tankPrefab);
 
     }
 

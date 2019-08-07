@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TankFactory : IUnitFactory
 {
-    public Unit CreateUnit(float x, float y)
+    public Unit CreateUnit(float x, float y, GameObject prefab)
     {
-        return new Tank();
+        var tank = new Tank
+        {
+            Prefab = Object.Instantiate(prefab)
+        };
+        return tank;
     }
 }

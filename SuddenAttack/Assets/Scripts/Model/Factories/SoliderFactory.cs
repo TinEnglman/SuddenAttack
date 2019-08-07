@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class SoliderFactory : IUnitFactory
 {
-    public Unit CreateUnit()
+    public Unit CreateUnit(float x, float y, GameObject prefab)
     {
-        return new Solider();
+        var solider = new Solider
+        {
+            Prefab = Object.Instantiate(prefab)
+        };
+        return solider;
     }
 }

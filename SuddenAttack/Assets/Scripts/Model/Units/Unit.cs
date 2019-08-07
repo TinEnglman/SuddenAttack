@@ -5,7 +5,13 @@ using UnityEngine;
 public abstract class Unit : IUnit
 {
     protected UnitData _unitData;
-    protected GameObject _prefab; 
+    protected GameObject _prefab;
+
+    public GameObject Prefab
+    {
+        get { return _prefab; }
+        set { _prefab = value; }
+    }
 
     public UnitData Data
     {
