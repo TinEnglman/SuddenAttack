@@ -9,6 +9,13 @@ public class TurretController : MonoBehaviour
     [SerializeField]
     private GameObject _target;
 
+
+    public GameObject Target
+    {
+        get { return _target; }
+        set { _target = value; }
+    }
+
     void Awake()
     {
         _target = gameObject;

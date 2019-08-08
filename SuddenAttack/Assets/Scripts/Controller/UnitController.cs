@@ -14,14 +14,16 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     private float _moveSpeed = 1.0f;
 
+    private SelectionCircleController _selectionCircleController = null;
+
     public void Select()
     {
-        //todo add circle animation
+        _selectionCircleController.Selectct();
     }
 
     public void Deselect()
     {
-        //todo add circle animation
+        _selectionCircleController.Deselectct();
     }
 
     public void SetDestination(Vector3 destination)
@@ -32,6 +34,7 @@ public class UnitController : MonoBehaviour
     void Awake()
     {
         _destination = GetComponent<Transform>().position;
+        _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
     }
 
     void Update()

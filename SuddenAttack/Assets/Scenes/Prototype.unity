@@ -26614,6 +26614,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f20809e6debc9e42a379b31dbbe2943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tankPrefab: {fileID: 1865397344074228864, guid: b852653e0d04c2f4f9bef32bfb1f5895,
+    type: 3}
+  _soliderPrefab: {fileID: 1870951756855943912, guid: 46db7b1c64db41348865ac319664d3bb,
+    type: 3}
 --- !u!1 &723343844
 GameObject:
   m_ObjectHideFlags: 0
@@ -31361,6 +31365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
+    - target: {fileID: 1865397344074228864, guid: b852653e0d04c2f4f9bef32bfb1f5895,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1865397344074228895, guid: b852653e0d04c2f4f9bef32bfb1f5895,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31439,6 +31448,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Solider
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870951756855943912, guid: 46db7b1c64db41348865ac319664d3bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1870951756855943915, guid: 46db7b1c64db41348865ac319664d3bb,
         type: 3}
