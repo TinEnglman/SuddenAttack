@@ -14,4 +14,9 @@ public class Tank : Unit
         _unitData.Damage = 25;
         _unitData.Range = 8;
     }
+
+    public override void Attack(IUnit other)
+    {
+        Prefab.GetComponentInChildren<TurretController>().Target = other.Prefab;
+    }
 }

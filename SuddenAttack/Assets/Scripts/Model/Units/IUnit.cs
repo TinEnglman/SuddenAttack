@@ -10,4 +10,5 @@ public interface IUnit
     void Move(Vector3 destination);
     void Select();
     void Deselect();
+    void Attack(IUnit other);
 }

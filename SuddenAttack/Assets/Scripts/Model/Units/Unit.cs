@@ -33,4 +33,7 @@ public abstract class Unit : IUnit
     {
         _prefab.GetComponent<UnitController>().Deselect();
     }
+
+    public abstract void Attack(IUnit other);
+ 
 }

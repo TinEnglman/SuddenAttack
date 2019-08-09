@@ -14,4 +14,9 @@ public class Solider : Unit
         _unitData.Damage = 4;
         _unitData.Range = 4;
     }
+
+    public override void Attack(IUnit other)
+    {
+
+    }
 }

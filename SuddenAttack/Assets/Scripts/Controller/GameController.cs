@@ -166,7 +166,8 @@ public class GameController : MonoBehaviour
 
     private void AttackTarget(IUnit other)
     {
-        _selectedUnit.Prefab.GetComponentInChildren<TurretController>().Target = other.Prefab;
+
+        _selectedUnit.Attack(other);
     }
 
 
