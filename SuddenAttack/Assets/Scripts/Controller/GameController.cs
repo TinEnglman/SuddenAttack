@@ -5,9 +5,9 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _tankPrefab;
+    private GameObject _tankPrefab = null;
     [SerializeField]
-    private GameObject _soliderPrefab;
+    private GameObject _soliderPrefab = null;
 
     private const int LeftButtonIndex = 0;
     private const int RightButtonIndex = 1;
@@ -49,6 +49,12 @@ public class GameController : MonoBehaviour
 
         newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab);
         AddUnit(newTank);
+
+        var newSolider = _soliderFactory.CreateUnit(-5.5f, -13, _soliderPrefab);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -16, _soliderPrefab);
+        AddUnit(newSolider);
     }
 
     // Update is called once per frame

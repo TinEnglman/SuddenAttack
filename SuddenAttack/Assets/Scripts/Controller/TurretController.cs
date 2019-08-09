@@ -5,9 +5,9 @@ using UnityEngine;
 public class TurretController : MonoBehaviour
 {
     [SerializeField]
-    private Animator _animator;
+    private Animator _animator = null;
     [SerializeField]
-    private GameObject _target;
+    private GameObject _target = null;
 
 
     public GameObject Target

@@ -8,7 +8,7 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     private float _currentAngle = 0f;
     [SerializeField]
-    private Animator _animator;
+    private Animator _animator = null;
     [SerializeField]
     private Vector3 _destination;
     [SerializeField]
