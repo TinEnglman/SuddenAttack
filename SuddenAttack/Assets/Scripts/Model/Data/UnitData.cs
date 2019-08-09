@@ -8,4 +8,5 @@ public class UnitData : ScriptableObject
     public float MoveSpeed { get; set; }
     public float FireSpeed { get; set; }
     public float Damage { get; set; }
+    public float Range { get; set; }
 }

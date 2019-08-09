@@ -175,6 +175,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: Angle
     m_EventTreshold: 1
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -90
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8122684951174428846}
   m_Solo: 0

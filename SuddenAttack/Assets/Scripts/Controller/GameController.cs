@@ -41,13 +41,13 @@ public class GameController : MonoBehaviour
 
     private void InitLevel()
     {
-        var newTank = _tankFactory.CreateUnit(-8, -20, _tankPrefab);
+        var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab);
         AddUnit(newTank);
 
         newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab);
         AddUnit(newTank);
 
-        newTank = _tankFactory.CreateUnit(-8, -13, _tankPrefab);
+        newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab);
         AddUnit(newTank);
     }
 
