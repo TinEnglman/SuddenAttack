@@ -13,10 +13,12 @@ public class Tank : Unit
         _unitData.FireSpeed = 1;
         _unitData.Damage = 25;
         _unitData.Range = 8;
+        _weaponCooldown = _unitData.FireSpeed;
     }
 
     public override void Attack(IUnit other)
     {
+        _isAttacking = true;
         Prefab.GetComponentInChildren<TurretController>().Target = other.Prefab;
     }
 }

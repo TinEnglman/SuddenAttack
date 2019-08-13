@@ -11,4 +11,7 @@ public interface IUnit
     void Select();
     void Deselect();
     void Attack(IUnit other);
+    bool CanFire();
+    void Fire(IUnit other);
+    void Update();
 }

@@ -13,10 +13,11 @@ public class Solider : Unit
         _unitData.FireSpeed = 0.33f;
         _unitData.Damage = 4;
         _unitData.Range = 4;
+        _weaponCooldown = _unitData.FireSpeed;
     }
 
     public override void Attack(IUnit other)
     {
-
+        _isAttacking = true;
     }
 }

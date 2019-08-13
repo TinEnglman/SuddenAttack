@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     private const int LeftButtonIndex = 0;
     private const int RightButtonIndex = 1;
     private GameManager _gameManager = null;
+    private CombatManager _combatManager = null;
     private IUnitFactory _soliderFactory = null;
     private IUnitFactory _tankFactory = null;
     private IUnit _selectedUnit;
@@ -21,6 +22,11 @@ public class GameController : MonoBehaviour
         if (_gameManager == null)
         {
             _gameManager = new GameManager(); // refactor for the love of god
+        }
+
+        if (_combatManager == null)
+        {
+            _combatManager = new CombatManager();
         }
 
         if (_tankFactory == null)
@@ -60,6 +66,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float dt = Time.deltaTime;
+        _gameManager.Update(dt);
+        _combatManager.Update(dt);
+
         if (Input.GetMouseButtonDown(LeftButtonIndex))
         {
             OnLeftMouseDown();
@@ -166,8 +176,8 @@ public class GameController : MonoBehaviour
 
     private void AttackTarget(IUnit other)
     {
+        _combatManager.LockTarget(_selectedUnit, other);
 
-        _selectedUnit.Attack(other);
     }
 
 

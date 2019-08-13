@@ -26,6 +26,14 @@ public class GameManager
         _buildings = new List<IBuilding>();
     }
 
+    public void Update(float dt)
+    {
+        foreach(IUnit unit in _units)
+        {
+            unit.Update();
+        }
+    }
+
     public void SelectUnit(IUnit unit)
     {
 
