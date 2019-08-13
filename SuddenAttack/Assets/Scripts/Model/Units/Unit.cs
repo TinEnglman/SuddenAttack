@@ -4,11 +4,20 @@ using UnityEngine;
 
 public abstract class Unit : IUnit
 {
+    public class DelayedDamage
+    {
+        public IUnit other;
+        public volatile float damage; // refactor
+        public volatile float delay;
+    }
+
     protected UnitData _unitData;
     protected GameObject _prefab;
     protected float _weaponCooldown = 0.0f;
     protected bool _isAttacking = false;
     protected bool _canFire = true;
+    protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>();
+
 
     public GameObject Prefab
     {
@@ -42,10 +51,9 @@ public abstract class Unit : IUnit
         return _canFire;
     }
 
-    public void Fire(IUnit other)
+    public void Fire()
     {
         _canFire = false;
-        other.Data.HitPoints -= Data.Damage;
     }
 
     public void Update()
@@ -56,10 +64,37 @@ public abstract class Unit : IUnit
 
             if (_weaponCooldown <= 0)
             {
-                _weaponCooldown += _unitData.FireSpeed;
+                _weaponCooldown += _unitData.WeaponCooldown;
                 _canFire = true;
             }
         }
+
+        List<int> killList = new List<int>();
+        for (int i = 0; i < _receavedDamage.Count; i++)
+        {
+            _receavedDamage[i].delay -= Time.deltaTime;
+
+            if (_receavedDamage[i].delay <= 0)
+            {
+                _receavedDamage[i].other.Data.HitPoints -= Data.Damage;
+                killList.Add(i);
+            }
+        }
+
+        for(int index = killList.Count - 1; index > 0; index--)
+        {
+            _receavedDamage.RemoveAt(index);
+        }
+
+    }
+
+    public void Damage(IUnit other, float damage, float delay)
+    {
+        var delayedDamage = new DelayedDamage();
+        delayedDamage.damage = damage;
+        delayedDamage.delay = delay;
+        delayedDamage.other = other;
+        _receavedDamage.Add(delayedDamage);
     }
 
     public abstract void Attack(IUnit other);

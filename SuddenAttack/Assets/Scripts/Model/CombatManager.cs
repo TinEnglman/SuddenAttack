@@ -21,15 +21,29 @@ public class CombatManager
     {
         foreach(KeyValuePair<IUnit,IUnit> pair in _attackingUnits)
         {
-            var attaker = pair.Key;
-            var attaked = pair.Value;
+            var attacker = pair.Key;
+            var attacked = pair.Value;
 
-            float attackerFireSpeed = attaker.Data.FireSpeed;
+            if (attacker.CanFire())
+            {
+                attacker.Fire();
+                float delay = CalculateDamageDelay(attacker, attacked);
+                attacker.Damage(attacked, attacker.Data.Damage, delay);
 
-            if (attaker.CanFire())
-            { 
-                pair.Key.Fire(pair.Value);
             }
+        }
+    }
+
+    public float CalculateDamageDelay(IUnit attacker, IUnit attacked)
+    {
+        float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
+        if (attacker.Data.ProjectileSpeed > 0)
+        {
+            return distance / attacker.Data.ProjectileSpeed;
+        }
+        else
+        {
+            return 0;
         }
     }
 }

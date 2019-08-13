@@ -28,9 +28,20 @@ public class GameManager
 
     public void Update(float dt)
     {
-        foreach(IUnit unit in _units)
+        List<IUnit> killList = new List<IUnit>();
+        foreach (IUnit unit in _units)
         {
             unit.Update();
+            if (unit.Data.HitPoints <= 0)
+            {
+                killList.Add(unit);
+            }
+        }
+
+        foreach(IUnit unit in killList)
+        {
+            _units.Remove(unit);
+            unit.Prefab.SetActive(false);
         }
     }
 

@@ -10,10 +10,11 @@ public class Tank : Unit
 
         _unitData.HitPoints = 100;
         _unitData.MoveSpeed = 2;
-        _unitData.FireSpeed = 1;
+        _unitData.WeaponCooldown = 4f;
         _unitData.Damage = 25;
         _unitData.Range = 8;
-        _weaponCooldown = _unitData.FireSpeed;
+        _unitData.ProjectileSpeed = 2;
+        _weaponCooldown = _unitData.WeaponCooldown;
     }
 
     public override void Attack(IUnit other)

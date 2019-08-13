@@ -12,6 +12,7 @@ public interface IUnit
     void Deselect();
     void Attack(IUnit other);
     bool CanFire();
-    void Fire(IUnit other);
+    void Fire();
+    void Damage(IUnit other, float damage, float delay);
     void Update();
 }
