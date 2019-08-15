@@ -21,5 +21,6 @@ public class Tank : Unit
     {
         _isAttacking = true;
         Prefab.GetComponentInChildren<TurretController>().Target = other.Prefab;
+        //Prefab.GetComponentInChildren<BulletContoller>().Target = other.Prefab;
     }
 }

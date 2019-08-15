@@ -12,14 +12,16 @@ public class CombatManager
         attacker.Attack(attacked);
     }
 
-    public void ClearTarget(IUnit attacker)
+    public void ClearAttacker(IUnit attacker)
     {
-        _attackingUnits[attacker] = null;
+        _attackingUnits.Remove(attacker);
     }
 
     public void Update(float dt)
     {
-        foreach(KeyValuePair<IUnit,IUnit> pair in _attackingUnits)
+
+        List<IUnit> killList = new List<IUnit>();
+        foreach (KeyValuePair<IUnit,IUnit> pair in _attackingUnits)
         {
             var attacker = pair.Key;
             var attacked = pair.Value;
@@ -29,9 +31,19 @@ public class CombatManager
                 attacker.Fire();
                 float delay = CalculateDamageDelay(attacker, attacked);
                 attacker.Damage(attacked, attacker.Data.Damage, delay);
+            }
 
+            if (attacked.Data.HitPoints <= 0)
+            {
+                killList.Add(attacker);
             }
         }
+
+        foreach(IUnit unit in killList)
+        {
+            ClearAttacker(unit);
+        }
+
     }
 
     public float CalculateDamageDelay(IUnit attacker, IUnit attacked)

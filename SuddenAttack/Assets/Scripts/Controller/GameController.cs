@@ -67,8 +67,9 @@ public class GameController : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-        _gameManager.Update(dt);
         _combatManager.Update(dt);
+        _gameManager.Update(dt);
+
 
         if (Input.GetMouseButtonDown(LeftButtonIndex))
         {

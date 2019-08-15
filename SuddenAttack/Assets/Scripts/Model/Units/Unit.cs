@@ -58,7 +58,7 @@ public abstract class Unit : IUnit
 
     public void Update()
     {
-        if (_isAttacking)
+        if (_isAttacking || !_canFire)
         {
             _weaponCooldown -= Time.deltaTime;
 
