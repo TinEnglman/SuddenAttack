@@ -14,6 +14,8 @@ public class TankFactory : IUnitFactory
 
         tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
         tank.Prefab.GetComponent<UnitController>().SetDestination(position);
+        tank.Prefab.GetComponent<BulletContoller>().enabled = false;
+        tank.Prefab.GetComponent<BulletContoller>().SetPosition(tank.Prefab.transform.position);
 
         return tank;
     }
