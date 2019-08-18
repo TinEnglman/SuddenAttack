@@ -6,7 +6,8 @@ public abstract class Unit : IUnit
 {
     public class DelayedDamage
     {
-        public IUnit other;
+        public IUnit attacker;
+        public IUnit attacked;
         public volatile float damage; // refactor
         public volatile float delay;
     }
@@ -34,6 +35,11 @@ public abstract class Unit : IUnit
     public void Move(Vector3 destination)
     {
         _prefab.GetComponent<UnitController>().SetDestination(destination);
+    }
+
+    public void Stop()
+    {
+        _prefab.GetComponent<UnitController>().SetDestination(_prefab.transform.position); 
     }
 
     public void Select()
@@ -76,12 +82,13 @@ public abstract class Unit : IUnit
 
             if (_receavedDamage[i].delay <= 0)
             {
-                _receavedDamage[i].other.Data.HitPoints -= Data.Damage;
+                _receavedDamage[i].attacked.Data.HitPoints -= Data.Damage;
+                _receavedDamage[i].attacker.Hit(_receavedDamage[i].attacked);
                 killList.Add(i);
             }
         }
 
-        for(int index = killList.Count - 1; index > 0; index--)
+        for(int index = killList.Count - 1; index >= 0; index--)
         {
             _receavedDamage.RemoveAt(index);
         }
@@ -93,10 +100,13 @@ public abstract class Unit : IUnit
         var delayedDamage = new DelayedDamage();
         delayedDamage.damage = damage;
         delayedDamage.delay = delay;
-        delayedDamage.other = other;
+        delayedDamage.attacked = other;
+        delayedDamage.attacker = this;
         _receavedDamage.Add(delayedDamage);
     }
 
     public abstract void Attack(IUnit other);
+    public abstract void Hit(IUnit other);
+    public abstract void StopAttacking();
 
 }

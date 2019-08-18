@@ -8,6 +8,8 @@ public class BulletContoller : MonoBehaviour
     private GameObject _projectile = null;
     private GameObject _target = null;
     private Vector3 _direction;
+    private float _projectileSpeed = 1;
+    private Vector3 _projectileOrigin;
 
     public GameObject Target
     {
@@ -15,9 +17,16 @@ public class BulletContoller : MonoBehaviour
         set { _target = value; }
     }
 
-    public void SetPosition(Vector3 position)
+    public Vector3 ProjectileOrigin
     {
-        _projectile.transform.position = position;
+        get { return _projectileOrigin; }
+        set { _projectileOrigin = value; }
+    }
+
+    public float ProjectileSpeed
+    {
+        get { return _projectileSpeed; }
+        set { _projectileSpeed = value; }
     }
 
     public void Fire()
@@ -26,7 +35,13 @@ public class BulletContoller : MonoBehaviour
         _direction = (_target.transform.position - transform.position).normalized;
         Vector3 angles = _projectile.transform.rotation.eulerAngles;
         Vector3 newRotation = new Vector3(angles.x, angles.y, Vector3.Angle(_direction, Vector3.right));
+        _projectile.transform.position = _projectileOrigin;
         _projectile.transform.localRotation = Quaternion.Euler(newRotation);
+    }
+
+    public void HitTarget()
+    {
+        _projectile.SetActive(false);
     }
 
     void Awake()
@@ -39,9 +54,7 @@ public class BulletContoller : MonoBehaviour
     {
         if (_target != null)
         {
-
-            float speed = 8;
-            _projectile.transform.Translate(_direction * speed * Time.deltaTime, Space.World);
+            _projectile.transform.Translate(_direction * _projectileSpeed * Time.deltaTime, Space.World);
         }
     }
 }

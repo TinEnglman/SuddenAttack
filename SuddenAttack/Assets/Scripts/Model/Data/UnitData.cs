@@ -10,4 +10,5 @@ public class UnitData : ScriptableObject
     public float Damage { get; set; }
     public float Range { get; set; }
     public float ProjectileSpeed { get; set; }
+    public bool IsFriendly { get; set; }
 }

@@ -9,12 +9,12 @@ public class CombatManager
     public void LockTarget(IUnit attacker, IUnit attacked)
     {
         _attackingUnits[attacker] = attacked;
-        attacker.Attack(attacked);
     }
 
     public void ClearAttacker(IUnit attacker)
     {
         _attackingUnits.Remove(attacker);
+        attacker.StopAttacking();
     }
 
     public void Update(float dt)
@@ -25,12 +25,20 @@ public class CombatManager
         {
             var attacker = pair.Key;
             var attacked = pair.Value;
+            float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
 
-            if (attacker.CanFire())
+            if (attacker.CanFire() && distance < attacker.Data.Range)
             {
+                attacker.Stop();
                 attacker.Fire();
                 float delay = CalculateDamageDelay(attacker, attacked);
+                attacker.Attack(attacked);
                 attacker.Damage(attacked, attacker.Data.Damage, delay);
+            }
+
+            if (distance > attacker.Data.Range)
+            {
+                attacker.Move(attacked.Prefab.transform.position);
             }
 
             if (attacked.Data.HitPoints <= 0)

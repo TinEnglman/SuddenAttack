@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUnitFactory
 {
-    Unit CreateUnit(float x, float y, GameObject prefab);
+    Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly);
 }

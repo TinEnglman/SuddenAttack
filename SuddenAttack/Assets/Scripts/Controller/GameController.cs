@@ -47,19 +47,19 @@ public class GameController : MonoBehaviour
 
     private void InitLevel()
     {
-        var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab);
+        var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab, true);
         AddUnit(newTank);
 
-        newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab);
+        newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab, true);
         AddUnit(newTank);
 
-        newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab);
+        newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, false);
         AddUnit(newTank);
 
-        var newSolider = _soliderFactory.CreateUnit(-5.5f, -13, _soliderPrefab);
+        var newSolider = _soliderFactory.CreateUnit(-5.5f, -13, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -16, _soliderPrefab);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -16, _soliderPrefab, false);
         AddUnit(newSolider);
     }
 
@@ -128,6 +128,7 @@ public class GameController : MonoBehaviour
             else
             {
                 MoveSelected(mousePos);
+                StopAttacking(_selectedUnit);
             }
         }
     }
@@ -179,6 +180,11 @@ public class GameController : MonoBehaviour
     {
         _combatManager.LockTarget(_selectedUnit, other);
 
+    }
+
+    private void StopAttacking(IUnit unit)
+    {
+        _combatManager.ClearAttacker(unit);
     }
 
 

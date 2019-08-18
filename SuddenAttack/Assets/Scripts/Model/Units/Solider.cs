@@ -12,7 +12,7 @@ public class Solider : Unit
         _unitData.MoveSpeed = 1.5f;
         _unitData.WeaponCooldown = 0.33f;
         _unitData.Damage = 4;
-        _unitData.Range = 4;
+        _unitData.Range = 3;
         _unitData.ProjectileSpeed = -1;
         _weaponCooldown = _unitData.WeaponCooldown;
     }
@@ -20,5 +20,15 @@ public class Solider : Unit
     public override void Attack(IUnit other)
     {
         _isAttacking = true;
+    }
+
+    public override void Hit(IUnit other)
+    {
+      
+    }
+
+    public override void StopAttacking()
+    {
+
     }
 }

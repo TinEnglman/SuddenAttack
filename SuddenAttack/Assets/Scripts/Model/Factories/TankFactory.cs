@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TankFactory : IUnitFactory
 {
-    public Unit CreateUnit(float x, float y, GameObject prefab)
+    public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
     {
         Vector3 position = new Vector3(x, y, 0);
         var tank = new Tank
@@ -12,10 +12,11 @@ public class TankFactory : IUnitFactory
             Prefab = Object.Instantiate(prefab)
         };
 
+        tank.Data.IsFriendly = isFriendly;
         tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
         tank.Prefab.GetComponent<UnitController>().SetDestination(position);
         tank.Prefab.GetComponent<BulletContoller>().enabled = false;
-        tank.Prefab.GetComponent<BulletContoller>().SetPosition(tank.Prefab.transform.position);
+        tank.Prefab.GetComponent<BulletContoller>().ProjectileOrigin = tank.Prefab.transform.position;
 
         return tank;
     }

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Tank : Unit
 {
+
+
     public Tank()
     {
         _unitData = ScriptableObject.CreateInstance<UnitData>();
 
         _unitData.HitPoints = 100;
         _unitData.MoveSpeed = 2;
-        _unitData.WeaponCooldown = 4f;
-        _unitData.Damage = 25;
-        _unitData.Range = 8;
-        _unitData.ProjectileSpeed = 2;
+        _unitData.WeaponCooldown = 2f;
+        _unitData.Damage = 10;
+        _unitData.Range = 6;
+        _unitData.ProjectileSpeed = 8;
         _weaponCooldown = _unitData.WeaponCooldown;
     }
 
@@ -24,9 +26,21 @@ public class Tank : Unit
 
         var bulletController = Prefab.GetComponent<BulletContoller>();
         bulletController.Target = other.Prefab;
-        bulletController.SetPosition(Prefab.transform.position);
+        bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0);
+        bulletController.ProjectileSpeed = _unitData.ProjectileSpeed;
         bulletController.Fire();
         bulletController.enabled = true;
 
+    }
+
+    public override void Hit(IUnit other)
+    {
+        var bulletController = Prefab.GetComponent<BulletContoller>();
+        bulletController.HitTarget();
+    }
+
+    public override void StopAttacking()
+    {
+        Prefab.GetComponentInChildren<TurretController>().Target = Prefab;
     }
 }
