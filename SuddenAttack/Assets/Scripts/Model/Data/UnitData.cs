@@ -11,4 +11,5 @@ public class UnitData : ScriptableObject
     public float Range { get; set; }
     public float ProjectileSpeed { get; set; }
     public bool IsFriendly { get; set; }
+    public float EngageRange { get; set; }
 }

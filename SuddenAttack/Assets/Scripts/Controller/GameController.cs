@@ -53,13 +53,34 @@ public class GameController : MonoBehaviour
         newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab, true);
         AddUnit(newTank);
 
-        newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, false);
+        newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, true);
         AddUnit(newTank);
 
-        var newSolider = _soliderFactory.CreateUnit(-5.5f, -13, _soliderPrefab, false);
+        var newSolider = _soliderFactory.CreateUnit(-5.5f, -10, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -16, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -10, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -11, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -10, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-4.5f, -10, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-3.5f, -10, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-2.5f, -10, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-2.5f, -8, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-6.5f, -10, _soliderPrefab, false);
         AddUnit(newSolider);
     }
 
@@ -69,6 +90,7 @@ public class GameController : MonoBehaviour
         float dt = Time.deltaTime;
         _combatManager.Update(dt);
         _gameManager.Update(dt);
+        UpdateAI();
 
 
         if (Input.GetMouseButtonDown(LeftButtonIndex))
@@ -154,6 +176,22 @@ public class GameController : MonoBehaviour
                 else
                 {
                     DeselectUnit();
+                }
+            }
+        }
+    }
+
+    private void UpdateAI()
+    {
+        foreach (IUnit unit in _gameManager.Units)
+        {
+           
+            var targets = _gameManager.GetTargets(unit);
+            foreach (IUnit target in targets)
+            {
+                if (target.Data.IsFriendly != unit.Data.IsFriendly)
+                {
+                    _combatManager.LockTarget(unit, target);
                 }
             }
         }

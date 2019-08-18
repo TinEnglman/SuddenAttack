@@ -43,6 +43,7 @@ public class GameManager
             _units.Remove(unit);
             unit.Prefab.SetActive(false);
         }
+
     }
 
     public void SelectUnit(IUnit unit)
@@ -77,5 +78,18 @@ public class GameManager
     public IUnit GetSelected()
     {
         return _selectedUnit;
+    }
+
+    public List<IUnit> GetTargets(IUnit source) // called form update; slow af; refactor
+    {
+        List<IUnit> targets = new List<IUnit>();
+        foreach (IUnit unit in _units)
+        {
+            if (source.Data.EngageRange > (unit.Prefab.transform.position - source.Prefab.transform.position).magnitude)
+            {
+                targets.Add(unit);
+            }
+        }
+        return targets;
     }
 }

@@ -14,6 +14,7 @@ public class Solider : Unit
         _unitData.Damage = 4;
         _unitData.Range = 3;
         _unitData.ProjectileSpeed = -1;
+        _unitData.EngageRange = 12;
         _weaponCooldown = _unitData.WeaponCooldown;
     }
 

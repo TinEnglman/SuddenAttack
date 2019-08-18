@@ -16,6 +16,7 @@ public class Tank : Unit
         _unitData.Damage = 10;
         _unitData.Range = 6;
         _unitData.ProjectileSpeed = 8;
+        _unitData.EngageRange = 12;
         _weaponCooldown = _unitData.WeaponCooldown;
     }
 
