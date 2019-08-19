@@ -56,32 +56,47 @@ public class GameController : MonoBehaviour
         newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, true);
         AddUnit(newTank);
 
-        var newSolider = _soliderFactory.CreateUnit(-5.5f, -10, _soliderPrefab, false);
+        var newSolider = _soliderFactory.CreateUnit(-8f, -15, _soliderPrefab, true);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -10, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -15, _soliderPrefab, true);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -11, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -3, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -10, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -2, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-4.5f, -10, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-3.5f, -10, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-2.5f, -10, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-4.5f, -1, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-3.5f, -1, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newSolider = _soliderFactory.CreateUnit(-2.5f, -1, _soliderPrefab, false);
         AddUnit(newSolider);
 
         newSolider = _soliderFactory.CreateUnit(-2.5f, -8, _soliderPrefab, false);
         AddUnit(newSolider);
 
-        newSolider = _soliderFactory.CreateUnit(-6.5f, -10, _soliderPrefab, false);
+        newSolider = _soliderFactory.CreateUnit(-6.5f, -1, _soliderPrefab, false);
         AddUnit(newSolider);
+
+        newTank = _tankFactory.CreateUnit(-1.5f, -4, _tankPrefab, false);
+        AddUnit(newTank);
+
+        newSolider = _soliderFactory.CreateUnit( 0f, 1, _soliderPrefab, false);
+        AddUnit(newSolider);
+
+        newTank = _tankFactory.CreateUnit(-1.5f, -0, _tankPrefab, false);
+        AddUnit(newTank);
     }
 
     // Update is called once per frame
@@ -185,14 +200,35 @@ public class GameController : MonoBehaviour
     {
         foreach (IUnit unit in _gameManager.Units)
         {
-           
+            if (unit.IsMoving && unit.Data.IsFriendly || _combatManager.HasLock(unit) && unit.Data.IsFriendly)
+            {
+                continue;
+            }
+
             var targets = _gameManager.GetTargets(unit);
+            float distance = 0;
+            IUnit closestTarget = null; 
             foreach (IUnit target in targets)
             {
                 if (target.Data.IsFriendly != unit.Data.IsFriendly)
                 {
-                    _combatManager.LockTarget(unit, target);
+                    if (distance == 0)
+                    { 
+                        distance = (target.Prefab.transform.position - unit.Prefab.transform.position).magnitude;
+                        closestTarget = target;
+                    }
+
+                    float currentDistance = (target.Prefab.transform.position - unit.Prefab.transform.position).magnitude;
+                    if (currentDistance < distance)
+                    {
+                        closestTarget = target;
+                        currentDistance = distance;
+                    }
                 }
+            }
+            if (closestTarget != null)
+            {
+                _combatManager.LockTarget(unit, closestTarget);
             }
         }
     }

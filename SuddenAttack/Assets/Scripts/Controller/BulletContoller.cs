@@ -56,5 +56,9 @@ public class BulletContoller : MonoBehaviour
         {
             _projectile.transform.Translate(_direction * _projectileSpeed * Time.deltaTime, Space.World);
         }
+        else
+        {
+            _projectile.SetActive(false);
+        }
     }
 }

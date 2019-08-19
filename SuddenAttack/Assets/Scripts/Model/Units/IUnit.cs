@@ -6,6 +6,7 @@ public interface IUnit
 {
     UnitData Data{get; set;}
     GameObject Prefab{get; set;}
+    bool IsMoving { get; }
 
     void Move(Vector3 destination);
     void Stop();

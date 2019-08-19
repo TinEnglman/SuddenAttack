@@ -17,9 +17,13 @@ public class CombatManager
         attacker.StopAttacking();
     }
 
+    public bool HasLock(IUnit attacker)
+    {
+        return _attackingUnits.ContainsKey(attacker);
+    }
+
     public void Update(float dt)
     {
-
         List<IUnit> killList = new List<IUnit>();
         foreach (KeyValuePair<IUnit,IUnit> pair in _attackingUnits)
         {

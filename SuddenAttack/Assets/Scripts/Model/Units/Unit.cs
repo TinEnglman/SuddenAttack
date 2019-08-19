@@ -52,6 +52,11 @@ public abstract class Unit : IUnit
         _prefab.GetComponent<UnitController>().Deselect();
     }
 
+    public bool IsMoving
+    {
+        get { return _prefab.GetComponent<UnitController>().IsMoving; }
+    }
+
     public bool CanFire()
     {
         return _canFire;

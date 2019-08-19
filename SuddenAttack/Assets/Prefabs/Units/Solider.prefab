@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1870951756855943916}
   - component: {fileID: 1870951756855943913}
   - component: {fileID: 3521042867032345257}
+  - component: {fileID: 3659072052800929732}
   m_Layer: 0
   m_Name: Solider
   m_TagString: Untagged
@@ -99,7 +100,7 @@ MonoBehaviour:
   _currentAngle: 0
   _animator: {fileID: 1870951756855943913}
   _destination: {x: 0, y: 0, z: 0}
-  _moveSpeed: 0.25
+  _moveSpeed: 0.5
 --- !u!95 &1870951756855943913
 Animator:
   serializedVersion: 3
@@ -145,6 +146,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2, y: 7.25}
   m_EdgeRadius: 0
+--- !u!114 &3659072052800929732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870951756855943912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6324827e39fce49a07c4eaa037a80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectile: {fileID: 181074658072854986, guid: 028a4e78fbcc9f14996f0651f9f96129,
+    type: 3}
 --- !u!1001 &7774103109616439434
 PrefabInstance:
   m_ObjectHideFlags: 0

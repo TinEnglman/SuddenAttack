@@ -15,6 +15,12 @@ public class UnitController : MonoBehaviour
     private float _moveSpeed = 1.0f;
 
     private SelectionCircleController _selectionCircleController = null;
+    private bool _isMoving = false;
+
+    public bool IsMoving
+    {
+        get { return _isMoving; }
+    }
 
     public void Select()
     {
@@ -43,6 +49,7 @@ public class UnitController : MonoBehaviour
 
         if (_destination != transform.position)
         {
+            _isMoving = true;
             Vector3 direction = (_destination - transform.position).normalized;
             transform.position += direction * _moveSpeed * Time.deltaTime;
             if (Mathf.Abs(direction.x) == 0)
@@ -65,6 +72,10 @@ public class UnitController : MonoBehaviour
             {
                 transform.position = _destination;
             }
+        }
+        else
+        {
+            _isMoving = false;
         }
     }
 }

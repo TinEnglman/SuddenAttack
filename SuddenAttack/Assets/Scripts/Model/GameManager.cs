@@ -43,7 +43,6 @@ public class GameManager
             _units.Remove(unit);
             unit.Prefab.SetActive(false);
         }
-
     }
 
     public void SelectUnit(IUnit unit)
@@ -90,6 +89,7 @@ public class GameManager
                 targets.Add(unit);
             }
         }
+
         return targets;
     }
 }
