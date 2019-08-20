@@ -33,9 +33,8 @@ public class BulletContoller : MonoBehaviour
     {
         _projectile.SetActive(true);
         _direction = (_target.transform.position - transform.position).normalized;
-        Vector3 angles = _projectile.transform.rotation.eulerAngles;
-        Vector3 newRotation = new Vector3(angles.x, angles.y, Vector3.Angle(Vector3.right, _direction));
-        
+        Vector3 newRotation = new Vector3(0, 0, Vector3.Angle(Vector3.right, _direction));
+        newRotation.z *= _direction.y / Mathf.Abs(_direction.y);
         _projectile.transform.position = _projectileOrigin;
         _projectile.transform.rotation = Quaternion.Euler(newRotation);
     }
