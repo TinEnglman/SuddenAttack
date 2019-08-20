@@ -16,8 +16,8 @@ public class Barracks : AbstractBuilding
 
     public override IUnit SpawnUnit()
     {
-        float x = Prefab.transform.position.x + _spawnOffset.x;
-        float y = Prefab.transform.position.y + _spawnOffset.y;
+        float x = Prefab.transform.position.x + _spawnOffset.x + Random.value;
+        float y = Prefab.transform.position.y + _spawnOffset.y + Random.value;
         IUnit unit = _unitFactory.CreateUnit(x, y, _unitPrefab, Data.IsFriendly);
         return unit;
     }

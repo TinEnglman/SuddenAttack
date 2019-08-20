@@ -18,6 +18,7 @@ public abstract class Unit : IUnit
     protected bool _isAttacking = false;
     protected bool _canFire = true;
     protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>();
+    private bool _isUserLocked = false;
 
 
     public GameObject Prefab
@@ -55,6 +56,12 @@ public abstract class Unit : IUnit
     public bool IsMoving
     {
         get { return _prefab.GetComponent<UnitController>().IsMoving; }
+    }
+
+    public bool IsUserLocked
+    {
+        get { return _isUserLocked; }
+        set { _isUserLocked = value; }
     }
 
     public bool CanFire()
@@ -96,6 +103,11 @@ public abstract class Unit : IUnit
         for(int index = killList.Count - 1; index >= 0; index--)
         {
             _receavedDamage.RemoveAt(index);
+        }
+
+        if (_isUserLocked && !IsMoving && !_isAttacking)
+        {
+            _isUserLocked = false;
         }
 
     }

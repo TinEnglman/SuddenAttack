@@ -219,11 +219,13 @@ public class GameController : MonoBehaviour
             if (target != _selectedUnit && target != null)
             {
                 AttackTarget(target);
+                _selectedUnit.IsUserLocked = true;
             }
             else
             {
                 MoveSelected(mousePos);
                 StopAttacking(_selectedUnit);
+                _selectedUnit.IsUserLocked = true;
             }
         }
     }
@@ -258,7 +260,7 @@ public class GameController : MonoBehaviour
     {
         foreach (IUnit unit in _gameManager.Units)
         {
-            if (unit.IsMoving && unit.Data.IsFriendly || _combatManager.HasLock(unit) && unit.Data.IsFriendly)
+            if (unit.IsUserLocked && unit.Data.IsFriendly)
             {
                 continue;
             }

@@ -15,7 +15,7 @@ public class Tank : Unit
         _unitData.WeaponCooldown = 2f;
         _unitData.Damage = 10;
         _unitData.Range = 6;
-        _unitData.ProjectileSpeed = 8;
+        _unitData.ProjectileSpeed = 16;
         _unitData.EngageRange = 10;
         _weaponCooldown = _unitData.WeaponCooldown;
     }
@@ -44,5 +44,6 @@ public class Tank : Unit
     {
         _isAttacking = false;
         Prefab.GetComponentInChildren<TurretController>().Target = Prefab;
+        Prefab.GetComponentInChildren<BulletContoller>().Target = null;
     }
 }

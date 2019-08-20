@@ -13,7 +13,7 @@ public class Solider : Unit
         _unitData.WeaponCooldown = 0.33f;
         _unitData.Damage = 4;
         _unitData.Range = 3;
-        _unitData.ProjectileSpeed = 22;
+        _unitData.ProjectileSpeed = 28;
         _unitData.EngageRange = 10;
         _weaponCooldown = _unitData.WeaponCooldown;
     }
@@ -40,5 +40,6 @@ public class Solider : Unit
     public override void StopAttacking()
     {
         _isAttacking = false;
+        Prefab.GetComponentInChildren<BulletContoller>().Target = null;
     }
 }

@@ -15,6 +15,7 @@ public class CombatManager
     {
         _attackingUnits.Remove(attacker);
         attacker.StopAttacking();
+        attacker.IsUserLocked = false;
     }
 
     public bool HasLock(IUnit attacker)
@@ -24,7 +25,7 @@ public class CombatManager
 
     public void Update(float dt)
     {
-        List<IUnit> killList = new List<IUnit>();
+        List<IUnit> clearList = new List<IUnit>();
         foreach (KeyValuePair<IUnit,IUnit> pair in _attackingUnits)
         {
             var attacker = pair.Key;
@@ -47,11 +48,11 @@ public class CombatManager
 
             if (attacked.Data.HitPoints <= 0)
             {
-                killList.Add(attacker);
+                clearList.Add(attacker);
             }
         }
 
-        foreach(IUnit unit in killList)
+        foreach(IUnit unit in clearList)
         {
             ClearAttacker(unit);
         }
