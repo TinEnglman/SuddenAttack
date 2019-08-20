@@ -6,7 +6,9 @@ public interface IBuilding
 {
     BuildingData Data { get; set; }
     GameObject Prefab { get; set; }
-    
-    void Update(float dt);
-    void SpawnUnit();
+    GameObject UnitPrefab { get; set; }
+
+    void SetFactory(IUnitFactory factory);
+    IUnit Update(float dt);
+    IUnit SpawnUnit();
 }

@@ -8,6 +8,24 @@ public class GameController : MonoBehaviour
     private GameObject _tankPrefab = null;
     [SerializeField]
     private GameObject _soliderPrefab = null;
+    [SerializeField]
+    private GameObject _hqRedPrefab = null;
+    [SerializeField]
+    private GameObject _hqBluePrefab = null;
+    [SerializeField]
+    private GameObject _barracksRedPrefab = null;
+    [SerializeField]
+    private GameObject _barracksBluePrefab = null;
+
+
+    [SerializeField]
+    private BuildingController _hqBlue = null;
+    [SerializeField]
+    private BuildingController _hqRed = null;
+    [SerializeField]
+    private BuildingController _barracksBlue = null;
+    [SerializeField]
+    private BuildingController _barracksRed = null;
 
     private const int LeftButtonIndex = 0;
     private const int RightButtonIndex = 1;
@@ -16,6 +34,8 @@ public class GameController : MonoBehaviour
     private IUnitFactory _soliderFactory = null;
     private IUnitFactory _tankFactory = null;
     private IUnit _selectedUnit;
+
+    private List<IBuilding> _buildings = new List<IBuilding>();
 
     void Awake()
     {
@@ -47,6 +67,35 @@ public class GameController : MonoBehaviour
 
     private void InitLevel()
     {
+        var hqRed = new HeadQuartes(false);
+        hqRed.SetFactory(_tankFactory);
+        hqRed.UnitPrefab = _tankPrefab;
+        hqRed.Prefab = _hqRedPrefab;
+        _buildings.Add(hqRed);
+        _hqRed.Building = hqRed;
+
+        var hqBlue = new HeadQuartes(true);
+        hqBlue.SetFactory(_tankFactory);
+        hqBlue.UnitPrefab = _tankPrefab;
+        hqBlue.Prefab = _hqBluePrefab;
+        _buildings.Add(hqBlue);
+        _hqBlue.Building = hqBlue;
+
+        var barracksRed = new Barracks(false);
+        barracksRed.SetFactory(_soliderFactory);
+        barracksRed.UnitPrefab = _soliderPrefab;
+        barracksRed.Prefab = _barracksRedPrefab;
+        _buildings.Add(barracksRed);
+        _barracksRed.Building = barracksRed;
+
+        var barracksBlue = new Barracks(true);
+        barracksBlue.SetFactory(_soliderFactory);
+        barracksBlue.UnitPrefab = _soliderPrefab;
+        barracksBlue.Prefab = _barracksBluePrefab;
+        _buildings.Add(barracksBlue);
+        _barracksBlue.Building = barracksBlue;
+
+
         var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab, true);
         AddUnit(newTank);
 
@@ -107,6 +156,15 @@ public class GameController : MonoBehaviour
         _gameManager.Update(dt);
         UpdateAI();
 
+    
+        foreach (IBuilding builing in _buildings)
+        {
+            IUnit newUnit = builing.Update(dt);
+            if (newUnit != null)
+            {
+                AddUnit(newUnit);
+            }
+        }
 
         if (Input.GetMouseButtonDown(LeftButtonIndex))
         {

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class BuildingController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private IBuilding _building = null; // unnecessary?
 
-    // Update is called once per frame
-    void Update()
+    public IBuilding Building
     {
-        
+        get { return _building; }
+        set { _building = value; }
     }
 }
