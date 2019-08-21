@@ -4,15 +4,17 @@ using UnityEngine;
 
 public abstract class AbstractBuilding : IBuilding
 {
-    protected BuildingData _buildingData;
-    protected GameObject _prefab;
+    protected UnitData _unitData;
     protected GameObject _unitPrefab;
+    protected GameObject _prefab;
     protected float _currentCountdown = 0;
     protected IUnitFactory _unitFactory;
     protected Vector2 _spawnOffset;
+    protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>();
 
     public AbstractBuilding()
     {
+        IsSpawning = true;
         _spawnOffset = new Vector3(1, 1, 0);
     }
 
@@ -21,16 +23,54 @@ public abstract class AbstractBuilding : IBuilding
         _unitFactory = factory;
     }
 
-    public BuildingData Data
+    public bool IsSpawning
     {
-        get { return _buildingData; }
-        set { _buildingData = value; }
+        get; set;
     }
 
-    public GameObject Prefab
+    public bool CanFire() { return false; }
+    public void Fire() { }
+   
+    public void StopAttacking() { }
+    public void Attack(IUnit other) { }
+    public void Hit(IUnit other) { }
+    public void Move(Vector3 destination) { }
+    public void Stop() {}
+  
+    public void Damage(IUnit other, float damage, float delay)
     {
-        get { return _prefab; }
-        set { _prefab = value; }
+        var delayedDamage = new DelayedDamage();
+        delayedDamage.damage = damage;
+        delayedDamage.delay = delay;
+        delayedDamage.attacked = other;
+        delayedDamage.attacker = this;
+        _receavedDamage.Add(delayedDamage);
+    }
+
+    public void Die()
+    {
+        Prefab.SetActive(false);
+        IsSpawning = false;
+    }
+
+    public bool IsUserLocked
+    {
+        get { return false; } // hekedy du
+        set { }
+    }
+
+    public bool IsMoving
+    {
+        get { return false; }
+        set { }
+    }
+
+    public void Select()
+    {
+    }
+
+    public void Deselect()
+    {
     }
 
     public GameObject UnitPrefab
@@ -39,14 +79,50 @@ public abstract class AbstractBuilding : IBuilding
         set { _unitPrefab = value; }
     }
 
+    public GameObject Prefab
+    {
+        get { return _prefab; }
+        set { _prefab = value; }
+    }
+
+    public UnitData Data
+    {
+        get { return _unitData; }
+        set { _unitData = value; }
+    }
+
+    public void Update()
+    {
+        List<int> killList = new List<int>();
+        for (int i = 0; i < _receavedDamage.Count; i++)
+        {
+            _receavedDamage[i].delay -= Time.deltaTime;
+
+            if (_receavedDamage[i].delay <= 0)
+            {
+                _receavedDamage[i].attacked.Data.HitPoints -= Data.Damage;
+                _receavedDamage[i].attacker.Hit(_receavedDamage[i].attacked);
+                killList.Add(i);
+            }
+        }
+
+        for (int index = killList.Count - 1; index >= 0; index--)
+        {
+            _receavedDamage.RemoveAt(index);
+        }
+    }
+
     public IUnit Update(float dt)
     {
-        _currentCountdown -= dt;
         IUnit newUnit = null;
-        if (_currentCountdown <= 0)
-        {
-            _currentCountdown = Data.BuildCooldown;
-            newUnit = SpawnUnit();
+        if (IsSpawning)
+        { 
+            _currentCountdown -= dt;
+            if (_currentCountdown <= 0)
+            {
+                _currentCountdown = Data.BuildCooldown;
+                newUnit = SpawnUnit();
+            }
         }
         return newUnit;
     }

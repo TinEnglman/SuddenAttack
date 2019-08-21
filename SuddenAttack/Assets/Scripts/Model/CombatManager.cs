@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class DelayedDamage
+{
+    public ICombatUnit attacker;
+    public IUnit attacked;
+    public volatile float damage; // refactor
+    public volatile float delay;
+}
+
+
 public class CombatManager
 {
     private Dictionary<IUnit, IUnit> _attackingUnits = new Dictionary<IUnit, IUnit>();

@@ -6,7 +6,7 @@ public class Barracks : AbstractBuilding
 {
     public Barracks(bool isFriendly)
     {
-        Data = ScriptableObject.CreateInstance<BuildingData>();
+        Data = ScriptableObject.CreateInstance<UnitData>();
         Data.BuildCooldown = 10;
         Data.HitPoints = 800;
         Data.IsFriendly = isFriendly;

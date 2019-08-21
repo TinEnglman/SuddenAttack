@@ -6,7 +6,7 @@ public class HeadQuartes : AbstractBuilding
 {
     public HeadQuartes(bool isFriendly)
     {
-        Data = ScriptableObject.CreateInstance<BuildingData>();
+        Data = ScriptableObject.CreateInstance<UnitData>();
         Data.BuildCooldown = 30;
         Data.HitPoints = 1000;
         Data.IsFriendly = isFriendly;

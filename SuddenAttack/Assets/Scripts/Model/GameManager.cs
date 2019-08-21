@@ -41,8 +41,7 @@ public class GameManager
         foreach(IUnit unit in killList)
         {
             _units.Remove(unit);
-            unit.Prefab.GetComponentInChildren<BulletContoller>().gameObject.SetActive(false);
-            unit.Prefab.SetActive(false);
+            unit.Die();
         }
     }
 

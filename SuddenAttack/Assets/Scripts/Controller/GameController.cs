@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour
         hqRed.Prefab = _hqRedPrefab;
         _buildings.Add(hqRed);
         _hqRed.Building = hqRed;
+        AddUnit((IUnit)hqRed);
 
         var hqBlue = new HeadQuartes(true);
         hqBlue.SetFactory(_tankFactory);
@@ -80,6 +81,7 @@ public class GameController : MonoBehaviour
         hqBlue.Prefab = _hqBluePrefab;
         _buildings.Add(hqBlue);
         _hqBlue.Building = hqBlue;
+        AddUnit((IUnit)hqBlue);
 
         var barracksRed = new Barracks(false);
         barracksRed.SetFactory(_soliderFactory);
@@ -87,6 +89,7 @@ public class GameController : MonoBehaviour
         barracksRed.Prefab = _barracksRedPrefab;
         _buildings.Add(barracksRed);
         _barracksRed.Building = barracksRed;
+        AddUnit((IUnit)barracksRed);
 
         var barracksBlue = new Barracks(true);
         barracksBlue.SetFactory(_soliderFactory);
@@ -94,6 +97,7 @@ public class GameController : MonoBehaviour
         barracksBlue.Prefab = _barracksBluePrefab;
         _buildings.Add(barracksBlue);
         _barracksBlue.Building = barracksBlue;
+        AddUnit((IUnit)barracksBlue);
 
 
         var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab, true);

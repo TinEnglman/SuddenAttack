@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBuilding
+public interface IBuilding : IUnit
 {
-    BuildingData Data { get; set; }
-    GameObject Prefab { get; set; }
     GameObject UnitPrefab { get; set; }
 
     void SetFactory(IUnitFactory factory);

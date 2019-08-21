@@ -4,14 +4,6 @@ using UnityEngine;
 
 public abstract class Unit : IUnit
 {
-    public class DelayedDamage
-    {
-        public IUnit attacker;
-        public IUnit attacked;
-        public volatile float damage; // refactor
-        public volatile float delay;
-    }
-
     protected UnitData _unitData;
     protected GameObject _prefab;
     protected float _weaponCooldown = 0.0f;
@@ -72,6 +64,16 @@ public abstract class Unit : IUnit
     public void Fire()
     {
         _canFire = false;
+    }
+
+    public void Die()
+    {
+        var bulletController = Prefab.GetComponentInChildren<BulletContoller>();
+        if (bulletController != null)
+        {
+            bulletController.gameObject.SetActive(false);
+        }
+        Prefab.SetActive(false);
     }
 
     public void Update()
