@@ -7,7 +7,7 @@ public class GameManager
     private List<IUnit> _units = null;
     private List<IBuilding> _buildings = null;
 
-    private IUnit _selectedUnit;
+    private List<IUnit> _selectedUnits;
 
     public List<IUnit> Units
     {
@@ -21,7 +21,7 @@ public class GameManager
 
     public GameManager()
     {
-        _selectedUnit = null;
+        _selectedUnits = new List<IUnit>();
         _units = new List<IUnit>();
         _buildings = new List<IBuilding>();
     }
@@ -47,16 +47,18 @@ public class GameManager
 
     public void SelectUnit(IUnit unit)
     {
-
-        _selectedUnit = unit;
-        _selectedUnit.Select();
+        _selectedUnits.Add(unit);
+        unit.Select();
     }
 
-    public void DeselectUnit()
+    public void DeselectUnits()
     {
 
-        _selectedUnit.Deselect();
-        _selectedUnit = null;
+        foreach(IUnit unit in _selectedUnits)
+        {
+            unit.Deselect();
+        }
+        _selectedUnits.Clear();
     }
 
     public void AddUnit(IUnit unit)
@@ -71,12 +73,10 @@ public class GameManager
 
     public void MoveSelected(Vector3 destination)
     {
-        _selectedUnit.Move(destination);
-    }
-
-    public IUnit GetSelected()
-    {
-        return _selectedUnit;
+        foreach(IUnit unit in _selectedUnits)
+        {
+            unit.Move(destination);
+        }
     }
 
     public List<IUnit> GetTargets(IUnit source) // called form update; slow af; refactor

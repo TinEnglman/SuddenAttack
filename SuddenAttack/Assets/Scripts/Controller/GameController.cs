@@ -33,9 +33,13 @@ public class GameController : MonoBehaviour
     private CombatManager _combatManager = null;
     private IUnitFactory _soliderFactory = null;
     private IUnitFactory _tankFactory = null;
-    private IUnit _selectedUnit;
+    //private IUnit _selectedUnit;
+    private List<IUnit> _selectedUnits;
+    private Vector3 _pressedPosition;
+    private bool _drawSelecionBox;
 
     private List<IBuilding> _buildings = new List<IBuilding>();
+    private Texture2D _boxSelectionTexture;
 
     void Awake()
     {
@@ -61,8 +65,47 @@ public class GameController : MonoBehaviour
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+        _drawSelecionBox = false;
+        _boxSelectionTexture = new Texture2D(1, 1);
+        _boxSelectionTexture.SetPixel(0, 0, Color.green);
+        _boxSelectionTexture.Apply();
 
         InitLevel();
+        _selectedUnits = new List<IUnit>();
+    }
+
+    private void DrawBorder(Rect rect)
+    {
+        GUI.color = Color.green;
+        GUI.DrawTexture(rect, _boxSelectionTexture);
+    }
+
+    private void DrawSelectionBox(Rect rect, float thickness)
+    {
+        DrawBorder(new Rect(rect.xMin, rect.yMin, rect.width, thickness));
+        DrawBorder(new Rect(rect.xMin, rect.yMin, thickness, rect.height));
+        DrawBorder(new Rect(rect.xMax - thickness, rect.yMin, thickness, rect.height));
+        DrawBorder(new Rect(rect.xMin, rect.yMax - thickness, rect.width, thickness));
+    }
+
+    private void OnGUI()
+    {
+        if (_drawSelecionBox == true)
+        {
+            Vector2 mousePos = Input.mousePosition;
+            DrawSelectionBox(GetScreenRect(_pressedPosition, mousePos), 2);
+        }
+    }
+
+    public Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
+    {
+        screenPosition1.y = Screen.height - screenPosition1.y;
+        screenPosition2.y = Screen.height - screenPosition2.y;
+
+        var topLeft = Vector3.Min(screenPosition1, screenPosition2);
+        var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
+
+        return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
     }
 
     private void InitLevel()
@@ -202,6 +245,8 @@ public class GameController : MonoBehaviour
 
     private void OnLeftMouseDown()
     {
+        _pressedPosition = Input.mousePosition;
+        _drawSelecionBox = true;
     }
 
     private void OnRightMouseUp()
@@ -218,45 +263,57 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (_selectedUnit != null) 
+        //if (_selectedUnit != null) 
+        foreach(IUnit selectedUnit in _selectedUnits)
         {
-            if (target != _selectedUnit && target != null)
+            if (target != selectedUnit && target != null)
             {
                 AttackTarget(target);
-                _selectedUnit.IsUserLocked = true;
+                selectedUnit.IsUserLocked = true;
             }
             else
             {
                 MoveSelected(mousePos);
-                StopAttacking(_selectedUnit);
-                _selectedUnit.IsUserLocked = true;
+                StopAttacking(selectedUnit);
+                selectedUnit.IsUserLocked = true;
             }
         }
     }
 
     private void OnLeftMouseUp()
     {
+        _drawSelecionBox = false;
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 pressedPos = Camera.main.ScreenToWorldPoint(_pressedPosition);
 
-        if (_selectedUnit != null)
+        if (_selectedUnits.Count > 0)
         {
-            DeselectUnit();
+            DeselectUnits();
         }
 
+        bool unitSelected = false;
         foreach (IUnit unit in _gameManager.Units)
         {
-            BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-            if (colider.bounds.Contains(new Vector3(mousePos.x, mousePos.y, colider.bounds.center.z)))
+            if (!unit.Data.IsFriendly)
             {
-                if (_selectedUnit != unit)
+                continue;
+            }
+            BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
+            Rect selectionRect = new Rect(pressedPos.x, pressedPos.y, mousePos.x - pressedPos.x, mousePos.y - pressedPos.y);
+            Vector2 unitCenter = new Vector2(unit.Prefab.transform.position.x, unit.Prefab.transform.position.y);
+            if (selectionRect.Contains(unitCenter, true) || colider.bounds.Contains(pressedPos))
+            {
+                if (!_selectedUnits.Contains(unit))
                 {
                     SelectUnit(unit);
-                }
-                else
-                {
-                    DeselectUnit();
+                    unitSelected = true;
                 }
             }
+        }
+
+        if (!unitSelected)
+        {
+            DeselectUnits();
         }
     }
 
@@ -299,14 +356,14 @@ public class GameController : MonoBehaviour
 
     private void SelectUnit(IUnit unit)
     {
-        _selectedUnit = unit;
+        _selectedUnits.Add(unit);
         _gameManager.SelectUnit(unit);
     }
 
-    private void DeselectUnit()
+    private void DeselectUnits()
     {
-        _gameManager.DeselectUnit();
-        _selectedUnit = null;
+        _gameManager.DeselectUnits();
+        _selectedUnits.Clear();
     }
 
     private void MoveSelected(Vector2 mousePos)
@@ -316,7 +373,10 @@ public class GameController : MonoBehaviour
 
     private void AttackTarget(IUnit other)
     {
-        _combatManager.LockTarget(_selectedUnit, other);
+        foreach(IUnit unit in _selectedUnits)
+        { 
+            _combatManager.LockTarget(unit, other);
+        }
 
     }
 
