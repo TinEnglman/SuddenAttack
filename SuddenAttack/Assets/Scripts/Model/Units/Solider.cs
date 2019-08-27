@@ -8,7 +8,9 @@ public class Solider : Unit
     {
         _unitData = ScriptableObject.CreateInstance<UnitData>();
 
+        _unitData.DisplayName = "Solider";
         _unitData.HitPoints = 30;
+        _unitData.MaxHitPoints = _unitData.HitPoints;
         _unitData.MoveSpeed = 2f;
         _unitData.WeaponCooldown = 0.33f;
         _unitData.Damage = 4;
@@ -21,7 +23,6 @@ public class Solider : Unit
     public override void Attack(IUnit other)
     {
         _isAttacking = true;
-
 
         var bulletController = Prefab.GetComponent<BulletContoller>();
         bulletController.Target = other.Prefab;

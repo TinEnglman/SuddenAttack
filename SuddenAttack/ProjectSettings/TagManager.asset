@@ -44,3 +44,6 @@ TagManager:
   - name: Map
     uniqueID: 3070405359
     locked: 0
+  - name: GameUI
+    uniqueID: 3719314179
+    locked: 0

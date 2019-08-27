@@ -7,8 +7,10 @@ public class HeadQuartes : AbstractBuilding
     public HeadQuartes(bool isFriendly)
     {
         Data = ScriptableObject.CreateInstance<UnitData>();
+        Data.DisplayName = "Head Quarters";
         Data.BuildCooldown = 30;
         Data.HitPoints = 1000;
+        Data.MaxHitPoints = Data.HitPoints;
         Data.IsFriendly = isFriendly;
         _currentCountdown = Data.BuildCooldown;
 
@@ -21,5 +23,10 @@ public class HeadQuartes : AbstractBuilding
         IUnit unit =_unitFactory.CreateUnit(x, y, _unitPrefab, Data.IsFriendly);
         return unit;
         
+    }
+
+    public override int GetIncome()
+    {
+        return 25;
     }
 }

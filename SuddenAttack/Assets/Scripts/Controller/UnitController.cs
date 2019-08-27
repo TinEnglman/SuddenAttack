@@ -13,13 +13,21 @@ public class UnitController : MonoBehaviour
     private Vector3 _destination;
     [SerializeField]
     private float _moveSpeed = 1.0f;
+    [SerializeField]
+    private GameObject _heltBarOverlay = null;
 
     private SelectionCircleController _selectionCircleController = null;
     private bool _isMoving = false;
+    private float _currentHelth = 1;
 
     public bool IsMoving
     {
         get { return _isMoving; }
+    }
+
+    public float CurrentHelth
+    {
+        set { _currentHelth = value; }
     }
 
     public void Select()
@@ -45,6 +53,12 @@ public class UnitController : MonoBehaviour
 
     void Update()
     {
+
+        var originalScale = _heltBarOverlay.transform.localScale;
+
+        float maxScale = 2;
+        float newScale = _currentHelth * maxScale;
+        _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
         _animator.SetFloat("Angle", _currentAngle);
 
         if (_destination != transform.position)

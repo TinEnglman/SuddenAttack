@@ -6,8 +6,15 @@ public class GameManager
 {
     private List<IUnit> _units = null;
     private List<IBuilding> _buildings = null;
+    private int _currentFunds = 0;
 
     private List<IUnit> _selectedUnits;
+
+    public int Funds
+    {
+        get { return _currentFunds; }
+        set { _currentFunds = value; }
+    }
 
     public List<IUnit> Units
     {

@@ -10,7 +10,9 @@ public class Tank : Unit
     {
         _unitData = ScriptableObject.CreateInstance<UnitData>();
 
+        _unitData.DisplayName = "Tank";
         _unitData.HitPoints = 100;
+        _unitData.MaxHitPoints = _unitData.HitPoints;
         _unitData.MoveSpeed = 2;
         _unitData.WeaponCooldown = 2f;
         _unitData.Damage = 10;

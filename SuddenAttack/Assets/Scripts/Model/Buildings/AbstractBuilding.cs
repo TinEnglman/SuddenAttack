@@ -14,13 +14,19 @@ public abstract class AbstractBuilding : IBuilding
 
     public AbstractBuilding()
     {
-        IsSpawning = true;
+        IsSpawning = false;
         _spawnOffset = new Vector3(1, 1, 0);
+
     }
 
     public void SetFactory(IUnitFactory factory)
     {
         _unitFactory = factory;
+    }
+
+    public IUnitFactory GetFactory()
+    {
+        return _unitFactory;
     }
 
     public bool IsSpawning
@@ -53,9 +59,14 @@ public abstract class AbstractBuilding : IBuilding
         IsSpawning = false;
     }
 
+    public bool IsBuilding()
+    {
+        return true;
+    }
+
     public bool IsUserLocked
     {
-        get { return false; } // hekedy du
+        get { return false; }
         set { }
     }
 
@@ -67,10 +78,12 @@ public abstract class AbstractBuilding : IBuilding
 
     public void Select()
     {
+        _prefab.GetComponent<BuildingController>().Select();
     }
 
     public void Deselect()
     {
+        _prefab.GetComponent<BuildingController>().Deselect();
     }
 
     public GameObject UnitPrefab
@@ -110,6 +123,8 @@ public abstract class AbstractBuilding : IBuilding
         {
             _receavedDamage.RemoveAt(index);
         }
+
+        _prefab.GetComponent<BuildingController>().CurrentHelth = Data.HitPoints / Data.MaxHitPoints;
     }
 
     public IUnit Update(float dt)
@@ -122,10 +137,17 @@ public abstract class AbstractBuilding : IBuilding
             {
                 _currentCountdown = Data.BuildCooldown;
                 newUnit = SpawnUnit();
+                IsSpawning = false;
             }
         }
         return newUnit;
     }
 
+    public float GetCompletePercent()
+    {
+        return 1 - _currentCountdown / Data.BuildCooldown;
+    }
+
     public abstract IUnit SpawnUnit();
+    public abstract int GetIncome();
 }

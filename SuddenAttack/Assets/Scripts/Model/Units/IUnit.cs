@@ -9,4 +9,5 @@ public interface IUnit : ICombatUnit
     void Select();
     void Deselect();
     void Update();
+    bool IsBuilding(); // hacky
 }

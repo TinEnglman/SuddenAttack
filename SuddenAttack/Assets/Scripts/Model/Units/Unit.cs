@@ -12,6 +12,9 @@ public abstract class Unit : IUnit
     protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>();
     private bool _isUserLocked = false;
 
+    public Unit()
+    {
+    }
 
     public GameObject Prefab
     {
@@ -23,6 +26,11 @@ public abstract class Unit : IUnit
     {
         get { return _unitData; }
         set { _unitData = value; }
+    }
+
+    public bool IsBuilding()
+    {
+        return false;
     }
 
     public void Move(Vector3 destination)
@@ -111,6 +119,8 @@ public abstract class Unit : IUnit
         {
             _isUserLocked = false;
         }
+
+        _prefab.GetComponent<UnitController>().CurrentHelth = Data.HitPoints / Data.MaxHitPoints;
 
     }
 

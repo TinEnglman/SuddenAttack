@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IUnitFactory
 {
     Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly);
+    string GetDisplayName();
+    int GetCost();
 }

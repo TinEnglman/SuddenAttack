@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -27,16 +29,27 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private BuildingController _barracksRed = null;
 
+    [SerializeField]
+    private TextMeshProUGUI _foundLabel = null;
+    [SerializeField]
+    private TextMeshProUGUI _unitNameLabel = null;
+    [SerializeField]
+    private Button _buildButton = null;
+    [SerializeField]
+    private Slider _completedSlider = null;
+
     private const int LeftButtonIndex = 0;
     private const int RightButtonIndex = 1;
     private GameManager _gameManager = null;
     private CombatManager _combatManager = null;
     private IUnitFactory _soliderFactory = null;
     private IUnitFactory _tankFactory = null;
-    //private IUnit _selectedUnit;
     private List<IUnit> _selectedUnits;
     private Vector3 _pressedPosition;
     private bool _drawSelecionBox;
+    private float _incomeFrequency = 9;
+    private float _incomeCountdown = 0;
+
 
     private List<IBuilding> _buildings = new List<IBuilding>();
     private Texture2D _boxSelectionTexture;
@@ -72,6 +85,9 @@ public class GameController : MonoBehaviour
 
         InitLevel();
         _selectedUnits = new List<IUnit>();
+
+        _buildButton.onClick.AddListener(OnBuildButton);
+        HideBuildingUI();
     }
 
     private void DrawBorder(Rect rect)
@@ -95,6 +111,30 @@ public class GameController : MonoBehaviour
             Vector2 mousePos = Input.mousePosition;
             DrawSelectionBox(GetScreenRect(_pressedPosition, mousePos), 2);
         }
+
+        _foundLabel.text = "Funds: " + _gameManager.Funds + " $";
+
+        if (_selectedUnits.Count == 1)
+        {
+            if (_selectedUnits[0].IsBuilding())
+            {
+                _completedSlider.normalizedValue = ((IBuilding)_selectedUnits[0]).GetCompletePercent();
+            }
+        }
+    }
+
+    private void ShowBuildingUI()
+    {
+        _completedSlider.gameObject.SetActive(true);
+        _buildButton.gameObject.SetActive(true);
+        _unitNameLabel.gameObject.SetActive(true);
+    }
+
+    private void HideBuildingUI()
+    {
+        _completedSlider.gameObject.SetActive(false);
+        _buildButton.gameObject.SetActive(false);
+        _unitNameLabel.gameObject.SetActive(false);
     }
 
     public Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
@@ -106,6 +146,17 @@ public class GameController : MonoBehaviour
         var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
 
         return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+    }
+
+    public void OnBuildButton()
+    {
+        var building = ((IBuilding)_selectedUnits[0]);
+        int cost = building.GetFactory().GetCost();
+        if (_gameManager.Funds >= cost && !building.IsSpawning)
+        {
+            _gameManager.Funds -= cost;
+            building.IsSpawning = true;
+        }
     }
 
     private void InitLevel()
@@ -201,6 +252,7 @@ public class GameController : MonoBehaviour
         float dt = Time.deltaTime;
         _combatManager.Update(dt);
         _gameManager.Update(dt);
+        UpdateIncome(dt);
         UpdateAI();
 
     
@@ -234,6 +286,28 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void UpdateIncome(float dt)
+    {
+        _incomeCountdown -= dt;
+
+        if (_incomeCountdown <= 0)
+        {
+            _incomeCountdown += _incomeFrequency;
+        }
+        else
+        {
+            return;
+        }
+
+        foreach (var building in _buildings)
+        {
+            if (building.Data.IsFriendly)
+            {
+                _gameManager.Funds += building.GetIncome();
+            }
+        }
+    }
+
     public void AddUnit(IUnit unit)
     {
         _gameManager.AddUnit(unit);
@@ -263,7 +337,6 @@ public class GameController : MonoBehaviour
             }
         }
 
-        //if (_selectedUnit != null) 
         foreach(IUnit selectedUnit in _selectedUnits)
         {
             if (target != selectedUnit && target != null)
@@ -298,6 +371,7 @@ public class GameController : MonoBehaviour
             {
                 continue;
             }
+
             BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
             Rect selectionRect = new Rect(pressedPos.x, pressedPos.y, mousePos.x - pressedPos.x, mousePos.y - pressedPos.y);
             Vector2 unitCenter = new Vector2(unit.Prefab.transform.position.x, unit.Prefab.transform.position.y);
@@ -319,6 +393,9 @@ public class GameController : MonoBehaviour
 
     private void UpdateAI()
     {
+        _hqRed.Building.IsSpawning = true; // AI Cheats
+        _barracksRed.Building.IsSpawning = true;
+
         foreach (IUnit unit in _gameManager.Units)
         {
             if (unit.IsUserLocked && unit.Data.IsFriendly)
@@ -358,12 +435,20 @@ public class GameController : MonoBehaviour
     {
         _selectedUnits.Add(unit);
         _gameManager.SelectUnit(unit);
+
+        if (unit.IsBuilding())
+        {
+            _unitNameLabel.text = unit.Data.DisplayName;
+            _buildButton.GetComponentInChildren<TextMeshProUGUI>().text = ((IBuilding)unit).GetFactory().GetDisplayName() + " : " + ((IBuilding)unit).GetFactory().GetCost() + " $ ";
+            ShowBuildingUI();
+        }
     }
 
     private void DeselectUnits()
     {
         _gameManager.DeselectUnits();
         _selectedUnits.Clear();
+        HideBuildingUI();
     }
 
     private void MoveSelected(Vector2 mousePos)
