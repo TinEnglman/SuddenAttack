@@ -393,8 +393,16 @@ public class GameController : MonoBehaviour
 
     private void UpdateAI()
     {
-        _hqRed.Building.IsSpawning = true; // AI Cheats
-        _barracksRed.Building.IsSpawning = true;
+        if (_hqRed.Building.Data.HitPoints > 0)
+        { 
+            _hqRed.Building.IsSpawning = true; // AI Cheats
+        }
+
+        if (_barracksRed.Building.Data.HitPoints > 0)
+        {
+            _barracksRed.Building.IsSpawning = true; // AI Cheats
+        }
+
 
         foreach (IUnit unit in _gameManager.Units)
         {
