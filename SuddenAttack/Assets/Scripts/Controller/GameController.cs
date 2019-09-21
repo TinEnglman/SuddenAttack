@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GameController : MonoBehaviour
 {
@@ -54,28 +55,17 @@ public class GameController : MonoBehaviour
     private List<IBuilding> _buildings = new List<IBuilding>();
     private Texture2D _boxSelectionTexture;
 
+    [Inject]
+    public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory)
+    {
+        _gameManager = gameManager;
+        _combatManager = combatManager;
+        _soliderFactory = soliderFactory;
+        _tankFactory = tankFactory;
+    }
+
     void Awake()
     {
-        if (_gameManager == null)
-        {
-            _gameManager = new GameManager(); // refactor for the love of god
-        }
-
-        if (_combatManager == null)
-        {
-            _combatManager = new CombatManager();
-        }
-
-        if (_tankFactory == null)
-        {
-            _tankFactory = new TankFactory();
-        }
-
-        if (_soliderFactory == null)
-        {
-            _soliderFactory = new SoliderFactory();
-        }
-
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         _drawSelecionBox = false;
