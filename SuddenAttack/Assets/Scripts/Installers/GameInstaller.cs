@@ -5,6 +5,9 @@ using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
+    [SerializeField]
+    private GameObject _inputHandler;
+
     public override void InstallBindings()
     {
         Container.Bind<GameManager>()
@@ -21,6 +24,10 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<SoliderFactory>()
             .To<SoliderFactory>()
+            .AsSingle();
+
+        Container.Bind<IInputManager>()
+            .FromComponentInNewPrefab(_inputHandler)
             .AsSingle();
     }
 }

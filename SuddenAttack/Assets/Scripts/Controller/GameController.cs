@@ -42,8 +42,9 @@ public class GameController : MonoBehaviour
     private const int LeftButtonIndex = 0;
     private const int RightButtonIndex = 1;
     private GameManager _gameManager = null;
-    private CombatManager _combatManager = null;
-    private IUnitFactory _soliderFactory = null;
+    private CombatManager _combatManager = default;
+    private IInputManager _inputManager = default;
+    private IUnitFactory _soliderFactory = default;
     private IUnitFactory _tankFactory = null;
     private List<IUnit> _selectedUnits;
     private Vector3 _pressedPosition;
@@ -56,12 +57,13 @@ public class GameController : MonoBehaviour
     private Texture2D _boxSelectionTexture;
 
     [Inject]
-    public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory)
+    public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager)
     {
         _gameManager = gameManager;
         _combatManager = combatManager;
         _soliderFactory = soliderFactory;
         _tankFactory = tankFactory;
+        _inputManager = inputManager;
     }
 
     void Awake()

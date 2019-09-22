@@ -21,7 +21,7 @@ public class DraggingCameraController : MonoBehaviour
 
     void Start()
     {
-        _camera = GetComponent<Camera>();
+        _camera = GetComponent<Camera>(); // refactor
         _currentDirectionVector = Vector3.zero;
     }
 
