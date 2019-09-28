@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GameController : MonoBehaviour
 {
@@ -38,14 +39,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Slider _completedSlider = null;
 
-    private const int LeftButtonIndex = 0;
-    private const int RightButtonIndex = 1;
     private GameManager _gameManager = null;
-    private CombatManager _combatManager = null;
-    private IUnitFactory _soliderFactory = null;
+    private CombatManager _combatManager = default;
+    private IInputManager _inputManager = default;
+    private IUnitFactory _soliderFactory = default;
     private IUnitFactory _tankFactory = null;
     private List<IUnit> _selectedUnits;
-    private Vector3 _pressedPosition;
+    private Vector3 _pressedWorldPosition;
+    private Vector3 _pressedScreenPosition;
     private bool _drawSelecionBox;
     private float _incomeFrequency = 9;
     private float _incomeCountdown = 0;
@@ -54,28 +55,18 @@ public class GameController : MonoBehaviour
     private List<IBuilding> _buildings = new List<IBuilding>();
     private Texture2D _boxSelectionTexture;
 
+    [Inject]
+    public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager)
+    {
+        _gameManager = gameManager;
+        _combatManager = combatManager;
+        _soliderFactory = soliderFactory;
+        _tankFactory = tankFactory;
+        _inputManager = inputManager;
+    }
+
     void Awake()
     {
-        if (_gameManager == null)
-        {
-            _gameManager = new GameManager(); // refactor for the love of god
-        }
-
-        if (_combatManager == null)
-        {
-            _combatManager = new CombatManager();
-        }
-
-        if (_tankFactory == null)
-        {
-            _tankFactory = new TankFactory();
-        }
-
-        if (_soliderFactory == null)
-        {
-            _soliderFactory = new SoliderFactory();
-        }
-
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         _drawSelecionBox = false;
@@ -108,8 +99,8 @@ public class GameController : MonoBehaviour
     {
         if (_drawSelecionBox == true)
         {
-            Vector2 mousePos = Input.mousePosition;
-            DrawSelectionBox(GetScreenRect(_pressedPosition, mousePos), 2);
+            Vector2 mousePos = _inputManager.GetMouseScreenPosition();
+            DrawSelectionBox(GetScreenRect(_pressedScreenPosition, mousePos), 2);
         }
 
         _foundLabel.text = "Funds: " + _gameManager.Funds + " $";
@@ -265,22 +256,22 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(LeftButtonIndex))
+        if (_inputManager.isLeftMouseButtonDown())
         {
             OnLeftMouseDown();
         }
 
-        if (Input.GetMouseButtonUp(LeftButtonIndex))
+        if (_inputManager.isLeftMouseButtonUp())
         {
             OnLeftMouseUp();
         }
 
-        if (Input.GetMouseButtonDown(RightButtonIndex))
+        if (_inputManager.isRightMouseButtonDown())
         {
             OnRightMouseDown();
         }
 
-        if (Input.GetMouseButtonUp(RightButtonIndex))
+        if (_inputManager.isRightMouseButtonUp())
         {
             OnRightMouseUp();
         }
@@ -319,19 +310,21 @@ public class GameController : MonoBehaviour
 
     private void OnLeftMouseDown()
     {
-        _pressedPosition = Input.mousePosition;
+        _pressedWorldPosition = _inputManager.GetMouseWorldPosition();
+        _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
         _drawSelecionBox = true;
     }
 
     private void OnRightMouseUp()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
+        Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
 
         IUnit target = null;
         foreach (IUnit unit in _gameManager.Units)
         {
             BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-            if (colider.bounds.Contains(new Vector3(mousePos.x, mousePos.y, colider.bounds.center.z)))
+            if (colider.bounds.Contains(new Vector3(mouseWorldPos.x, mouseWorldPos.y, colider.bounds.center.z)))
             {
                 target = unit;
             }
@@ -346,7 +339,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                MoveSelected(mousePos);
+                MoveSelected(mouseWorldPos);
                 StopAttacking(selectedUnit);
                 selectedUnit.IsUserLocked = true;
             }
@@ -356,8 +349,8 @@ public class GameController : MonoBehaviour
     private void OnLeftMouseUp()
     {
         _drawSelecionBox = false;
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 pressedPos = Camera.main.ScreenToWorldPoint(_pressedPosition);
+        Vector2 mousePos = _inputManager.GetMouseWorldPosition();
+        Vector2 pressedPos = _pressedWorldPosition;
 
         if (_selectedUnits.Count > 0)
         {

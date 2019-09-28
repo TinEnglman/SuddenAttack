@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
 public class DraggingCameraController : MonoBehaviour
 {
@@ -18,26 +17,33 @@ public class DraggingCameraController : MonoBehaviour
 
     private Camera _camera;
     private Vector3 _currentDirectionVector;
+    private IInputManager _inputManager = default;
 
-    void Start()
+
+    void Awake()
     {
-        _camera = GetComponent<Camera>();
         _currentDirectionVector = Vector3.zero;
+    }
+
+    [Inject]
+    public void Construct(Camera camera, IInputManager inputManager)
+    {
+        _inputManager = inputManager;
+        _camera = camera;
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (_inputManager.IsDown(KeyCode.A))
         {
             _lockCamera = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (_inputManager.IsDown(KeyCode.B))
         {
             _lockCamera = false;
         }
-
 
         if (_lockCamera)
         {
@@ -46,20 +52,21 @@ public class DraggingCameraController : MonoBehaviour
 
         _currentDirectionVector = Vector3.zero;
 
-        if (Input.mousePosition.x < _edgePadding && _camera.transform.position.x >  _cameraPositionMin.x)
+        Vector2 mousePosition = _inputManager.GetMouseScreenPosition();
+        if (mousePosition.x < _edgePadding && _camera.transform.position.x >  _cameraPositionMin.x)
         {
             _currentDirectionVector = Vector3.left;
         }
-        else if (Input.mousePosition.x > Screen.width - _edgePadding && _camera.transform.position.x < _cameraPositionMax.x)
+        else if (mousePosition.x > Screen.width - _edgePadding && _camera.transform.position.x < _cameraPositionMax.x)
         {
             _currentDirectionVector = Vector3.right;
         }
 
-        if (Input.mousePosition.y < _edgePadding && _camera.transform.position.y < _cameraPositionMin.y)
+        if (mousePosition.y < _edgePadding && _camera.transform.position.y < _cameraPositionMin.y)
         {
             _currentDirectionVector += Vector3.down;
         }
-        else if (Input.mousePosition.y > Screen.height - _edgePadding && _camera.transform.position.y > _cameraPositionMax.y)
+        else if (mousePosition.y > Screen.height - _edgePadding && _camera.transform.position.y > _cameraPositionMax.y)
         {
             _currentDirectionVector += Vector3.up;
         }
