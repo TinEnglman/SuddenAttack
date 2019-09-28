@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectionCircleController : MonoBehaviour
+namespace SuddenAttack.Controllers
 {
-    void Awake()
+    public class SelectionCircleController : MonoBehaviour
     {
-        GetComponent<SpriteRenderer>().enabled = false;
-    }
+        void Awake()
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
 
-    public void Selectct()
-    {
-        GetComponent<SpriteRenderer>().enabled = true;
-    }
+        public void Selectct()
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
 
-    public void Deselectct()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
+        public void Deselectct()
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 }

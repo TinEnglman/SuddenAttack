@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoliderController : UnitController
+namespace SuddenAttack.Controllers
 {
+    public class SoliderController : UnitController
+    {
+    }
 }

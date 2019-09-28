@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTargetCommand : CommandBase
+namespace SuddenAttack.Model.Commands
 {
-    public override void Execute() { }
+    public class AttackTargetCommand : CommandBase
+    {
+        public override void Execute() { }
+    }
 }

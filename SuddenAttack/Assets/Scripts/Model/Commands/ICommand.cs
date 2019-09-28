@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICommand
+namespace SuddenAttack.Model.Commands
 {
-    void Execute();
+    public interface ICommand
+    {
+        void Execute();
+    }
 }

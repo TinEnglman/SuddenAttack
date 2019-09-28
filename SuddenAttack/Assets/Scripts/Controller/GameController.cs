@@ -4,472 +4,477 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using SuddenAttack.Model;
+using SuddenAttack.Model.Factories;
+using SuddenAttack.Model.Buildings;
+using SuddenAttack.Model.Units;
 
-public class GameController : MonoBehaviour
+namespace SuddenAttack.Controllers
 {
-    [SerializeField]
-    private GameObject _tankPrefab = null;
-    [SerializeField]
-    private GameObject _soliderPrefab = null;
-    [SerializeField]
-    private GameObject _hqRedPrefab = null;
-    [SerializeField]
-    private GameObject _hqBluePrefab = null;
-    [SerializeField]
-    private GameObject _barracksRedPrefab = null;
-    [SerializeField]
-    private GameObject _barracksBluePrefab = null;
-
-
-    [SerializeField]
-    private BuildingController _hqBlue = null;
-    [SerializeField]
-    private BuildingController _hqRed = null;
-    [SerializeField]
-    private BuildingController _barracksBlue = null;
-    [SerializeField]
-    private BuildingController _barracksRed = null;
-
-    [SerializeField]
-    private TextMeshProUGUI _foundLabel = null;
-    [SerializeField]
-    private TextMeshProUGUI _unitNameLabel = null;
-    [SerializeField]
-    private Button _buildButton = null;
-    [SerializeField]
-    private Slider _completedSlider = null;
-
-    private GameManager _gameManager = null;
-    private CombatManager _combatManager = default;
-    private IInputManager _inputManager = default;
-    private IUnitFactory _soliderFactory = default;
-    private IUnitFactory _tankFactory = null;
-    private List<IUnit> _selectedUnits;
-    private Vector3 _pressedWorldPosition;
-    private Vector3 _pressedScreenPosition;
-    private bool _drawSelecionBox;
-    private float _incomeFrequency = 9;
-    private float _incomeCountdown = 0;
-
-
-    private List<IBuilding> _buildings = new List<IBuilding>();
-    private Texture2D _boxSelectionTexture;
-
-    [Inject]
-    public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager)
+    public class GameController : MonoBehaviour
     {
-        _gameManager = gameManager;
-        _combatManager = combatManager;
-        _soliderFactory = soliderFactory;
-        _tankFactory = tankFactory;
-        _inputManager = inputManager;
-    }
+        [SerializeField]
+        private GameObject _tankPrefab = null;
+        [SerializeField]
+        private GameObject _soliderPrefab = null;
+        [SerializeField]
+        private GameObject _hqRedPrefab = null;
+        [SerializeField]
+        private GameObject _hqBluePrefab = null;
+        [SerializeField]
+        private GameObject _barracksRedPrefab = null;
+        [SerializeField]
+        private GameObject _barracksBluePrefab = null;
 
-    void Awake()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        _drawSelecionBox = false;
-        _boxSelectionTexture = new Texture2D(1, 1);
-        _boxSelectionTexture.SetPixel(0, 0, Color.green);
-        _boxSelectionTexture.Apply();
 
-        InitLevel();
-        _selectedUnits = new List<IUnit>();
+        [SerializeField]
+        private BuildingController _hqBlue = null;
+        [SerializeField]
+        private BuildingController _hqRed = null;
+        [SerializeField]
+        private BuildingController _barracksBlue = null;
+        [SerializeField]
+        private BuildingController _barracksRed = null;
 
-        _buildButton.onClick.AddListener(OnBuildButton);
-        HideBuildingUI();
-    }
+        [SerializeField]
+        private TextMeshProUGUI _foundLabel = null;
+        [SerializeField]
+        private TextMeshProUGUI _unitNameLabel = null;
+        [SerializeField]
+        private Button _buildButton = null;
+        [SerializeField]
+        private Slider _completedSlider = null;
 
-    private void DrawBorder(Rect rect)
-    {
-        GUI.color = Color.green;
-        GUI.DrawTexture(rect, _boxSelectionTexture);
-    }
+        private GameManager _gameManager = null;
+        private CombatManager _combatManager = default;
+        private IInputManager _inputManager = default;
+        private IUnitFactory _soliderFactory = default;
+        private IUnitFactory _tankFactory = null;
+        private List<IUnit> _selectedUnits;
+        private Vector3 _pressedWorldPosition;
+        private Vector3 _pressedScreenPosition;
+        private bool _drawSelecionBox;
+        private float _incomeFrequency = 9;
+        private float _incomeCountdown = 0;
 
-    private void DrawSelectionBox(Rect rect, float thickness)
-    {
-        DrawBorder(new Rect(rect.xMin, rect.yMin, rect.width, thickness));
-        DrawBorder(new Rect(rect.xMin, rect.yMin, thickness, rect.height));
-        DrawBorder(new Rect(rect.xMax - thickness, rect.yMin, thickness, rect.height));
-        DrawBorder(new Rect(rect.xMin, rect.yMax - thickness, rect.width, thickness));
-    }
 
-    private void OnGUI()
-    {
-        if (_drawSelecionBox == true)
+        private List<IBuilding> _buildings = new List<IBuilding>();
+        private Texture2D _boxSelectionTexture;
+
+        [Inject]
+        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager)
         {
-            Vector2 mousePos = _inputManager.GetMouseScreenPosition();
-            DrawSelectionBox(GetScreenRect(_pressedScreenPosition, mousePos), 2);
+            _gameManager = gameManager;
+            _combatManager = combatManager;
+            _soliderFactory = soliderFactory;
+            _tankFactory = tankFactory;
+            _inputManager = inputManager;
         }
 
-        _foundLabel.text = "Funds: " + _gameManager.Funds + " $";
-
-        if (_selectedUnits.Count == 1)
+        void Awake()
         {
-            if (_selectedUnits[0].IsBuilding())
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            _drawSelecionBox = false;
+            _boxSelectionTexture = new Texture2D(1, 1);
+            _boxSelectionTexture.SetPixel(0, 0, Color.green);
+            _boxSelectionTexture.Apply();
+
+            InitLevel();
+            _selectedUnits = new List<IUnit>();
+
+            _buildButton.onClick.AddListener(OnBuildButton);
+            HideBuildingUI();
+        }
+
+        private void DrawBorder(Rect rect)
+        {
+            GUI.color = Color.green;
+            GUI.DrawTexture(rect, _boxSelectionTexture);
+        }
+
+        private void DrawSelectionBox(Rect rect, float thickness)
+        {
+            DrawBorder(new Rect(rect.xMin, rect.yMin, rect.width, thickness));
+            DrawBorder(new Rect(rect.xMin, rect.yMin, thickness, rect.height));
+            DrawBorder(new Rect(rect.xMax - thickness, rect.yMin, thickness, rect.height));
+            DrawBorder(new Rect(rect.xMin, rect.yMax - thickness, rect.width, thickness));
+        }
+
+        private void OnGUI()
+        {
+            if (_drawSelecionBox == true)
             {
-                _completedSlider.normalizedValue = ((IBuilding)_selectedUnits[0]).GetCompletePercent();
+                Vector2 mousePos = _inputManager.GetMouseScreenPosition();
+                DrawSelectionBox(GetScreenRect(_pressedScreenPosition, mousePos), 2);
             }
-        }
-    }
 
-    private void ShowBuildingUI()
-    {
-        _completedSlider.gameObject.SetActive(true);
-        _buildButton.gameObject.SetActive(true);
-        _unitNameLabel.gameObject.SetActive(true);
-    }
+            _foundLabel.text = "Funds: " + _gameManager.Funds + " $";
 
-    private void HideBuildingUI()
-    {
-        _completedSlider.gameObject.SetActive(false);
-        _buildButton.gameObject.SetActive(false);
-        _unitNameLabel.gameObject.SetActive(false);
-    }
-
-    public Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
-    {
-        screenPosition1.y = Screen.height - screenPosition1.y;
-        screenPosition2.y = Screen.height - screenPosition2.y;
-
-        var topLeft = Vector3.Min(screenPosition1, screenPosition2);
-        var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
-
-        return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
-    }
-
-    public void OnBuildButton()
-    {
-        var building = ((IBuilding)_selectedUnits[0]);
-        int cost = building.GetFactory().GetCost();
-        if (_gameManager.Funds >= cost && !building.IsSpawning)
-        {
-            _gameManager.Funds -= cost;
-            building.IsSpawning = true;
-        }
-    }
-
-    private void InitLevel()
-    {
-        var hqRed = new HeadQuartes(false);
-        hqRed.SetFactory(_tankFactory);
-        hqRed.UnitPrefab = _tankPrefab;
-        hqRed.Prefab = _hqRedPrefab;
-        _buildings.Add(hqRed);
-        _hqRed.Building = hqRed;
-        AddUnit((IUnit)hqRed);
-
-        var hqBlue = new HeadQuartes(true);
-        hqBlue.SetFactory(_tankFactory);
-        hqBlue.UnitPrefab = _tankPrefab;
-        hqBlue.Prefab = _hqBluePrefab;
-        _buildings.Add(hqBlue);
-        _hqBlue.Building = hqBlue;
-        AddUnit((IUnit)hqBlue);
-
-        var barracksRed = new Barracks(false);
-        barracksRed.SetFactory(_soliderFactory);
-        barracksRed.UnitPrefab = _soliderPrefab;
-        barracksRed.Prefab = _barracksRedPrefab;
-        _buildings.Add(barracksRed);
-        _barracksRed.Building = barracksRed;
-        AddUnit((IUnit)barracksRed);
-
-        var barracksBlue = new Barracks(true);
-        barracksBlue.SetFactory(_soliderFactory);
-        barracksBlue.UnitPrefab = _soliderPrefab;
-        barracksBlue.Prefab = _barracksBluePrefab;
-        _buildings.Add(barracksBlue);
-        _barracksBlue.Building = barracksBlue;
-        AddUnit((IUnit)barracksBlue);
-
-
-        var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab, true);
-        AddUnit(newTank);
-
-        newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab, true);
-        AddUnit(newTank);
-
-        newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, true);
-        AddUnit(newTank);
-
-        var newSolider = _soliderFactory.CreateUnit(-8f, -15, _soliderPrefab, true);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -15, _soliderPrefab, true);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -3, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -2, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-4.5f, -1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-3.5f, -1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-2.5f, -1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-2.5f, -8, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newSolider = _soliderFactory.CreateUnit(-6.5f, -1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newTank = _tankFactory.CreateUnit(-1.5f, -4, _tankPrefab, false);
-        AddUnit(newTank);
-
-        newSolider = _soliderFactory.CreateUnit( 0f, 1, _soliderPrefab, false);
-        AddUnit(newSolider);
-
-        newTank = _tankFactory.CreateUnit(-1.5f, -0, _tankPrefab, false);
-        AddUnit(newTank);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        float dt = Time.deltaTime;
-        _combatManager.Update(dt);
-        _gameManager.Update(dt);
-        UpdateIncome(dt);
-        UpdateAI();
-
-    
-        foreach (IBuilding builing in _buildings)
-        {
-            IUnit newUnit = builing.Update(dt);
-            if (newUnit != null)
+            if (_selectedUnits.Count == 1)
             {
-                AddUnit(newUnit);
+                if (_selectedUnits[0].IsBuilding())
+                {
+                    _completedSlider.normalizedValue = ((IBuilding)_selectedUnits[0]).GetCompletePercent();
+                }
             }
         }
 
-        if (_inputManager.isLeftMouseButtonDown())
+        private void ShowBuildingUI()
         {
-            OnLeftMouseDown();
+            _completedSlider.gameObject.SetActive(true);
+            _buildButton.gameObject.SetActive(true);
+            _unitNameLabel.gameObject.SetActive(true);
         }
 
-        if (_inputManager.isLeftMouseButtonUp())
+        private void HideBuildingUI()
         {
-            OnLeftMouseUp();
+            _completedSlider.gameObject.SetActive(false);
+            _buildButton.gameObject.SetActive(false);
+            _unitNameLabel.gameObject.SetActive(false);
         }
 
-        if (_inputManager.isRightMouseButtonDown())
+        public Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
         {
-            OnRightMouseDown();
+            screenPosition1.y = Screen.height - screenPosition1.y;
+            screenPosition2.y = Screen.height - screenPosition2.y;
+
+            var topLeft = Vector3.Min(screenPosition1, screenPosition2);
+            var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
+
+            return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
         }
 
-        if (_inputManager.isRightMouseButtonUp())
+        public void OnBuildButton()
         {
-            OnRightMouseUp();
-        }
-    }
-
-    void UpdateIncome(float dt)
-    {
-        _incomeCountdown -= dt;
-
-        if (_incomeCountdown <= 0)
-        {
-            _incomeCountdown += _incomeFrequency;
-        }
-        else
-        {
-            return;
-        }
-
-        foreach (var building in _buildings)
-        {
-            if (building.Data.IsFriendly)
+            var building = ((IBuilding)_selectedUnits[0]);
+            int cost = building.GetFactory().GetCost();
+            if (_gameManager.Funds >= cost && !building.IsSpawning)
             {
-                _gameManager.Funds += building.GetIncome();
-            }
-        }
-    }
-
-    public void AddUnit(IUnit unit)
-    {
-        _gameManager.AddUnit(unit);
-    }
-
-    private void OnRightMouseDown()
-    {
-    }
-
-    private void OnLeftMouseDown()
-    {
-        _pressedWorldPosition = _inputManager.GetMouseWorldPosition();
-        _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
-        _drawSelecionBox = true;
-    }
-
-    private void OnRightMouseUp()
-    {
-        Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
-        Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
-
-        IUnit target = null;
-        foreach (IUnit unit in _gameManager.Units)
-        {
-            BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-            if (colider.bounds.Contains(new Vector3(mouseWorldPos.x, mouseWorldPos.y, colider.bounds.center.z)))
-            {
-                target = unit;
+                _gameManager.Funds -= cost;
+                building.IsSpawning = true;
             }
         }
 
-        foreach(IUnit selectedUnit in _selectedUnits)
+        private void InitLevel()
         {
-            if (target != selectedUnit && target != null)
+            var hqRed = new HeadQuartes(false);
+            hqRed.SetFactory(_tankFactory);
+            hqRed.UnitPrefab = _tankPrefab;
+            hqRed.Prefab = _hqRedPrefab;
+            _buildings.Add(hqRed);
+            _hqRed.Building = hqRed;
+            AddUnit((IUnit)hqRed);
+
+            var hqBlue = new HeadQuartes(true);
+            hqBlue.SetFactory(_tankFactory);
+            hqBlue.UnitPrefab = _tankPrefab;
+            hqBlue.Prefab = _hqBluePrefab;
+            _buildings.Add(hqBlue);
+            _hqBlue.Building = hqBlue;
+            AddUnit((IUnit)hqBlue);
+
+            var barracksRed = new Barracks(false);
+            barracksRed.SetFactory(_soliderFactory);
+            barracksRed.UnitPrefab = _soliderPrefab;
+            barracksRed.Prefab = _barracksRedPrefab;
+            _buildings.Add(barracksRed);
+            _barracksRed.Building = barracksRed;
+            AddUnit((IUnit)barracksRed);
+
+            var barracksBlue = new Barracks(true);
+            barracksBlue.SetFactory(_soliderFactory);
+            barracksBlue.UnitPrefab = _soliderPrefab;
+            barracksBlue.Prefab = _barracksBluePrefab;
+            _buildings.Add(barracksBlue);
+            _barracksBlue.Building = barracksBlue;
+            AddUnit((IUnit)barracksBlue);
+
+
+            var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab, true);
+            AddUnit(newTank);
+
+            newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab, true);
+            AddUnit(newTank);
+
+            newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, true);
+            AddUnit(newTank);
+
+            var newSolider = _soliderFactory.CreateUnit(-8f, -15, _soliderPrefab, true);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -15, _soliderPrefab, true);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -3, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -2, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-4.5f, -1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-3.5f, -1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-2.5f, -1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-2.5f, -8, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newSolider = _soliderFactory.CreateUnit(-6.5f, -1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newTank = _tankFactory.CreateUnit(-1.5f, -4, _tankPrefab, false);
+            AddUnit(newTank);
+
+            newSolider = _soliderFactory.CreateUnit(0f, 1, _soliderPrefab, false);
+            AddUnit(newSolider);
+
+            newTank = _tankFactory.CreateUnit(-1.5f, -0, _tankPrefab, false);
+            AddUnit(newTank);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            float dt = Time.deltaTime;
+            _combatManager.Update(dt);
+            _gameManager.Update(dt);
+            UpdateIncome(dt);
+            UpdateAI();
+
+
+            foreach (IBuilding builing in _buildings)
             {
-                AttackTarget(target);
-                selectedUnit.IsUserLocked = true;
+                IUnit newUnit = builing.Update(dt);
+                if (newUnit != null)
+                {
+                    AddUnit(newUnit);
+                }
+            }
+
+            if (_inputManager.isLeftMouseButtonDown())
+            {
+                OnLeftMouseDown();
+            }
+
+            if (_inputManager.isLeftMouseButtonUp())
+            {
+                OnLeftMouseUp();
+            }
+
+            if (_inputManager.isRightMouseButtonDown())
+            {
+                OnRightMouseDown();
+            }
+
+            if (_inputManager.isRightMouseButtonUp())
+            {
+                OnRightMouseUp();
+            }
+        }
+
+        void UpdateIncome(float dt)
+        {
+            _incomeCountdown -= dt;
+
+            if (_incomeCountdown <= 0)
+            {
+                _incomeCountdown += _incomeFrequency;
             }
             else
             {
-                MoveSelected(mouseWorldPos);
-                StopAttacking(selectedUnit);
-                selectedUnit.IsUserLocked = true;
-            }
-        }
-    }
-
-    private void OnLeftMouseUp()
-    {
-        _drawSelecionBox = false;
-        Vector2 mousePos = _inputManager.GetMouseWorldPosition();
-        Vector2 pressedPos = _pressedWorldPosition;
-
-        if (_selectedUnits.Count > 0)
-        {
-            DeselectUnits();
-        }
-
-        bool unitSelected = false;
-        foreach (IUnit unit in _gameManager.Units)
-        {
-            if (!unit.Data.IsFriendly)
-            {
-                continue;
+                return;
             }
 
-            BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-            Rect selectionRect = new Rect(pressedPos.x, pressedPos.y, mousePos.x - pressedPos.x, mousePos.y - pressedPos.y);
-            Vector2 unitCenter = new Vector2(unit.Prefab.transform.position.x, unit.Prefab.transform.position.y);
-            if (selectionRect.Contains(unitCenter, true) || colider.bounds.Contains(pressedPos))
+            foreach (var building in _buildings)
             {
-                if (!_selectedUnits.Contains(unit))
+                if (building.Data.IsFriendly)
                 {
-                    SelectUnit(unit);
-                    unitSelected = true;
+                    _gameManager.Funds += building.GetIncome();
                 }
             }
         }
 
-        if (!unitSelected)
+        public void AddUnit(IUnit unit)
         {
-            DeselectUnits();
-        }
-    }
-
-    private void UpdateAI()
-    {
-        if (_hqRed.Building.Data.HitPoints > 0)
-        { 
-            _hqRed.Building.IsSpawning = true; // AI Cheats
+            _gameManager.AddUnit(unit);
         }
 
-        if (_barracksRed.Building.Data.HitPoints > 0)
+        private void OnRightMouseDown()
         {
-            _barracksRed.Building.IsSpawning = true; // AI Cheats
         }
 
-
-        foreach (IUnit unit in _gameManager.Units)
+        private void OnLeftMouseDown()
         {
-            if (unit.IsUserLocked && unit.Data.IsFriendly)
+            _pressedWorldPosition = _inputManager.GetMouseWorldPosition();
+            _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
+            _drawSelecionBox = true;
+        }
+
+        private void OnRightMouseUp()
+        {
+            Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
+            Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
+
+            IUnit target = null;
+            foreach (IUnit unit in _gameManager.Units)
             {
-                continue;
+                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
+                if (colider.bounds.Contains(new Vector3(mouseWorldPos.x, mouseWorldPos.y, colider.bounds.center.z)))
+                {
+                    target = unit;
+                }
             }
 
-            var targets = _gameManager.GetTargets(unit);
-            float distance = 0;
-            IUnit closestTarget = null; 
-            foreach (IUnit target in targets)
+            foreach (IUnit selectedUnit in _selectedUnits)
             {
-                if (target.Data.IsFriendly != unit.Data.IsFriendly)
+                if (target != selectedUnit && target != null)
                 {
-                    if (distance == 0)
-                    { 
-                        distance = (target.Prefab.transform.position - unit.Prefab.transform.position).magnitude;
-                        closestTarget = target;
-                    }
+                    AttackTarget(target);
+                    selectedUnit.IsUserLocked = true;
+                }
+                else
+                {
+                    MoveSelected(mouseWorldPos);
+                    StopAttacking(selectedUnit);
+                    selectedUnit.IsUserLocked = true;
+                }
+            }
+        }
 
-                    float currentDistance = (target.Prefab.transform.position - unit.Prefab.transform.position).magnitude;
-                    if (currentDistance < distance)
+        private void OnLeftMouseUp()
+        {
+            _drawSelecionBox = false;
+            Vector2 mousePos = _inputManager.GetMouseWorldPosition();
+            Vector2 pressedPos = _pressedWorldPosition;
+
+            if (_selectedUnits.Count > 0)
+            {
+                DeselectUnits();
+            }
+
+            bool unitSelected = false;
+            foreach (IUnit unit in _gameManager.Units)
+            {
+                if (!unit.Data.IsFriendly)
+                {
+                    continue;
+                }
+
+                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
+                Rect selectionRect = new Rect(pressedPos.x, pressedPos.y, mousePos.x - pressedPos.x, mousePos.y - pressedPos.y);
+                Vector2 unitCenter = new Vector2(unit.Prefab.transform.position.x, unit.Prefab.transform.position.y);
+                if (selectionRect.Contains(unitCenter, true) || colider.bounds.Contains(pressedPos))
+                {
+                    if (!_selectedUnits.Contains(unit))
                     {
-                        closestTarget = target;
-                        currentDistance = distance;
+                        SelectUnit(unit);
+                        unitSelected = true;
                     }
                 }
             }
-            if (closestTarget != null)
+
+            if (!unitSelected)
             {
-                _combatManager.LockTarget(unit, closestTarget);
+                DeselectUnits();
             }
         }
-    }
 
-    private void SelectUnit(IUnit unit)
-    {
-        _selectedUnits.Add(unit);
-        _gameManager.SelectUnit(unit);
-
-        if (unit.IsBuilding())
+        private void UpdateAI()
         {
-            _unitNameLabel.text = unit.Data.DisplayName;
-            _buildButton.GetComponentInChildren<TextMeshProUGUI>().text = ((IBuilding)unit).GetFactory().GetDisplayName() + " : " + ((IBuilding)unit).GetFactory().GetCost() + " $ ";
-            ShowBuildingUI();
+            if (_hqRed.Building.Data.HitPoints > 0)
+            {
+                _hqRed.Building.IsSpawning = true; // AI Cheats
+            }
+
+            if (_barracksRed.Building.Data.HitPoints > 0)
+            {
+                _barracksRed.Building.IsSpawning = true; // AI Cheats
+            }
+
+
+            foreach (IUnit unit in _gameManager.Units)
+            {
+                if (unit.IsUserLocked && unit.Data.IsFriendly)
+                {
+                    continue;
+                }
+
+                var targets = _gameManager.GetTargets(unit);
+                float distance = 0;
+                IUnit closestTarget = null;
+                foreach (IUnit target in targets)
+                {
+                    if (target.Data.IsFriendly != unit.Data.IsFriendly)
+                    {
+                        if (distance == 0)
+                        {
+                            distance = (target.Prefab.transform.position - unit.Prefab.transform.position).magnitude;
+                            closestTarget = target;
+                        }
+
+                        float currentDistance = (target.Prefab.transform.position - unit.Prefab.transform.position).magnitude;
+                        if (currentDistance < distance)
+                        {
+                            closestTarget = target;
+                            currentDistance = distance;
+                        }
+                    }
+                }
+                if (closestTarget != null)
+                {
+                    _combatManager.LockTarget(unit, closestTarget);
+                }
+            }
+        }
+
+        private void SelectUnit(IUnit unit)
+        {
+            _selectedUnits.Add(unit);
+            _gameManager.SelectUnit(unit);
+
+            if (unit.IsBuilding())
+            {
+                _unitNameLabel.text = unit.Data.DisplayName;
+                _buildButton.GetComponentInChildren<TextMeshProUGUI>().text = ((IBuilding)unit).GetFactory().GetDisplayName() + " : " + ((IBuilding)unit).GetFactory().GetCost() + " $ ";
+                ShowBuildingUI();
+            }
+        }
+
+        private void DeselectUnits()
+        {
+            _gameManager.DeselectUnits();
+            _selectedUnits.Clear();
+            HideBuildingUI();
+        }
+
+        private void MoveSelected(Vector2 mousePos)
+        {
+            _gameManager.MoveSelected(mousePos);
+        }
+
+        private void AttackTarget(IUnit other)
+        {
+            foreach (IUnit unit in _selectedUnits)
+            {
+                _combatManager.LockTarget(unit, other);
+            }
+
+        }
+
+        private void StopAttacking(IUnit unit)
+        {
+            _combatManager.ClearAttacker(unit);
         }
     }
-
-    private void DeselectUnits()
-    {
-        _gameManager.DeselectUnits();
-        _selectedUnits.Clear();
-        HideBuildingUI();
-    }
-
-    private void MoveSelected(Vector2 mousePos)
-    {
-        _gameManager.MoveSelected(mousePos);
-    }
-
-    private void AttackTarget(IUnit other)
-    {
-        foreach(IUnit unit in _selectedUnits)
-        { 
-            _combatManager.LockTarget(unit, other);
-        }
-
-    }
-
-    private void StopAttacking(IUnit unit)
-    {
-        _combatManager.ClearAttacker(unit);
-    }
-
-
 }

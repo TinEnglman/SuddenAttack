@@ -1,48 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SuddenAttack.Model.Buildings;
 
-public class BuildingController : MonoBehaviour
+namespace SuddenAttack.Controllers
 {
-    [SerializeField]
-    private GameObject _heltBarOverlay = null;
-    private float _currentHelth = 1;
-
-    private void Awake()
+    public class BuildingController : MonoBehaviour
     {
-        _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
-    }
+        [SerializeField]
+        private GameObject _heltBarOverlay = null;
+        private float _currentHelth = 1;
 
-    private SelectionCircleController _selectionCircleController = null;
-    public float CurrentHelth
-    {
-        set { _currentHelth = value; }
-    }
+        private void Awake()
+        {
+            _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
+        }
 
-    private IBuilding _building = null;
+        private SelectionCircleController _selectionCircleController = null;
+        public float CurrentHelth
+        {
+            set { _currentHelth = value; }
+        }
 
-    public IBuilding Building
-    {
-        get { return _building; }
-        set { _building = value; }
-    }
+        private IBuilding _building = null;
 
-    private void Update()
-    {
-        var originalScale = _heltBarOverlay.transform.localScale;
+        public IBuilding Building
+        {
+            get { return _building; }
+            set { _building = value; }
+        }
 
-        float maxScale = 1f;
-        float newScale = _currentHelth * maxScale;
-        _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
-    }
+        private void Update()
+        {
+            var originalScale = _heltBarOverlay.transform.localScale;
 
-    public void Select()
-    {
-        _selectionCircleController.Selectct();
-    }
+            float maxScale = 1f;
+            float newScale = _currentHelth * maxScale;
+            _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
+        }
 
-    public void Deselect()
-    {
-        _selectionCircleController.Deselectct();
+        public void Select()
+        {
+            _selectionCircleController.Selectct();
+        }
+
+        public void Deselect()
+        {
+            _selectionCircleController.Deselectct();
+        }
     }
 }

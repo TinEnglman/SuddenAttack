@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SuddenAttack.Model.Units;
 
-public interface IUnitFactory
+namespace SuddenAttack.Model.Factories
 {
-    Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly);
-    string GetDisplayName();
-    int GetCost();
+    public interface IUnitFactory
+    {
+        Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly);
+        string GetDisplayName();
+        int GetCost();
+    }
 }

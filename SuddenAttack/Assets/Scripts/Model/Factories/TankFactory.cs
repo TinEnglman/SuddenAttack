@@ -1,37 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SuddenAttack.Controllers;
+using SuddenAttack.Model.Units;
 
-public class TankFactory : IUnitFactory
+namespace SuddenAttack.Model.Factories
 {
-    private int _cost;
-
-    public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
+    public class TankFactory : IUnitFactory
     {
-        Vector3 position = new Vector3(x, y, 0);
-        var tank = new Tank
+        private int _cost;
+
+        public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
         {
-            Prefab = Object.Instantiate(prefab)
-        };
+            Vector3 position = new Vector3(x, y, 0);
+            var tank = new Tank
+            {
+                Prefab = Object.Instantiate(prefab)
+            };
 
-        _cost = 40;
-        tank.Data.Cost = _cost;
-        tank.Data.IsFriendly = isFriendly;
-        tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
-        tank.Prefab.GetComponent<UnitController>().SetDestination(position);
-        tank.Prefab.GetComponent<BulletContoller>().enabled = false;
-        tank.Prefab.GetComponent<BulletContoller>().ProjectileOrigin = tank.Prefab.transform.position;
+            _cost = 40;
+            tank.Data.Cost = _cost;
+            tank.Data.IsFriendly = isFriendly;
+            tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
+            tank.Prefab.GetComponent<UnitController>().SetDestination(position);
+            tank.Prefab.GetComponent<BulletContoller>().enabled = false;
+            tank.Prefab.GetComponent<BulletContoller>().ProjectileOrigin = tank.Prefab.transform.position;
 
-        return tank;
-    }
+            return tank;
+        }
 
-    public string GetDisplayName()
-    {
-        return "Tank"; // refactor
-    }
+        public string GetDisplayName()
+        {
+            return "Tank"; // refactor
+        }
 
-    public int GetCost()
-    {
-        return _cost;
+        public int GetCost()
+        {
+            return _cost;
+        }
     }
 }

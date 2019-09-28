@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IUnit : ICombatUnit
+namespace SuddenAttack.Model.Units
 {
-    bool IsMoving { get; }
+    public interface IUnit : ICombatUnit
+    {
+        bool IsMoving { get; }
 
-    void Select();
-    void Deselect();
-    void Update();
-    bool IsBuilding(); // hacky
+        void Select();
+        void Deselect();
+        void Update();
+        bool IsBuilding(); // hacky
+    }
 }

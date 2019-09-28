@@ -1,36 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SuddenAttack.Controllers;
+using SuddenAttack.Model.Units;
 
-public class SoliderFactory : IUnitFactory
+namespace SuddenAttack.Model.Factories
 {
-    private int _cost;
-
-    public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
+    public class SoliderFactory : IUnitFactory
     {
-        Vector3 position = new Vector3(x, y, 0);
-        var solider = new Solider
+        private int _cost;
+
+        public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
         {
-            Prefab = Object.Instantiate(prefab)
-        };
+            Vector3 position = new Vector3(x, y, 0);
+            var solider = new Solider
+            {
+                Prefab = Object.Instantiate(prefab)
+            };
 
-        _cost = 10;
-        solider.Data.Cost = _cost;
-        solider.Data.IsFriendly = isFriendly;
-        solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
-        solider.Prefab.GetComponent<UnitController>().SetDestination(position);
+            _cost = 10;
+            solider.Data.Cost = _cost;
+            solider.Data.IsFriendly = isFriendly;
+            solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
+            solider.Prefab.GetComponent<UnitController>().SetDestination(position);
 
-        return solider;
-    }
+            return solider;
+        }
 
-    public string GetDisplayName()
-    {
-        return "Solider"; // refactor
-    }
+        public string GetDisplayName()
+        {
+            return "Solider"; // refactor
+        }
 
-    public int GetCost()
-    {
-        return _cost;
+        public int GetCost()
+        {
+            return _cost;
+        }
     }
 }
-

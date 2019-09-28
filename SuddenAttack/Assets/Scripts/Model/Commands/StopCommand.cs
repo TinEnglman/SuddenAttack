@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StopCommand : CommandBase
+namespace SuddenAttack.Model.Commands
 {
-    public override void Execute() { }
+    public class StopCommand : CommandBase
+    {
+        public override void Execute() { }
+    }
 }
