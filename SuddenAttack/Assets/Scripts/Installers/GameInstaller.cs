@@ -6,7 +6,7 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     [SerializeField]
-    private GameObject _inputHandler;
+    private GameObject _inputHandler = default;
 
     public override void InstallBindings()
     {

@@ -5,15 +5,9 @@ using UnityEngine.EventSystems;
 
 public class InputHandler : MonoBehaviour, IInputManager
 {
-    [SerializeField] private LayerMask _layerMask = default;
-    [SerializeField] private float _doubleClickDelay = 0.25f;
-
-    public Vector3 PointerWorldPosition { get; private set; }
-
     private Camera _mainCamera;
-    private bool _isDownWithIgnoringUI;
-    private bool _isHeldWithIgnoringUI;
-    private RaycastHit _hit;
+    private const int LeftButtonIndex = 0;
+    private const int RightButtonIndex = 1;
 
     public class DoubleClick
     {
@@ -23,10 +17,9 @@ public class InputHandler : MonoBehaviour, IInputManager
 
         public DoubleClick() { }
 
-        public DoubleClick(string currentAction, GameObject currentTarget,
+        public DoubleClick(GameObject currentTarget,
             float startTime)
         {
-            this.currentAction = currentAction;
             this.currentTarget = currentTarget;
             this.startTime = startTime;
         }
@@ -41,35 +34,41 @@ public class InputHandler : MonoBehaviour, IInputManager
 
     void Update()
     {
-        if (IsDown("Fire1", true))
-        {
-            _isDownWithIgnoringUI = true;
-        }
 
-        if (IsHeld("Fire1", true))
-        {
-            _isHeldWithIgnoringUI = true;
-        }
-
-        if (IsUp("Fire1", true))
-        {
-            _isHeldWithIgnoringUI = false;
-        }
     }
 
     void FixedUpdate()
     {
-        GetPointerWorldPosition();
     }
 
-    public bool IsDown(string action, bool ignoreUICheck = false)
+    public Vector2 GetMouseScreenPosition()
     {
-        if (!ValidatePointerAction(action, ignoreUICheck))
-        {
-            return false;
-        }
+        return Input.mousePosition;
+    }
 
-        return Input.GetButtonDown(action);
+    public Vector2 GetMouseWorldPosition()
+    {
+        return _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public bool isRightMouseButtonDown()
+    {
+        return Input.GetMouseButtonDown(RightButtonIndex);
+    }
+
+    public bool isLeftMouseButtonDown()
+    {
+        return Input.GetMouseButtonDown(LeftButtonIndex);
+    }
+
+    public bool isRightMouseButtonUp()
+    {
+        return Input.GetMouseButtonUp(RightButtonIndex);
+    }
+
+    public bool isLeftMouseButtonUp()
+    {
+        return Input.GetMouseButtonUp(LeftButtonIndex);
     }
 
     public bool IsDown(KeyCode keyCode, bool ignoreUICheck = false)
@@ -79,17 +78,7 @@ public class InputHandler : MonoBehaviour, IInputManager
             return false;
         }
 
-        return UnityEngine.Input.GetKeyDown(keyCode);
-    }
-
-    public bool IsHeld(string action, bool ignoreUICheck = false)
-    {
-        if (!ValidatePointerAction(action, ignoreUICheck))
-        {
-            return false;
-        }
-
-        return UnityEngine.Input.GetButton(action);
+        return Input.GetKeyDown(keyCode);
     }
 
     public bool IsHeld(KeyCode keyCode, bool ignoreUICheck = false)
@@ -99,17 +88,7 @@ public class InputHandler : MonoBehaviour, IInputManager
             return false;
         }
 
-        return UnityEngine.Input.GetKey(keyCode);
-    }
-
-    public bool IsUp(string action, bool ignoreUICheck = false)
-    {
-        if (!ValidatePointerAction(action, ignoreUICheck))
-        {
-            return false;
-        }
-
-        return UnityEngine.Input.GetButtonUp(action);
+        return Input.GetKey(keyCode);
     }
 
     public bool IsUp(KeyCode keyCode, bool ignoreUICheck = false)
@@ -119,7 +98,7 @@ public class InputHandler : MonoBehaviour, IInputManager
             return false;
         }
 
-        return UnityEngine.Input.GetKeyUp(keyCode);
+        return Input.GetKeyUp(keyCode);
     }
 
     private void SetDoubleClickValues(DoubleClick doubleClick)
@@ -127,112 +106,6 @@ public class InputHandler : MonoBehaviour, IInputManager
         _doubleClick.currentAction = doubleClick.currentAction;
         _doubleClick.currentTarget = doubleClick.currentTarget;
         _doubleClick.startTime = doubleClick.startTime;
-    }
-
-    public bool IsDouble(string action, out RaycastHit hit, LayerMask layerMask, bool ignoreUICheck = false)
-    {
-        hit = default;
-
-        if (_doubleClick.currentAction != null &&
-            Time.time - _doubleClick.startTime > _doubleClickDelay)
-        {
-            SetDoubleClickValues(new DoubleClick());
-            return false;
-        }
-
-        if (IsUp(action, ignoreUICheck))
-        {
-            if (_doubleClick.currentAction != null &&
-                _doubleClick.currentAction != action)
-            {
-                SetDoubleClickValues(new DoubleClick());
-                return false;
-            }
-
-            if (_doubleClick.currentTarget != null &&
-                GetRaycastHit(out hit, layerMask) &&
-                _doubleClick.currentTarget != hit.transform.gameObject)
-            {
-                SetDoubleClickValues(new DoubleClick());
-                return false;
-            }
-
-            if (_doubleClick.currentAction == action &&
-                GetRaycastHit(out hit, layerMask) &&
-                _doubleClick.currentTarget == hit.transform.gameObject &&
-                Time.time - _doubleClick.startTime <= _doubleClickDelay)
-            {
-                SetDoubleClickValues(new DoubleClick());
-                return true;
-            }
-
-            if (_doubleClick.currentAction == null &&
-                GetRaycastHit(out hit, layerMask))
-            {
-                SetDoubleClickValues(new DoubleClick(action, hit.transform.gameObject, Time.time));
-            }
-        }
-
-        return false;
-    }
-
-    public float GetAxisRaw(string action)
-    {
-        return Input.GetAxisRaw(action);
-    }
-
-    public float GetAxis(string action)
-    {
-        return Input.GetAxis(action);
-    }
-
-    private void GetPointerWorldPosition()
-    {
-        if (_isDownWithIgnoringUI)
-        {
-            _isDownWithIgnoringUI = false;
-            if (GetRaycastHit(out _hit, _layerMask))
-            {
-                PointerWorldPosition = _hit.point;
-            }
-        }
-
-        if (_isHeldWithIgnoringUI)
-        {
-            if (GetRaycastHit(out _hit, _layerMask))
-            {
-                PointerWorldPosition = _hit.point;
-            }
-        }
-    }
-
-    public bool IsRaycasted(LayerMask layerMask)
-    {
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, 1000, layerMask);
-    }
-
-    public bool GetRaycastHit(out RaycastHit hitInfo, LayerMask layerMask)
-    {
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out hitInfo, 1000, layerMask);
-    }
-
-    private bool ValidatePointerAction(string action, bool ignoreUICheck)
-    {
-        if (ignoreUICheck)
-        {
-            return true;
-        }
-
-        if (action == "Fire1")
-        {
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     private bool ValidatePointerKeyCode(KeyCode keyCode, bool ignoreUICheck)
