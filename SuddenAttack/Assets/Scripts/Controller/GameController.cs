@@ -8,6 +8,7 @@ using SuddenAttack.Model;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Units;
+using SuddenAttack.Ui.Menu;
 
 namespace SuddenAttack.Controllers
 {
@@ -35,6 +36,9 @@ namespace SuddenAttack.Controllers
         private BuildingController _barracksBlue = null;
         [SerializeField]
         private BuildingController _barracksRed = null;
+
+        [SerializeField]
+        private GameMenu _gameMenuController;
 
         [SerializeField]
         private TextMeshProUGUI _foundLabel = null;
@@ -260,6 +264,11 @@ namespace SuddenAttack.Controllers
                 {
                     AddUnit(newUnit);
                 }
+            }
+
+            if (_inputManager.IsDown(KeyCode.F10))
+            {
+                _gameMenuController.gameObject.SetActive(true);
             }
 
             if (_inputManager.isLeftMouseButtonDown())
