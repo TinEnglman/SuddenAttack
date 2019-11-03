@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using SuddenAttack.Model.Commands.Factory;
 using UnityEngine;
 using Zenject;
 using SuddenAttack.Model.Factories;
@@ -37,12 +38,10 @@ namespace SuddenAttack.Model
             Container.Bind<CommandManager>()
                 .To<CommandManager>()
                 .AsSingle();
-        }
-    }
 
-    public enum UnitCommandType
-    {
-        AttackMove,
-        AttackTarget
+            Container.Bind<ICommandFactory>()
+                .To<CommandFactory>()
+                .AsSingle();
+        }
     }
 }

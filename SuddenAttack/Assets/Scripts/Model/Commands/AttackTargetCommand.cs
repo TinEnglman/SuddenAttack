@@ -5,6 +5,10 @@ namespace SuddenAttack.Model.Commands
     public class AttackTargetCommand : UnitCommandBase
     {
         public IUnit AttackedUnit { get; set; }
-        public override void Execute() { }
+
+        public override void Execute()
+        {
+            Unit.Attack(AttackedUnit);
+        }
     }
 }

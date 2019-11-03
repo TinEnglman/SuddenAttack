@@ -8,7 +8,7 @@ namespace SuddenAttack.Controllers
     {
         [SerializeField]
         private GameObject _heltBarOverlay = null;
-        private float _currentHelth = 1;
+        private float _currentHealth = 1;
 
         private void Awake()
         {
@@ -18,7 +18,7 @@ namespace SuddenAttack.Controllers
         private SelectionCircleController _selectionCircleController = null;
         public float CurrentHelth
         {
-            set { _currentHelth = value; }
+            set { _currentHealth = value; }
         }
 
         private IBuilding _building = null;
@@ -34,7 +34,7 @@ namespace SuddenAttack.Controllers
             var originalScale = _heltBarOverlay.transform.localScale;
 
             float maxScale = 1f;
-            float newScale = _currentHelth * maxScale;
+            float newScale = _currentHealth * maxScale;
             _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
         }
 

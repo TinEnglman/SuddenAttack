@@ -7,6 +7,7 @@ using Zenject;
 using SuddenAttack.Model;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Buildings;
+using SuddenAttack.Model.Commands.Factory;
 using SuddenAttack.Model.Units;
 using SuddenAttack.Ui.Menu;
 
@@ -52,6 +53,7 @@ namespace SuddenAttack.Controllers
         private GameManager _gameManager = null;
         private CommandManager _commandManager = null;
         private CombatManager _combatManager = default;
+        private ICommandFactory _combatFactory = default;
         private IInputManager _inputManager = default;
         private IUnitFactory _soliderFactory = default;
         private IUnitFactory _tankFactory = null;
@@ -67,7 +69,7 @@ namespace SuddenAttack.Controllers
         private Texture2D _boxSelectionTexture;
 
         [Inject]
-        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager)
+        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory)
         {
             _gameManager = gameManager;
             _combatManager = combatManager;
@@ -75,6 +77,7 @@ namespace SuddenAttack.Controllers
             _tankFactory = tankFactory;
             _inputManager = inputManager;
             _commandManager = commandManager;
+            _combatFactory = commandFactory;
         }
 
         void Awake()

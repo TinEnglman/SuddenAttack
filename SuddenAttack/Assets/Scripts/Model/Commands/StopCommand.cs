@@ -4,6 +4,9 @@ namespace SuddenAttack.Model.Commands
 {
     public class StopCommand : CommandBase
     {
-        public override void Execute() { }
+        public override void Execute()
+        {
+            Unit.Stop();
+        }
     }
 }

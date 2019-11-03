@@ -9,14 +9,14 @@ namespace SuddenAttack.Model
     {
         private Dictionary<IUnit, List<ICommand>> _activeCommands = new Dictionary<IUnit, List<ICommand>>();
 
-        public void AddCommand(IUnit unit, ICommand command)
+        public void AddCommand(ICommand command)
         {
-            if (!_activeCommands.ContainsKey(unit))
+            if (!_activeCommands.ContainsKey(command.Unit))
             {
-                _activeCommands.Add(unit, new List<ICommand>());
+                _activeCommands.Add(command.Unit, new List<ICommand>());
             }
 
-            _activeCommands[unit].Add(command);
+            _activeCommands[command.Unit].Add(command);
         }
     }
 }
