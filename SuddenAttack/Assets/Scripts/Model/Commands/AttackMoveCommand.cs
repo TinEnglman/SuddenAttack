@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using SuddenAttack.Model.Units;
 
 namespace SuddenAttack.Model.Commands
 {
-    public class AttackMoveCommand : CommandBase
+    public class AttackMoveCommand : UnitCommandBase
     {
+        public Vector2 Destination { get; set; }
         public override void Execute() { }
     }
 }

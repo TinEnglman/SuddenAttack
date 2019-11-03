@@ -33,15 +33,6 @@ namespace SuddenAttack.Model
             _mainCamera = mainCamera;
         }
 
-        void Update()
-        {
-
-        }
-
-        void FixedUpdate()
-        {
-        }
-
         public Vector2 GetMouseScreenPosition()
         {
             return Input.mousePosition;

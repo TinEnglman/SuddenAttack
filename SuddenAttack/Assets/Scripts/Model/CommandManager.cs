@@ -1,21 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using SuddenAttack.Model.Commands;
+using SuddenAttack.Model.Units;
+
 
 namespace SuddenAttack.Model
 {
-    public class CommandManager : MonoBehaviour
+    public class CommandManager
     {
-        // Start is called before the first frame update
-        void Start()
+        private Dictionary<IUnit, List<ICommand>> _activeCommands = new Dictionary<IUnit, List<ICommand>>();
+
+        public void AddCommand(IUnit unit, ICommand command)
         {
+            if (!_activeCommands.ContainsKey(unit))
+            {
+                _activeCommands.Add(unit, new List<ICommand>());
+            }
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            _activeCommands[unit].Add(command);
         }
     }
 }

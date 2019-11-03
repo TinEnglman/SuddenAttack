@@ -50,6 +50,7 @@ namespace SuddenAttack.Controllers
         private Slider _completedSlider = null;
 
         private GameManager _gameManager = null;
+        private CommandManager _commandManager = null;
         private CombatManager _combatManager = default;
         private IInputManager _inputManager = default;
         private IUnitFactory _soliderFactory = default;
@@ -66,13 +67,14 @@ namespace SuddenAttack.Controllers
         private Texture2D _boxSelectionTexture;
 
         [Inject]
-        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager)
+        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager)
         {
             _gameManager = gameManager;
             _combatManager = combatManager;
             _soliderFactory = soliderFactory;
             _tankFactory = tankFactory;
             _inputManager = inputManager;
+            _commandManager = commandManager;
         }
 
         void Awake()
@@ -349,6 +351,7 @@ namespace SuddenAttack.Controllers
             {
                 if (target != selectedUnit && target != null)
                 {
+                    //_commandManager.AddCommand(selectedUnit);
                     AttackTarget(target);
                     selectedUnit.IsUserLocked = true;
                 }

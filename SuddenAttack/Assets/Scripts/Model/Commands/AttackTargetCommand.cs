@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using SuddenAttack.Model.Units;
 
 namespace SuddenAttack.Model.Commands
 {
-    public class AttackTargetCommand : CommandBase
+    public class AttackTargetCommand : UnitCommandBase
     {
+        public IUnit AttackedUnit { get; set; }
         public override void Execute() { }
     }
 }

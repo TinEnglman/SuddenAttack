@@ -1,7 +1,7 @@
 ﻿
 namespace SuddenAttack.Model.Commands
 {
-    public class UnitCommandBase : CommandBase
+    public class BuildingCommandBase : CommandBase
     {
         public override void Execute() { }
     }

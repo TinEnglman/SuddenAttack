@@ -33,6 +33,16 @@ namespace SuddenAttack.Model
             Container.Bind<IInputManager>()
                 .FromComponentInNewPrefab(_inputHandler)
                 .AsSingle();
+
+            Container.Bind<CommandManager>()
+                .To<CommandManager>()
+                .AsSingle();
         }
+    }
+
+    public enum UnitCommandType
+    {
+        AttackMove,
+        AttackTarget
     }
 }
