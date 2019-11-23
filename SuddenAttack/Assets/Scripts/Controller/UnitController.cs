@@ -54,10 +54,7 @@ namespace SuddenAttack.Controllers
 
         void Update()
         {
-
-            var originalScale = _heltBarOverlay.transform.localScale;
-
-            float maxScale = 2;
+            float maxScale = 1;
             float newScale = _currentHelth * maxScale;
             _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
             _animator.SetFloat("Angle", _currentAngle);
