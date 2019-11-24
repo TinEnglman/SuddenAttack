@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SuddenAttack.Model.Units;
+using SuddenAttack.Controllers;
 
 namespace SuddenAttack.Model
 {
     public class DelayedDamage
     {
-        public ICombatUnit attacker;
+        public IUnit attacker;
         public IUnit attacked;
         public volatile float damage; // refactor
         public volatile float delay;
@@ -17,6 +18,23 @@ namespace SuddenAttack.Model
     public class CombatManager
     {
         private Dictionary<IUnit, IUnit> _attackingUnits = new Dictionary<IUnit, IUnit>();
+        private Dictionary<IUnit, List<DelayedDamage>> _delayedDamageMap = new Dictionary<IUnit, List<DelayedDamage>>();
+
+        public void Damage(IUnit attacker, IUnit attacked, float damage, float delay)
+        {
+            var delayedDamage = new DelayedDamage();
+            delayedDamage.damage = damage;
+            delayedDamage.delay = delay;
+            delayedDamage.attacked = attacked;
+            delayedDamage.attacker = attacker;
+
+            if (!_delayedDamageMap.ContainsKey(attacked))
+            {
+                _delayedDamageMap.Add(attacked, new List<DelayedDamage>());
+            }
+
+            _delayedDamageMap[attacked].Add(delayedDamage);
+        }
 
         public void LockTarget(IUnit attacker, IUnit attacked)
         {
@@ -30,15 +48,30 @@ namespace SuddenAttack.Model
             attacker.IsUserLocked = false;
         }
 
+        public void MoveUnit(IUnit unit, Vector3 destination)
+        {
+            unit.Prefab.GetComponent<UnitController>().SetDestination(destination);
+        }
+
+        public void StopUnit(IUnit unit)
+        {
+            unit.Prefab.GetComponent<UnitController>().SetDestination(unit.Prefab.transform.position);
+        }
+
         public bool HasLock(IUnit attacker)
         {
             return _attackingUnits.ContainsKey(attacker);
         }
 
+        public bool IsMoving(IUnit unit)
+        {
+            return unit.Prefab.GetComponent<UnitController>().IsMoving;
+        }
+
         public void Update(float dt)
         {
             List<IUnit> clearList = new List<IUnit>();
-            foreach (KeyValuePair<IUnit, IUnit> pair in _attackingUnits)
+            foreach (var pair in _attackingUnits)
             {
                 var attacker = pair.Key;
                 var attacked = pair.Value;
@@ -67,6 +100,27 @@ namespace SuddenAttack.Model
             foreach (IUnit unit in clearList)
             {
                 ClearAttacker(unit);
+            }
+
+            foreach (var delayedDamagePair in _delayedDamageMap)
+            {
+                List<DelayedDamage> killList = new List<DelayedDamage>();
+                foreach (var delayedDamage in delayedDamagePair.Value)
+                {
+                    delayedDamage.delay -= dt;
+
+                    if (delayedDamage.delay <= 0)
+                    {
+                        delayedDamage.attacked.Data.HitPoints -= delayedDamage.damage;
+                        delayedDamage.attacker.Hit(delayedDamage.attacked);
+                        killList.Add(delayedDamage);
+                    }
+                }
+
+                foreach (var delayedDamage in killList)
+                {
+                    delayedDamagePair.Value.Remove(delayedDamage);
+                }
             }
 
         }

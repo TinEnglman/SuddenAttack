@@ -10,14 +10,16 @@ namespace SuddenAttack.Model.Units
     {
         protected UnitData _unitData;
         protected GameObject _prefab;
+        protected CombatManager _combatManager = default;
+
         protected float _weaponCooldown = 0.0f;
         protected bool _isAttacking = false;
         protected bool _canFire = true;
-        protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>();
         private bool _isUserLocked = false;
 
-        public Unit()
+        public Unit(CombatManager combatManager)
         {
+            _combatManager = combatManager;
         }
 
         public GameObject Prefab
@@ -39,17 +41,19 @@ namespace SuddenAttack.Model.Units
 
         public void Move(Vector3 destination)
         {
-            _prefab.GetComponent<UnitController>().SetDestination(destination);
+            //_prefab.GetComponent<UnitController>().SetDestination(destination);
+            _combatManager.MoveUnit(this, destination);
         }
 
         public void Stop()
         {
-            _prefab.GetComponent<UnitController>().SetDestination(_prefab.transform.position);
+            //_prefab.GetComponent<UnitController>().SetDestination(_prefab.transform.position);
+            _combatManager.StopUnit(this);
         }
 
         public void Select()
         {
-            _prefab.GetComponent<UnitController>().Select();
+            _prefab.GetComponent<UnitController>().Select(); // refactor after input system refactor
         }
 
         public void Deselect()
@@ -59,12 +63,12 @@ namespace SuddenAttack.Model.Units
 
         public bool IsMoving
         {
-            get { return _prefab.GetComponent<UnitController>().IsMoving; }
+            get { return _combatManager.IsMoving(this); }
         }
 
         public bool IsUserLocked
         {
-            get { return _isUserLocked; }
+            get { return _isUserLocked; } // refactor to controll/input system perhaps?
             set { _isUserLocked = value; }
         }
 
@@ -101,46 +105,28 @@ namespace SuddenAttack.Model.Units
                 }
             }
 
-            List<int> killList = new List<int>();
-            for (int i = 0; i < _receavedDamage.Count; i++)
-            {
-                _receavedDamage[i].delay -= Time.deltaTime;
-
-                if (_receavedDamage[i].delay <= 0)
-                {
-                    _receavedDamage[i].attacked.Data.HitPoints -= Data.Damage;
-                    _receavedDamage[i].attacker.Hit(_receavedDamage[i].attacked);
-                    killList.Add(i);
-                }
-            }
-
-            for (int index = killList.Count - 1; index >= 0; index--)
-            {
-                _receavedDamage.RemoveAt(index);
-            }
-
             if (_isUserLocked && !IsMoving && !_isAttacking)
             {
                 _isUserLocked = false;
             }
 
             _prefab.GetComponent<UnitController>().CurrentHelth = Data.HitPoints / Data.MaxHitPoints;
-
         }
 
         public void Damage(IUnit other, float damage, float delay)
         {
-            var delayedDamage = new DelayedDamage();
-            delayedDamage.damage = damage;
-            delayedDamage.delay = delay;
-            delayedDamage.attacked = other;
-            delayedDamage.attacker = this;
-            _receavedDamage.Add(delayedDamage);
+            _combatManager.Damage(this, other, damage, delay);
         }
 
-        public abstract void Attack(IUnit other);
-        public abstract void Hit(IUnit other);
-        public abstract void StopAttacking();
+        public virtual void Attack(IUnit other)
+        {
+            _isAttacking = true;
+        }
+        public virtual void StopAttacking()
+        {
+            _isAttacking = false;
+        }
 
+        public abstract void Hit(IUnit other);
     }
 }

@@ -53,7 +53,7 @@ namespace SuddenAttack.Controllers
         private GameManager _gameManager = null;
         private CommandManager _commandManager = null;
         private CombatManager _combatManager = default;
-        private ICommandFactory _combatFactory = default;
+        private ICommandFactory _commandFactory = default;
         private IInputManager _inputManager = default;
         private IUnitFactory _soliderFactory = default;
         private IUnitFactory _tankFactory = null;
@@ -77,7 +77,7 @@ namespace SuddenAttack.Controllers
             _tankFactory = tankFactory;
             _inputManager = inputManager;
             _commandManager = commandManager;
-            _combatFactory = commandFactory;
+            _commandFactory = commandFactory;
         }
 
         void Awake()
@@ -335,11 +335,8 @@ namespace SuddenAttack.Controllers
             _drawSelecionBox = true;
         }
 
-        private void OnRightMouseUp()
+        private IUnit GetUnitUnderPointer(Vector3 mouseWorldPos)
         {
-            Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
-            Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
-
             IUnit target = null;
             foreach (IUnit unit in _gameManager.Units)
             {
@@ -349,14 +346,26 @@ namespace SuddenAttack.Controllers
                     target = unit;
                 }
             }
+            return target;
+        }
+
+        private void OnRightMouseUp()
+        {
+            Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
+            Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
+
+            IUnit target = GetUnitUnderPointer(mouseWorldPos);
+
 
             foreach (IUnit selectedUnit in _selectedUnits)
             {
                 if (target != selectedUnit && target != null)
                 {
-                    //_commandManager.AddCommand(selectedUnit);
-                    AttackTarget(target);
-                    selectedUnit.IsUserLocked = true;
+                    var command = _commandFactory.CreateAttackTargetCommand(selectedUnit, target);
+                    _commandManager.AddCommand(command);
+
+                    //AttackTarget(target);
+                    //selectedUnit.IsUserLocked = true;
                 }
                 else
                 {

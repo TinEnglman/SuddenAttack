@@ -8,7 +8,7 @@ namespace SuddenAttack.Model.Units
 {
     public class Solider : Unit
     {
-        public Solider()
+        public Solider(CombatManager combatManager) : base(combatManager)
         {
             _unitData = ScriptableObject.CreateInstance<UnitData>();
 
@@ -16,18 +16,17 @@ namespace SuddenAttack.Model.Units
             _unitData.HitPoints = 30;
             _unitData.MaxHitPoints = _unitData.HitPoints;
             _unitData.MoveSpeed = 2f;
-            _unitData.WeaponCooldown = 0.33f;
+            _unitData.WeaponCooldown = 0.67f;
             _unitData.Damage = 4;
             _unitData.Range = 3;
-            _unitData.ProjectileSpeed = 28;
+            _unitData.ProjectileSpeed = 15;
             _unitData.EngageRange = 10;
             _weaponCooldown = _unitData.WeaponCooldown;
         }
 
         public override void Attack(IUnit other)
         {
-            _isAttacking = true;
-
+            base.Attack(other);
             var bulletController = Prefab.GetComponent<BulletContoller>();
             bulletController.Target = other.Prefab;
             bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0);
@@ -44,7 +43,7 @@ namespace SuddenAttack.Model.Units
 
         public override void StopAttacking()
         {
-            _isAttacking = false;
+            base.StopAttacking();
             Prefab.GetComponentInChildren<BulletContoller>().Target = null;
         }
     }

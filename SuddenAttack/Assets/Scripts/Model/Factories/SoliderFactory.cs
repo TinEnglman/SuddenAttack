@@ -8,12 +8,19 @@ namespace SuddenAttack.Model.Factories
 {
     public class SoliderFactory : IUnitFactory
     {
-        private int _cost;
+        private int _cost = default;
+        private CombatManager _combatManager = default;
+
+        public SoliderFactory(CombatManager combatManager)
+        {
+            _combatManager = combatManager;
+        }
 
         public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
-            var solider = new Solider
+
+            var solider = new Solider(_combatManager)
             {
                 Prefab = Object.Instantiate(prefab)
             };

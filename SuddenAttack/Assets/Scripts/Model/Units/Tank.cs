@@ -8,25 +8,26 @@ namespace SuddenAttack.Model.Units
 {
     public class Tank : Unit
     {
-        public Tank()
+        public Tank(CombatManager combatManager) : base (combatManager)
         {
             _unitData = ScriptableObject.CreateInstance<UnitData>();
 
             _unitData.DisplayName = "Tank";
-            _unitData.HitPoints = 100;
+            _unitData.HitPoints = 200;
             _unitData.MaxHitPoints = _unitData.HitPoints;
             _unitData.MoveSpeed = 2;
-            _unitData.WeaponCooldown = 2f;
-            _unitData.Damage = 10;
+            _unitData.WeaponCooldown = 3f;
+            _unitData.Damage = 25;
             _unitData.Range = 6;
-            _unitData.ProjectileSpeed = 16;
+            _unitData.ProjectileSpeed = 8;
             _unitData.EngageRange = 10;
             _weaponCooldown = _unitData.WeaponCooldown;
         }
 
         public override void Attack(IUnit other)
         {
-            _isAttacking = true;
+            base.Attack(other);
+
             Prefab.GetComponentInChildren<TurretController>().Target = other.Prefab;
 
             var bulletController = Prefab.GetComponent<BulletContoller>();
@@ -46,7 +47,7 @@ namespace SuddenAttack.Model.Units
 
         public override void StopAttacking()
         {
-            _isAttacking = false;
+            base.StopAttacking();
             Prefab.GetComponentInChildren<TurretController>().Target = Prefab;
             Prefab.GetComponentInChildren<BulletContoller>().Target = null;
         }

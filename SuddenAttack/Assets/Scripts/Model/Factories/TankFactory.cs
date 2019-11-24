@@ -9,11 +9,17 @@ namespace SuddenAttack.Model.Factories
     public class TankFactory : IUnitFactory
     {
         private int _cost;
+        private CombatManager _combatManager = default;
+
+        public TankFactory(CombatManager combatManager)
+        {
+            _combatManager = combatManager;
+        }
 
         public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
-            var tank = new Tank
+            var tank = new Tank(_combatManager)
             {
                 Prefab = Object.Instantiate(prefab)
             };
