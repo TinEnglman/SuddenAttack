@@ -20,6 +20,7 @@ namespace SuddenAttack.Controllers
         private SelectionCircleController _selectionCircleController = null;
         private bool _isMoving = false;
         private float _currentHelth = 1;
+        private float _maxScale = default;
 
         public bool IsMoving
         {
@@ -47,16 +48,16 @@ namespace SuddenAttack.Controllers
         }
 
         void Awake()
-        {
-            _destination = GetComponent<Transform>().position;
+        { 
+            _destination = gameObject.transform.position;
+            _maxScale = _heltBarOverlay.transform.localScale.x;
             _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
         }
 
         void Update()
         {
-            float maxScale = 1;
-            float newScale = _currentHelth * maxScale;
-            _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
+            float newScale = _currentHelth * _maxScale;
+            _heltBarOverlay.transform.localScale = new Vector3(newScale, _maxScale, _maxScale);
             _animator.SetFloat("Angle", _currentAngle);
 
             if (_destination != transform.position)

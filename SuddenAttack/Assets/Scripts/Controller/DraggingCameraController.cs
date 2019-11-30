@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using Zenject;
 using SuddenAttack.Model;
+using UnityEngine.U2D;
 
 namespace SuddenAttack.Controllers
 {
     public class DraggingCameraController : MonoBehaviour
     {
-
         [SerializeField]
         private bool _lockCamera = false;
         [SerializeField]
@@ -19,6 +19,7 @@ namespace SuddenAttack.Controllers
         private Vector3 _cameraPositionMax = new Vector3(20, -31, -10);
 
         private Camera _camera;
+        private PixelPerfectCamera _pixelPerfectComponent;
         private Vector3 _currentDirectionVector;
         private IInputManager _inputManager = default;
 
@@ -26,6 +27,13 @@ namespace SuddenAttack.Controllers
         void Awake()
         {
             _currentDirectionVector = Vector3.zero;
+            _pixelPerfectComponent = gameObject.AddComponent<PixelPerfectCamera>();
+            _pixelPerfectComponent.refResolutionX = 1920;
+            _pixelPerfectComponent.refResolutionY = 1200;
+            _pixelPerfectComponent.assetsPPU = 100;
+            _pixelPerfectComponent.cropFrameX = true;
+            _pixelPerfectComponent.cropFrameY = true;
+            _pixelPerfectComponent.upscaleRT = true;
         }
 
         [Inject]
