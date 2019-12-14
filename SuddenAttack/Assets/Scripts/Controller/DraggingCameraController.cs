@@ -28,12 +28,12 @@ namespace SuddenAttack.Controllers
         {
             _currentDirectionVector = Vector3.zero;
             _pixelPerfectComponent = gameObject.AddComponent<PixelPerfectCamera>();
-            _pixelPerfectComponent.refResolutionX = 1920;
-            _pixelPerfectComponent.refResolutionY = 1200;
+            _pixelPerfectComponent.refResolutionX = 1366;
+            _pixelPerfectComponent.refResolutionY = 768;
             _pixelPerfectComponent.assetsPPU = 100;
-            _pixelPerfectComponent.cropFrameX = true;
-            _pixelPerfectComponent.cropFrameY = true;
-            _pixelPerfectComponent.upscaleRT = true;
+            _pixelPerfectComponent.cropFrameX = false;
+            _pixelPerfectComponent.cropFrameY = false;
+            _pixelPerfectComponent.upscaleRT = false;
         }
 
         [Inject]

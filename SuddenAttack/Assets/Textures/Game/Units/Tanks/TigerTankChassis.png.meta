@@ -1,46 +1,43 @@
 fileFormatVersion: 2
-guid: 13492daad080fa34d97f96a588c06242
+guid: a0fd1c3502e2dda4999b0c8b6bb8589e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6445633914792498818
-    second: TigerTankTurret_0
+      213: 939135229741216776
+    second: tiger tank chassis - new large_0
   - first:
-      213: -2405536294534435590
-    second: TigerTankTurret_1
+      213: -7619486344110509346
+    second: tiger tank chassis - new large_1
   - first:
-      213: 449705615018774827
-    second: TigerTankTurret_2
+      213: -8721156212886635549
+    second: tiger tank chassis - new large_2
   - first:
-      213: -3255694093812083243
-    second: TigerTankTurret_3
+      213: -8839976141019992894
+    second: tiger tank chassis - new large_3
   - first:
-      213: -880427274858045065
-    second: TigerTankTurret_4
+      213: -8435117470952187181
+    second: tiger tank chassis - new large_4
   - first:
-      213: 1955960395501046599
-    second: TigerTankTurret_5
+      213: -2847697472346216393
+    second: tiger tank chassis - new large_5
   - first:
-      213: -2304537249692780952
-    second: TigerTankTurret_6
+      213: 2022083201632163786
+    second: tiger tank chassis - new large_6
   - first:
-      213: -3493543837856437767
-    second: TigerTankTurret_7
+      213: 3820642845388354355
+    second: tiger tank chassis - new large_7
   - first:
-      213: 2814452625325901295
-    second: TigerTankTurret_8
+      213: -6906423393564937968
+    second: tiger tank chassis - new large_8
   - first:
-      213: 3120249720244765961
-    second: TigerTankTurret_9
+      213: -1733265685184569640
+    second: tiger tank chassis - new large_9
   - first:
-      213: 311173973968375259
-    second: TigerTankTurret_10
+      213: -725067964382553908
+    second: tiger tank chassis - new large_10
   - first:
-      213: 1330009949571703248
-    second: TigerTankTurret_11
-  - first:
-      213: -6437404587994496282
-    second: TigerTankTurret_12
+      213: 3546797606076038697
+    second: tiger tank chassis - new large_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -86,7 +83,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -134,274 +131,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TigerTankTurret_0
+      name: tiger tank chassis - new large_0
       rect:
         serializedVersion: 2
-        x: 241
-        y: 1711
-        width: 141
-        height: 192
+        x: 67
+        y: 43
+        width: 66
+        height: 86
       alignment: 9
-      pivot: {x: 0.39226472, y: 0.35758653}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 950cdaad7c7031048a96fd2a33504c58
-      internalID: -6445633914792498818
+      spriteID: c0e0812dbeb4e5b418a2a0aab8ccbf9f
+      internalID: 939135229741216776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_1
+      name: tiger tank chassis - new large_1
       rect:
         serializedVersion: 2
-        x: 895
-        y: 1729
-        width: 219
-        height: 162
+        x: 265
+        y: 36
+        width: 86
+        height: 99
       alignment: 9
-      pivot: {x: 0.30578166, y: 0.40622965}
+      pivot: {x: 0.4883721, y: 0.5050505}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7f811ee34bbd0542b48509112a61061
-      internalID: -2405536294534435590
+      spriteID: a8d51d8b096ebbc4687d730ca2a59ecf
+      internalID: -7619486344110509346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_2
+      name: tiger tank chassis - new large_2
       rect:
         serializedVersion: 2
-        x: 1411
-        y: 1756
-        width: 255
-        height: 102
+        x: 463
+        y: 35
+        width: 101
+        height: 101
       alignment: 9
-      pivot: {x: 0.2617149, y: 0.5595691}
+      pivot: {x: 0.51485145, y: 0.52475244}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee4a11fa2b8086945a54971349525ddb
-      internalID: 449705615018774827
+      spriteID: 67949efdc315fe341a385334d64eafc1
+      internalID: -8721156212886635549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_3
+      name: tiger tank chassis - new large_3
       rect:
         serializedVersion: 2
-        x: 220
-        y: 1315
-        width: 234
-        height: 147
+        x: 667
+        y: 56
+        width: 96
+        height: 63
       alignment: 9
-      pivot: {x: 0.3052483, y: 0.6446716}
+      pivot: {x: 0.5833334, y: 0.5873016}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf21b089d821f1845be477a42a143bf8
-      internalID: -3255694093812083243
+      spriteID: a5412c6c31e9716439206ddbf5302432
+      internalID: -8839976141019992894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_4
+      name: tiger tank chassis - new large_4
       rect:
         serializedVersion: 2
-        x: 874
-        y: 1246
-        width: 165
-        height: 210
+        x: 861
+        y: 48
+        width: 107
+        height: 87
       alignment: 9
-      pivot: {x: 0.38952228, y: 0.7170079}
+      pivot: {x: 0.55140185, y: 0.5862069}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a608fdb944ffbfa448db3086dcd8047f
-      internalID: -880427274858045065
+      spriteID: d27e127568a245f4babee3d20a9f3990
+      internalID: -8435117470952187181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_5
+      name: tiger tank chassis - new large_5
       rect:
         serializedVersion: 2
-        x: 1486
-        y: 1276
-        width: 99
-        height: 210
+        x: 1071
+        y: 41
+        width: 98
+        height: 91
       alignment: 9
-      pivot: {x: 0.49999753, y: 0.7025396}
+      pivot: {x: 0.52040815, y: 0.61538464}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 601dad025ffce954281fa7d4f7ea099e
-      internalID: 1955960395501046599
+      spriteID: c211684a52935104bb24300281c55996
+      internalID: -2847697472346216393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_6
+      name: tiger tank chassis - new large_6
       rect:
         serializedVersion: 2
-        x: 241
-        y: 709
-        width: 165
-        height: 210
+        x: 1291
+        y: 41
+        width: 66
+        height: 85
       alignment: 9
-      pivot: {x: 0.610477, y: 0.717007}
+      pivot: {x: 0.5151515, y: 0.65882355}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36eb1b425f5ea7449eff26b2f6fa60c
-      internalID: -2304537249692780952
+      spriteID: 066b6d81d6b189646b42d09a52fe710b
+      internalID: 2022083201632163786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_7
+      name: tiger tank chassis - new large_7
       rect:
         serializedVersion: 2
-        x: 820
-        y: 835
-        width: 219
-        height: 162
+        x: 1482
+        y: 41
+        width: 98
+        height: 91
       alignment: 9
-      pivot: {x: 0.7219634, y: 0.36872205}
+      pivot: {x: 0.5102041, y: 0.6043956}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecb76725361c8814f899bae3dd76380c
-      internalID: -3493543837856437767
+      spriteID: c3f34f179e2c27d4f8f0a51ff61c0024
+      internalID: 3820642845388354355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_8
+      name: tiger tank chassis - new large_8
       rect:
         serializedVersion: 2
-        x: 1459
-        y: 868
-        width: 141
-        height: 192
+        x: 1682
+        y: 48
+        width: 107
+        height: 87
       alignment: 9
-      pivot: {x: 0.6292794, y: 0.35758623}
+      pivot: {x: 0.4953271, y: 0.5862069}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcbd4ccaaf2a60d4c98e8f15de8acdbc
-      internalID: 2814452625325901295
+      spriteID: fba750031fca91b4d818e5774bbf8391
+      internalID: -6906423393564937968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_9
+      name: tiger tank chassis - new large_9
       rect:
         serializedVersion: 2
-        x: 190
-        y: 277
-        width: 234
-        height: 147
+        x: 1887
+        y: 56
+        width: 96
+        height: 63
       alignment: 9
-      pivot: {x: 0.69475144, y: 0.62400395}
+      pivot: {x: 0.4375, y: 0.5714286}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c4f8b1c8d42b024489083c1a6f24e9a
-      internalID: 3120249720244765961
+      spriteID: ec087fbe85e091a42879613b0f66679b
+      internalID: -1733265685184569640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_10
+      name: tiger tank chassis - new large_10
       rect:
         serializedVersion: 2
-        x: 835
-        y: 295
-        width: 255
-        height: 102
+        x: 2087
+        y: 35
+        width: 100
+        height: 101
       alignment: 9
-      pivot: {x: 0.77402633, y: 0.5595706}
+      pivot: {x: 0.5, y: 0.5346535}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3271ed6694b189e4c98d0f42a05a0a1a
-      internalID: 311173973968375259
+      spriteID: 7c3a1a0cef2558946ac774b591aa3739
+      internalID: -725067964382553908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TigerTankTurret_11
+      name: tiger tank chassis - new large_11
       rect:
         serializedVersion: 2
-        x: 1510
-        y: 295
-        width: 102
-        height: 213
+        x: 2300
+        y: 36
+        width: 86
+        height: 99
       alignment: 9
-      pivot: {x: 0.5595691, y: 0.3145739}
+      pivot: {x: 0.5116279, y: 0.4848485}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b952d6a19646bf43b1290cb24d09bc8
-      internalID: 1330009949571703248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TigerTankTurret_12
-      rect:
-        serializedVersion: 2
-        x: 1925
-        y: 570
-        width: 123
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7d810c6943882e34686fc63f26f4f590
-      internalID: -6437404587994496282
+      spriteID: 796694eacdb820c42a9eaa6a2f9c20c2
+      internalID: 3546797606076038697
       vertices: []
       indices: 
       edges: []
@@ -409,7 +385,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cc2f2615c88302542939449f158f654c
+    spriteID: 15d7f51cb22459c4199002c8b966012f
     internalID: 0
     vertices: []
     indices: 
@@ -418,7 +394,7 @@ TextureImporter:
     secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 1
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
