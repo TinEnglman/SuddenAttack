@@ -10,8 +10,9 @@ using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Commands.Factory;
 using SuddenAttack.Model.Units;
 using SuddenAttack.Ui.Menu;
+using SuddenAttack.Controller.ViewController;
 
-namespace SuddenAttack.Controllers
+namespace SuddenAttack.Controller.FlowController
 {
     public class GameController : MonoBehaviour
     {

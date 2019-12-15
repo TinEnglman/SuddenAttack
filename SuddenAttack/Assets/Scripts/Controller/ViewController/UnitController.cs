@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using SuddenAttack.Gui;
 
-namespace SuddenAttack.Controllers
+namespace SuddenAttack.Controller.ViewController
 {
     public class UnitController : MonoBehaviour
     {
@@ -47,14 +47,14 @@ namespace SuddenAttack.Controllers
             _destination = destination;
         }
 
-        void Awake()
+        private void Awake()
         { 
             _destination = gameObject.transform.position;
             _maxScale = _heltBarOverlay.transform.localScale.x;
             _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
         }
 
-        void Update()
+        private void Update()
         {
             float newScale = _currentHelth * _maxScale;
             _heltBarOverlay.transform.localScale = new Vector3(newScale, _maxScale, _maxScale);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SuddenAttack.Controllers
+namespace SuddenAttack.Controller.ViewController
 {
     public class TurretController : MonoBehaviour
     {

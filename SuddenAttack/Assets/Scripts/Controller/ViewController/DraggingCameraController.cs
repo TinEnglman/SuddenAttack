@@ -3,7 +3,7 @@ using Zenject;
 using SuddenAttack.Model;
 using UnityEngine.U2D;
 
-namespace SuddenAttack.Controllers
+namespace SuddenAttack.Controller.ViewController
 {
     public class DraggingCameraController : MonoBehaviour
     {

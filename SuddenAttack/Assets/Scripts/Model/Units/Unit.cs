@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SuddenAttack.Model.Data;
-using SuddenAttack.Controllers;
+using SuddenAttack.Controller.ViewController;
 
 namespace SuddenAttack.Model.Units
 {
