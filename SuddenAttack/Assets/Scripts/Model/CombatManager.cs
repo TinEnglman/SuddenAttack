@@ -125,7 +125,7 @@ namespace SuddenAttack.Model
 
         }
 
-        public float CalculateDamageDelay(IUnit attacker, IUnit attacked)
+        private float CalculateDamageDelay(IUnit attacker, IUnit attacked)
         {
             float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
             if (attacker.Data.ProjectileSpeed > 0)

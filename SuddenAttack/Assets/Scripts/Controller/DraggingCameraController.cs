@@ -7,6 +7,10 @@ namespace SuddenAttack.Controllers
 {
     public class DraggingCameraController : MonoBehaviour
     {
+        private int DEFAULT_SCREEN_X = 1920;
+        private int DEFAULT_SCREEN_Y = 1080;
+        private int PIXELS_PER_UNIT = 100;
+
         [SerializeField]
         private bool _lockCamera = false;
         [SerializeField]
@@ -28,9 +32,9 @@ namespace SuddenAttack.Controllers
         {
             _currentDirectionVector = Vector3.zero;
             _pixelPerfectComponent = gameObject.AddComponent<PixelPerfectCamera>();
-            _pixelPerfectComponent.refResolutionX = 1366;
-            _pixelPerfectComponent.refResolutionY = 768;
-            _pixelPerfectComponent.assetsPPU = 100;
+            _pixelPerfectComponent.refResolutionX = DEFAULT_SCREEN_X;
+            _pixelPerfectComponent.refResolutionY = DEFAULT_SCREEN_Y;
+            _pixelPerfectComponent.assetsPPU = PIXELS_PER_UNIT;
             _pixelPerfectComponent.cropFrameX = false;
             _pixelPerfectComponent.cropFrameY = false;
             _pixelPerfectComponent.upscaleRT = false;
