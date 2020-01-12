@@ -16,11 +16,18 @@ namespace SuddenAttack.Controller.ViewController
         private float _moveSpeed = 1.0f;
         [SerializeField]
         private GameObject _heltBarOverlay = null;
+        [SerializeField]
+        private GameObject _defaultTarget = null; // revisit; unised by solider
 
         private SelectionCircleController _selectionCircleController = null;
         private bool _isMoving = false;
         private float _currentHelth = 1;
         private float _maxScale = default;
+
+        public GameObject DefaultTarget
+        {
+            get { return _defaultTarget;  }
+        }
 
         public bool IsMoving
         {

@@ -10,7 +10,7 @@ namespace SuddenAttack.Model.Units
     {
         public Solider(CombatManager combatManager) : base(combatManager)
         {
-            _unitData = ScriptableObject.CreateInstance<UnitData>();
+            _unitData = ScriptableObject.CreateInstance<UnitData>(); // externalise
 
             _unitData.DisplayName = "Solider";
             _unitData.HitPoints = 30;
@@ -44,7 +44,7 @@ namespace SuddenAttack.Model.Units
         public override void StopAttacking()
         {
             base.StopAttacking();
-            Prefab.GetComponentInChildren<BulletContoller>().Target = null;
+            //Prefab.GetComponentInChildren<BulletContoller>().Target = null; // revisit
         }
     }
 }

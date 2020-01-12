@@ -48,8 +48,17 @@ namespace SuddenAttack.Model.Units
         public override void StopAttacking()
         {
             base.StopAttacking();
-            Prefab.GetComponentInChildren<TurretController>().Target = Prefab;
-            Prefab.GetComponentInChildren<BulletContoller>().Target = null;
+            Prefab.GetComponentInChildren<TurretController>().Target = Prefab.GetComponentInChildren<UnitController>().DefaultTarget; ;
+            //Prefab.GetComponentInChildren<BulletContoller>().Target = null; // revisit
+        }
+
+        public override void Move(Vector3 destination)
+        {
+            base.Move(destination);
+            var unitController = Prefab.GetComponentInChildren<UnitController>();
+            var turretController = Prefab.GetComponentInChildren<TurretController>();
+            unitController.DefaultTarget.transform.position = destination;
+            turretController.Target = unitController.DefaultTarget;
         }
     }
 }

@@ -18,14 +18,20 @@ namespace SuddenAttack.Controller.ViewController
             set { _target = value; }
         }
 
-        void Awake()
+        private void Awake()
         {
             _target = gameObject;
         }
 
-        void Update()
+        private void Update()
         {
             float targetAngle = 0.0f;
+
+            if (_target == null)
+            {
+                _target = gameObject;
+            }
+
             Vector3 direction = (_target.transform.position - transform.position).normalized;
             if (Mathf.Abs(direction.x) == 0)
             {

@@ -39,11 +39,6 @@ namespace SuddenAttack.Model.Units
             return false;
         }
 
-        public void Move(Vector3 destination)
-        {
-            //_prefab.GetComponent<UnitController>().SetDestination(destination);
-            _combatManager.MoveUnit(this, destination);
-        }
 
         public void Stop()
         {
@@ -125,6 +120,12 @@ namespace SuddenAttack.Model.Units
         public virtual void StopAttacking()
         {
             _isAttacking = false;
+        }
+
+        public virtual void Move(Vector3 destination)
+        {
+            //_prefab.GetComponent<UnitController>().SetDestination(destination);
+            _combatManager.MoveUnit(this, destination);
         }
 
         public abstract void Hit(IUnit other);
