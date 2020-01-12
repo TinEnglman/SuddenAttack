@@ -65,6 +65,8 @@ namespace SuddenAttack.Controller.FlowController
         private float _incomeFrequency = 9;
         private float _incomeCountdown = 0;
 
+        private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
+
 
         private List<IBuilding> _buildings = new List<IBuilding>();
         private Texture2D _boxSelectionTexture;
@@ -163,6 +165,7 @@ namespace SuddenAttack.Controller.FlowController
             {
                 _gameManager.Funds -= cost;
                 building.IsSpawning = true;
+                _lockBuildingUI = true;
             }
         }
 
@@ -383,7 +386,7 @@ namespace SuddenAttack.Controller.FlowController
             Vector2 mousePos = _inputManager.GetMouseWorldPosition();
             Vector2 pressedPos = _pressedWorldPosition;
 
-            if (_selectedUnits.Count > 0)
+            if (_selectedUnits.Count > 0 && _lockBuildingUI == false)
             {
                 DeselectUnits();
             }
@@ -409,10 +412,12 @@ namespace SuddenAttack.Controller.FlowController
                 }
             }
 
-            if (!unitSelected)
+            if (!unitSelected && _lockBuildingUI == false)
             {
                 DeselectUnits();
             }
+
+            _lockBuildingUI = false;
         }
 
         private void UpdateAI()
