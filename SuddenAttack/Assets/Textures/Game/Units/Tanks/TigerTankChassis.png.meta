@@ -181,7 +181,7 @@ TextureImporter:
         width: 101
         height: 101
       alignment: 9
-      pivot: {x: 0.4942633, y: 0.559066}
+      pivot: {x: 0.5292497, y: 0.441562}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,7 +202,7 @@ TextureImporter:
         width: 96
         height: 63
       alignment: 9
-      pivot: {x: 0.56167287, y: 0.5983039}
+      pivot: {x: 0.56954384, y: 0.46845162}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,7 +223,7 @@ TextureImporter:
         width: 107
         height: 87
       alignment: 9
-      pivot: {x: 0.5125339, y: 0.57823986}
+      pivot: {x: 0.54806036, y: 0.48782104}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: tiger tank chassis - new large_5
       rect:
         serializedVersion: 2
-        x: 1071
-        y: 41
+        x: 1068
+        y: 42
         width: 98
         height: 91
       alignment: 9
-      pivot: {x: 0.5274808, y: 0.5925344}
+      pivot: {x: 0.5642227, y: 0.49216563}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,12 +260,12 @@ TextureImporter:
       name: tiger tank chassis - new large_6
       rect:
         serializedVersion: 2
-        x: 1291
+        x: 1292
         y: 41
         width: 66
         height: 85
       alignment: 9
-      pivot: {x: 0.5151515, y: 0.65882355}
+      pivot: {x: 0.49595502, y: 0.5544763}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -286,7 +286,7 @@ TextureImporter:
         width: 98
         height: 91
       alignment: 9
-      pivot: {x: 0.5102041, y: 0.6043956}
+      pivot: {x: 0.48300108, y: 0.48479772}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -307,7 +307,7 @@ TextureImporter:
         width: 107
         height: 87
       alignment: 9
-      pivot: {x: 0.51476026, y: 0.55433893}
+      pivot: {x: 0.5018539, y: 0.4562735}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,12 +323,12 @@ TextureImporter:
       name: tiger tank chassis - new large_9
       rect:
         serializedVersion: 2
-        x: 1887
+        x: 1888
         y: 56
         width: 96
         height: 63
       alignment: 9
-      pivot: {x: 0.48803964, y: 0.58243066}
+      pivot: {x: 0.5246493, y: 0.47586823}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -349,7 +349,7 @@ TextureImporter:
         width: 100
         height: 101
       alignment: 9
-      pivot: {x: 0.55544925, y: 0.5758296}
+      pivot: {x: 0.5874463, y: 0.49135748}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -370,7 +370,7 @@ TextureImporter:
         width: 86
         height: 99
       alignment: 9
-      pivot: {x: 0.53580636, y: 0.53385776}
+      pivot: {x: 0.5854123, y: 0.5015411}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
