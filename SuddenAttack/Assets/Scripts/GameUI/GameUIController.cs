@@ -1,6 +1,6 @@
-﻿using SuddenAttack.Model;
+﻿using SuddenAttack.Controller.FlowController;
+using SuddenAttack.Model;
 using SuddenAttack.Ui.Menu;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -25,25 +25,19 @@ namespace SuddenAttack.Controller.GameUI
         private Slider _completedSlider = null;
 
         private IInputManager _inputManager = default;
+        private SelectionManager _selectionManager = default;
+        private GameManager _gameManager = default;
         private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
         private Texture2D _boxSelectionTexture;
         private bool _drawSelecionBox;
+        private Vector3 _pressedScreenPosition;
 
         [Inject]
-        public void Construct(IInputManager inputManager)
+        public void Construct(IInputManager inputManager, SelectionManager selectionManager, GameManager gameManager)
         {
             _inputManager = inputManager;
-        }
-
-        public Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
-        {
-            screenPosition1.y = Screen.height - screenPosition1.y;
-            screenPosition2.y = Screen.height - screenPosition2.y;
-
-            var topLeft = Vector3.Min(screenPosition1, screenPosition2);
-            var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
-
-            return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+            _selectionManager = selectionManager;
+            _gameManager = gameManager;
         }
 
         private void Awake()
@@ -55,6 +49,18 @@ namespace SuddenAttack.Controller.GameUI
             _boxSelectionTexture.SetPixel(0, 0, Color.green);
             _boxSelectionTexture.Apply();
         }
+
+        private Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
+        {
+            screenPosition1.y = Screen.height - screenPosition1.y;
+            screenPosition2.y = Screen.height - screenPosition2.y;
+
+            var topLeft = Vector3.Min(screenPosition1, screenPosition2);
+            var bottomRight = Vector3.Max(screenPosition1, screenPosition2);
+
+            return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+        }
+
 
         private void DrawBorder(Rect rect)
         {
@@ -80,12 +86,10 @@ namespace SuddenAttack.Controller.GameUI
 
             _foundLabel.text = "Funds: " + _gameManager.Funds + " $"; // playerManager
 
-            if (_selectedUnits.Count == 1)
+
+            if (_selectionManager.GetSelectedBuildings().Count == 1)
             {
-                if (_selectedUnits[0].IsBuilding())
-                {
-                    _completedSlider.normalizedValue = ((IBuilding)_selectedUnits[0]).GetCompletePercent();
-                }
+                _completedSlider.normalizedValue = (_selectionManager.GetSelectedBuildings()[0]).GetCompletePercent();
             }
         }
 
@@ -104,9 +108,9 @@ namespace SuddenAttack.Controller.GameUI
             _unitNameLabel.gameObject.SetActive(false);
         }
 
-        public void OnBuildButton()
+        private void OnBuildButton()
         {
-            var building = ((IBuilding)_selectedUnits[0]);
+            var building = _selectionManager.GetSelectedBuildings()[0];
             int cost = building.GetFactory().GetCost();
             if (_gameManager.Funds >= cost && !building.IsSpawning)
             {
@@ -151,6 +155,7 @@ namespace SuddenAttack.Controller.GameUI
         private void OnLeftMouseDown()
         {
             _drawSelecionBox = true;
+            _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
         }
 
         private void OnRightMouseUp()

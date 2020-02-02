@@ -1,4 +1,5 @@
 ﻿using SuddenAttack.Model;
+using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Units;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,6 +63,20 @@ namespace SuddenAttack.Controller.FlowController
                 }
             }
             return target;
+        }
+
+        public List<IBuilding> GetSelectedBuildings()
+        {
+            List<IBuilding> buildings = new List<IBuilding>();
+            foreach(var unit in _selectedUnits)
+            {
+                IBuilding building = (IBuilding)unit;
+                if (building != null)
+                {
+                    buildings.Add(building);
+                }
+            }
+            return buildings;
         }
 
         private void OnRightMouseDown()
