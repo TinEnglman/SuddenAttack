@@ -12,7 +12,6 @@ namespace SuddenAttack.Model
         private List<IBuilding> _buildings = null;
         private int _currentFunds = 0;
 
-        private List<IUnit> _selectedUnits;
 
         public int Funds
         {
@@ -32,7 +31,6 @@ namespace SuddenAttack.Model
 
         public GameManager()
         {
-            _selectedUnits = new List<IUnit>();
             _units = new List<IUnit>();
             _buildings = new List<IBuilding>();
         }
@@ -56,22 +54,6 @@ namespace SuddenAttack.Model
             }
         }
 
-        public void SelectUnit(IUnit unit)
-        {
-            _selectedUnits.Add(unit);
-            unit.Select();
-        }
-
-        public void DeselectUnits()
-        {
-
-            foreach (IUnit unit in _selectedUnits)
-            {
-                unit.Deselect();
-            }
-            _selectedUnits.Clear();
-        }
-
         public void AddUnit(IUnit unit)
         {
             _units.Add(unit);
@@ -82,13 +64,15 @@ namespace SuddenAttack.Model
             _units.Remove(unit);
         }
 
-        public void MoveSelected(Vector3 destination)
+        /*
+        public void MoveSelected(Vector3 destination) // move to command
         {
             foreach (IUnit unit in _selectedUnits)
             {
                 unit.Move(destination);
             }
         }
+        */
 
         public List<IUnit> GetTargets(IUnit source) // called form update; slow af; refactor
         {

@@ -18,9 +18,9 @@ namespace SuddenAttack.Controller.ViewController
         [SerializeField]
         private float _edgePadding = 10.0f;
         [SerializeField]
-        private Vector3 _cameraPositionMin = new Vector3(-20, 7, -10);
+        private Vector3 _cameraPositionMin = new Vector3(-20, 7, -30);
         [SerializeField]
-        private Vector3 _cameraPositionMax = new Vector3(20, -31, -10);
+        private Vector3 _cameraPositionMax = new Vector3(20, -31, -30);
 
         private Camera _camera;
         private PixelPerfectCamera _pixelPerfectComponent;
@@ -31,6 +31,8 @@ namespace SuddenAttack.Controller.ViewController
         void Awake()
         {
             _currentDirectionVector = Vector3.zero;
+
+            /*
             _pixelPerfectComponent = gameObject.AddComponent<PixelPerfectCamera>();
             _pixelPerfectComponent.refResolutionX = DEFAULT_SCREEN_X;
             _pixelPerfectComponent.refResolutionY = DEFAULT_SCREEN_Y;
@@ -38,6 +40,8 @@ namespace SuddenAttack.Controller.ViewController
             _pixelPerfectComponent.cropFrameX = false;
             _pixelPerfectComponent.cropFrameY = false;
             _pixelPerfectComponent.upscaleRT = false;
+            */
+
         }
 
         [Inject]
@@ -58,6 +62,16 @@ namespace SuddenAttack.Controller.ViewController
             if (_inputManager.IsDown(KeyCode.B))
             {
                 _lockCamera = false;
+            }
+
+            if (_inputManager.IsDown(KeyCode.KeypadMinus))
+            {
+                _camera.orthographicSize += 0.1f;
+            }
+
+            if (_inputManager.IsDown(KeyCode.KeypadPlus))
+            {
+                _camera.orthographicSize -= 0.1f;
             }
 
             if (_lockCamera)

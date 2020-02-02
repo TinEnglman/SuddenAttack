@@ -38,7 +38,7 @@ namespace SuddenAttack.Controller.FlowController
         private BuildingController _barracksBlue = null;
         [SerializeField]
         private BuildingController _barracksRed = null;
-
+        /*
         [SerializeField]
         private GameMenu _gameMenuController;
 
@@ -50,26 +50,27 @@ namespace SuddenAttack.Controller.FlowController
         private Button _buildButton = null;
         [SerializeField]
         private Slider _completedSlider = null;
-
+        */
         private GameManager _gameManager = null;
         private CommandManager _commandManager = null;
         private CombatManager _combatManager = default;
+        private SelectionManager _selectionManager = default;
         private ICommandFactory _commandFactory = default;
         private IInputManager _inputManager = default;
         private IUnitFactory _soliderFactory = default;
         private IUnitFactory _tankFactory = null;
-        private List<IUnit> _selectedUnits;
-        private Vector3 _pressedWorldPosition;
-        private Vector3 _pressedScreenPosition;
-        private bool _drawSelecionBox;
+        //private List<IUnit> _selectedUnits;
+        //private Vector3 _pressedWorldPosition;
+        //private Vector3 _pressedScreenPosition;
+        //private bool _drawSelecionBox;
         private float _incomeFrequency = 9;
         private float _incomeCountdown = 0;
 
-        private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
+        //private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
 
 
         private List<IBuilding> _buildings = new List<IBuilding>();
-        private Texture2D _boxSelectionTexture;
+        //private Texture2D _boxSelectionTexture;
 
         [Inject]
         public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory)
@@ -83,27 +84,29 @@ namespace SuddenAttack.Controller.FlowController
             _commandFactory = commandFactory;
         }
 
-        void Awake()
+        private void Awake()
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
-            _drawSelecionBox = false;
-            _boxSelectionTexture = new Texture2D(1, 1);
-            _boxSelectionTexture.SetPixel(0, 0, Color.green);
-            _boxSelectionTexture.Apply();
+            //_drawSelecionBox = false;
+            //_boxSelectionTexture = new Texture2D(1, 1);
+            //_boxSelectionTexture.SetPixel(0, 0, Color.green);
+            //_boxSelectionTexture.Apply();
 
             InitLevel();
-            _selectedUnits = new List<IUnit>();
+            //_selectedUnits = new List<IUnit>();
 
-            _buildButton.onClick.AddListener(OnBuildButton);
-            HideBuildingUI();
+            //_buildButton.onClick.AddListener(OnBuildButton);
+            //HideBuildingUI();
         }
 
+        /*
         private void DrawBorder(Rect rect)
         {
             GUI.color = Color.green;
             GUI.DrawTexture(rect, _boxSelectionTexture);
         }
+        
 
         private void DrawSelectionBox(Rect rect, float thickness)
         {
@@ -145,6 +148,7 @@ namespace SuddenAttack.Controller.FlowController
             _buildButton.gameObject.SetActive(false);
             _unitNameLabel.gameObject.SetActive(false);
         }
+     
 
         public Rect GetScreenRect(Vector3 screenPosition1, Vector3 screenPosition2)
         {
@@ -157,6 +161,7 @@ namespace SuddenAttack.Controller.FlowController
             return Rect.MinMaxRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
         }
 
+     
         public void OnBuildButton()
         {
             var building = ((IBuilding)_selectedUnits[0]);
@@ -168,6 +173,7 @@ namespace SuddenAttack.Controller.FlowController
                 _lockBuildingUI = true;
             }
         }
+        */
 
         private void InitLevel()
         {
@@ -257,14 +263,14 @@ namespace SuddenAttack.Controller.FlowController
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             float dt = Time.deltaTime;
             _combatManager.Update(dt);
             _gameManager.Update(dt);
+            _selectionManager.Update();
             UpdateIncome(dt);
             UpdateAI();
-
 
             foreach (IBuilding builing in _buildings)
             {
@@ -273,11 +279,6 @@ namespace SuddenAttack.Controller.FlowController
                 {
                     AddUnit(newUnit);
                 }
-            }
-
-            if (_inputManager.IsDown(KeyCode.F10))
-            {
-                _gameMenuController.gameObject.SetActive(true);
             }
 
             if (_inputManager.isLeftMouseButtonDown())
@@ -301,7 +302,7 @@ namespace SuddenAttack.Controller.FlowController
             }
         }
 
-        void UpdateIncome(float dt)
+        private void UpdateIncome(float dt)
         {
             _incomeCountdown -= dt;
 
@@ -334,23 +335,6 @@ namespace SuddenAttack.Controller.FlowController
 
         private void OnLeftMouseDown()
         {
-            _pressedWorldPosition = _inputManager.GetMouseWorldPosition();
-            _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
-            _drawSelecionBox = true;
-        }
-
-        private IUnit GetUnitUnderPointer(Vector3 mouseWorldPos)
-        {
-            IUnit target = null;
-            foreach (IUnit unit in _gameManager.Units)
-            {
-                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-                if (colider.bounds.Contains(new Vector3(mouseWorldPos.x, mouseWorldPos.y, colider.bounds.center.z)))
-                {
-                    target = unit;
-                }
-            }
-            return target;
         }
 
         private void OnRightMouseUp()
@@ -358,10 +342,10 @@ namespace SuddenAttack.Controller.FlowController
             Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
             Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
 
-            IUnit target = GetUnitUnderPointer(mouseWorldPos);
+            IUnit target = _selectionManager.GetUnitUnderPointer(mouseWorldPos);
 
 
-            foreach (IUnit selectedUnit in _selectedUnits)
+            foreach (IUnit selectedUnit in _selectionManager.GetSelectedUnits())
             {
                 if (target != selectedUnit && target != null)
                 {
@@ -382,42 +366,6 @@ namespace SuddenAttack.Controller.FlowController
 
         private void OnLeftMouseUp()
         {
-            _drawSelecionBox = false;
-            Vector2 mousePos = _inputManager.GetMouseWorldPosition();
-            Vector2 pressedPos = _pressedWorldPosition;
-
-            if (_selectedUnits.Count > 0 && _lockBuildingUI == false)
-            {
-                DeselectUnits();
-            }
-
-            bool unitSelected = false;
-            foreach (IUnit unit in _gameManager.Units)
-            {
-                if (!unit.Data.IsFriendly)
-                {
-                    continue;
-                }
-
-                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-                Rect selectionRect = new Rect(pressedPos.x, pressedPos.y, mousePos.x - pressedPos.x, mousePos.y - pressedPos.y);
-                Vector2 unitCenter = new Vector2(unit.Prefab.transform.position.x, unit.Prefab.transform.position.y);
-                if (selectionRect.Contains(unitCenter, true) || colider.bounds.Contains(pressedPos))
-                {
-                    if (!_selectedUnits.Contains(unit))
-                    {
-                        SelectUnit(unit);
-                        unitSelected = true;
-                    }
-                }
-            }
-
-            if (!unitSelected && _lockBuildingUI == false)
-            {
-                DeselectUnits();
-            }
-
-            _lockBuildingUI = false;
         }
 
         private void UpdateAI()
@@ -468,6 +416,7 @@ namespace SuddenAttack.Controller.FlowController
             }
         }
 
+        /*
         private void SelectUnit(IUnit unit)
         {
             _selectedUnits.Add(unit);
@@ -475,9 +424,10 @@ namespace SuddenAttack.Controller.FlowController
 
             if (unit.IsBuilding())
             {
-                _unitNameLabel.text = unit.Data.DisplayName;
-                _buildButton.GetComponentInChildren<TextMeshProUGUI>().text = ((IBuilding)unit).GetFactory().GetDisplayName() + " : " + ((IBuilding)unit).GetFactory().GetCost() + " $ ";
-                ShowBuildingUI();
+                //refactor selection
+                //_unitNameLabel.text = unit.Data.DisplayName;
+                //_buildButton.GetComponentInChildren<TextMeshProUGUI>().text = ((IBuilding)unit).GetFactory().GetDisplayName() + " : " + ((IBuilding)unit).GetFactory().GetCost() + " $ ";
+                //ShowBuildingUI();
             }
         }
 
@@ -485,17 +435,17 @@ namespace SuddenAttack.Controller.FlowController
         {
             _gameManager.DeselectUnits();
             _selectedUnits.Clear();
-            HideBuildingUI();
+            //HideBuildingUI();
         }
-
+        */
         private void MoveSelected(Vector2 mousePos)
         {
-            _gameManager.MoveSelected(mousePos);
+            //_gameManager.MoveSelected(mousePos);
         }
 
         private void AttackTarget(IUnit other)
         {
-            foreach (IUnit unit in _selectedUnits)
+            foreach (IUnit unit in _selectionManager.GetSelectedUnits())
             {
                 _combatManager.LockTarget(unit, other);
             }

@@ -10,23 +10,6 @@ namespace SuddenAttack.Model
         private const int LeftButtonIndex = 0;
         private const int RightButtonIndex = 1;
 
-        public class DoubleClick
-        {
-            public string currentAction;
-            public GameObject currentTarget;
-            public float startTime;
-
-            public DoubleClick() { }
-
-            public DoubleClick(GameObject currentTarget,
-                float startTime)
-            {
-                this.currentTarget = currentTarget;
-                this.startTime = startTime;
-            }
-        }
-        private DoubleClick _doubleClick = new DoubleClick();
-
         [Inject]
         public void Construct(Camera mainCamera)
         {
@@ -91,13 +74,6 @@ namespace SuddenAttack.Model
             }
 
             return Input.GetKeyUp(keyCode);
-        }
-
-        private void SetDoubleClickValues(DoubleClick doubleClick)
-        {
-            _doubleClick.currentAction = doubleClick.currentAction;
-            _doubleClick.currentTarget = doubleClick.currentTarget;
-            _doubleClick.startTime = doubleClick.startTime;
         }
 
         private bool ValidatePointerKeyCode(KeyCode keyCode, bool ignoreUICheck)
