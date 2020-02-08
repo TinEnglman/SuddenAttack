@@ -134,11 +134,16 @@ namespace SuddenAttack.Controller.FlowController
 
         private void SelectUnit(IUnit unit)
         {
+            unit.Select();
             _selectedUnits.Add(unit);
         }
 
         private void DeselectUnits()
         {
+            foreach (var unit in _selectedUnits)
+            {
+                unit.Deselect();
+            }
             _selectedUnits.Clear();
         }
     }

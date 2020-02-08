@@ -7,9 +7,9 @@ namespace SuddenAttack.Controller.ViewController
 {
     public class DraggingCameraController : MonoBehaviour
     {
-        private int DEFAULT_SCREEN_X = 1920;
-        private int DEFAULT_SCREEN_Y = 1080;
-        private int PIXELS_PER_UNIT = 100;
+        //private int DEFAULT_SCREEN_X = 1920;
+        //private int DEFAULT_SCREEN_Y = 1080;
+        //private int PIXELS_PER_UNIT = 100;
 
         [SerializeField]
         private bool _lockCamera = false;

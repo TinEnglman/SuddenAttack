@@ -73,7 +73,7 @@ namespace SuddenAttack.Controller.FlowController
         //private Texture2D _boxSelectionTexture;
 
         [Inject]
-        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory)
+        public void Construct(GameManager gameManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory, SelectionManager selectionManager)
         {
             _gameManager = gameManager;
             _combatManager = combatManager;
@@ -82,6 +82,7 @@ namespace SuddenAttack.Controller.FlowController
             _inputManager = inputManager;
             _commandManager = commandManager;
             _commandFactory = commandFactory;
+            _selectionManager = selectionManager;
         }
 
         private void Awake()

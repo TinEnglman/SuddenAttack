@@ -13,7 +13,7 @@ namespace SuddenAttack.Controller.GameUI
     public class GameUIController : MonoBehaviour
     {
         [SerializeField]
-        private GameMenu _gameMenuController;
+        private GameMenu _gameMenuController = default;
 
         [SerializeField]
         private TextMeshProUGUI _foundLabel = null;
@@ -27,7 +27,7 @@ namespace SuddenAttack.Controller.GameUI
         private IInputManager _inputManager = default;
         private SelectionManager _selectionManager = default;
         private GameManager _gameManager = default;
-        private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
+        //private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
         private Texture2D _boxSelectionTexture;
         private bool _drawSelecionBox;
         private Vector3 _pressedScreenPosition;
@@ -116,7 +116,7 @@ namespace SuddenAttack.Controller.GameUI
             {
                 _gameManager.Funds -= cost;
                 building.IsSpawning = true;
-                _lockBuildingUI = true;
+                //_lockBuildingUI = true;
             }
         }
 
