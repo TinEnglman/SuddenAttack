@@ -26798,11 +26798,6 @@ MonoBehaviour:
   _hqRed: {fileID: 1560123887}
   _barracksBlue: {fileID: 2092705606}
   _barracksRed: {fileID: 1845462711592442037}
-  _gameMenuController: {fileID: 1250733554}
-  _foundLabel: {fileID: 293717315}
-  _unitNameLabel: {fileID: 1733174291}
-  _buildButton: {fileID: 108193610}
-  _completedSlider: {fileID: 1195909896}
 --- !u!1 &723343844
 GameObject:
   m_ObjectHideFlags: 0
@@ -31809,6 +31804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1343750182}
+  - component: {fileID: 1343750183}
   m_Layer: 0
   m_Name: GameUI
   m_TagString: Untagged
@@ -31831,6 +31827,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1343750183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343750181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5bbb3e9f3626445b4bcba798e9f161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameMenuController: {fileID: 1250733554}
+  _foundLabel: {fileID: 293717315}
+  _unitNameLabel: {fileID: 1733174291}
+  _buildButton: {fileID: 108193610}
+  _completedSlider: {fileID: 1195909896}
 --- !u!1 &1353568869
 GameObject:
   m_ObjectHideFlags: 0
