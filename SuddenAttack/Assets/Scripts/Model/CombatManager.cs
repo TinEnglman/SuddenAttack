@@ -112,7 +112,7 @@ namespace SuddenAttack.Model
                     if (delayedDamage.delay <= 0)
                     {
                         delayedDamage.attacked.Data.HitPoints -= delayedDamage.damage;
-                        delayedDamage.attacker.Hit(delayedDamage.attacked);
+                        delayedDamage.attacker.OnHit(delayedDamage.attacked);
                         killList.Add(delayedDamage);
                     }
                 }

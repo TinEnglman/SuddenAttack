@@ -10,6 +10,6 @@ public class BuildUnitCommand : BuildingCommandBase
 
     public override void Execute()
     {
-        ((IBuilding) Unit).IsSpawning = true; // add index
+        //((IBuilding) Unit).IsSpawning = true; // add index
     }
 }

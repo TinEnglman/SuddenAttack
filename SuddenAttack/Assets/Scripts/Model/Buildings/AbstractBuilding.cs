@@ -13,16 +13,15 @@ namespace SuddenAttack.Model.Buildings
         protected UnitData _unitData;
         protected GameObject _unitPrefab;
         protected GameObject _prefab;
-        protected float _currentCountdown = 0;
-        protected IUnitFactory _unitFactory;
-        protected Vector2 _spawnOffset;
-        protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>();
+        public Vector2 SpawnOffset { get; set; }
+
+        //protected float _currentCountdown = 0;
+        protected IUnitFactory _unitFactory; // refactor?
+        //protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>(); // refactor
 
         public AbstractBuilding()
         {
-            IsSpawning = false;
-            _spawnOffset = new Vector3(1, 1, 0);
-
+            SpawnOffset = new Vector3(1, 1, 0);
         }
 
         public void SetFactory(IUnitFactory factory)
@@ -33,53 +32,6 @@ namespace SuddenAttack.Model.Buildings
         public IUnitFactory GetFactory()
         {
             return _unitFactory;
-        }
-
-        public bool IsSpawning
-        {
-            get; set;
-        }
-
-        public bool CanFire() { return false; }
-        public void Fire() { }
-
-        public void StopAttacking() { }
-        public void Attack(IUnit other) { }
-        public void Hit(IUnit other) { }
-        public void Move(Vector3 destination) { }
-        public void Stop() { }
-
-        public void Damage(IUnit other, float damage, float delay)
-        {
-            var delayedDamage = new DelayedDamage();
-            delayedDamage.damage = damage;
-            delayedDamage.delay = delay;
-            delayedDamage.attacked = other;
-            delayedDamage.attacker = this;
-            _receavedDamage.Add(delayedDamage);
-        }
-
-        public void Die()
-        {
-            Prefab.SetActive(false);
-            IsSpawning = false;
-        }
-
-        public bool IsBuilding()
-        {
-            return true;
-        }
-
-        public bool IsUserLocked
-        {
-            get { return false; }
-            set { }
-        }
-
-        public bool IsMoving
-        {
-            get { return false; }
-            set { }
         }
 
         public void Select()
@@ -110,8 +62,39 @@ namespace SuddenAttack.Model.Buildings
             set { _unitData = value; }
         }
 
+
+
+        //public bool CanFire() { return false; }
+        //public void Fire() { }
+
+        public abstract void OnUpdate(float dt);
+        public abstract void OnMove(Vector3 destination);
+        public abstract void OnAttack(IUnit other);
+        public abstract void OnFire();
+        public abstract void OnHit(IUnit other);
+        public abstract void OnStopAttacking();
+        public abstract void OnStop();
+
+        /*
+        public void Damage(IUnit other, float damage, float delay)
+        {
+            var delayedDamage = new DelayedDamage();
+            delayedDamage.damage = damage;
+            delayedDamage.delay = delay;
+            delayedDamage.attacked = other;
+            delayedDamage.attacker = this;
+            _receavedDamage.Add(delayedDamage);
+        }
+        */
+        public virtual void OnDie()
+        {
+            Prefab.SetActive(false);
+        }
+
+       
         public void Update()
         {
+            /* // refactor; moveto combat manager
             List<int> killList = new List<int>();
             for (int i = 0; i < _receavedDamage.Count; i++)
             {
@@ -131,8 +114,10 @@ namespace SuddenAttack.Model.Buildings
             }
 
             _prefab.GetComponent<BuildingController>().CurrentHelth = Data.HitPoints / Data.MaxHitPoints;
+            */
         }
 
+        /* refactor; Create "BuilingManager" or "ProductionManager"
         public IUnit Update(float dt)
         {
             IUnit newUnit = null;
@@ -148,13 +133,15 @@ namespace SuddenAttack.Model.Buildings
             }
             return newUnit;
         }
+        
 
         public float GetCompletePercent()
         {
             return 1 - _currentCountdown / Data.BuildCooldown;
         }
-
+        
         public abstract IUnit SpawnUnit();
         public abstract int GetIncome();
+        */
     }
 }

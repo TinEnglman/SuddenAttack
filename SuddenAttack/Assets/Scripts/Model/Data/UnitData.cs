@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Data
         public float Range { get; set; }
         public float ProjectileSpeed { get; set; }
         public float EngageRange { get; set; }
-        public int BuildCooldown { get; set; }
+        public int BuildDuration { get; set; }
         public int Cost { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SuddenAttack.Controller.FlowController;
 using SuddenAttack.Model;
 using SuddenAttack.Ui.Menu;
+using SuddenAttack.Model.Buildings;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,17 +28,19 @@ namespace SuddenAttack.Controller.GameUI
         private IInputManager _inputManager = default;
         private SelectionManager _selectionManager = default;
         private GameManager _gameManager = default;
+        private UnitBuildingManager _unitCreationManager = default;
         //private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
         private Texture2D _boxSelectionTexture;
         private bool _drawSelecionBox;
         private Vector3 _pressedScreenPosition;
 
         [Inject]
-        public void Construct(IInputManager inputManager, SelectionManager selectionManager, GameManager gameManager)
+        public void Construct(UnitBuildingManager unitCreationManager, IInputManager inputManager, SelectionManager selectionManager, GameManager gameManager)
         {
             _inputManager = inputManager;
             _selectionManager = selectionManager;
             _gameManager = gameManager;
+            _unitCreationManager = unitCreationManager;
         }
 
         private void Awake()
@@ -86,13 +89,25 @@ namespace SuddenAttack.Controller.GameUI
 
             _foundLabel.text = "Funds: " + _gameManager.Funds + " $"; // playerManager
 
-
             if (_selectionManager.GetSelectedBuildings().Count == 1)
             {
-                _completedSlider.normalizedValue = (_selectionManager.GetSelectedBuildings()[0]).GetCompletePercent();
+                var selectedBuilding = _selectionManager.GetSelectedBuildings()[0];
+                RefreshBuildingUI(selectedBuilding);
+                ShowBuildingUI();
+                _completedSlider.normalizedValue = _unitCreationManager.GetCompletePercent(selectedBuilding);
+                //_completedSlider.normalizedValue = (_selectionManager.GetSelectedBuildings()[0]).GetCompletePercent();
+            }
+            else
+            {
+                HideBuildingUI();
             }
         }
 
+        private void RefreshBuildingUI(IBuilding building)
+        {
+            _unitNameLabel.text = building.Data.DisplayName;
+            _buildButton.GetComponentInChildren<TextMeshProUGUI>().text = building.GetFactory().GetDisplayName() + " : " + building.GetFactory().GetCost() + " $ ";
+        }
 
         private void ShowBuildingUI()
         {
@@ -112,11 +127,11 @@ namespace SuddenAttack.Controller.GameUI
         {
             var building = _selectionManager.GetSelectedBuildings()[0];
             int cost = building.GetFactory().GetCost();
-            if (_gameManager.Funds >= cost && !building.IsSpawning)
+            if (_gameManager.Funds >= cost && !_unitCreationManager.IsBuilding(building))
             {
                 _gameManager.Funds -= cost;
-                building.IsSpawning = true;
-                //_lockBuildingUI = true;
+                _unitCreationManager.StartBuildingUnit(building, true);
+
             }
         }
 

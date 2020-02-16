@@ -20,7 +20,7 @@ namespace SuddenAttack.Model.Factories
         {
             Vector3 position = new Vector3(x, y, 0);
 
-            var solider = new Solider(_combatManager)
+            var solider = new Solider()
             {
                 Prefab = Object.Instantiate(prefab)
             };

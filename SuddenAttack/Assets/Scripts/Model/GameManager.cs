@@ -40,7 +40,7 @@ namespace SuddenAttack.Model
             List<IUnit> killList = new List<IUnit>();
             foreach (IUnit unit in _units)
             {
-                unit.Update();
+                unit.OnUpdate(dt);
                 if (unit.Data.HitPoints <= 0)
                 {
                     killList.Add(unit);
@@ -50,7 +50,7 @@ namespace SuddenAttack.Model
             foreach (IUnit unit in killList)
             {
                 _units.Remove(unit);
-                unit.Die();
+                unit.OnDie();
             }
         }
 

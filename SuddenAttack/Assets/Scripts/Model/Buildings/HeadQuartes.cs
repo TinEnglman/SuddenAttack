@@ -12,14 +12,15 @@ namespace SuddenAttack.Model.Buildings
         {
             Data = ScriptableObject.CreateInstance<UnitData>();
             Data.DisplayName = "Head Quarters";
-            Data.BuildCooldown = 30;
+            Data.BuildDuration = 30;
             Data.HitPoints = 1000;
             Data.MaxHitPoints = Data.HitPoints;
             Data.IsFriendly = isFriendly;
-            _currentCountdown = Data.BuildCooldown;
+            //_currentCountdown = Data.BuildCooldown;
 
         }
 
+        /*
         public override IUnit SpawnUnit()
         {
             float x = Prefab.transform.position.x + _spawnOffset.x + Random.value;
@@ -32,6 +33,35 @@ namespace SuddenAttack.Model.Buildings
         public override int GetIncome()
         {
             return 25;
+        }
+        */
+
+        public override void OnUpdate(float dt)
+        {
+        }
+
+        public override void OnMove(Vector3 destination)
+        {
+        }
+
+        public override void OnAttack(IUnit other)
+        {
+        }
+
+        public override void OnFire()
+        {
+        }
+
+        public override void OnHit(IUnit other)
+        {
+        }
+
+        public override void OnStopAttacking()
+        {
+        }
+
+        public override void OnStop()
+        {
         }
     }
 }

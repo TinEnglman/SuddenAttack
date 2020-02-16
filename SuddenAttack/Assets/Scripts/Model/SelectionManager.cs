@@ -22,12 +22,6 @@ namespace SuddenAttack.Controller.FlowController
             _inputManager = inputManager;
             _gameManager = gameManager;
         }
-
-        public List<IUnit> GetSelectedUnits()
-        {
-            return _selectedUnits;
-        }
-
         public void Update()
         {
             if (_inputManager.isLeftMouseButtonDown())
@@ -51,6 +45,11 @@ namespace SuddenAttack.Controller.FlowController
             }
         }
 
+        public List<IUnit> GetSelectedUnits()
+        {
+            return _selectedUnits;
+        }
+
         public IUnit GetUnitUnderPointer(Vector3 mouseWorldPos)
         {
             IUnit target = null;
@@ -70,7 +69,7 @@ namespace SuddenAttack.Controller.FlowController
             List<IBuilding> buildings = new List<IBuilding>();
             foreach(var unit in _selectedUnits)
             {
-                IBuilding building = (IBuilding)unit;
+                IBuilding building = unit as IBuilding;
                 if (building != null)
                 {
                     buildings.Add(building);

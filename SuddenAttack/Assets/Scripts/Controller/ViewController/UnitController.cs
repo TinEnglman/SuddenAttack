@@ -17,7 +17,7 @@ namespace SuddenAttack.Controller.ViewController
         [SerializeField]
         private GameObject _heltBarOverlay = null;
         [SerializeField]
-        private GameObject _defaultTarget = null; // revisit; unised by solider
+        private GameObject _defaultTarget = null; // revisit; unised by solider; refactor
 
         private SelectionCircleController _selectionCircleController = null;
         private bool _isMoving = false;
