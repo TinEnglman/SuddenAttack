@@ -6,7 +6,7 @@ namespace SuddenAttack.Model.Commands
     {
         public override void Execute()
         {
-            Unit.Stop();
+            Unit.OnStop();
         }
     }
 }

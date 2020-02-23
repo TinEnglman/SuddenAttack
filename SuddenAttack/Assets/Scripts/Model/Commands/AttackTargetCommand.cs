@@ -8,7 +8,7 @@ namespace SuddenAttack.Model.Commands
 
         public override void Execute()
         {
-            Unit.Attack(AttackedUnit);
+            Unit.OnAttack(AttackedUnit);
         }
     }
 }

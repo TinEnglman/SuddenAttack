@@ -16,37 +16,17 @@ namespace SuddenAttack.Model
 
         public override void InstallBindings()
         {
-            Container.Bind<GameManager>()
-                .To<GameManager>()
-                .AsSingle();
+            Container.Bind<IInputManager>().FromComponentInNewPrefab(_inputHandler).AsSingle();
 
-            Container.Bind<SelectionManager>()
-               .To<SelectionManager>()
-               .AsSingle();
+            Container.Bind<UnitBuildingManager>().To<UnitBuildingManager>().AsSingle();
+            Container.Bind<GameManager>().To<GameManager>().AsSingle();
+            Container.Bind<SelectionManager>().To<SelectionManager>().AsSingle();
+            Container.Bind<TankFactory>().To<TankFactory>().AsSingle();
+            Container.Bind<SoliderFactory>().To<SoliderFactory>().AsSingle();
+            Container.Bind<CommandManager>().To<CommandManager>().AsSingle();
+            Container.Bind<CombatManager>().To<CombatManager>().AsSingle();
 
-            Container.Bind<CombatManager>()
-                .To<CombatManager>()
-                .AsSingle();
-
-            Container.Bind<TankFactory>()
-                .To<TankFactory>()
-                .AsSingle();
-
-            Container.Bind<SoliderFactory>()
-                .To<SoliderFactory>()
-                .AsSingle();
-
-            Container.Bind<IInputManager>()
-                .FromComponentInNewPrefab(_inputHandler)
-                .AsSingle();
-
-            Container.Bind<CommandManager>()
-                .To<CommandManager>()
-                .AsSingle();
-
-            Container.Bind<ICommandFactory>()
-                .To<CommandFactory>()
-                .AsSingle();
+            Container.Bind<ICommandFactory>().To<CommandFactory>().AsSingle();
         }
     }
 }

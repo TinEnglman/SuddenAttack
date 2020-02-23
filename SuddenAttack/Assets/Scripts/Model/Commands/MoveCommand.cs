@@ -9,7 +9,7 @@ namespace SuddenAttack.Model.Commands
 
         public override void Execute()
         {
-            Unit.Move(Destination);
+            Unit.OnMove(Destination);
         }
     }
 }

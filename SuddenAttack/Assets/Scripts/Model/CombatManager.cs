@@ -44,8 +44,9 @@ namespace SuddenAttack.Model
         public void ClearAttacker(IUnit attacker)
         {
             _attackingUnits.Remove(attacker);
-            attacker.StopAttacking();
-            attacker.IsUserLocked = false;
+            //attacker.StopAttacking();
+            attacker.OnStopAttacking();
+            //attacker.IsUserLocked = false;
         }
 
         public void MoveUnit(IUnit unit, Vector3 destination)
@@ -77,18 +78,19 @@ namespace SuddenAttack.Model
                 var attacked = pair.Value;
                 float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
 
-                if (attacker.CanFire() && distance < attacker.Data.Range)
+                //if (attacker.CanFire() && distance < attacker.Data.Range)
+                if (distance < attacker.Data.Range)
                 {
-                    attacker.Stop();
-                    attacker.Fire();
+                    attacker.OnStop();
+                    attacker.OnFire();
                     float delay = CalculateDamageDelay(attacker, attacked);
-                    attacker.Attack(attacked);
-                    attacker.Damage(attacked, attacker.Data.Damage, delay);
+                    attacker.OnAttack(attacked);
+                    //attacker.OnDamage(attacked, attacker.Data.Damage, delay);
                 }
 
                 if (distance > attacker.Data.Range)
                 {
-                    attacker.Move(attacked.Prefab.transform.position);
+                    attacker.OnMove(attacked.Prefab.transform.position);
                 }
 
                 if (attacked.Data.HitPoints <= 0)
