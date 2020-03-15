@@ -15,7 +15,11 @@ namespace SuddenAttack.Model
 
         public float GetCompletePercent(IBuilding building)
         {
-            return _currentBuildingTime[building].BuildCooldown / building.Data.BuildDuration;
+            if (!_currentBuildingTime.ContainsKey(building))
+            {
+                return 0f;
+            }
+            return (building.Data.BuildDuration -_currentBuildingTime[building].BuildCooldown) / building.Data.BuildDuration;
         }
 
         public bool IsBuilding(IBuilding building)

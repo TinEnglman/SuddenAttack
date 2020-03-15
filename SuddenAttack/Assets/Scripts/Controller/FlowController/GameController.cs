@@ -268,13 +268,13 @@ namespace SuddenAttack.Controller.FlowController
             if (_hqRed.Building.Data.HitPoints > 0)
             {
                 //_hqRed.Building.IsSpawning = true; // AI Cheats
-                _unitBuildingManager.StartBuildingUnit(_hqRed.Building, false);
+                //_unitBuildingManager.StartBuildingUnit(_hqRed.Building, false);
             }
 
             if (_barracksRed.Building.Data.HitPoints > 0)
             {
                 //_barracksRed.Building.IsSpawning = true; // AI Cheats
-                _unitBuildingManager.StartBuildingUnit(_barracksRed.Building, false);
+                //_unitBuildingManager.StartBuildingUnit(_barracksRed.Building, false);
             }
 
 
