@@ -41,7 +41,7 @@ namespace SuddenAttack.Model
             foreach (IUnit unit in _units)
             {
                 unit.OnUpdate(dt);
-                if (unit.Data.HitPoints <= 0)
+                if (unit.HitPoints <= 0)
                 {
                     killList.Add(unit);
                 }

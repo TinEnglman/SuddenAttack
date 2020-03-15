@@ -184,7 +184,7 @@ namespace SuddenAttack.Controller.FlowController
 
             foreach (var building in _buildings)
             {
-                if (building.Data.IsFriendly)
+                if (building.IsFriendly)
                 {
                     _gameManager.Funds += 25; //building.GetIncome(); // refactor
                 }
@@ -265,13 +265,13 @@ namespace SuddenAttack.Controller.FlowController
 
         private void UpdateAI()
         {
-            if (_hqRed.Building.Data.HitPoints > 0)
+            if (_hqRed.Building.HitPoints > 0)
             {
                 //_hqRed.Building.IsSpawning = true; // AI Cheats
                 //_unitBuildingManager.StartBuildingUnit(_hqRed.Building, false);
             }
 
-            if (_barracksRed.Building.Data.HitPoints > 0)
+            if (_barracksRed.Building.HitPoints > 0)
             {
                 //_barracksRed.Building.IsSpawning = true; // AI Cheats
                 //_unitBuildingManager.StartBuildingUnit(_barracksRed.Building, false);
@@ -281,7 +281,7 @@ namespace SuddenAttack.Controller.FlowController
             foreach (IUnit unit in _gameManager.Units)
             {
                 //if (unit.IsUserLocked && unit.Data.IsFriendly)
-                if (unit.Data.IsFriendly)
+                if (unit.IsFriendly)
                 {
                     continue;
                 }
@@ -291,7 +291,7 @@ namespace SuddenAttack.Controller.FlowController
                 IUnit closestTarget = null;
                 foreach (IUnit target in targets)
                 {
-                    if (target.Data.IsFriendly != unit.Data.IsFriendly)
+                    if (target.IsFriendly != unit.IsFriendly)
                     {
                         if (distance == 0)
                         {

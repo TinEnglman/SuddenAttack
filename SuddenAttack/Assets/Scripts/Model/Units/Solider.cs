@@ -8,20 +8,21 @@ namespace SuddenAttack.Model.Units
 {
     public class Solider : Unit
     {
-        public Solider() : base()
+        public Solider(UnitData unitData) : base()
         {
-            _unitData = ScriptableObject.CreateInstance<UnitData>(); // externalise
-
+            _unitData = unitData;
+            //_unitData = ScriptableObject.CreateInstance<UnitData>(); // externalise
+            /*
             _unitData.DisplayName = "Solider";
-            _unitData.HitPoints = 30;
-            _unitData.MaxHitPoints = _unitData.HitPoints;
+            _unitData.MaxHitPoints = 30;
             _unitData.MoveSpeed = 2f;
-            _unitData.WeaponCooldown = 0.67f;
-            _unitData.Damage = 4;
-            _unitData.Range = 3;
-            _unitData.ProjectileSpeed = 15;
+            //_unitData.WeaponCooldown = 0.67f;
+            //_unitData.Damage = 4;
+            //_unitData.Range = 3;
+            //_unitData.ProjectileSpeed = 15;
             _unitData.EngageRange = 10;
             //_weaponCooldown = _unitData.WeaponCooldown;
+            */
         }
 
         public override void OnUpdate(float dt)
@@ -37,7 +38,7 @@ namespace SuddenAttack.Model.Units
             var bulletController = Prefab.GetComponent<BulletContoller>();
             bulletController.Target = other.Prefab;
             bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); //refactor; add projectile exit point
-            bulletController.ProjectileSpeed = _unitData.ProjectileSpeed;
+            bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
             bulletController.Fire();
             bulletController.enabled = true;
         }

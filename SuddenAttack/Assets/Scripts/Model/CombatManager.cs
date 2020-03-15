@@ -79,7 +79,7 @@ namespace SuddenAttack.Model
                 float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
 
                 //if (attacker.CanFire() && distance < attacker.Data.Range)
-                if (distance < attacker.Data.Range)
+                if (distance < attacker.Data.PrimaryWeapon.Range)
                 {
                     attacker.OnStop();
                     attacker.OnFire();
@@ -88,12 +88,12 @@ namespace SuddenAttack.Model
                     //attacker.OnDamage(attacked, attacker.Data.Damage, delay);
                 }
 
-                if (distance > attacker.Data.Range)
+                if (distance > attacker.Data.PrimaryWeapon.Range)
                 {
                     attacker.OnMove(attacked.Prefab.transform.position);
                 }
 
-                if (attacked.Data.HitPoints <= 0)
+                if (attacked.HitPoints <= 0)
                 {
                     clearList.Add(attacker);
                 }
@@ -113,7 +113,7 @@ namespace SuddenAttack.Model
 
                     if (delayedDamage.delay <= 0)
                     {
-                        delayedDamage.attacked.Data.HitPoints -= delayedDamage.damage;
+                        delayedDamage.attacked.HitPoints -= delayedDamage.damage;
                         delayedDamage.attacker.OnHit(delayedDamage.attacked);
                         killList.Add(delayedDamage);
                     }
@@ -130,9 +130,9 @@ namespace SuddenAttack.Model
         private float CalculateDamageDelay(IUnit attacker, IUnit attacked)
         {
             float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
-            if (attacker.Data.ProjectileSpeed > 0)
+            if (attacker.Data.PrimaryWeapon.ProjectileSpeed > 0)
             {
-                return distance / attacker.Data.ProjectileSpeed;
+                return distance / attacker.Data.PrimaryWeapon.ProjectileSpeed;
             }
             else
             {

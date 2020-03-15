@@ -10,6 +10,13 @@ namespace SuddenAttack.Model.Units
     {
         protected UnitData _unitData;
         protected GameObject _prefab;
+        public float HitPoints { get; set; }
+        public bool IsFriendly { get; set; }
+
+        public Unit()
+        {
+            HitPoints = _unitData.MaxHitPoints;
+        }
 
         public GameObject Prefab
         {

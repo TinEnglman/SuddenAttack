@@ -13,9 +13,9 @@ namespace SuddenAttack.Model.Buildings
             Data = ScriptableObject.CreateInstance<UnitData>();
             Data.DisplayName = "Head Quarters";
             Data.BuildDuration = 30;
-            Data.HitPoints = 1000;
-            Data.MaxHitPoints = Data.HitPoints;
-            Data.IsFriendly = isFriendly;
+            //Data.HitPoints = 1000;
+            Data.MaxHitPoints = 1000;
+            IsFriendly = isFriendly;
             //_currentCountdown = Data.BuildCooldown;
 
         }

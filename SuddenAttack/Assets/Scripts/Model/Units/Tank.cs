@@ -13,13 +13,12 @@ namespace SuddenAttack.Model.Units
             _unitData = ScriptableObject.CreateInstance<UnitData>(); // refactor; load scriptable
 
             _unitData.DisplayName = "Tank";
-            _unitData.HitPoints = 200;
-            _unitData.MaxHitPoints = _unitData.HitPoints;
+            _unitData.MaxHitPoints = 200;
             _unitData.MoveSpeed = 2;
-            _unitData.WeaponCooldown = 3f;
-            _unitData.Damage = 25;
-            _unitData.Range = 6;
-            _unitData.ProjectileSpeed = 8;
+            //_unitData.WeaponCooldown = 3f;
+            //_unitData.Damage = 25;
+            //_unitData.Range = 6;
+            //_unitData.ProjectileSpeed = 8;
             _unitData.EngageRange = 10;
             //_weaponCooldown = _unitData.WeaponCooldown;
         }
@@ -43,7 +42,7 @@ namespace SuddenAttack.Model.Units
             var bulletController = Prefab.GetComponent<BulletContoller>();
             bulletController.Target = other.Prefab;
             bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); // add top of turret; refactor
-            bulletController.ProjectileSpeed = _unitData.ProjectileSpeed;
+            bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
             bulletController.Fire();
             bulletController.enabled = true;
         }

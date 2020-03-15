@@ -13,9 +13,8 @@ namespace SuddenAttack.Model.Buildings
             Data = ScriptableObject.CreateInstance<UnitData>();
             Data.DisplayName = "Barracks";
             Data.BuildDuration = 10;
-            Data.HitPoints = 800;
-            Data.MaxHitPoints = Data.HitPoints;
-            Data.IsFriendly = isFriendly;
+            Data.MaxHitPoints = 800;
+            IsFriendly = isFriendly;
             //_currentCountdown = Data.BuildCooldown;
         }
 

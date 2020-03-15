@@ -10,6 +10,9 @@ namespace SuddenAttack.Model.Units
         UnitData Data { get; set; }
         GameObject Prefab { get; set; }
 
+        float HitPoints { get; set; }
+        bool IsFriendly { get; set; }
+
         void Select();
         void Deselect();
         void OnUpdate(float dt);

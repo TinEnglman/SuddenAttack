@@ -27,9 +27,10 @@ namespace SuddenAttack.Model.Factories
 
             _cost = 10;
             solider.Data.Cost = _cost;
-            solider.Data.IsFriendly = isFriendly;
+            solider.IsFriendly = isFriendly;
             solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
-            solider.Prefab.GetComponent<UnitController>().SetDestination(position);
+            var unitController = solider.Prefab.GetComponent<UnitController>();
+            unitController.SetDestination(position);
 
             return solider;
         }

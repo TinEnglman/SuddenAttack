@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28de760e717a11840a12327c8686fed7, type: 3}
+  m_Name: Barracks
+  m_EditorClassIdentifier: 
+  BuildingPrefab: {fileID: 4930574511549562437, guid: c98f5fc2b7b4f4343a9fd48bec4476c8,
+    type: 3}
+  PrimaryWeapon: {fileID: 0}
+  DisplayName: Barracks
+  MaxHitPoints: 1000
+  BuildDuration: 120
+  Cost: 150

@@ -107,7 +107,7 @@ namespace SuddenAttack.Controller.FlowController
             bool unitSelected = false;
             foreach (IUnit unit in _gameManager.Units)
             {
-                if (!unit.Data.IsFriendly)
+                if (!unit.IsFriendly)
                 {
                     continue;
                 }

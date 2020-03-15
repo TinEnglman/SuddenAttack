@@ -14,6 +14,8 @@ namespace SuddenAttack.Model.Buildings
         protected GameObject _unitPrefab;
         protected GameObject _prefab;
         public Vector2 SpawnOffset { get; set; }
+        public float HitPoints { get; set; }
+        public bool IsFriendly { get; set; }
 
         //protected float _currentCountdown = 0;
         protected IUnitFactory _unitFactory; // refactor?
@@ -22,6 +24,7 @@ namespace SuddenAttack.Model.Buildings
         public AbstractBuilding()
         {
             SpawnOffset = new Vector3(1, 1, 0);
+            HitPoints = _unitData.MaxHitPoints;
         }
 
         public void SetFactory(IUnitFactory factory)

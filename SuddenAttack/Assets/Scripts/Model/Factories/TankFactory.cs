@@ -26,7 +26,7 @@ namespace SuddenAttack.Model.Factories
 
             _cost = 40;
             tank.Data.Cost = _cost;
-            tank.Data.IsFriendly = isFriendly;
+            tank.IsFriendly = isFriendly;
             tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
             tank.Prefab.GetComponent<UnitController>().SetDestination(position);
             tank.Prefab.GetComponent<BulletContoller>().enabled = false;

@@ -4,15 +4,13 @@ using UnityEngine;
 
 namespace SuddenAttack.Model.Data
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Create Unit")]
-    public class UnitData : ScriptableObject
+    [CreateAssetMenu(menuName = "ScriptableObjects/Create Building")]
+    public class BuildingData : ScriptableObject
     {
-        public GameObject UnitPrefab;
+        public GameObject BuildingPrefab;
         public WeaponData PrimaryWeapon;
         public string DisplayName;
         public float MaxHitPoints;
-        public float MoveSpeed;
-        public float EngageRange;
         public int BuildDuration;
         public int Cost;
     }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9518e75636203df49910379761507015, type: 3}
+  m_Name: Tank
+  m_EditorClassIdentifier: 
+  UnitPrefab: {fileID: 1972366221613630025, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
+    type: 3}
+  PrimaryWeapon: {fileID: 11400000, guid: c05746cb7e9cbea4c8754090963a557e, type: 2}
+  DisplayName: Tank
+  MaxHitPoints: 200
+  MoveSpeed: 10
+  EngageRange: 16
+  BuildDuration: 60
+  Cost: 100
