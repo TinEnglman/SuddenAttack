@@ -10,6 +10,7 @@ namespace SuddenAttack.Model.Units
     {
         public Tank() : base ()
         {
+            /*
             _unitData = ScriptableObject.CreateInstance<UnitData>(); // refactor; load scriptable
 
             _unitData.DisplayName = "Tank";
@@ -21,6 +22,7 @@ namespace SuddenAttack.Model.Units
             //_unitData.ProjectileSpeed = 8;
             _unitData.EngageRange = 10;
             //_weaponCooldown = _unitData.WeaponCooldown;
+            */
         }
 
         public override void OnUpdate(float dt)

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2ec8363510e5941945cc970311c7a4, type: 3}
   m_Name: SoliderGun
   m_EditorClassIdentifier: 
+  WeaponId: SoliderGun
   WeaponCooldown: 0.2
   Damage: 5
   Range: 4

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9518e75636203df49910379761507015, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
+  UnitId: Tank
   UnitPrefab: {fileID: 1972366221613630025, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
     type: 3}
   PrimaryWeapon: {fileID: 11400000, guid: c05746cb7e9cbea4c8754090963a557e, type: 2}

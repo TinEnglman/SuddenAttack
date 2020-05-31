@@ -26138,7 +26138,7 @@ Transform:
   - {fileID: 306077308}
   - {fileID: 2102169782}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &293717313
 GameObject:
@@ -26772,7 +26772,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &571812122
 MonoBehaviour:
@@ -26786,10 +26786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f20809e6debc9e42a379b31dbbe2943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tankPrefab: {fileID: 1972366221613630025, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
-    type: 3}
-  _soliderPrefab: {fileID: 968037871566619523, guid: 9a46e8adc602c08488fa0fb060383d6e,
-    type: 3}
+  _tankData: {fileID: 11400000, guid: fd6796ebe934805498aba0a2aa18b3d8, type: 2}
+  _soliderData: {fileID: 11400000, guid: 6fccd57eed03b8e49a995e44eaa4adcc, type: 2}
   _hqRedPrefab: {fileID: 1560123886}
   _hqBluePrefab: {fileID: 110317634}
   _barracksRedPrefab: {fileID: 1845462711592442036}
@@ -31673,7 +31671,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1230097539
 MonoBehaviour:
@@ -31825,7 +31823,7 @@ Transform:
   m_Children:
   - {fileID: 783362341}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1343750183
 MonoBehaviour:
@@ -32065,7 +32063,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552715351
 GameObject:
@@ -32144,7 +32142,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1560123886 stripped
 GameObject:
@@ -32497,6 +32495,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoliderPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 968037871566619523, guid: 9a46e8adc602c08488fa0fb060383d6e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 968037871566619520, guid: 9a46e8adc602c08488fa0fb060383d6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32535,7 +32538,7 @@ PrefabInstance:
     - target: {fileID: 968037871566619520, guid: 9a46e8adc602c08488fa0fb060383d6e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 968037871566619520, guid: 9a46e8adc602c08488fa0fb060383d6e,
         type: 3}
@@ -32565,6 +32568,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarracksRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930574511549562437, guid: c98f5fc2b7b4f4343a9fd48bec4476c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7883001158503585897, guid: c98f5fc2b7b4f4343a9fd48bec4476c8,
         type: 3}
@@ -32656,7 +32664,7 @@ PrefabInstance:
     - target: {fileID: 1972366221613630025, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1972366221613630024, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
         type: 3}
@@ -32696,7 +32704,7 @@ PrefabInstance:
     - target: {fileID: 1972366221613630024, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1972366221613630024, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
         type: 3}
@@ -32901,6 +32909,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HQRed
       objectReference: {fileID: 0}
+    - target: {fileID: 8061612933179966172, guid: 03a697d05c97bc149b0454c4a534e0db,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7837840098950779303, guid: 03a697d05c97bc149b0454c4a534e0db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32970,6 +32983,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarracksBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 3581218289454345676, guid: 1557b81366a165a4c87bbdf2a4f5f1db,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7216621605631323044, guid: 1557b81366a165a4c87bbdf2a4f5f1db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33038,6 +33056,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HQBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033080762809090965, guid: 800da43e7d22c4b47a33b001640c8558,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5830233758569403226, guid: 800da43e7d22c4b47a33b001640c8558,
         type: 3}

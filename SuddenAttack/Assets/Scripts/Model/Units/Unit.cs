@@ -15,7 +15,7 @@ namespace SuddenAttack.Model.Units
 
         public Unit()
         {
-            HitPoints = _unitData.MaxHitPoints;
+            //HitPoints = _unitData.MaxHitPoints;
         }
 
         public GameObject Prefab

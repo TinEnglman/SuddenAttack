@@ -6,6 +6,7 @@ namespace SuddenAttack.Model.Data
     [CreateAssetMenu(menuName = "ScriptableObjects/Create Weapon")]
     public class WeaponData : ScriptableObject
     {
+        public string WeaponId;
         public float WeaponCooldown;
         public float Damage;
         public float Range;

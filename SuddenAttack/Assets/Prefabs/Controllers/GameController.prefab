@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2129629478835279751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2129629478835279750}
+  - component: {fileID: 2129629478835279749}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2129629478835279750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129629478835279751}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.1028514, y: 15.224287, z: 142.66676}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2129629478835279749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129629478835279751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f20809e6debc9e42a379b31dbbe2943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tankData: {fileID: 11400000, guid: fd6796ebe934805498aba0a2aa18b3d8, type: 2}
+  _soliderData: {fileID: 11400000, guid: 6fccd57eed03b8e49a995e44eaa4adcc, type: 2}
+  _hqRedPrefab: {fileID: 0}
+  _hqBluePrefab: {fileID: 0}
+  _barracksRedPrefab: {fileID: 0}
+  _barracksBluePrefab: {fileID: 0}
+  _hqBlue: {fileID: 0}
+  _hqRed: {fileID: 0}
+  _barracksBlue: {fileID: 0}
+  _barracksRed: {fileID: 0}

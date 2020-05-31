@@ -11,18 +11,6 @@ namespace SuddenAttack.Model.Units
         public Solider(UnitData unitData) : base()
         {
             _unitData = unitData;
-            //_unitData = ScriptableObject.CreateInstance<UnitData>(); // externalise
-            /*
-            _unitData.DisplayName = "Solider";
-            _unitData.MaxHitPoints = 30;
-            _unitData.MoveSpeed = 2f;
-            //_unitData.WeaponCooldown = 0.67f;
-            //_unitData.Damage = 4;
-            //_unitData.Range = 3;
-            //_unitData.ProjectileSpeed = 15;
-            _unitData.EngageRange = 10;
-            //_weaponCooldown = _unitData.WeaponCooldown;
-            */
         }
 
         public override void OnUpdate(float dt)

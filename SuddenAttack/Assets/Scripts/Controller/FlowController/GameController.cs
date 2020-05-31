@@ -11,15 +11,16 @@ using SuddenAttack.Model.Commands.Factory;
 using SuddenAttack.Model.Units;
 using SuddenAttack.Ui.Menu;
 using SuddenAttack.Controller.ViewController;
+using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Controller.FlowController
 {
     public class GameController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _tankPrefab = null;
+        private UnitData _tankData = null;
         [SerializeField]
-        private GameObject _soliderPrefab = null;
+        private UnitData _soliderData = null;
         [SerializeField]
         private GameObject _hqRedPrefab = null;
         [SerializeField]
@@ -46,8 +47,8 @@ namespace SuddenAttack.Controller.FlowController
         private UnitBuildingManager _unitBuildingManager = default;
         private ICommandFactory _commandFactory = default;
         private IInputManager _inputManager = default;
-        private IUnitFactory _soliderFactory = default;
-        private IUnitFactory _tankFactory = null;
+        //private IUnitFactory _soliderFactory = default;
+        //private IUnitFactory _tankFactory = null;
 
         private float _incomeFrequency = 9;
         private float _incomeCountdown = 0;
@@ -55,13 +56,13 @@ namespace SuddenAttack.Controller.FlowController
         private List<IBuilding> _buildings = new List<IBuilding>();
 
         [Inject]
-        public void Construct(GameManager gameManager, UnitBuildingManager unitBuildingManager, CombatManager combatManager, TankFactory tankFactory, SoliderFactory soliderFactory, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory, SelectionManager selectionManager)
+        public void Construct(GameManager gameManager, UnitBuildingManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory, SelectionManager selectionManager)
         {
             _gameManager = gameManager;
             _unitBuildingManager = unitBuildingManager;
             _combatManager = combatManager;
-            _soliderFactory = soliderFactory;
-            _tankFactory = tankFactory;
+            //_soliderFactory = soliderFactory;
+            //_tankFactory = tankFactory;
             _inputManager = inputManager;
             _commandManager = commandManager;
             _commandFactory = commandFactory;
@@ -83,9 +84,10 @@ namespace SuddenAttack.Controller.FlowController
 
         private void InitLevel()
         {
+            /*
             var hqRed = new HeadQuartes(false);
             hqRed.SetFactory(_tankFactory);
-            hqRed.UnitPrefab = _tankPrefab;
+            hqRed.UnitData = _tankData;
             hqRed.Prefab = _hqRedPrefab;
             _buildings.Add(hqRed);
             _hqRed.Building = hqRed;
@@ -93,7 +95,7 @@ namespace SuddenAttack.Controller.FlowController
 
             var hqBlue = new HeadQuartes(true);
             hqBlue.SetFactory(_tankFactory);
-            hqBlue.UnitPrefab = _tankPrefab;
+            hqBlue.UnitData = _tankData;
             hqBlue.Prefab = _hqBluePrefab;
             _buildings.Add(hqBlue);
             _hqBlue.Building = hqBlue;
@@ -101,7 +103,7 @@ namespace SuddenAttack.Controller.FlowController
 
             var barracksRed = new Barracks(false);
             barracksRed.SetFactory(_soliderFactory);
-            barracksRed.UnitPrefab = _soliderPrefab;
+            barracksRed.UnitData = _soliderData;
             barracksRed.Prefab = _barracksRedPrefab;
             _buildings.Add(barracksRed);
             _barracksRed.Building = barracksRed;
@@ -109,63 +111,65 @@ namespace SuddenAttack.Controller.FlowController
 
             var barracksBlue = new Barracks(true);
             barracksBlue.SetFactory(_soliderFactory);
-            barracksBlue.UnitPrefab = _soliderPrefab;
+            barracksBlue.UnitData = _soliderData;
             barracksBlue.Prefab = _barracksBluePrefab;
             _buildings.Add(barracksBlue);
             _barracksBlue.Building = barracksBlue;
             AddUnit((IUnit)barracksBlue);
+            */
 
-
-            var newTank = _tankFactory.CreateUnit(-9, -15, _tankPrefab, true);
+            /*
+            var newTank = _tankFactory.CreateUnit(-9, -15, _tankData, true);
             AddUnit(newTank);
 
-            newTank = _tankFactory.CreateUnit(-8, -17, _tankPrefab, true);
+            newTank = _tankFactory.CreateUnit(-8, -17, _tankData, true);
             AddUnit(newTank);
 
-            newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankPrefab, true);
+            newTank = _tankFactory.CreateUnit(-8.5f, -13, _tankData, true);
             AddUnit(newTank);
 
-            var newSolider = _soliderFactory.CreateUnit(-8f, -15, _soliderPrefab, true);
+            var newSolider = _soliderFactory.CreateUnit(-8f, -15, _soliderData, true);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-5.5f, -15, _soliderPrefab, true);
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -15, _soliderData, true);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-5.5f, -3, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -3, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-5.5f, -2, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -2, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-5.5f, -1, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-4.5f, -1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-4.5f, -1, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-3.5f, -1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-3.5f, -1, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-2.5f, -1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-2.5f, -1, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-2.5f, -8, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-2.5f, -8, _soliderData, false);
             AddUnit(newSolider);
 
-            newSolider = _soliderFactory.CreateUnit(-6.5f, -1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(-6.5f, -1, _soliderData, false);
             AddUnit(newSolider);
 
-            newTank = _tankFactory.CreateUnit(-1.5f, -4, _tankPrefab, false);
+            newTank = _tankFactory.CreateUnit(-1.5f, -4, _tankData, false);
             AddUnit(newTank);
 
-            newSolider = _soliderFactory.CreateUnit(0f, 1, _soliderPrefab, false);
+            newSolider = _soliderFactory.CreateUnit(0f, 1, _soliderData, false);
             AddUnit(newSolider);
 
-            newTank = _tankFactory.CreateUnit(-1.5f, -0, _tankPrefab, false);
+            newTank = _tankFactory.CreateUnit(-1.5f, -0, _tankData, false);
             AddUnit(newTank);
+            */
         }
 
 
@@ -265,13 +269,13 @@ namespace SuddenAttack.Controller.FlowController
 
         private void UpdateAI()
         {
-            if (_hqRed.Building.HitPoints > 0)
+            //if (_hqRed.Building.HitPoints > 0)
             {
                 //_hqRed.Building.IsSpawning = true; // AI Cheats
                 //_unitBuildingManager.StartBuildingUnit(_hqRed.Building, false);
             }
 
-            if (_barracksRed.Building.HitPoints > 0)
+            //if (_barracksRed.Building.HitPoints > 0)
             {
                 //_barracksRed.Building.IsSpawning = true; // AI Cheats
                 //_unitBuildingManager.StartBuildingUnit(_barracksRed.Building, false);

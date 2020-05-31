@@ -10,8 +10,8 @@ namespace SuddenAttack.Model.Buildings
 {
     public abstract class AbstractBuilding : IBuilding
     {
+        //protected UnitData _unitData;
         protected UnitData _unitData;
-        protected GameObject _unitPrefab;
         protected GameObject _prefab;
         public Vector2 SpawnOffset { get; set; }
         public float HitPoints { get; set; }
@@ -47,10 +47,10 @@ namespace SuddenAttack.Model.Buildings
             _prefab.GetComponent<BuildingController>().Deselect();
         }
 
-        public GameObject UnitPrefab
+        public UnitData UnitData
         {
-            get { return _unitPrefab; }
-            set { _unitPrefab = value; }
+            get { return _unitData; }
+            set { _unitData = value; }
         }
 
         public GameObject Prefab

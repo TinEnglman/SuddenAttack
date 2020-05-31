@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using SuddenAttack.Controller.ViewController;
 using SuddenAttack.Model.Units;
+using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Model.Factories
 {
     public class TankFactory : IUnitFactory
     {
-        private int _cost;
-        private CombatManager _combatManager = default;
+        private UnitData _unitData = default;
 
-        public TankFactory(CombatManager combatManager)
+        public TankFactory(UnitData unitData)
         {
-            _combatManager = combatManager;
+            _unitData = unitData;
         }
 
-        public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
+        public Unit CreateUnit(float x, float y, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
             var tank = new Tank()
             {
-                Prefab = Object.Instantiate(prefab)
+                Prefab = Object.Instantiate(_unitData.UnitPrefab)
             };
 
-            _cost = 40;
-            tank.Data.Cost = _cost;
+
             tank.IsFriendly = isFriendly;
             tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
             tank.Prefab.GetComponent<UnitController>().SetDestination(position);
@@ -37,12 +36,12 @@ namespace SuddenAttack.Model.Factories
 
         public string GetDisplayName()
         {
-            return "Tank"; // refactor
+            return _unitData.DisplayName; // refactor
         }
 
         public int GetCost()
         {
-            return _cost;
+            return _unitData.Cost;
         }
     }
 }

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9518e75636203df49910379761507015, type: 3}
-  m_Name: Solider
+  m_Name: Sniper
   m_EditorClassIdentifier: 
-  UnitId: Solider
-  UnitPrefab: {fileID: 968037871566619523, guid: 9a46e8adc602c08488fa0fb060383d6e,
+  UnitId: Sniper
+  UnitPrefab: {fileID: 1870951756855943912, guid: 46db7b1c64db41348865ac319664d3bb,
     type: 3}
-  PrimaryWeapon: {fileID: 11400000, guid: a6cd262da2f789c4c8b9fb5d96a11140, type: 2}
-  DisplayName: Solider
+  PrimaryWeapon: {fileID: 11400000, guid: f14fe4689d552b24da18a09d5e6c8ce4, type: 2}
+  DisplayName: Sniper
   MaxHitPoints: 30
   MoveSpeed: 10
-  EngageRange: 12
-  BuildDuration: 15
-  Cost: 10
+  EngageRange: 16
+  BuildDuration: 40
+  Cost: 40

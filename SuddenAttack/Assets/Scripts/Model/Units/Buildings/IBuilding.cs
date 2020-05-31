@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Units;
+using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Model.Buildings
 {
     public interface IBuilding : IUnit
     {
-        GameObject UnitPrefab { get; set; }
+        UnitData UnitData { get; set; }
         Vector2 SpawnOffset { get; set; }
         //bool IsSpawning { get; set; }
 

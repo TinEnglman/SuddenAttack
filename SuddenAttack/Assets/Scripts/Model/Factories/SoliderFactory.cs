@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using SuddenAttack.Controller.ViewController;
 using SuddenAttack.Model.Units;
+using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Model.Factories
 {
     public class SoliderFactory : IUnitFactory
     {
-        private int _cost = default;
-        private CombatManager _combatManager = default;
+        private UnitData _unitData;
 
-        public SoliderFactory(CombatManager combatManager)
+        public SoliderFactory(UnitData unitData)
         {
-            _combatManager = combatManager;
+            _unitData = unitData;
         }
 
-        public Unit CreateUnit(float x, float y, GameObject prefab, bool isFriendly)
+        public Unit CreateUnit(float x, float y, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
 
-            var solider = new Solider()
+            var solider = new Solider(_unitData)
             {
-                Prefab = Object.Instantiate(prefab)
+                Prefab = Object.Instantiate(_unitData.UnitPrefab) // todo: add unit transform
             };
 
-            _cost = 10;
-            solider.Data.Cost = _cost;
+
             solider.IsFriendly = isFriendly;
             solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
             var unitController = solider.Prefab.GetComponent<UnitController>();
@@ -37,12 +36,12 @@ namespace SuddenAttack.Model.Factories
 
         public string GetDisplayName()
         {
-            return "Solider"; // refactor
+            return _unitData.DisplayName; // refactor
         }
 
-        public int GetCost()
+        public int GetCost() // refactor
         {
-            return _cost;
+            return _unitData.Cost;
         }
     }
 }
