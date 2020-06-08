@@ -45,8 +45,8 @@ namespace SuddenAttack.Model
                 {
                     float x = currentBuilding.SpawnOffset.x;
                     float y = currentBuilding.SpawnOffset.y;
-                    IUnit createdUnit = currentBuilding.GetFactory().CreateUnit(x, y, true);
-                    createdUnits.Add(currentBuilding, createdUnit);
+                    //IUnit createdUnit = currentBuilding.GetFactory().CreateUnit(x, y, true);
+                    //createdUnits.Add(currentBuilding, createdUnit);
                 }
             }
 

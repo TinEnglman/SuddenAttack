@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Factories
             _unitData = unitData;
         }
 
-        public Unit CreateUnit(float x, float y, bool isFriendly)
+        public IUnit CreateUnit(float x, float y, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
             var tank = new Tank()

@@ -9,12 +9,13 @@ namespace SuddenAttack.Model.Buildings
 {
     public interface IBuilding : IUnit
     {
-        UnitData UnitData { get; set; }
+        //UnitData UnitData { get; set; } factiry replaces this
         Vector2 SpawnOffset { get; set; }
         //bool IsSpawning { get; set; }
 
-        void SetFactory(IUnitFactory factory);
-        IUnitFactory GetFactory();
+        List<string> UnitIds { get; set; }
+        //void SetFactory(IUnitFactory factory);
+        //IUnitFactory GetFactory();
         //float GetCompletePercent(); // refactor: Create "BuilingManager" or "ProductionManager"
         //int GetIncome();
         //IUnit Update(float dt);

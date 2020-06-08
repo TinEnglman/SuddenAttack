@@ -13,6 +13,7 @@ namespace SuddenAttack.Model.Buildings
         //protected UnitData _unitData;
         protected UnitData _unitData;
         protected GameObject _prefab;
+        List<string> _unitIds;
         public Vector2 SpawnOffset { get; set; }
         public float HitPoints { get; set; }
         public bool IsFriendly { get; set; }
@@ -20,6 +21,8 @@ namespace SuddenAttack.Model.Buildings
         //protected float _currentCountdown = 0;
         protected IUnitFactory _unitFactory; // refactor?
         //protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>(); // refactor
+
+        public List<string> UnitIds { get { return _unitIds;  } set { _unitIds = value; } }
 
         public AbstractBuilding()
         {

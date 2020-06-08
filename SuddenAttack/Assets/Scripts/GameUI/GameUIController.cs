@@ -106,7 +106,7 @@ namespace SuddenAttack.Controller.GameUI
         private void RefreshBuildingUI(IBuilding building)
         {
             _unitNameLabel.text = building.Data.DisplayName;
-            _buildButton.GetComponentInChildren<TextMeshProUGUI>().text = building.GetFactory().GetDisplayName() + " : " + building.GetFactory().GetCost() + " $ ";
+            //_buildButton.GetComponentInChildren<TextMeshProUGUI>().text = building.GetFactory().GetDisplayName() + " : " + building.GetFactory().GetCost() + " $ ";
         }
 
         private void ShowBuildingUI()
@@ -126,7 +126,8 @@ namespace SuddenAttack.Controller.GameUI
         private void OnBuildButton()
         {
             var building = _selectionManager.GetSelectedBuildings()[0];
-            int cost = building.GetFactory().GetCost();
+            //int cost = building.GetFactory().GetCost();
+            int cost = 0;
             if (_gameManager.Funds >= cost && !_unitCreationManager.IsBuilding(building))
             {
                 _gameManager.Funds -= cost;
