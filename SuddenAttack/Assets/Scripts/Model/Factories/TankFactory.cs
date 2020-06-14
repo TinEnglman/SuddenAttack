@@ -19,7 +19,7 @@ namespace SuddenAttack.Model.Factories
         public IUnit CreateUnit(float x, float y, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
-            var tank = new Tank()
+            var tank = new Tank(_unitData)
             {
                 Prefab = Object.Instantiate(_unitData.UnitPrefab)
             };

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28de760e717a11840a12327c8686fed7, type: 3}
   m_Name: HeadQuarters
   m_EditorClassIdentifier: 
+  BuildingId: HQ
   BuildingPrefab: {fileID: 8061612933179966172, guid: 03a697d05c97bc149b0454c4a534e0db,
     type: 3}
   PrimaryWeapon: {fileID: 0}

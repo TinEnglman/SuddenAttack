@@ -8,14 +8,15 @@ namespace SuddenAttack.Model.Buildings
 {
     public class HeadQuartes : AbstractBuilding
     {
-        public HeadQuartes(bool isFriendly)
+        public HeadQuartes(BuildingData buildingData) : base()
         {
-            Data = ScriptableObject.CreateInstance<UnitData>();
-            Data.DisplayName = "Head Quarters";
-            Data.BuildDuration = 30;
+            _buildingData = buildingData;
+            //Data = ScriptableObject.CreateInstance<UnitData>();
+            //Data.DisplayName = "Head Quarters";
+            //Data.BuildDuration = 30;
             //Data.HitPoints = 1000;
-            Data.MaxHitPoints = 1000;
-            IsFriendly = isFriendly;
+            //Data.MaxHitPoints = 1000;
+            //IsFriendly = isFriendly;
             //_currentCountdown = Data.BuildCooldown;
 
         }

@@ -6,7 +6,7 @@ using SuddenAttack.Controller.ViewController;
 
 namespace SuddenAttack.Model.Units
 {
-    public class Solider : Unit
+    public class Solider : MobileUnit
     {
         public Solider(UnitData unitData) : base()
         {

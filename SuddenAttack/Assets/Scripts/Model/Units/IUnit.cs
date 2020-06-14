@@ -7,7 +7,6 @@ namespace SuddenAttack.Model.Units
 {
     public interface IUnit
     {
-        UnitData Data { get; set; }
         GameObject Prefab { get; set; }
 
         float HitPoints { get; set; }

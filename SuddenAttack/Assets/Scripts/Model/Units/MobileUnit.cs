@@ -6,17 +6,12 @@ using SuddenAttack.Controller.ViewController;
 
 namespace SuddenAttack.Model.Units
 {
-    public abstract class Unit : IUnit
+    public abstract class MobileUnit : IMobileUnit
     {
         protected UnitData _unitData;
         protected GameObject _prefab;
         public float HitPoints { get; set; }
         public bool IsFriendly { get; set; }
-
-        public Unit()
-        {
-            //HitPoints = _unitData.MaxHitPoints;
-        }
 
         public GameObject Prefab
         {

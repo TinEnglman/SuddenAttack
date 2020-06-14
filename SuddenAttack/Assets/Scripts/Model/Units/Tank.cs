@@ -6,10 +6,11 @@ using SuddenAttack.Controller.ViewController;
 
 namespace SuddenAttack.Model.Units
 {
-    public class Tank : Unit
+    public class Tank : MobileUnit
     {
-        public Tank() : base ()
+        public Tank(UnitData unitData) : base ()
         {
+            _unitData = unitData;
             /*
             _unitData = ScriptableObject.CreateInstance<UnitData>(); // refactor; load scriptable
 

@@ -8,13 +8,15 @@ namespace SuddenAttack.Model.Buildings
 {
     public class Barracks : AbstractBuilding
     {
-        public Barracks(bool isFriendly)
+        public Barracks(BuildingData buildingData) : base ()
         {
-            Data = ScriptableObject.CreateInstance<UnitData>();
-            Data.DisplayName = "Barracks";
-            Data.BuildDuration = 10;
-            Data.MaxHitPoints = 800;
-            IsFriendly = isFriendly;
+
+            _buildingData = buildingData;
+            //Data = ScriptableObject.CreateInstance<UnitData>();
+            //Data.DisplayName = "Barracks";
+            //Data.BuildDuration = 10;
+            //Data.MaxHitPoints = 800;
+            //IsFriendly = isFriendly;
             //_currentCountdown = Data.BuildCooldown;
         }
 

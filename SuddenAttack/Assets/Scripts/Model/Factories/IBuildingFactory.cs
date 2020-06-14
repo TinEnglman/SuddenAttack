@@ -1,18 +1,14 @@
-﻿using System.Collections;
+﻿using SuddenAttack.Model.Buildings;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IBuildingFactory : MonoBehaviour
+namespace SuddenAttack.Model.Factories
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface IBuildingFactory
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        IBuilding CreateBuilding(float x, float y, bool isFriendly);
+        string GetDisplayName();
+        int GetCost();
     }
 }
