@@ -79,7 +79,7 @@ namespace SuddenAttack.Model
                 float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
 
                 //if (attacker.CanFire() && distance < attacker.Data.Range)
-                if (distance < attacker.Data.PrimaryWeapon.Range)
+                if (distance < attacker.WeaponData.Range)
                 {
                     attacker.OnStop();
                     attacker.OnFire();
@@ -88,7 +88,7 @@ namespace SuddenAttack.Model
                     //attacker.OnDamage(attacked, attacker.Data.Damage, delay);
                 }
 
-                if (distance > attacker.Data.PrimaryWeapon.Range)
+                if (distance > attacker.WeaponData.Range)
                 {
                     attacker.OnMove(attacked.Prefab.transform.position);
                 }
@@ -130,9 +130,9 @@ namespace SuddenAttack.Model
         private float CalculateDamageDelay(IUnit attacker, IUnit attacked)
         {
             float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
-            if (attacker.Data.PrimaryWeapon.ProjectileSpeed > 0)
+            if (attacker.WeaponData.ProjectileSpeed > 0)
             {
-                return distance / attacker.Data.PrimaryWeapon.ProjectileSpeed;
+                return distance / attacker.WeaponData.ProjectileSpeed;
             }
             else
             {

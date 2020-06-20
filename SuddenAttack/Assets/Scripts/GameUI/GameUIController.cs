@@ -105,7 +105,7 @@ namespace SuddenAttack.Controller.GameUI
 
         private void RefreshBuildingUI(IBuilding building)
         {
-            _unitNameLabel.text = building.Data.DisplayName;
+            _unitNameLabel.text = building.BuildingData.DisplayName;
             //_buildButton.GetComponentInChildren<TextMeshProUGUI>().text = building.GetFactory().GetDisplayName() + " : " + building.GetFactory().GetCost() + " $ ";
         }
 

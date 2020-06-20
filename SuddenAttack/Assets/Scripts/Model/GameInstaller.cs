@@ -18,6 +18,9 @@ namespace SuddenAttack.Model
         {
             Container.Bind<IInputManager>().FromComponentInNewPrefab(_inputHandler).AsSingle();
 
+            Container.Bind<BuildingFactoryManager>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<UnitFactoryManager>().FromComponentInHierarchy().AsSingle();
+
             Container.Bind<UnitBuildingManager>().To<UnitBuildingManager>().AsSingle();
             Container.Bind<GameManager>().To<GameManager>().AsSingle();
             Container.Bind<SelectionManager>().To<SelectionManager>().AsSingle();

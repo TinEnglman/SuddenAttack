@@ -19,7 +19,7 @@ namespace SuddenAttack.Model
             {
                 return 0f;
             }
-            return (building.Data.BuildDuration -_currentBuildingTime[building].BuildCooldown) / building.Data.BuildDuration;
+            return (building.BuildingData.BuildDuration -_currentBuildingTime[building].BuildCooldown) / building.BuildingData.BuildDuration;
         }
 
         public bool IsBuilding(IBuilding building)
@@ -29,7 +29,7 @@ namespace SuddenAttack.Model
 
         public void StartBuildingUnit(IBuilding building, bool isFriendly)
         {
-            UnitCeation unitCreation = new UnitCeation(building.Data.BuildDuration, isFriendly);
+            UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, isFriendly);
             _currentBuildingTime.Add(building, unitCreation);
         }
 

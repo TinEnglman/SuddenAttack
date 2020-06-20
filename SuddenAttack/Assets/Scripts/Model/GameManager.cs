@@ -74,7 +74,7 @@ namespace SuddenAttack.Model
         }
         */
 
-        public List<IUnit> GetTargets(IUnit source) // called form update; slow af; refactor
+        public List<IUnit> GetTargets(IMobileUnit source) // called form update; slow af; refactor
         {
             List<IUnit> targets = new List<IUnit>();
             foreach (IUnit unit in _units)

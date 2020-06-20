@@ -12,6 +12,7 @@ namespace SuddenAttack.Model.Buildings
     {
         //protected UnitData _unitData;
         protected BuildingData _buildingData;
+        protected WeaponData _weaponData;    
         protected GameObject _prefab;
         List<string> _unitIds;
         public Vector2 SpawnOffset { get; set; }
@@ -27,7 +28,6 @@ namespace SuddenAttack.Model.Buildings
         public AbstractBuilding()
         {
             SpawnOffset = new Vector3(1, 1, 0);
-            HitPoints = _buildingData.MaxHitPoints;
         }
 
         public void SetFactory(IUnitFactory factory)
@@ -49,6 +49,13 @@ namespace SuddenAttack.Model.Buildings
         {
             _prefab.GetComponent<BuildingController>().Deselect();
         }
+
+        public WeaponData WeaponData
+        {
+            get { return _weaponData; }
+            set { _weaponData = value; }
+        }
+
 
         public BuildingData BuildingData
         {

@@ -25,7 +25,7 @@ namespace SuddenAttack.Model.Factories
             _unitFactories.Clear();
             _unitFactories.Add("Solider", new SoliderFactory(_soliderData));
             _unitFactories.Add("Tank", new TankFactory(_tankData));
-            //_unitFactories.Add("Sniper", new SniperFactory(_soliderData));
+            _unitFactories.Add("Sniper", new SniperFactory(_soliderData));
         }
 
         private void Start()

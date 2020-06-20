@@ -11,6 +11,7 @@ namespace SuddenAttack.Model.Buildings
         public HeadQuartes(BuildingData buildingData) : base()
         {
             _buildingData = buildingData;
+            HitPoints = _buildingData.MaxHitPoints;
             //Data = ScriptableObject.CreateInstance<UnitData>();
             //Data.DisplayName = "Head Quarters";
             //Data.BuildDuration = 30;

@@ -12,6 +12,7 @@ namespace SuddenAttack.Model.Buildings
         {
 
             _buildingData = buildingData;
+            HitPoints = _buildingData.MaxHitPoints;
             //Data = ScriptableObject.CreateInstance<UnitData>();
             //Data.DisplayName = "Barracks";
             //Data.BuildDuration = 10;

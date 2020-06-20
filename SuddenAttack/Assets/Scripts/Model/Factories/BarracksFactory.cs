@@ -19,16 +19,16 @@ namespace SuddenAttack.Model.Factories
         {
             Vector3 position = new Vector3(x, y, 0);
 
-            var headQuarters = new HeadQuartes(_buildingData)
+            var barracks = new Barracks(_buildingData)
             {
                 Prefab = Object.Instantiate(_buildingData.BuildingPrefab) // todo: add unit transform
             };
 
 
-            headQuarters.IsFriendly = isFriendly;
-            headQuarters.Prefab.transform.SetPositionAndRotation(position, headQuarters.Prefab.transform.rotation);
+            barracks.IsFriendly = isFriendly;
+            barracks.Prefab.transform.SetPositionAndRotation(position, barracks.Prefab.transform.rotation);
 
-            return headQuarters;
+            return barracks;
         }
 
         public string GetDisplayName()

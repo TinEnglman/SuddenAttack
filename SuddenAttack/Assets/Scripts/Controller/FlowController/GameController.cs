@@ -39,7 +39,9 @@ namespace SuddenAttack.Controller.FlowController
         private BuildingController _barracksBlue = null;
         [SerializeField]
         private BuildingController _barracksRed = null;
-      
+
+        private BuildingFactoryManager _buildingFactoryManager;
+        private UnitFactoryManager _unitFactoryManager;
         private GameManager _gameManager = null;
         private CommandManager _commandManager = null;
         private CombatManager _combatManager = default;
@@ -47,8 +49,6 @@ namespace SuddenAttack.Controller.FlowController
         private UnitBuildingManager _unitBuildingManager = default;
         private ICommandFactory _commandFactory = default;
         private IInputManager _inputManager = default;
-        //private IUnitFactory _soliderFactory = default;
-        //private IUnitFactory _tankFactory = null;
 
         private float _incomeFrequency = 9;
         private float _incomeCountdown = 0;
@@ -56,13 +56,13 @@ namespace SuddenAttack.Controller.FlowController
         private List<IBuilding> _buildings = new List<IBuilding>();
 
         [Inject]
-        public void Construct(GameManager gameManager, UnitBuildingManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory, SelectionManager selectionManager)
+        public void Construct(UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, GameManager gameManager, UnitBuildingManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory, SelectionManager selectionManager)
         {
+            _buildingFactoryManager = buildingFactoryManager;
+            _unitFactoryManager = unitFactoryManager;
             _gameManager = gameManager;
             _unitBuildingManager = unitBuildingManager;
             _combatManager = combatManager;
-            //_soliderFactory = soliderFactory;
-            //_tankFactory = tankFactory;
             _inputManager = inputManager;
             _commandManager = commandManager;
             _commandFactory = commandFactory;
@@ -74,16 +74,18 @@ namespace SuddenAttack.Controller.FlowController
             _gameManager.AddUnit(unit);
         }
 
-        private void Awake()
+        private void Start()
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
-            
-            InitLevel();
         }
 
         private void InitLevel()
         {
+
+            _buildingFactoryManager.CreateBuilding(-9, -15, "Barracks", true);
+            _unitFactoryManager.CreateUnit("Sniper", - 12, -15, true);
+
             /*
             var hqRed = new HeadQuartes(false);
             hqRed.SetFactory(_tankFactory);
@@ -208,6 +210,7 @@ namespace SuddenAttack.Controller.FlowController
 
             if (_inputManager.isLeftMouseButtonDown())
             {
+                InitLevel(); //temp
                 OnLeftMouseDown();
             }
 
@@ -290,7 +293,7 @@ namespace SuddenAttack.Controller.FlowController
                     continue;
                 }
 
-                var targets = _gameManager.GetTargets(unit);
+                var targets = _gameManager.GetTargets(unit as IMobileUnit);
                 float distance = 0;
                 IUnit closestTarget = null;
                 foreach (IUnit target in targets)
