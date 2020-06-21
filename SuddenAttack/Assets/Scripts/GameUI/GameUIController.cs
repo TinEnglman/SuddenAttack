@@ -28,14 +28,14 @@ namespace SuddenAttack.Controller.GameUI
         private IInputManager _inputManager = default;
         private SelectionManager _selectionManager = default;
         private GameManager _gameManager = default;
-        private UnitBuildingManager _unitCreationManager = default;
+        private UnitCreationManager _unitCreationManager = default;
         //private bool _lockBuildingUI = false; // temp hack; remove when proper UI controll is implemented
         private Texture2D _boxSelectionTexture;
         private bool _drawSelecionBox;
         private Vector3 _pressedScreenPosition;
 
         [Inject]
-        public void Construct(UnitBuildingManager unitCreationManager, IInputManager inputManager, SelectionManager selectionManager, GameManager gameManager)
+        public void Construct(UnitCreationManager unitCreationManager, IInputManager inputManager, SelectionManager selectionManager, GameManager gameManager)
         {
             _inputManager = inputManager;
             _selectionManager = selectionManager;

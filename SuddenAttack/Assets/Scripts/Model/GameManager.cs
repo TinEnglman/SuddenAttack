@@ -8,8 +8,9 @@ namespace SuddenAttack.Model
 {
     public class GameManager
     {
-        private List<IUnit> _units = null;
-        private List<IBuilding> _buildings = null;
+        private List<IMobileUnit> _moblieUnits;
+        private List<IBuilding> _buildings;
+        private List<IUnit> _units;
         private int _currentFunds = 0;
 
 
@@ -24,6 +25,11 @@ namespace SuddenAttack.Model
             get { return _units; }
         }
 
+        public List<IMobileUnit> MobileUnits
+        {
+            get { return _moblieUnits; }
+        }
+
         public List<IBuilding> Buildings
         {
             get { return _buildings; }
@@ -31,14 +37,15 @@ namespace SuddenAttack.Model
 
         public GameManager()
         {
-            _units = new List<IUnit>();
+            _moblieUnits = new List<IMobileUnit>();
             _buildings = new List<IBuilding>();
+            _units = new List<IUnit>();
         }
 
         public void Update(float dt)
         {
             List<IUnit> killList = new List<IUnit>();
-            foreach (IUnit unit in _units)
+            foreach (IUnit unit in _moblieUnits)
             {
                 unit.OnUpdate(dt);
                 if (unit.HitPoints <= 0)
@@ -47,20 +54,34 @@ namespace SuddenAttack.Model
                 }
             }
 
-            foreach (IUnit unit in killList)
+            foreach (IMobileUnit unit in killList)
             {
-                _units.Remove(unit);
+                _moblieUnits.Remove(unit);
                 unit.OnDie();
             }
         }
 
-        public void AddUnit(IUnit unit)
+        public void AddMobileUnit(IMobileUnit unit)
         {
+            _moblieUnits.Add(unit);
             _units.Add(unit);
         }
 
-        public void RemoveUnit(IUnit unit)
+        public void RemoveMobileUnit(IMobileUnit unit)
         {
+            _moblieUnits.Remove(unit);
+            _units.Remove(unit);
+        }
+
+        public void AddBuilding(IBuilding unit)
+        {
+            _buildings.Add(unit);
+            _units.Add(unit);
+        }
+
+        public void RemoveBuilding(IBuilding unit)
+        {
+            _buildings.Remove(unit);
             _units.Remove(unit);
         }
 
@@ -74,10 +95,10 @@ namespace SuddenAttack.Model
         }
         */
 
-        public List<IUnit> GetTargets(IMobileUnit source) // called form update; slow af; refactor
+        public List<IUnit> GetTargets(IMobileUnit source) // called form update; slow af; refactor; move to combatManager
         {
             List<IUnit> targets = new List<IUnit>();
-            foreach (IUnit unit in _units)
+            foreach (IUnit unit in _moblieUnits)
             {
                 if (source.Data.EngageRange > (unit.Prefab.transform.position - source.Prefab.transform.position).magnitude)
                 {

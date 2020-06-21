@@ -6,5 +6,8 @@ namespace SuddenAttack.Model.Behavior
 { 
     public interface IBehavior
     {
+        void OnBegin();
+        void OnEnd();
+        bool IsFinished();
     }
 }

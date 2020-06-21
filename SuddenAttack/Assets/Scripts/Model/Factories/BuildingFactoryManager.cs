@@ -12,16 +12,11 @@ namespace SuddenAttack.Model.Factories
 
         private Dictionary<string, IBuildingFactory> _buildingFactories = new Dictionary<string, IBuildingFactory>();
 
-        private void Init()
+        public void Setup()
         {
             _buildingFactories.Clear();
             _buildingFactories.Add("HQ", new HQFactory(_hqData));
             _buildingFactories.Add("Barracks", new BarracksFactory(_barracksData));
-        }
-
-        private void Start()
-        {
-            Init();
         }
 
         public IBuilding CreateBuilding(float x, float y, string buildingId, bool isFriendly)

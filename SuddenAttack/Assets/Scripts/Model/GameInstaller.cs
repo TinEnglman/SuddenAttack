@@ -21,7 +21,7 @@ namespace SuddenAttack.Model
             Container.Bind<BuildingFactoryManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<UnitFactoryManager>().FromComponentInHierarchy().AsSingle();
 
-            Container.Bind<UnitBuildingManager>().To<UnitBuildingManager>().AsSingle();
+            Container.Bind<UnitCreationManager>().To<UnitCreationManager>().AsSingle();
             Container.Bind<GameManager>().To<GameManager>().AsSingle();
             Container.Bind<SelectionManager>().To<SelectionManager>().AsSingle();
             //Container.Bind<TankFactory>().To<TankFactory>().AsSingle();

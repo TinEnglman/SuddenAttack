@@ -3,12 +3,12 @@ using SuddenAttack.Model.Units;
 using System.Collections.Generic;
 namespace SuddenAttack.Model
 {
-    public class UnitBuildingManager
+    public class UnitCreationManager
     {
         private Dictionary<IBuilding, UnitCeation> _currentBuildingTime = new Dictionary<IBuilding, UnitCeation>();
         private GameManager _gameManager = default;
 
-        public UnitBuildingManager(GameManager gameManager)
+        public UnitCreationManager(GameManager gameManager)
         {
             _gameManager = gameManager;
         }
@@ -35,7 +35,7 @@ namespace SuddenAttack.Model
 
         public void UpdateBuilding(float dt)
         {
-            Dictionary<IBuilding, IUnit> createdUnits = new Dictionary<IBuilding, IUnit>();
+            Dictionary<IBuilding, IMobileUnit> createdUnits = new Dictionary<IBuilding, IMobileUnit>();
             foreach (var pair in _currentBuildingTime)
             {
                 IBuilding currentBuilding = pair.Key;
@@ -53,9 +53,9 @@ namespace SuddenAttack.Model
             foreach (var pair in createdUnits)
             {
                 IBuilding building = pair.Key;
-                IUnit newUnit = pair.Value;
+                IMobileUnit newUnit = pair.Value;
 
-                _gameManager.AddUnit(newUnit);
+                _gameManager.AddMobileUnit(newUnit);
                 _currentBuildingTime.Remove(building);
             }
         }

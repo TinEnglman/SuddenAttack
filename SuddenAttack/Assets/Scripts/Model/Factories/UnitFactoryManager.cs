@@ -15,22 +15,17 @@ namespace SuddenAttack.Model.Factories
 
         private Dictionary<string, IUnitFactory> _unitFactories = new Dictionary<string, IUnitFactory>();
 
-        public IUnit CreateUnit(string unitId, float x, float y, bool isFriendly)
-        {
-            return _unitFactories[unitId].CreateUnit(x, y, isFriendly);
-        }
-
-        private void Init()
+        public void Setup()
         {
             _unitFactories.Clear();
             _unitFactories.Add("Solider", new SoliderFactory(_soliderData));
             _unitFactories.Add("Tank", new TankFactory(_tankData));
-            _unitFactories.Add("Sniper", new SniperFactory(_soliderData));
+            _unitFactories.Add("Sniper", new SniperFactory(_sniperData));
         }
 
-        private void Start()
+        public IUnit CreateUnit(string unitId, float x, float y, bool isFriendly)
         {
-            Init();
+            return _unitFactories[unitId].CreateUnit(x, y, isFriendly);
         }
     }
 }
