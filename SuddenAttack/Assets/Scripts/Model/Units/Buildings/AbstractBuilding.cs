@@ -14,6 +14,7 @@ namespace SuddenAttack.Model.Buildings
         protected BuildingData _buildingData;
         protected WeaponData _weaponData;    
         protected GameObject _prefab;
+        protected Vector2 _position;
         List<string> _unitIds;
         public Vector2 SpawnOffset { get; set; }
         public float HitPoints { get; set; }
@@ -67,6 +68,12 @@ namespace SuddenAttack.Model.Buildings
         {
             get { return _prefab; }
             set { _prefab = value; }
+        }
+
+        public Vector2 Position
+        {
+            get { return _position; }
+            set { _position = value; }
         }
 
         /*

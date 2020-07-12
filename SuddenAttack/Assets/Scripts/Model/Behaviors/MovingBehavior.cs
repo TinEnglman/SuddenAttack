@@ -1,22 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SuddenAttack.Model.Units;
 using UnityEngine;
 
 namespace SuddenAttack.Model.Behavior
 {
-    public class MovingBehavior : IBehavior
+    public class MovingBehavior : BehaviorBase
     {
-        public void OnBegin()
+        public Vector2 Destination { get; set; }
+
+        public override void Update(IUnit unit, float dt)
+        {
+            IMobileUnit mobileUnit = unit as IMobileUnit;
+            Vector2 direction = (Destination - unit.Position).normalized;
+            unit.Position += direction * mobileUnit.Data.MoveSpeed * dt;
+
+            if ((Destination - unit.Position).sqrMagnitude < 0.01f)
+            {
+                unit.Position = Destination;
+            }
+        }
+
+        public override void OnBegin(IUnit unit)
         {
         }
 
-        public void OnEnd()
+        public override void OnEnd(IUnit unit)
         {
         }
 
-        public bool IsFinished()
+        public override bool IsFinished(IUnit unit)
         {
-            return true;
+            return unit.Position == Destination;
         }
     }
 }

@@ -24,10 +24,10 @@ namespace SuddenAttack.Model.Factories
                 Prefab = Object.Instantiate(_unitData.UnitPrefab)
             };
 
-
+            tank.Position = position;
             tank.IsFriendly = isFriendly;
             tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
-            tank.Prefab.GetComponent<UnitController>().SetDestination(position);
+            tank.Prefab.GetComponent<UnitController>().Unit = tank;
             tank.Prefab.GetComponent<BulletContoller>().enabled = false;
             tank.Prefab.GetComponent<BulletContoller>().ProjectileOrigin = tank.Prefab.transform.position;
 

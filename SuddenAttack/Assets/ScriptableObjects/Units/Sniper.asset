@@ -18,7 +18,7 @@ MonoBehaviour:
   PrimaryWeapon: {fileID: 11400000, guid: f14fe4689d552b24da18a09d5e6c8ce4, type: 2}
   DisplayName: Sniper
   MaxHitPoints: 30
-  MoveSpeed: 10
+  MoveSpeed: 0.1
   EngageRange: 16
   BuildDuration: 40
   Cost: 40

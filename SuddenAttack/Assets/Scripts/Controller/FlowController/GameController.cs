@@ -12,6 +12,7 @@ using SuddenAttack.Model.Units;
 using SuddenAttack.Ui.Menu;
 using SuddenAttack.Controller.ViewController;
 using SuddenAttack.Model.Data;
+using SuddenAttack.Model.Behavior;
 
 namespace SuddenAttack.Controller.FlowController
 {
@@ -19,13 +20,15 @@ namespace SuddenAttack.Controller.FlowController
     {
         private BuildingFactoryManager _buildingFactoryManager;
         private UnitFactoryManager _unitFactoryManager;
-        private GameManager _gameManager = null;
-        private CommandManager _commandManager = null;
-        private CombatManager _combatManager = default;
-        private SelectionManager _selectionManager = default;
-        private UnitCreationManager _unitBuildingManager = default;
-        private ICommandFactory _commandFactory = default;
-        private IInputManager _inputManager = default;
+        private GameManager _gameManager;
+        private CommandManager _commandManager;
+        private CombatManager _combatManager;
+        private ICommandController _localPlayerCommandController;
+        private SelectionManager _selectionManager;
+        private UnitCreationManager _unitBuildingManager;
+        private BehaviorManager _behaviorManager;
+        //private ICommandFactory _commandFactory;
+        private IInputManager _inputManager;
 
         private float _incomeFrequency = 9;
         private float _incomeCountdown = 0;
@@ -33,16 +36,18 @@ namespace SuddenAttack.Controller.FlowController
         private List<IBuilding> _buildings = new List<IBuilding>();
 
         [Inject]
-        public void Construct(UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, GameManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, ICommandFactory commandFactory, SelectionManager selectionManager)
+        public void Construct(ICommandController localPlayerCommandController, BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, GameManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager)
         {
             _buildingFactoryManager = buildingFactoryManager;
             _unitFactoryManager = unitFactoryManager;
             _gameManager = gameManager;
             _unitBuildingManager = unitBuildingManager;
+            _behaviorManager = behaviorManager;
             _combatManager = combatManager;
             _inputManager = inputManager;
             _commandManager = commandManager;
-            _commandFactory = commandFactory;
+            _localPlayerCommandController = localPlayerCommandController;
+            //_commandFactory = commandFactory;
             _selectionManager = selectionManager;
         }
 
@@ -56,7 +61,8 @@ namespace SuddenAttack.Controller.FlowController
         private void SetupLevel()
         {
             var building = _buildingFactoryManager.CreateBuilding(-9, -15, "Barracks", true);
-            _unitFactoryManager.CreateUnit("Sniper", - 12, -15, true);
+            var unit = _unitFactoryManager.CreateUnit("Solider", - 12, -15, true);
+            _localPlayerCommandController.SetMoveCommand(unit, Vector2.one);
         }
 
         private void Setup()
@@ -73,7 +79,10 @@ namespace SuddenAttack.Controller.FlowController
             _combatManager.Update(dt);
             _gameManager.Update(dt);
             _unitBuildingManager.UpdateBuilding(dt);
+            _behaviorManager.UpdateBehaviors(dt);
+
             _selectionManager.Update();
+
             UpdateIncome(dt);
             UpdateAI();
 
@@ -145,8 +154,8 @@ namespace SuddenAttack.Controller.FlowController
             {
                 if (target != selectedUnit && target != null)
                 {
-                    var command = _commandFactory.CreateAttackTargetCommand(selectedUnit, target);
-                    _commandManager.AddCommand(command);
+                    //var command = _commandFactory.CreateAttackTargetCommand(selectedUnit, target);
+                    //_commandManager.AddCommand(command);
 
                     //AttackTarget(target);
                     //selectedUnit.IsUserLocked = true;

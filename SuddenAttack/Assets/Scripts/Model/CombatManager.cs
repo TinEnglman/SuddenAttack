@@ -51,12 +51,12 @@ namespace SuddenAttack.Model
 
         public void MoveUnit(IUnit unit, Vector3 destination)
         {
-            unit.Prefab.GetComponent<UnitController>().SetDestination(destination);
+            //unit.Prefab.GetComponent<UnitController>().SetDestination(destination);
         }
 
         public void StopUnit(IUnit unit)
         {
-            unit.Prefab.GetComponent<UnitController>().SetDestination(unit.Prefab.transform.position);
+            //unit.Prefab.GetComponent<UnitController>().SetDestination(unit.Prefab.transform.position);
         }
 
         public bool HasLock(IUnit attacker)

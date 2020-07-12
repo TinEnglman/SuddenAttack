@@ -19,9 +19,9 @@ namespace SuddenAttack.Model
             _activeCommands[command.Unit].Add(command);
         }
 
-        public void ExecuteComand(IUnit unit, ICommand command)
+        public void SetCommand(ICommand command)
         {
-            command.Execute();// hmh
+            command.Execute();
         }
     }
 }

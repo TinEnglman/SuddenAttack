@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using SuddenAttack.Model.Units;
 
-public class BehaviorBase : MonoBehaviour
+namespace SuddenAttack.Model.Behavior
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class BehaviorBase : IBehavior
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public abstract void Update(IUnit unit, float dt);
+        public abstract void OnBegin(IUnit unit);
+        public abstract void OnEnd(IUnit unit);
+        public abstract bool IsFinished(IUnit unit);
     }
 }

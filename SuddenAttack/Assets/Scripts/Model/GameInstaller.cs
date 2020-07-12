@@ -5,6 +5,7 @@ using UnityEngine;
 using Zenject;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Controller.FlowController;
+using SuddenAttack.Model.Behavior;
 
 namespace SuddenAttack.Model
 {
@@ -24,12 +25,12 @@ namespace SuddenAttack.Model
             Container.Bind<UnitCreationManager>().To<UnitCreationManager>().AsSingle();
             Container.Bind<GameManager>().To<GameManager>().AsSingle();
             Container.Bind<SelectionManager>().To<SelectionManager>().AsSingle();
-            //Container.Bind<TankFactory>().To<TankFactory>().AsSingle();
-            //Container.Bind<SoliderFactory>().To<SoliderFactory>().AsSingle();
             Container.Bind<CommandManager>().To<CommandManager>().AsSingle();
             Container.Bind<CombatManager>().To<CombatManager>().AsSingle();
+            Container.Bind<BehaviorManager>().To<BehaviorManager>().AsSingle();
+            Container.Bind<ICommandController>().To<LocalPlayerCommandController>().AsSingle(); // temp
 
-            Container.Bind<ICommandFactory>().To<CommandFactory>().AsSingle();
+            Container.Bind<CommandFactory>().To<CommandFactory>().AsSingle();
         }
     }
 }

@@ -26,10 +26,11 @@ namespace SuddenAttack.Model.Factories
             };
 
 
+            sniper.Position = position;
             sniper.IsFriendly = isFriendly;
             sniper.Prefab.transform.SetPositionAndRotation(position, sniper.Prefab.transform.rotation);
             var unitController = sniper.Prefab.GetComponent<UnitController>();
-            unitController.SetDestination(position);
+            unitController.Unit = sniper;
 
             return sniper;
         }

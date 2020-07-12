@@ -12,6 +12,7 @@ namespace SuddenAttack.Model.Units
         float HitPoints { get; set; }
         bool IsFriendly { get; set; }
         WeaponData WeaponData { get; set; }
+        Vector2 Position { get; set; }
 
         void Select();
         void Deselect();

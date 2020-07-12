@@ -25,11 +25,11 @@ namespace SuddenAttack.Model.Factories
                 Prefab = Object.Instantiate(_unitData.UnitPrefab) // todo: add unit transform
             };
 
-
+            solider.Position = position;
             solider.IsFriendly = isFriendly;
             solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
             var unitController = solider.Prefab.GetComponent<UnitController>();
-            unitController.SetDestination(position);
+            unitController.Unit = solider;
 
             return solider;
         }

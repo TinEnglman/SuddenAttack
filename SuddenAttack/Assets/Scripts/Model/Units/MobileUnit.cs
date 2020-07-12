@@ -11,6 +11,7 @@ namespace SuddenAttack.Model.Units
         protected UnitData _unitData;
         protected GameObject _prefab;
         protected WeaponData _weaponData;
+        protected Vector2 _position;
         public float HitPoints { get; set; }
         public bool IsFriendly { get; set; }
 
@@ -30,6 +31,12 @@ namespace SuddenAttack.Model.Units
         {
             get { return _weaponData; }
             set { _weaponData = value; }
+        }
+
+        public Vector2 Position
+        {
+            get { return _position; }
+            set { _position = value; }
         }
 
         public void Select()
