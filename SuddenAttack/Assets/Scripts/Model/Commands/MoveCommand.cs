@@ -12,7 +12,6 @@ namespace SuddenAttack.Model.Commands
 
         public override void Execute()
         {
-            Unit.OnMove(Destination);
             var movingBehavior = new MovingBehavior();
             movingBehavior.Destination = Destination;
             _behaviorManager.SetBehavior(Unit, movingBehavior);

@@ -25,7 +25,7 @@ namespace SuddenAttack.Model.Commands.Factory
         {
             var command = new AttackTargetCommand(_behaviorManager);
             command.Unit = attacker;
-            command.AttackedUnit = attacked;
+            command.Target = attacked;
             return command;
         }
 

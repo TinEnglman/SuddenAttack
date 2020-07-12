@@ -21,6 +21,7 @@ namespace SuddenAttack.Model.Behavior
 
         public override void OnBegin(IUnit unit)
         {
+            unit.OnMove(Destination);
         }
 
         public override void OnEnd(IUnit unit)
