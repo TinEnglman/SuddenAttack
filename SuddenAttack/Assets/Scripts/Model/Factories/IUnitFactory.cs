@@ -8,7 +8,7 @@ namespace SuddenAttack.Model.Factories
 {
     public interface IUnitFactory
     {
-        IUnit CreateUnit(float x, float y, bool isFriendly);
+        IMobileUnit CreateUnit(float x, float y, bool isFriendly);
         string GetDisplayName();
         int GetCost();
     }

@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Factories
             _unitData = unitData;
         }
 
-        public IUnit CreateUnit(float x, float y, bool isFriendly)
+        public IMobileUnit CreateUnit(float x, float y, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
             var tank = new Tank(_unitData)
@@ -26,6 +26,8 @@ namespace SuddenAttack.Model.Factories
 
             tank.Position = position;
             tank.IsFriendly = isFriendly;
+            tank.WeaponData = _unitData.PrimaryWeapon;
+            tank.HitPoints = _unitData.MaxHitPoints;
             tank.Prefab.transform.SetPositionAndRotation(position, tank.Prefab.transform.rotation);
             tank.Prefab.GetComponent<UnitController>().Unit = tank;
             tank.Prefab.GetComponent<BulletContoller>().enabled = false;

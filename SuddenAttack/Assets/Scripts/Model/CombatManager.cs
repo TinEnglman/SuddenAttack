@@ -10,21 +10,19 @@ namespace SuddenAttack.Model
     {
         public IUnit attacker;
         public IUnit attacked;
-        public volatile float damage; // refactor
+        public volatile float damage;
         public volatile float delay;
     }
 
-
     public class CombatManager
     {
-        private Dictionary<IUnit, IUnit> _attackingUnits = new Dictionary<IUnit, IUnit>();
         private Dictionary<IUnit, List<DelayedDamage>> _delayedDamageMap = new Dictionary<IUnit, List<DelayedDamage>>();
 
-        public void Damage(IUnit attacker, IUnit attacked, float damage, float delay)
+        public void Damage(IUnit attacker, IUnit attacked)
         {
             var delayedDamage = new DelayedDamage();
-            delayedDamage.damage = damage;
-            delayedDamage.delay = delay;
+            delayedDamage.damage = attacker.WeaponData.Damage;
+            delayedDamage.delay = CalculateDamageDelay(attacker, attacked);
             delayedDamage.attacked = attacked;
             delayedDamage.attacker = attacker;
 
@@ -36,73 +34,9 @@ namespace SuddenAttack.Model
             _delayedDamageMap[attacked].Add(delayedDamage);
         }
 
-        public void LockTarget(IUnit attacker, IUnit attacked)
-        {
-            _attackingUnits[attacker] = attacked;
-        }
-
-        public void ClearAttacker(IUnit attacker)
-        {
-            _attackingUnits.Remove(attacker);
-            //attacker.StopAttacking();
-            attacker.OnStopAttacking();
-            //attacker.IsUserLocked = false;
-        }
-
-        public void MoveUnit(IUnit unit, Vector3 destination)
-        {
-            //unit.Prefab.GetComponent<UnitController>().SetDestination(destination);
-        }
-
-        public void StopUnit(IUnit unit)
-        {
-            //unit.Prefab.GetComponent<UnitController>().SetDestination(unit.Prefab.transform.position);
-        }
-
-        public bool HasLock(IUnit attacker)
-        {
-            return _attackingUnits.ContainsKey(attacker);
-        }
-
-        public bool IsMoving(IUnit unit)
-        {
-            return unit.Prefab.GetComponent<UnitController>().IsMoving;
-        }
 
         public void Update(float dt)
         {
-            List<IUnit> clearList = new List<IUnit>();
-            foreach (var pair in _attackingUnits)
-            {
-                var attacker = pair.Key;
-                var attacked = pair.Value;
-                float distance = (attacker.Prefab.transform.position - attacked.Prefab.transform.position).magnitude;
-
-                //if (attacker.CanFire() && distance < attacker.Data.Range)
-                if (distance < attacker.WeaponData.Range)
-                {
-                    attacker.OnStop();
-                    attacker.OnFire();
-                    float delay = CalculateDamageDelay(attacker, attacked);
-                    attacker.OnAttack(attacked);
-                    //attacker.OnDamage(attacked, attacker.Data.Damage, delay);
-                }
-
-                if (distance > attacker.WeaponData.Range)
-                {
-                    attacker.OnMove(attacked.Prefab.transform.position);
-                }
-
-                if (attacked.HitPoints <= 0)
-                {
-                    clearList.Add(attacker);
-                }
-            }
-
-            foreach (IUnit unit in clearList)
-            {
-                ClearAttacker(unit);
-            }
 
             foreach (var delayedDamagePair in _delayedDamageMap)
             {

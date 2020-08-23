@@ -7,10 +7,12 @@ namespace SuddenAttack.Model.Commands.Factory
     public class CommandFactory
     {
         private BehaviorManager _behaviorManager;
+        private CombatManager _combatManager;
 
-        public CommandFactory(BehaviorManager behaviorManager)
+        public CommandFactory(BehaviorManager behaviorManager, CombatManager combatManager)
         {
             _behaviorManager = behaviorManager;
+            _combatManager = combatManager;
         }
 
         public ICommand CreateAttackMoveCommand(IUnit attacker, Vector2 destination)
@@ -23,9 +25,10 @@ namespace SuddenAttack.Model.Commands.Factory
 
         public ICommand CreateAttackTargetCommand(IUnit attacker, IUnit attacked)
         {
-            var command = new AttackTargetCommand(_behaviorManager);
+            var command = new AttackTargetCommand(_behaviorManager, _combatManager);
             command.Unit = attacker;
             command.Target = attacked;
+
             return command;
         }
 

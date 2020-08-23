@@ -23,7 +23,7 @@ namespace SuddenAttack.Model.Factories
             _unitFactories.Add("Sniper", new SniperFactory(_sniperData));
         }
 
-        public IUnit CreateUnit(string unitId, float x, float y, bool isFriendly)
+        public IMobileUnit CreateUnit(string unitId, float x, float y, bool isFriendly)
         {
             return _unitFactories[unitId].CreateUnit(x, y, isFriendly);
         }

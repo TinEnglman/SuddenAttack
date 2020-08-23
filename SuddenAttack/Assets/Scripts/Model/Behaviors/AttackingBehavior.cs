@@ -9,7 +9,13 @@ namespace SuddenAttack.Model.Behavior
     {
         public IUnit Target { get; set; }
 
+        private CombatManager _combatManager;        
         private float _fireCountdoown;
+
+        public AttackingBehavior(CombatManager combatManager)
+        {
+            _combatManager = combatManager;
+        }
 
         public override void Update(IUnit unit, float dt) // only creates fire instructions for combat manager
         {
@@ -18,7 +24,8 @@ namespace SuddenAttack.Model.Behavior
 
             if (distance <= unit.WeaponData.Range && _fireCountdoown <= 0)
             {
-                unit.OnFire();
+                unit.OnAttack(Target);
+                _combatManager.Damage(unit, Target);
                 _fireCountdoown += unit.WeaponData.WeaponCooldown;
             }
         }
@@ -26,6 +33,7 @@ namespace SuddenAttack.Model.Behavior
         public override void OnBegin(IUnit unit)
         {
             unit.OnAttack(Target);
+            _combatManager.Damage(unit, Target);
             _fireCountdoown = unit.WeaponData.WeaponCooldown;
         }
 
@@ -36,7 +44,7 @@ namespace SuddenAttack.Model.Behavior
 
         public override bool IsFinished(IUnit unit)
         {
-            return Target.HitPoints > 0;
+            return Target.HitPoints <= 0;
         }
     }
 }

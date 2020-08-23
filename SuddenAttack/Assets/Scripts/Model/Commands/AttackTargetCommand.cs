@@ -7,7 +7,12 @@ namespace SuddenAttack.Model.Commands
     {
         public IUnit Target { get; set; }
 
-        public AttackTargetCommand(BehaviorManager behaviorManager) : base(behaviorManager) { }
+        private CombatManager _combatManager;
+
+        public AttackTargetCommand(BehaviorManager behaviorManager, CombatManager combatManager) : base(behaviorManager)
+        {
+            _combatManager = combatManager;
+        }
 
         public override void Execute()
         {
@@ -19,7 +24,7 @@ namespace SuddenAttack.Model.Commands
             }
             else
             {
-                var attackingBehavior = new AttackingBehavior();
+                var attackingBehavior = new AttackingBehavior(_combatManager);
                 attackingBehavior.Target = Target;
                 _behaviorManager.SetBehavior(Unit, attackingBehavior);
                 // combat manager should be notified in the local player conmmand controller

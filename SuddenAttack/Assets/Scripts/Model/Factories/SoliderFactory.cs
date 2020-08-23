@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Factories
             _unitData = unitData;
         }
 
-        public IUnit CreateUnit(float x, float y, bool isFriendly)
+        public IMobileUnit CreateUnit(float x, float y, bool isFriendly)
         {
             Vector3 position = new Vector3(x, y, 0);
 
@@ -27,6 +27,8 @@ namespace SuddenAttack.Model.Factories
 
             solider.Position = position;
             solider.IsFriendly = isFriendly;
+            solider.WeaponData = _unitData.PrimaryWeapon;
+            solider.HitPoints = _unitData.MaxHitPoints;
             solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
             var unitController = solider.Prefab.GetComponent<UnitController>();
             unitController.Unit = solider;

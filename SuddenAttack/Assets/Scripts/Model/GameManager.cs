@@ -11,6 +11,7 @@ namespace SuddenAttack.Model
         private List<IMobileUnit> _moblieUnits;
         private List<IBuilding> _buildings;
         private List<IUnit> _units;
+        private List<IUnit> _killList;
         private int _currentFunds = 0;
 
 
@@ -40,24 +41,29 @@ namespace SuddenAttack.Model
             _moblieUnits = new List<IMobileUnit>();
             _buildings = new List<IBuilding>();
             _units = new List<IUnit>();
+            _killList = new List<IUnit>();
         }
 
         public void Update(float dt)
         {
-            List<IUnit> killList = new List<IUnit>();
-            foreach (IUnit unit in _moblieUnits)
+            foreach (IUnit unit in _units)
             {
                 unit.OnUpdate(dt);
                 if (unit.HitPoints <= 0)
                 {
-                    killList.Add(unit);
+                    _killList.Add(unit);
                 }
             }
 
-            foreach (IMobileUnit unit in killList)
+            foreach (IUnit unit in _killList)
             {
-                _moblieUnits.Remove(unit);
+                RemoveUnit(unit);
                 unit.OnDie();
+            }
+
+            if (_killList.Count != 0)
+            { 
+                _killList.Clear();
             }
         }
 
@@ -85,15 +91,12 @@ namespace SuddenAttack.Model
             _units.Remove(unit);
         }
 
-        /*
-        public void MoveSelected(Vector3 destination) // move to command
+        public void RemoveUnit(IUnit unit)
         {
-            foreach (IUnit unit in _selectedUnits)
-            {
-                unit.Move(destination);
-            }
+            _moblieUnits.Remove(unit as IMobileUnit);
+            _buildings.Remove(unit as IBuilding);
+            _units.Remove(unit);
         }
-        */
 
         public List<IUnit> GetTargets(IMobileUnit source) // called form update; slow af; refactor; move to combatManager
         {

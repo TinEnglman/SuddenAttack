@@ -21,7 +21,7 @@ namespace SuddenAttack.Model
 
         public void SetCommand(ICommand command)
         {
-            command.Execute();
+            command.Execute(); // does not seem right
         }
     }
 }

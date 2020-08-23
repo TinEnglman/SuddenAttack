@@ -47,7 +47,6 @@ namespace SuddenAttack.Controller.FlowController
             _inputManager = inputManager;
             _commandManager = commandManager;
             _localPlayerCommandController = localPlayerCommandController;
-            //_commandFactory = commandFactory;
             _selectionManager = selectionManager;
         }
 
@@ -61,8 +60,12 @@ namespace SuddenAttack.Controller.FlowController
         private void SetupLevel()
         {
             var building = _buildingFactoryManager.CreateBuilding(-9, -15, "Barracks", true);
-            var unit = _unitFactoryManager.CreateUnit("Solider", - 12, -15, true);
-            _localPlayerCommandController.SetMoveCommand(unit, Vector2.one);
+            var unit = _unitFactoryManager.CreateUnit("Solider", - 12, -16, true);
+
+            _gameManager.AddBuilding(building);
+            _gameManager.AddMobileUnit(unit);
+
+            _localPlayerCommandController.SetAttackTargetCommand(unit, building);
         }
 
         private void Setup()
@@ -187,7 +190,7 @@ namespace SuddenAttack.Controller.FlowController
                 //_unitBuildingManager.StartBuildingUnit(_barracksRed.Building, false);
             }
 
-
+            /*
             foreach (IUnit unit in _gameManager.Units)
             {
                 //if (unit.IsUserLocked && unit.Data.IsFriendly)
@@ -219,12 +222,14 @@ namespace SuddenAttack.Controller.FlowController
                 }
                 if (closestTarget != null)
                 {
-                    _combatManager.LockTarget(unit, closestTarget);
+                    //_combatManager.LockTarget(unit, closestTarget);
                 }
+               
             }
+             */
         }
 
-      
+
         private void MoveSelected(Vector2 mousePos)
         {
             //_gameManager.MoveSelected(mousePos);
@@ -234,14 +239,14 @@ namespace SuddenAttack.Controller.FlowController
         {
             foreach (IUnit unit in _selectionManager.GetSelectedUnits())
             {
-                _combatManager.LockTarget(unit, other);
+                //_combatManager.LockTarget(unit, other);
             }
 
         }
 
         private void StopAttacking(IUnit unit)
         {
-            _combatManager.ClearAttacker(unit);
+            //_combatManager.StopAttacking(unit);
         }
     }
 }

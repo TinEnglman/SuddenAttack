@@ -24,5 +24,12 @@ namespace SuddenAttack.Controller.FlowController
             var moveCommand = _commandFactory.CreateMoveCommand(unit, destination);
             _commandManager.SetCommand(moveCommand);
         }
+
+        public void SetAttackTargetCommand(IUnit unit, IUnit attacked)
+        {
+            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked);
+            _commandManager.SetCommand(attackTargetCommand);
+        }
+
     }
 }
