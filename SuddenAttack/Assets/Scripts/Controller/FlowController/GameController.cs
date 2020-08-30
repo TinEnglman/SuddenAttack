@@ -83,6 +83,7 @@ namespace SuddenAttack.Controller.FlowController
             _gameManager.Update(dt);
             _unitBuildingManager.UpdateBuilding(dt);
             _behaviorManager.UpdateBehaviors(dt);
+            _commandManager.Update();
 
             _selectionManager.Update();
 

@@ -37,7 +37,6 @@ namespace SuddenAttack.Model
 
         public void Update(float dt)
         {
-
             foreach (var delayedDamagePair in _delayedDamageMap)
             {
                 List<DelayedDamage> killList = new List<DelayedDamage>();

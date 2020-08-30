@@ -7,21 +7,60 @@ namespace SuddenAttack.Model
 {
     public class CommandManager
     {
-        private Dictionary<IUnit, List<ICommand>> _activeCommands = new Dictionary<IUnit, List<ICommand>>();
+        private Dictionary<IUnit, List<ICommand>> _queuedCommands = new Dictionary<IUnit, List<ICommand>>(); // replace with queue
+        private Dictionary<IUnit, ICommand> _activeCommand = new Dictionary<IUnit, ICommand>();
+        private List<ICommand> _commandKillList = new List<ICommand>();
 
         public void AddCommand(ICommand command)
         {
-            if (!_activeCommands.ContainsKey(command.Unit))
+            if (!_queuedCommands.ContainsKey(command.Unit))
             {
-                _activeCommands.Add(command.Unit, new List<ICommand>());
+                _queuedCommands.Add(command.Unit, new List<ICommand>());
             }
 
-            _activeCommands[command.Unit].Add(command);
+            _queuedCommands[command.Unit].Add(command);
         }
 
         public void SetCommand(ICommand command)
         {
-            command.Execute(); // does not seem right
+            if (_activeCommand.ContainsKey(command.Unit))
+            {
+                if (_activeCommand[command.Unit] != command)
+                {
+                    InternalSetCommand(command);
+                }
+            }
+            else
+            {
+                _activeCommand.Add(command.Unit, command);
+            }
+        }
+
+        public ICommand PopQueuedCommand(IUnit unit)
+        {
+            return _queuedCommands[unit][0];
+        }
+
+
+        public void Update()
+        {
+            foreach (var commmandListtPair in _activeCommand)
+            {
+                var unit = commmandListtPair.Key;
+                var command = commmandListtPair.Value;
+                command.Execute();
+                _commandKillList.Add(command);
+            }
+
+            foreach(var command in _commandKillList)
+            {
+                _activeCommand.Remove(command.Unit);
+            }
+        }
+
+        private void InternalSetCommand(ICommand command)
+        {
+            _activeCommand[command.Unit] = command;
         }
     }
 }
