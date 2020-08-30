@@ -28,7 +28,7 @@ namespace SuddenAttack.Controller.FlowController
         public void AddMoveCommand(IUnit unit, Vector2 destination)
         {
             var moveCommand = _commandFactory.CreateMoveCommand(unit, destination);
-            _commandManager.AddCommand(moveCommand);
+            _commandManager.PushCommand(moveCommand);
         }
 
         public void SetAttackTargetCommand(IUnit unit, IUnit attacked)
@@ -40,7 +40,7 @@ namespace SuddenAttack.Controller.FlowController
         public void AddAttackTargetCommand(IUnit unit, IUnit attacked)
         {
             var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked);
-            _commandManager.AddCommand(attackTargetCommand);
+            _commandManager.PushCommand(attackTargetCommand);
         }
 
     }

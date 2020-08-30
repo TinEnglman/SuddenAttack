@@ -7,28 +7,26 @@ namespace SuddenAttack.Model
 {
     public class CommandManager
     {
-        private Dictionary<IUnit, List<ICommand>> _queuedCommands = new Dictionary<IUnit, List<ICommand>>(); // replace with queue
+        private Dictionary<IUnit, Queue<ICommand>> _queuedCommands = new Dictionary<IUnit, Queue<ICommand>>(); // replace with queue
         private Dictionary<IUnit, ICommand> _activeCommand = new Dictionary<IUnit, ICommand>();
         private List<ICommand> _commandKillList = new List<ICommand>();
 
-        public void AddCommand(ICommand command)
+        public void PushCommand(ICommand command)
         {
             if (!_queuedCommands.ContainsKey(command.Unit))
             {
-                _queuedCommands.Add(command.Unit, new List<ICommand>());
+                _queuedCommands.Add(command.Unit, new Queue<ICommand>());
             }
 
-            _queuedCommands[command.Unit].Add(command);
+            _queuedCommands[command.Unit].Enqueue(command);
         }
 
         public void SetCommand(ICommand command)
         {
             if (_activeCommand.ContainsKey(command.Unit))
             {
-                if (_activeCommand[command.Unit] != command)
-                {
-                    InternalSetCommand(command);
-                }
+                
+                InternalSetCommand(command);
             }
             else
             {
@@ -38,13 +36,12 @@ namespace SuddenAttack.Model
 
         public void PopQueuedCommand(IUnit unit)
         {
-            if (!_queuedCommands.ContainsKey(unit))
+            if (!_queuedCommands.ContainsKey(unit) || _queuedCommands[unit].Count == 0)
             {
                 return;
             }
 
-            SetCommand(_queuedCommands[unit][0]);
-            _queuedCommands[unit].RemoveAt(0);
+            SetCommand(_queuedCommands[unit].Dequeue());
         }
 
 

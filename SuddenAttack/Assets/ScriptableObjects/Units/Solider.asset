@@ -18,7 +18,7 @@ MonoBehaviour:
   PrimaryWeapon: {fileID: 11400000, guid: a6cd262da2f789c4c8b9fb5d96a11140, type: 2}
   DisplayName: Solider
   MaxHitPoints: 30
-  MoveSpeed: 0.1
+  MoveSpeed: 0.5
   EngageRange: 12
   BuildDuration: 15
   Cost: 10

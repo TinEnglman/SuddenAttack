@@ -18,7 +18,7 @@ MonoBehaviour:
   PrimaryWeapon: {fileID: 11400000, guid: c05746cb7e9cbea4c8754090963a557e, type: 2}
   DisplayName: Tank
   MaxHitPoints: 200
-  MoveSpeed: 0.2
+  MoveSpeed: 2
   EngageRange: 16
   BuildDuration: 60
   Cost: 100
