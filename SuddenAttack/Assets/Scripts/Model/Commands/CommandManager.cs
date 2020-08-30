@@ -36,9 +36,15 @@ namespace SuddenAttack.Model
             }
         }
 
-        public ICommand PopQueuedCommand(IUnit unit)
+        public void PopQueuedCommand(IUnit unit)
         {
-            return _queuedCommands[unit][0];
+            if (!_queuedCommands.ContainsKey(unit))
+            {
+                return;
+            }
+
+            SetCommand(_queuedCommands[unit][0]);
+            _queuedCommands[unit].RemoveAt(0);
         }
 
 

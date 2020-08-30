@@ -10,6 +10,13 @@ namespace SuddenAttack.Model.Behavior
         private Dictionary<IUnit, IBehavior> _activeBehaviorDict = new Dictionary<IUnit, IBehavior>();
         private List<IUnit> _killList = new List<IUnit>();
 
+        private CommandManager _commandManager;
+
+        public BehaviorManager(CommandManager commandManager)
+        {
+            _commandManager = commandManager;
+        }
+
         public void SetBehavior(IUnit unit, IBehavior behavior)
         {
             _activeBehaviorDict.Add(unit, behavior);
@@ -29,10 +36,12 @@ namespace SuddenAttack.Model.Behavior
                 {
                     behavior.OnEnd(unit);
                     _killList.Add(unit);
+                    _commandManager.PopQueuedCommand(unit);
+
                 }
             }
 
-            foreach(var unit in _killList)
+            foreach (var unit in _killList)
             {
                 _activeBehaviorDict.Remove(unit);
             }
@@ -42,5 +51,8 @@ namespace SuddenAttack.Model.Behavior
                 _killList.Clear();
             }
         }
+
+ 
+
     }
 }

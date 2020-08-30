@@ -66,6 +66,7 @@ namespace SuddenAttack.Controller.FlowController
             _gameManager.AddMobileUnit(unit);
 
             _localPlayerCommandController.SetAttackTargetCommand(unit, building);
+            _localPlayerCommandController.AddMoveCommand(unit, new Vector2(10, 10));
         }
 
         private void Setup()
