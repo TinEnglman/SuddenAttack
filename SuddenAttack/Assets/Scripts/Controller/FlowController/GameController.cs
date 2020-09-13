@@ -23,10 +23,10 @@ namespace SuddenAttack.Controller.FlowController
         private GameManager _gameManager;
         private CommandManager _commandManager;
         private CombatManager _combatManager;
-        private ICommandController _localPlayerCommandController;
         private SelectionManager _selectionManager;
         private UnitCreationManager _unitBuildingManager;
         private BehaviorManager _behaviorManager;
+        private LocalPlayerCommandController _localPlayerCommandController;
         //private ICommandFactory _commandFactory;
         private IInputManager _inputManager;
 
@@ -36,7 +36,7 @@ namespace SuddenAttack.Controller.FlowController
         private List<IBuilding> _buildings = new List<IBuilding>();
 
         [Inject]
-        public void Construct(ICommandController localPlayerCommandController, BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, GameManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager)
+        public void Construct(BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, GameManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
         {
             _buildingFactoryManager = buildingFactoryManager;
             _unitFactoryManager = unitFactoryManager;
@@ -46,8 +46,8 @@ namespace SuddenAttack.Controller.FlowController
             _combatManager = combatManager;
             _inputManager = inputManager;
             _commandManager = commandManager;
-            _localPlayerCommandController = localPlayerCommandController;
             _selectionManager = selectionManager;
+            _localPlayerCommandController = localPlayerCommandController;
         }
 
         private void Start()
@@ -64,11 +64,6 @@ namespace SuddenAttack.Controller.FlowController
 
             _gameManager.AddBuilding(building);
             _gameManager.AddMobileUnit(unit);
-
-            _localPlayerCommandController.SetAttackTargetCommand(unit, building);
-            _localPlayerCommandController.SetMoveCommand(unit, new Vector2(-12f, -15.5f));
-            _localPlayerCommandController.AddMoveCommand(unit, new Vector2(-12.5f, -15.5f));
-            _localPlayerCommandController.AddAttackTargetCommand(unit, building);
         }
 
         private void Setup()
@@ -87,28 +82,29 @@ namespace SuddenAttack.Controller.FlowController
             _unitBuildingManager.UpdateBuilding(dt);
             _behaviorManager.UpdateBehaviors(dt);
             _commandManager.Update();
+            _localPlayerCommandController.Update();
 
             _selectionManager.Update();
 
             UpdateIncome(dt);
             UpdateAI();
 
-            if (_inputManager.isLeftMouseButtonDown())
+            if (_inputManager.IsLeftMouseButtonDown())
             {
                 OnLeftMouseDown();
             }
 
-            if (_inputManager.isLeftMouseButtonUp())
+            if (_inputManager.IsLeftMouseButtonUp())
             {
                 OnLeftMouseUp();
             }
 
-            if (_inputManager.isRightMouseButtonDown())
+            if (_inputManager.IsRightMouseButtonDown())
             {
                 OnRightMouseDown();
             }
 
-            if (_inputManager.isRightMouseButtonUp())
+            if (_inputManager.IsRightMouseButtonUp())
             {
                 OnRightMouseUp();
             }
@@ -151,29 +147,6 @@ namespace SuddenAttack.Controller.FlowController
 
         private void OnRightMouseUp()
         {
-            Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
-            Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
-
-            IUnit target = _selectionManager.GetUnitUnderPointer(mouseWorldPos);
-
-
-            foreach (IUnit selectedUnit in _selectionManager.GetSelectedUnits())
-            {
-                if (target != selectedUnit && target != null)
-                {
-                    //var command = _commandFactory.CreateAttackTargetCommand(selectedUnit, target);
-                    //_commandManager.AddCommand(command);
-
-                    //AttackTarget(target);
-                    //selectedUnit.IsUserLocked = true;
-                }
-                else
-                {
-                    MoveSelected(mouseWorldPos);
-                    StopAttacking(selectedUnit);
-                    //selectedUnit.IsUserLocked = true;
-                }
-            }
         }
 
         private void OnLeftMouseUp()

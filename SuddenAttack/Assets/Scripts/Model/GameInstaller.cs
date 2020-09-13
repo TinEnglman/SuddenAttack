@@ -21,16 +21,17 @@ namespace SuddenAttack.Model
 
             Container.Bind<BuildingFactoryManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<UnitFactoryManager>().FromComponentInHierarchy().AsSingle();
-
             Container.Bind<UnitCreationManager>().To<UnitCreationManager>().AsSingle();
             Container.Bind<GameManager>().To<GameManager>().AsSingle();
             Container.Bind<SelectionManager>().To<SelectionManager>().AsSingle();
             Container.Bind<CommandManager>().To<CommandManager>().AsSingle();
             Container.Bind<CombatManager>().To<CombatManager>().AsSingle();
             Container.Bind<BehaviorManager>().To<BehaviorManager>().AsSingle();
-            Container.Bind<ICommandController>().To<LocalPlayerCommandController>().AsSingle(); // temp
-
+          
             Container.Bind<CommandFactory>().To<CommandFactory>().AsSingle();
+
+            Container.Bind<LocalPlayerCommandController>().To<LocalPlayerCommandController>().AsSingle();
+            Container.Bind<CommandController>().To<CommandController>().AsSingle();
         }
     }
 }

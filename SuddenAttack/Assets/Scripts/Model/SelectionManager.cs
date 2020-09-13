@@ -22,46 +22,23 @@ namespace SuddenAttack.Controller.FlowController
             _inputManager = inputManager;
             _gameManager = gameManager;
         }
+
         public void Update()
         {
-            if (_inputManager.isLeftMouseButtonDown())
+            if (_inputManager.IsLeftMouseButtonDown()) // listener candidate
             {
                 OnLeftMouseDown();
             }
 
-            if (_inputManager.isLeftMouseButtonUp())
+            if (_inputManager.IsLeftMouseButtonUp())
             {
                 OnLeftMouseUp();
-            }
-
-            if (_inputManager.isRightMouseButtonDown())
-            {
-                OnRightMouseDown();
-            }
-
-            if (_inputManager.isRightMouseButtonUp())
-            {
-                OnRightMouseUp();
             }
         }
 
         public List<IUnit> GetSelectedUnits()
         {
             return _selectedUnits;
-        }
-
-        public IUnit GetUnitUnderPointer(Vector3 mouseWorldPos)
-        {
-            IUnit target = null;
-            foreach (IUnit unit in _gameManager.Units)
-            {
-                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
-                if (colider.bounds.Contains(new Vector3(mouseWorldPos.x, mouseWorldPos.y, colider.bounds.center.z)))
-                {
-                    target = unit;
-                }
-            }
-            return target;
         }
 
         public List<IBuilding> GetSelectedBuildings()
@@ -78,20 +55,10 @@ namespace SuddenAttack.Controller.FlowController
             return buildings;
         }
 
-        private void OnRightMouseDown()
-        {
-        }
-
         private void OnLeftMouseDown()
         {
             _pressedWorldPosition = _inputManager.GetMouseWorldPosition();
             _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
-        }
-
-        private void OnRightMouseUp()
-        {
-            Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
-            Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
         }
 
         private void OnLeftMouseUp()
@@ -112,7 +79,7 @@ namespace SuddenAttack.Controller.FlowController
                     continue;
                 }
 
-                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
+                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>();
                 Rect selectionRect = new Rect(pressedPos.x, pressedPos.y, mousePos.x - pressedPos.x, mousePos.y - pressedPos.y);
                 Vector2 unitCenter = new Vector2(unit.Prefab.transform.position.x, unit.Prefab.transform.position.y);
                 if (selectionRect.Contains(unitCenter, true) || colider.bounds.Contains(pressedPos))

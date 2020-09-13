@@ -19,8 +19,22 @@ namespace SuddenAttack.Model.Behavior
 
         public void SetBehavior(IUnit unit, IBehavior behavior)
         {
+            if (_activeBehaviorDict.ContainsKey(unit))
+            {
+                StopBehavior(unit);
+                UpdateBehaviors(0);
+            }
+
             _activeBehaviorDict.Add(unit, behavior);
             behavior.OnBegin(unit);
+        }
+
+        public void StopBehavior(IUnit unit)
+        {
+            var behavior = _activeBehaviorDict[unit];
+            behavior.OnEnd(unit);
+            _killList.Add(unit);
+            _commandManager.PopQueuedCommand(unit);
         }
 
         public void UpdateBehaviors(float dt)
@@ -34,10 +48,7 @@ namespace SuddenAttack.Model.Behavior
 
                 if (behavior.IsFinished(unit))
                 {
-                    behavior.OnEnd(unit);
-                    _killList.Add(unit);
-                    _commandManager.PopQueuedCommand(unit);
-
+                    StopBehavior(unit);
                 }
             }
 

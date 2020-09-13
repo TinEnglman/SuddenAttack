@@ -26,71 +26,40 @@ namespace SuddenAttack.Model
             return _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        public bool isRightMouseButtonDown()
+        public bool IsRightMouseButtonDown()
         {
             return Input.GetMouseButtonDown(RightButtonIndex);
         }
 
-        public bool isLeftMouseButtonDown()
+        public bool IsLeftMouseButtonDown()
         {
             return Input.GetMouseButtonDown(LeftButtonIndex);
         }
 
-        public bool isRightMouseButtonUp()
+        public bool IsRightMouseButtonUp()
         {
             return Input.GetMouseButtonUp(RightButtonIndex);
         }
 
-        public bool isLeftMouseButtonUp()
+        public bool IsLeftMouseButtonUp()
         {
             return Input.GetMouseButtonUp(LeftButtonIndex);
         }
 
-        public bool IsDown(KeyCode keyCode, bool ignoreUICheck = false)
+        public bool IsDown(KeyCode keyCode)
         {
-            if (!ValidatePointerKeyCode(keyCode, ignoreUICheck))
-            {
-                return false;
-            }
-
             return Input.GetKeyDown(keyCode);
         }
 
-        public bool IsHeld(KeyCode keyCode, bool ignoreUICheck = false)
+        public bool IsHeld(KeyCode keyCode)
         {
-            if (!ValidatePointerKeyCode(keyCode, ignoreUICheck))
-            {
-                return false;
-            }
-
             return Input.GetKey(keyCode);
         }
 
-        public bool IsUp(KeyCode keyCode, bool ignoreUICheck = false)
+        public bool IsUp(KeyCode keyCode)
         {
-            if (!ValidatePointerKeyCode(keyCode, ignoreUICheck))
-            {
-                return false;
-            }
-
             return Input.GetKeyUp(keyCode);
         }
 
-        private bool ValidatePointerKeyCode(KeyCode keyCode, bool ignoreUICheck)
-        {
-            if (ignoreUICheck)
-            {
-                return true;
-            }
-
-            if (keyCode == KeyCode.Mouse0)
-            {
-                if (EventSystem.current.IsPointerOverGameObject())
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
     }
 }

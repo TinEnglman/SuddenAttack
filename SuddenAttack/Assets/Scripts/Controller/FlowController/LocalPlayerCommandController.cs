@@ -8,40 +8,75 @@ using UnityEngine;
 
 namespace SuddenAttack.Controller.FlowController
 {
-    public class LocalPlayerCommandController : ICommandController
+    public class LocalPlayerCommandController
     {
-        private CommandManager _commandManager;
-        private CommandFactory _commandFactory;
+        private GameManager _gameManager;
+        private CommandController _commandController;
+        private IInputManager _inputManager;
+        private SelectionManager _selectionManager;
 
-        public LocalPlayerCommandController(CommandManager commandManager, CommandFactory commandFactory)
+        private Vector3 _pressedWorldPosition;
+        private Vector3 _pressedScreenPosition;
+
+        public LocalPlayerCommandController(GameManager gameManager, CommandController commandController, IInputManager inputManager, SelectionManager selectionManager)
         {
-            _commandManager = commandManager;
-            _commandFactory = commandFactory;
+            _gameManager = gameManager;
+            _commandController = commandController;
+            _inputManager = inputManager;
+            _selectionManager = selectionManager;
         }
 
-        public void SetMoveCommand(IUnit unit, Vector2 destination)
+        public void Update()
         {
-            var moveCommand = _commandFactory.CreateMoveCommand(unit, destination);
-            _commandManager.SetCommand(moveCommand);
+            if (_inputManager.IsRightMouseButtonDown()) // listener candidate
+            {
+                OnRightMouseDown();
+            }
+
+            if (_inputManager.IsRightMouseButtonUp())
+            {
+                OnRightMouseUp();
+            }
         }
 
-        public void AddMoveCommand(IUnit unit, Vector2 destination)
+        private void OnRightMouseDown()
         {
-            var moveCommand = _commandFactory.CreateMoveCommand(unit, destination);
-            _commandManager.PushCommand(moveCommand);
+            _pressedWorldPosition = _inputManager.GetMouseWorldPosition();
+            _pressedScreenPosition = _inputManager.GetMouseScreenPosition();
         }
 
-        public void SetAttackTargetCommand(IUnit unit, IUnit attacked)
+        private void OnRightMouseUp()
         {
-            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked);
-            _commandManager.SetCommand(attackTargetCommand);
+            Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
+            Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
+
+            IUnit target = GetUnitUnderPointer(mouseWorldPos);
+
+            foreach (IUnit selectedUnit in _selectionManager.GetSelectedUnits())
+            {
+                if (target != selectedUnit && target != null)
+                {
+                    _commandController.SetAttackTargetCommand(selectedUnit, target);
+                }
+                else
+                {
+                    _commandController.SetMoveCommand(selectedUnit, mouseWorldPos);
+                }
+            }
         }
 
-        public void AddAttackTargetCommand(IUnit unit, IUnit attacked)
+        public IUnit GetUnitUnderPointer(Vector3 mouseWorldPos)
         {
-            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked);
-            _commandManager.PushCommand(attackTargetCommand);
+            IUnit target = null;
+            foreach (IUnit unit in _gameManager.Units)
+            {
+                BoxCollider2D colider = unit.Prefab.GetComponent<BoxCollider2D>(); // fragile construct
+                if (colider.bounds.Contains(new Vector3(mouseWorldPos.x, mouseWorldPos.y, colider.bounds.center.z)))
+                {
+                    target = unit;
+                }
+            }
+            return target;
         }
-
     }
 }

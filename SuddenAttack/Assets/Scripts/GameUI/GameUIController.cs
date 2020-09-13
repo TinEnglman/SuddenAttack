@@ -143,22 +143,22 @@ namespace SuddenAttack.Controller.GameUI
                 _gameMenuController.gameObject.SetActive(true);
             }
 
-            if (_inputManager.isLeftMouseButtonDown())
+            if (_inputManager.IsLeftMouseButtonDown())
             {
                 OnLeftMouseDown();
             }
 
-            if (_inputManager.isLeftMouseButtonUp())
+            if (_inputManager.IsLeftMouseButtonUp())
             {
                 OnLeftMouseUp();
             }
 
-            if (_inputManager.isRightMouseButtonDown())
+            if (_inputManager.IsRightMouseButtonDown())
             {
                 OnRightMouseDown();
             }
 
-            if (_inputManager.isRightMouseButtonUp())
+            if (_inputManager.IsRightMouseButtonUp())
             {
                 OnRightMouseUp();
             }

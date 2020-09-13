@@ -57,7 +57,6 @@ namespace SuddenAttack.Model
                     delayedDamagePair.Value.Remove(delayedDamage);
                 }
             }
-
         }
 
         private float CalculateDamageDelay(IUnit attacker, IUnit attacked)
