@@ -7,7 +7,7 @@ namespace SuddenAttack.Model
 {
     public class CommandManager
     {
-        private Dictionary<IUnit, Queue<ICommand>> _queuedCommands = new Dictionary<IUnit, Queue<ICommand>>(); // replace with queue
+        private Dictionary<IUnit, Queue<ICommand>> _queuedCommands = new Dictionary<IUnit, Queue<ICommand>>();
         private Dictionary<IUnit, ICommand> _activeCommand = new Dictionary<IUnit, ICommand>();
         private List<ICommand> _commandKillList = new List<ICommand>();
 
@@ -51,13 +51,18 @@ namespace SuddenAttack.Model
             {
                 var unit = commmandListtPair.Key;
                 var command = commmandListtPair.Value;
-                command.Execute();
                 _commandKillList.Add(command);
             }
 
             foreach(var command in _commandKillList)
             {
+                command.Execute();
                 _activeCommand.Remove(command.Unit);
+            }
+
+            if (_commandKillList.Count > 0)
+            {
+                _commandKillList.Clear();
             }
         }
 
