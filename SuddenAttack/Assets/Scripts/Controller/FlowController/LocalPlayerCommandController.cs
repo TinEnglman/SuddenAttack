@@ -18,6 +18,8 @@ namespace SuddenAttack.Controller.FlowController
         private Vector3 _pressedWorldPosition;
         private Vector3 _pressedScreenPosition;
 
+        private bool _queueActive;
+
         public LocalPlayerCommandController(GameManager gameManager, CommandController commandController, IInputManager inputManager, SelectionManager selectionManager)
         {
             _gameManager = gameManager;
@@ -36,6 +38,16 @@ namespace SuddenAttack.Controller.FlowController
             if (_inputManager.IsRightMouseButtonUp())
             {
                 OnRightMouseUp();
+            }
+
+            if (_inputManager.IsPressed(KeyCode.LeftShift) || _inputManager.IsPressed(KeyCode.RightShift))
+            {
+                _queueActive = true;
+            }
+
+            if (_inputManager.IsReleased(KeyCode.LeftShift) || _inputManager.IsReleased(KeyCode.RightShift))
+            {
+                _queueActive = false;
             }
         }
 
@@ -56,11 +68,25 @@ namespace SuddenAttack.Controller.FlowController
             {
                 if (target != selectedUnit && target != null)
                 {
-                    _commandController.SetAttackTargetCommand(selectedUnit, target);
+                    if (_queueActive)
+                    {
+                        _commandController.AddAttackTargetCommand(selectedUnit, target);
+                    }
+                    else
+                    {
+                        _commandController.SetAttackTargetCommand(selectedUnit, target);
+                    }
                 }
                 else
                 {
-                    _commandController.SetMoveCommand(selectedUnit, mouseWorldPos);
+                    if (_queueActive)
+                    {
+                        _commandController.AddMoveCommand(selectedUnit, mouseWorldPos);
+                    }
+                    else
+                    {
+                        _commandController.SetMoveCommand(selectedUnit, mouseWorldPos);
+                    }
                 }
             }
         }

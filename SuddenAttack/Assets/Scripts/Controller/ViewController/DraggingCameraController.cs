@@ -54,22 +54,22 @@ namespace SuddenAttack.Controller.ViewController
 
         void Update()
         {
-            if (_inputManager.IsDown(KeyCode.A))
+            if (_inputManager.IsPressed(KeyCode.A))
             {
                 _lockCamera = true;
             }
 
-            if (_inputManager.IsDown(KeyCode.B))
+            if (_inputManager.IsPressed(KeyCode.B))
             {
                 _lockCamera = false;
             }
 
-            if (_inputManager.IsDown(KeyCode.KeypadMinus))
+            if (_inputManager.IsPressed(KeyCode.KeypadMinus))
             {
                 _camera.orthographicSize += 0.1f;
             }
 
-            if (_inputManager.IsDown(KeyCode.KeypadPlus))
+            if (_inputManager.IsPressed(KeyCode.KeypadPlus))
             {
                 _camera.orthographicSize -= 0.1f;
             }

@@ -138,7 +138,7 @@ namespace SuddenAttack.Controller.GameUI
 
         private void Update()
         {
-            if (_inputManager.IsDown(KeyCode.F10))
+            if (_inputManager.IsPressed(KeyCode.F10))
             {
                 _gameMenuController.gameObject.SetActive(true);
             }

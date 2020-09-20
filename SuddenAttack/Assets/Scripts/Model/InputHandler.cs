@@ -46,7 +46,7 @@ namespace SuddenAttack.Model
             return Input.GetMouseButtonUp(LeftButtonIndex);
         }
 
-        public bool IsDown(KeyCode keyCode)
+        public bool IsPressed(KeyCode keyCode)
         {
             return Input.GetKeyDown(keyCode);
         }
@@ -56,7 +56,7 @@ namespace SuddenAttack.Model
             return Input.GetKey(keyCode);
         }
 
-        public bool IsUp(KeyCode keyCode)
+        public bool IsReleased(KeyCode keyCode)
         {
             return Input.GetKeyUp(keyCode);
         }

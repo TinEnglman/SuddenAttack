@@ -5,9 +5,9 @@ namespace SuddenAttack.Model
     {
         Vector2 GetMouseScreenPosition();
         Vector2 GetMouseWorldPosition();
-        bool IsDown(KeyCode keyCod);
+        bool IsPressed(KeyCode keyCod);
         bool IsHeld(KeyCode keyCode);
-        bool IsUp(KeyCode keyCode);
+        bool IsReleased(KeyCode keyCode);
         bool IsRightMouseButtonDown();
         bool IsLeftMouseButtonDown();
         bool IsRightMouseButtonUp();
