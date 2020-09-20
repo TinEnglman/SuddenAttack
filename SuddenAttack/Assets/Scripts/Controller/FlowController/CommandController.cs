@@ -42,13 +42,13 @@ namespace SuddenAttack.Controller.FlowController
 
         public void SetAttackTargetCommand(IUnit unit, IUnit attacked)
         {
-            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked);
+            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked, this);
             _commandManager.SetCommand(attackTargetCommand);
         }
 
         public void AddAttackTargetCommand(IUnit unit, IUnit attacked)
         {
-            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked);
+            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked, this);
             _commandManager.PushCommand(attackTargetCommand);
         }
     }

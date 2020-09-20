@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using SuddenAttack.Model.Commands.Factory;
+﻿using SuddenAttack.Model.Commands.Factory;
 using UnityEngine;
 using Zenject;
 using SuddenAttack.Model.Factories;

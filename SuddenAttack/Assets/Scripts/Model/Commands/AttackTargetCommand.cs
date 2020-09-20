@@ -1,4 +1,5 @@
-﻿using SuddenAttack.Model.Behavior;
+﻿using SuddenAttack.Controller.FlowController;
+using SuddenAttack.Model.Behavior;
 using SuddenAttack.Model.Units;
 
 namespace SuddenAttack.Model.Commands
@@ -8,10 +9,12 @@ namespace SuddenAttack.Model.Commands
         public IUnit Target { get; set; }
 
         private CombatManager _combatManager;
+        private CommandController _commandController;
 
-        public AttackTargetCommand(BehaviorManager behaviorManager, CombatManager combatManager) : base(behaviorManager)
+        public AttackTargetCommand(BehaviorManager behaviorManager, CombatManager combatManager, CommandController commandController) : base(behaviorManager)
         {
             _combatManager = combatManager;
+            _commandController = commandController;
         }
 
         public override void Execute()
@@ -20,7 +23,9 @@ namespace SuddenAttack.Model.Commands
 
             if (distance > Unit.WeaponData.Range)
             {
-                // add pursuit behavior
+                var pursuingBehavior = new PursuingBehavior(_commandController);
+                pursuingBehavior.PursuedUnit = Target;
+                _behaviorManager.SetBehavior(Unit, pursuingBehavior);
             }
             else
             {

@@ -61,9 +61,11 @@ namespace SuddenAttack.Controller.FlowController
         {
             var building = _buildingFactoryManager.CreateBuilding(-9, -15, "Barracks", true);
             var unit = _unitFactoryManager.CreateUnit("Solider", - 12, -16, true);
+            var unit2 = _unitFactoryManager.CreateUnit("Solider", -16, -16, true);
 
             _gameManager.AddBuilding(building);
             _gameManager.AddMobileUnit(unit);
+            _gameManager.AddMobileUnit(unit2);
         }
 
         private void Setup()

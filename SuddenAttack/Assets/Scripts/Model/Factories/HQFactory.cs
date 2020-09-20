@@ -27,6 +27,7 @@ namespace SuddenAttack.Model.Factories
 
             headQuarters.IsFriendly = isFriendly;
             headQuarters.Prefab.transform.SetPositionAndRotation(position, headQuarters.Prefab.transform.rotation);
+            headQuarters.Position = position;
 
             return headQuarters;
         }

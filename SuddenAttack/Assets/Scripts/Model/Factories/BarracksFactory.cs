@@ -27,6 +27,7 @@ namespace SuddenAttack.Model.Factories
 
             barracks.IsFriendly = isFriendly;
             barracks.Prefab.transform.SetPositionAndRotation(position, barracks.Prefab.transform.rotation);
+            barracks.Position = position;
 
             return barracks;
         }

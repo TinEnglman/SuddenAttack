@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using SuddenAttack.Model.Units;
 using SuddenAttack.Model.Behavior;
+using SuddenAttack.Controller.FlowController;
 
 namespace SuddenAttack.Model.Commands.Factory
 {
@@ -23,9 +24,9 @@ namespace SuddenAttack.Model.Commands.Factory
             return command;
         }
 
-        public ICommand CreateAttackTargetCommand(IUnit attacker, IUnit attacked)
+        public ICommand CreateAttackTargetCommand(IUnit attacker, IUnit attacked, CommandController commandController)
         {
-            var command = new AttackTargetCommand(_behaviorManager, _combatManager);
+            var command = new AttackTargetCommand(_behaviorManager, _combatManager, commandController);
             command.Unit = attacker;
             command.Target = attacked;
 

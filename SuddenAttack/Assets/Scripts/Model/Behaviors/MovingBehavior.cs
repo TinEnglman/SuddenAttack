@@ -10,12 +10,12 @@ namespace SuddenAttack.Model.Behavior
         public override void Update(IUnit unit, float dt)
         {
             IMobileUnit mobileUnit = unit as IMobileUnit;
-            Vector2 direction = (Destination - unit.Position).normalized;
-            unit.Position += direction * mobileUnit.Data.MoveSpeed * dt;
+            Vector2 direction = (Destination - mobileUnit.Position).normalized;
+            mobileUnit.Position += direction * mobileUnit.Data.MoveSpeed * dt;
 
-            if ((Destination - unit.Position).sqrMagnitude < 0.01f)
+            if ((Destination - mobileUnit.Position).sqrMagnitude < 0.001f)
             {
-                unit.Position = Destination;
+                mobileUnit.Position = Destination;
             }
         }
 
