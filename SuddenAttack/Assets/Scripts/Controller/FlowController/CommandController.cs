@@ -18,12 +18,24 @@ namespace SuddenAttack.Controller.FlowController
 
         public void SetMoveCommand(IUnit unit, Vector2 destination)
         {
+            IMobileUnit mobileUnit = unit as IMobileUnit;
+            if (mobileUnit == null)
+            {
+                return; 
+            }                
+
             var moveCommand = _commandFactory.CreateMoveCommand(unit, destination);
             _commandManager.SetCommand(moveCommand);
         }
 
         public void AddMoveCommand(IUnit unit, Vector2 destination)
         {
+            IMobileUnit mobileUnit = unit as IMobileUnit;
+            if (mobileUnit == null)
+            {
+                return;
+            }
+
             var moveCommand = _commandFactory.CreateMoveCommand(unit, destination);
             _commandManager.PushCommand(moveCommand);
         }
