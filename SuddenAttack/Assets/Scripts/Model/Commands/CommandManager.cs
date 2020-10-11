@@ -23,15 +23,7 @@ namespace SuddenAttack.Model
 
         public void SetCommand(ICommand command)
         {
-            if (_activeCommand.ContainsKey(command.Unit))
-            {
-                
-                InternalSetCommand(command);
-            }
-            else
-            {
-                _activeCommand.Add(command.Unit, command);
-            }
+            InternalSetCommand(command);
         }
 
         public void PopQueuedCommand(IUnit unit)
@@ -68,7 +60,15 @@ namespace SuddenAttack.Model
 
         private void InternalSetCommand(ICommand command)
         {
-            _activeCommand[command.Unit] = command;
+            if (_activeCommand.ContainsKey(command.Unit))
+            {
+
+                _activeCommand[command.Unit] = command;
+            }
+            else
+            {
+                _activeCommand.Add(command.Unit, command);
+            }
         }
     }
 }
