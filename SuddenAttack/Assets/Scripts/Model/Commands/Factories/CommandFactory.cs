@@ -18,9 +18,10 @@ namespace SuddenAttack.Model.Commands.Factory
 
         public ICommand CreateAttackMoveCommand(IUnit attacker, Vector2 destination)
         {
-            var command = new AttackMoveCommand(_behaviorManager);
+            var command = new AttackMoveCommand(_behaviorManager, _combatManager);
             command.Unit = attacker;
             command.Destination = destination;
+
             return command;
         }
 
@@ -38,6 +39,7 @@ namespace SuddenAttack.Model.Commands.Factory
             var command = new MoveCommand(_behaviorManager);
             command.Unit = unit;
             command.Destination = destination;
+
             return command;
         }
 
@@ -47,6 +49,7 @@ namespace SuddenAttack.Model.Commands.Factory
             command.Unit = unit;
             command.Destination = destination;
             command.Start = start;
+
             return command;
         }
 
@@ -54,6 +57,7 @@ namespace SuddenAttack.Model.Commands.Factory
         {
             var command = new StopCommand(_behaviorManager);
             command.Unit = unit;
+
             return command;
         }
 
@@ -62,7 +66,9 @@ namespace SuddenAttack.Model.Commands.Factory
             var command = new BuildUnitCommand(_behaviorManager);
             command.Unit = building;
             command.UnitIndex = unitIndex;
+
             return command;
         }
+
     }
 }

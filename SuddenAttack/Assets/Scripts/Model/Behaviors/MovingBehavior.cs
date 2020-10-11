@@ -5,6 +5,8 @@ namespace SuddenAttack.Model.Behavior
 {
     public class MovingBehavior : BehaviorBase
     {
+        private const float DISTANCE_TRESHOLD = 0.001f;
+
         public Vector2 Destination { get; set; }
 
         public override void Update(IUnit unit, float dt)
@@ -13,7 +15,7 @@ namespace SuddenAttack.Model.Behavior
             Vector2 direction = (Destination - mobileUnit.Position).normalized;
             mobileUnit.Position += direction * mobileUnit.Data.MoveSpeed * dt;
 
-            if ((Destination - mobileUnit.Position).sqrMagnitude < 0.001f)
+            if ((Destination - mobileUnit.Position).sqrMagnitude < DISTANCE_TRESHOLD)
             {
                 mobileUnit.Position = Destination;
             }
