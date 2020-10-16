@@ -207,25 +207,5 @@ namespace SuddenAttack.Controller.FlowController
             }
              */
         }
-
-
-        private void MoveSelected(Vector2 mousePos)
-        {
-            //_gameManager.MoveSelected(mousePos);
-        }
-
-        private void AttackTarget(IUnit other)
-        {
-            foreach (IUnit unit in _selectionManager.GetSelectedUnits())
-            {
-                //_combatManager.LockTarget(unit, other);
-            }
-
-        }
-
-        private void StopAttacking(IUnit unit)
-        {
-            //_combatManager.StopAttacking(unit);
-        }
     }
 }
