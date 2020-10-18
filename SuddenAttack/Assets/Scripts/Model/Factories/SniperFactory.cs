@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Factories
             _unitData = unitData;
         }
 
-        public IMobileUnit CreateUnit(float x, float y, bool isFriendly)
+        public IMobileUnit CreateUnit(float x, float y, int teamIndex)
         {
             Vector3 position = new Vector3(x, y, 0);
 
@@ -27,7 +27,7 @@ namespace SuddenAttack.Model.Factories
 
 
             sniper.Position = position;
-            sniper.IsFriendly = isFriendly;
+            sniper.TeamIndex = teamIndex;
             sniper.WeaponData = _unitData.PrimaryWeapon; // need base class
             sniper.HitPoints = _unitData.MaxHitPoints;
             sniper.Prefab.transform.SetPositionAndRotation(position, sniper.Prefab.transform.rotation);

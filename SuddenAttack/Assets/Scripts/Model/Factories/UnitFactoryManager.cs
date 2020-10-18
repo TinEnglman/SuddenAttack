@@ -23,9 +23,9 @@ namespace SuddenAttack.Model.Factories
             _unitFactories.Add("Sniper", new SniperFactory(_sniperData));
         }
 
-        public IMobileUnit CreateUnit(string unitId, float x, float y, bool isFriendly)
+        public IMobileUnit CreateUnit(string unitId, float x, float y, int teamIndex)
         {
-            return _unitFactories[unitId].CreateUnit(x, y, isFriendly);
+            return _unitFactories[unitId].CreateUnit(x, y, teamIndex);
         }
     }
 }

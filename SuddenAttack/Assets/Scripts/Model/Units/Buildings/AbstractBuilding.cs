@@ -18,7 +18,7 @@ namespace SuddenAttack.Model.Buildings
         List<string> _unitIds;
         public Vector2 SpawnOffset { get; set; }
         public float HitPoints { get; set; }
-        public bool IsFriendly { get; set; }
+        public int TeamIndex { get; set; }
 
         //protected float _currentCountdown = 0;
         protected IUnitFactory _unitFactory; // refactor?

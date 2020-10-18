@@ -6,7 +6,7 @@ namespace SuddenAttack.Model
     public class UnitCreationManager
     {
         private Dictionary<IBuilding, UnitCeation> _currentBuildingTime = new Dictionary<IBuilding, UnitCeation>();
-        private GameManager _gameManager = default;
+        private GameManager _gameManager;
 
         public UnitCreationManager(GameManager gameManager)
         {
@@ -19,7 +19,7 @@ namespace SuddenAttack.Model
             {
                 return 0f;
             }
-            return (building.BuildingData.BuildDuration -_currentBuildingTime[building].BuildCooldown) / building.BuildingData.BuildDuration;
+            return (building.BuildingData.BuildDuration - _currentBuildingTime[building].BuildCooldown) / building.BuildingData.BuildDuration;
         }
 
         public bool IsBuilding(IBuilding building)
@@ -27,9 +27,9 @@ namespace SuddenAttack.Model
             return _currentBuildingTime.ContainsKey(building);
         }
 
-        public void StartBuildingUnit(IBuilding building, bool isFriendly)
+        public void StartBuildingUnit(IBuilding building, int teamIndex)
         {
-            UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, isFriendly);
+            UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, teamIndex);
             _currentBuildingTime.Add(building, unitCreation);
         }
 
@@ -64,12 +64,12 @@ namespace SuddenAttack.Model
     public class UnitCeation
     {
         public float BuildCooldown { get; set; }
-        public bool IsFriendly { get; set; } // refactor to playerID or smt similar
+        public int TeamIndex { get; set; }
 
-        public UnitCeation(float buildTime, bool isFriendly)
+        public UnitCeation(float buildTime, int teamIndex)
         {
             BuildCooldown = buildTime;
-            IsFriendly = isFriendly;
+            TeamIndex = teamIndex;
         }
     }
 }

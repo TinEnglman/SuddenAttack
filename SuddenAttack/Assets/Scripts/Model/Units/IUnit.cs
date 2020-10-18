@@ -10,7 +10,7 @@ namespace SuddenAttack.Model.Units
         GameObject Prefab { get; set; }
 
         float HitPoints { get; set; }
-        bool IsFriendly { get; set; }
+        int TeamIndex { get; set; }
         WeaponData WeaponData { get; set; }
         Vector2 Position { get; set; }
 

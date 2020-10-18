@@ -12,31 +12,7 @@ namespace SuddenAttack.Model.Buildings
         {
             _buildingData = buildingData;
             HitPoints = _buildingData.MaxHitPoints;
-            //Data = ScriptableObject.CreateInstance<UnitData>();
-            //Data.DisplayName = "Head Quarters";
-            //Data.BuildDuration = 30;
-            //Data.HitPoints = 1000;
-            //Data.MaxHitPoints = 1000;
-            //IsFriendly = isFriendly;
-            //_currentCountdown = Data.BuildCooldown;
-
         }
-
-        /*
-        public override IUnit SpawnUnit()
-        {
-            float x = Prefab.transform.position.x + _spawnOffset.x + Random.value;
-            float y = Prefab.transform.position.y + _spawnOffset.y + Random.value;
-            IUnit unit = _unitFactory.CreateUnit(x, y, _unitPrefab, Data.IsFriendly);
-            return unit;
-
-        }
-
-        public override int GetIncome()
-        {
-            return 25;
-        }
-        */
 
         public override void OnUpdate(float dt)
         {

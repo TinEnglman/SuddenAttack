@@ -15,7 +15,7 @@ namespace SuddenAttack.Model.Factories
             _buildingData = buindingData;
         }
 
-        public IBuilding CreateBuilding(float x, float y, bool isFriendly)
+        public IBuilding CreateBuilding(float x, float y, int teamIndex)
         {
             Vector3 position = new Vector3(x, y, 0);
 
@@ -25,7 +25,7 @@ namespace SuddenAttack.Model.Factories
             };
 
 
-            headQuarters.IsFriendly = isFriendly;
+            headQuarters.TeamIndex = teamIndex;
             headQuarters.Prefab.transform.SetPositionAndRotation(position, headQuarters.Prefab.transform.rotation);
             headQuarters.Position = position;
 

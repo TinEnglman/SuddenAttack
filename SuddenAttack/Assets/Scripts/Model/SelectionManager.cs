@@ -14,6 +14,7 @@ namespace SuddenAttack.Controller.FlowController
 
         private Vector3 _pressedWorldPosition;
         private Vector3 _pressedScreenPosition;
+        private int _localPlayerTeamIndex;
 
         private List<IUnit> _selectedUnits = new List<IUnit>();
 
@@ -21,6 +22,7 @@ namespace SuddenAttack.Controller.FlowController
         {
             _inputManager = inputManager;
             _gameManager = gameManager;
+            _localPlayerTeamIndex = 0;
         }
 
         public void Update()
@@ -74,7 +76,7 @@ namespace SuddenAttack.Controller.FlowController
             bool unitSelected = false;
             foreach (IUnit unit in _gameManager.Units)
             {
-                if (!unit.IsFriendly)
+                if (unit.TeamIndex != _localPlayerTeamIndex)
                 {
                     continue;
                 }

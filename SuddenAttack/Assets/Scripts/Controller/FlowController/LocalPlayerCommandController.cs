@@ -68,13 +68,21 @@ namespace SuddenAttack.Controller.FlowController
             {
                 if (target != selectedUnit && target != null)
                 {
-                    if (_queueActive)
-                    {
-                        _commandController.AddAttackTargetCommand(selectedUnit, target);
+                    
+                    if (target.TeamIndex != selectedUnit.TeamIndex)
+                    { 
+                        if (_queueActive)
+                        {
+                            _commandController.AddAttackTargetCommand(selectedUnit, target);
+                        }
+                        else
+                        {
+                            _commandController.SetAttackTargetCommand(selectedUnit, target);
+                        }
                     }
                     else
                     {
-                        _commandController.SetAttackTargetCommand(selectedUnit, target);
+                        // add logic for right clicking on a friendly unit
                     }
                 }
                 else

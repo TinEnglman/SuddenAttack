@@ -131,7 +131,7 @@ namespace SuddenAttack.Controller.GameUI
             if (_gameManager.Funds >= cost && !_unitCreationManager.IsBuilding(building))
             {
                 _gameManager.Funds -= cost;
-                _unitCreationManager.StartBuildingUnit(building, true);
+                _unitCreationManager.StartBuildingUnit(building, 0);
 
             }
         }
