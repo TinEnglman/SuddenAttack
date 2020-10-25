@@ -52,6 +52,12 @@ namespace SuddenAttack.Controller.FlowController
             _commandManager.PushCommand(attackTargetCommand);
         }
 
+        public void InjectAttackTargetCommand(IUnit unit, IUnit attacked)
+        {
+            var attackTargetCommand = _commandFactory.CreateAttackTargetCommand(unit, attacked, this);
+            _commandManager.InjectCommand(attackTargetCommand);
+        }
+
         public void SetAttackMoveCommand(IUnit unit, Vector2 destination)
         {
             IMobileUnit mobileUnit = unit as IMobileUnit;

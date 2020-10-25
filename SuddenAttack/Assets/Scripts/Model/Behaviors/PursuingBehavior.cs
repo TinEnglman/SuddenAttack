@@ -29,7 +29,7 @@ namespace SuddenAttack.Model.Behavior
 
         public override void OnEnd(IUnit unit)
         {
-            _commandController.SetAttackTargetCommand(unit, PursuedUnit);
+            //_commandController.SetAttackTargetCommand(unit, PursuedUnit);
         }
 
         public override bool IsFinished(IUnit unit)

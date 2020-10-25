@@ -17,6 +17,16 @@ namespace SuddenAttack.Model.Behavior
             _commandManager = commandManager;
         }
 
+        public IBehavior GetActiveBehavior(IUnit unit)
+        {
+            if (!_activeBehaviorDict.ContainsKey(unit))
+            {
+                return null;
+            }
+
+            return _activeBehaviorDict[unit];
+        }
+
         public void SetBehavior(IUnit unit, IBehavior behavior)
         {
             if (_activeBehaviorDict.ContainsKey(unit))
@@ -62,8 +72,5 @@ namespace SuddenAttack.Model.Behavior
                 _killList.Clear();
             }
         }
-
- 
-
     }
 }

@@ -26,14 +26,13 @@ namespace SuddenAttack.Model.Commands
                 var pursuingBehavior = new PursuingBehavior(_commandController);
                 pursuingBehavior.PursuedUnit = Target;
                 _behaviorManager.SetBehavior(Unit, pursuingBehavior);
+                _commandController.InjectAttackTargetCommand(Unit, Target);
             }
             else
             {
                 var attackingBehavior = new AttackingBehavior(_combatManager);
                 attackingBehavior.Target = Target;
                 _behaviorManager.SetBehavior(Unit, attackingBehavior);
-                // combat manager should be notified in the local player conmmand controller
-                // add pursuiz command to queue in the local player conmmand controller
             }
         }
     }

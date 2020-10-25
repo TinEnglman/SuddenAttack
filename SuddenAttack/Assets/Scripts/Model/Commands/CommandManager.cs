@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SuddenAttack.Model.Behavior;
 using SuddenAttack.Model.Commands;
 using SuddenAttack.Model.Units;
 
@@ -7,7 +8,7 @@ namespace SuddenAttack.Model
 {
     public class CommandManager
     {
-        private Dictionary<IUnit, Queue<ICommand>> _queuedCommands = new Dictionary<IUnit, Queue<ICommand>>();
+        private Dictionary<IUnit, LinkedList<ICommand>> _queuedCommands = new Dictionary<IUnit, LinkedList<ICommand>>();
         private Dictionary<IUnit, ICommand> _activeCommand = new Dictionary<IUnit, ICommand>();
         private List<ICommand> _commandKillList = new List<ICommand>();
 
@@ -15,15 +16,26 @@ namespace SuddenAttack.Model
         {
             if (!_queuedCommands.ContainsKey(command.Unit))
             {
-                _queuedCommands.Add(command.Unit, new Queue<ICommand>());
+                _queuedCommands.Add(command.Unit, new LinkedList<ICommand>());
             }
 
-            _queuedCommands[command.Unit].Enqueue(command);
+            _queuedCommands[command.Unit].AddFirst(command);
+        }
+
+        public void InjectCommand(ICommand command)
+        {
+            if (!_queuedCommands.ContainsKey(command.Unit))
+            {
+                _queuedCommands.Add(command.Unit, new LinkedList<ICommand>());
+            }
+
+            _queuedCommands[command.Unit].AddLast(command);
         }
 
         public void SetCommand(ICommand command)
         {
             InternalSetCommand(command);
+            _queuedCommands.Clear();
         }
 
         public void PopQueuedCommand(IUnit unit)
@@ -33,9 +45,13 @@ namespace SuddenAttack.Model
                 return;
             }
 
-            SetCommand(_queuedCommands[unit].Dequeue());
-        }
+            InternalSetCommand(_queuedCommands[unit].Last.Value);
 
+            if (_queuedCommands[unit].Count > 0)
+            { 
+                _queuedCommands[unit].RemoveLast();
+            }
+        }
 
         public void Update()
         {
@@ -62,7 +78,6 @@ namespace SuddenAttack.Model
         {
             if (_activeCommand.ContainsKey(command.Unit))
             {
-
                 _activeCommand[command.Unit] = command;
             }
             else
