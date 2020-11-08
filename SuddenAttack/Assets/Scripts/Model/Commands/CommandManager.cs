@@ -35,7 +35,11 @@ namespace SuddenAttack.Model
         public void SetCommand(ICommand command)
         {
             InternalSetCommand(command);
-            _queuedCommands.Clear();
+
+            if (_queuedCommands.ContainsKey(command.Unit))
+            { 
+                _queuedCommands[command.Unit].Clear();
+            }
         }
 
         public void PopQueuedCommand(IUnit unit)
