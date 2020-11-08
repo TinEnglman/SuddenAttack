@@ -82,7 +82,14 @@ namespace SuddenAttack.Controller.FlowController
                     }
                     else
                     {
-                        // add logic for right clicking on a friendly unit
+                        if (_queueActive)
+                        {
+                            _commandController.AddMoveCommand(selectedUnit, mouseWorldPos);
+                        }
+                        else
+                        {
+                            _commandController.SetMoveCommand(selectedUnit, mouseWorldPos);
+                        }
                     }
                 }
                 else
