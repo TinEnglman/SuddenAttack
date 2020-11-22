@@ -66,7 +66,7 @@ namespace SuddenAttack.Controller.FlowController
                 return;
             }
 
-            var attackMoveCommand = _commandFactory.CreateAttackMoveCommand(mobileUnit, destination);
+            var attackMoveCommand = _commandFactory.CreateAttackMoveCommand(mobileUnit, destination, this);
             _commandManager.SetCommand(attackMoveCommand);
         }
 
@@ -78,8 +78,20 @@ namespace SuddenAttack.Controller.FlowController
                 return;
             }
 
-            var attackMoveCommand = _commandFactory.CreateAttackMoveCommand(mobileUnit, destination);
+            var attackMoveCommand = _commandFactory.CreateAttackMoveCommand(mobileUnit, destination, this);
             _commandManager.PushCommand(attackMoveCommand);
+        }
+
+        public void InjectAttackMoveCommand(IUnit unit, Vector2 destination)
+        {
+            IMobileUnit mobileUnit = unit as IMobileUnit;
+            if (mobileUnit == null)
+            {
+                return;
+            }
+
+            var attackMoveCommand = _commandFactory.CreateAttackMoveCommand(mobileUnit, destination, this);
+            _commandManager.InjectCommand(attackMoveCommand);
         }
     }
 }

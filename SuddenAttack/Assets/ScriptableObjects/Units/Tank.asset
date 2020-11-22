@@ -20,5 +20,6 @@ MonoBehaviour:
   MaxHitPoints: 200
   MoveSpeed: 2
   EngageRange: 16
+  SightRange: 30
   BuildDuration: 60
   Cost: 100

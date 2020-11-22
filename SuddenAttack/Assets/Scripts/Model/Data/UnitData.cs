@@ -14,6 +14,7 @@ namespace SuddenAttack.Model.Data
         public float MaxHitPoints;
         public float MoveSpeed;
         public float EngageRange;
+        public float SightRange;
         public int BuildDuration;
         public int Cost;
     }

@@ -9,16 +9,18 @@ namespace SuddenAttack.Model.Commands.Factory
     {
         private BehaviorManager _behaviorManager;
         private CombatManager _combatManager;
+        private UnitManager _untiManager;
 
-        public CommandFactory(BehaviorManager behaviorManager, CombatManager combatManager)
+        public CommandFactory(BehaviorManager behaviorManager, CombatManager combatManager, UnitManager unitManager)
         {
             _behaviorManager = behaviorManager;
             _combatManager = combatManager;
+            _untiManager = unitManager;
         }
 
-        public ICommand CreateAttackMoveCommand(IUnit attacker, Vector2 destination)
+        public ICommand CreateAttackMoveCommand(IUnit attacker, Vector2 destination, CommandController commandController)
         {
-            var command = new AttackMoveCommand(_behaviorManager, _combatManager);
+            var command = new AttackMoveCommand(_behaviorManager, commandController, _untiManager);
             command.Unit = attacker;
             command.Destination = destination;
 

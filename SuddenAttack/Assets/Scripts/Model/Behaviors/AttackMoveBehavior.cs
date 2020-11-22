@@ -1,84 +1,64 @@
-﻿using SuddenAttack.Model.Commands.Factory;
+﻿using SuddenAttack.Controller.FlowController;
 using SuddenAttack.Model.Units;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace SuddenAttack.Model.Behavior
 {
-    public class AttackMoveBehavior : BehaviorBase
+    public class AttackMoveBehavior : MovingBehavior
     {
-        private float SIGHT_RADIUS = 15; // todo add to unit definition
+        private UnitManager _unitManager;
+        private CommandController _commandController;
 
-        private CombatManager _combatManager;
-        private MovingBehavior _movingBehavior;
-        private AttackingBehavior _attackingBehavior;
-
-        public Vector2 Destination { get; set; }
-
-        public AttackMoveBehavior(CombatManager combatManager)
+        public AttackMoveBehavior(CommandController commandController, UnitManager unitManager)
         {
-            _combatManager = combatManager;
+            _commandController = commandController;
+            _unitManager = unitManager;
         }
 
         public override void Update(IUnit unit, float dt)
         {
-            if (_attackingBehavior.Target == null)
-            { 
-                var units = GetTargets(unit.Position, SIGHT_RADIUS);
+            var units = GetTargets((IMobileUnit)unit);
 
-                if (units.Count > 0)
-                {
-                    IUnit target = units[0];
-                    _attackingBehavior.Target = target;
-                    _attackingBehavior.OnBegin(unit);
-                }
-                else
-                {
-                    
-                }
+            if (units.Count > 0)
+            {
+                EngageTarget(unit, units[0]);
             }
             else
             {
-                _movingBehavior.Update(unit, dt);
+                base.Update(unit, dt);
             }
         }
 
         public override void OnBegin(IUnit unit)
         {
-            _movingBehavior = new MovingBehavior();
-            _movingBehavior.Destination = Destination;
-            _attackingBehavior = new AttackingBehavior(_combatManager);
-            _attackingBehavior.Target = null;
+            var units = GetTargets((IMobileUnit)unit);
 
-            var units = GetTargets(unit.Position, SIGHT_RADIUS);
-
-            if (units.Count == 0)
+            if (units.Count > 0)
             {
-                _movingBehavior.OnBegin(unit);
-            }
-            else
-            {
-                IUnit target = units[0];
-                _attackingBehavior.Target = target;
-                _attackingBehavior.OnBegin(unit);
+                EngageTarget(unit, units[0]);
             }
         }
 
         public override void OnEnd(IUnit unit)
         {
-           
         }
 
         public override bool IsFinished(IUnit unit)
         {
-            return false;
+            return base.IsFinished(unit);
         }
 
-        private List<IUnit> GetTargets(Vector2 center, float radius)
+        private List<IUnit> GetTargets(IMobileUnit unti) // todo; get closest
         {
-            return new List<IUnit>(); // todo implement
+            return _unitManager.GetTargets(unti);
+        }
+
+        private void EngageTarget(IUnit unit, IUnit target)
+        {
+            _commandController.SetAttackTargetCommand(unit, target);
+            _commandController.InjectAttackMoveCommand(unit, Destination);
         }
     }
 }

@@ -28,6 +28,10 @@ namespace SuddenAttack.Model.Behavior
                 _combatManager.Damage(unit, Target);
                 _fireCountdoown += unit.WeaponData.WeaponCooldown;
             }
+            else
+            {
+                // add pursuit
+            }
         }
 
         public override void OnBegin(IUnit unit)

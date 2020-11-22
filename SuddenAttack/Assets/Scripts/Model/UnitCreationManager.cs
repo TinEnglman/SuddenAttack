@@ -6,9 +6,9 @@ namespace SuddenAttack.Model
     public class UnitCreationManager
     {
         private Dictionary<IBuilding, UnitCeation> _currentBuildingTime = new Dictionary<IBuilding, UnitCeation>();
-        private GameManager _gameManager;
+        private UnitManager _gameManager;
 
-        public UnitCreationManager(GameManager gameManager)
+        public UnitCreationManager(UnitManager gameManager)
         {
             _gameManager = gameManager;
         }

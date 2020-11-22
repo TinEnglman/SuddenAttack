@@ -6,7 +6,7 @@ using SuddenAttack.Model.Buildings;
 
 namespace SuddenAttack.Model
 {
-    public class GameManager
+    public class UnitManager
     {
         private List<IMobileUnit> _moblieUnits;
         private List<IBuilding> _buildings;
@@ -36,7 +36,7 @@ namespace SuddenAttack.Model
             get { return _buildings; }
         }
 
-        public GameManager()
+        public UnitManager()
         {
             _moblieUnits = new List<IMobileUnit>();
             _buildings = new List<IBuilding>();
@@ -103,7 +103,7 @@ namespace SuddenAttack.Model
             List<IUnit> targets = new List<IUnit>();
             foreach (IUnit unit in _moblieUnits)
             {
-                if (source.Data.EngageRange > (unit.Prefab.transform.position - source.Prefab.transform.position).magnitude)
+                if (source.TeamIndex != unit.TeamIndex && source.Data.EngageRange > (unit.Prefab.transform.position - source.Prefab.transform.position).magnitude)
                 {
                     targets.Add(unit);
                 }

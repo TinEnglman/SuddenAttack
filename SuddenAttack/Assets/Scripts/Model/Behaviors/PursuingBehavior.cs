@@ -19,7 +19,7 @@ namespace SuddenAttack.Model.Behavior
         {
             IMobileUnit pursuingUnit = unit as IMobileUnit;
             Vector2 direction = (PursuedUnit.Position - pursuingUnit.Position).normalized;
-            unit.Position += direction * pursuingUnit.Data.MoveSpeed * dt;
+            pursuingUnit.Position += direction * pursuingUnit.Data.MoveSpeed * dt;
         }
 
         public override void OnBegin(IUnit unit)
@@ -29,7 +29,6 @@ namespace SuddenAttack.Model.Behavior
 
         public override void OnEnd(IUnit unit)
         {
-            //_commandController.SetAttackTargetCommand(unit, PursuedUnit);
         }
 
         public override bool IsFinished(IUnit unit)

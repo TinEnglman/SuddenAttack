@@ -10,7 +10,7 @@ namespace SuddenAttack.Controller.FlowController
 {
     public class LocalPlayerCommandController
     {
-        private GameManager _gameManager;
+        private UnitManager _gameManager;
         private CommandController _commandController;
         private IInputManager _inputManager;
         private SelectionManager _selectionManager;
@@ -19,8 +19,9 @@ namespace SuddenAttack.Controller.FlowController
         private Vector3 _pressedScreenPosition;
 
         private bool _queueActive;
+        private bool _attackMoveActive;
 
-        public LocalPlayerCommandController(GameManager gameManager, CommandController commandController, IInputManager inputManager, SelectionManager selectionManager)
+        public LocalPlayerCommandController(UnitManager gameManager, CommandController commandController, IInputManager inputManager, SelectionManager selectionManager)
         {
             _gameManager = gameManager;
             _commandController = commandController;
@@ -49,6 +50,16 @@ namespace SuddenAttack.Controller.FlowController
             {
                 _queueActive = false;
             }
+
+            if (_inputManager.IsPressed(KeyCode.A))
+            {
+                _attackMoveActive = true;
+            }
+
+            if (_inputManager.IsReleased(KeyCode.A))
+            {
+                _attackMoveActive = false;
+            }
         }
 
         private void OnRightMouseDown()
@@ -66,10 +77,12 @@ namespace SuddenAttack.Controller.FlowController
 
             foreach (IUnit selectedUnit in _selectionManager.GetSelectedUnits())
             {
-                if (target != selectedUnit && target != null)
+                bool hasTarget = target != selectedUnit && target != null;
+                bool isHostile = hasTarget && target.TeamIndex != selectedUnit.TeamIndex;
+
+                if (hasTarget)
                 {
-                    
-                    if (target.TeamIndex != selectedUnit.TeamIndex)
+                    if (isHostile)
                     { 
                         if (_queueActive)
                         {
@@ -80,7 +93,7 @@ namespace SuddenAttack.Controller.FlowController
                             _commandController.SetAttackTargetCommand(selectedUnit, target);
                         }
                     }
-                    else
+                    else // target is friendly
                     {
                         if (_queueActive)
                         {
@@ -92,15 +105,29 @@ namespace SuddenAttack.Controller.FlowController
                         }
                     }
                 }
-                else
+                else // does not have target
                 {
                     if (_queueActive)
                     {
-                        _commandController.AddMoveCommand(selectedUnit, mouseWorldPos);
+                        if (_attackMoveActive)
+                        {
+                            _commandController.AddAttackMoveCommand(selectedUnit, mouseWorldPos);
+                        }
+                        else
+                        { 
+                            _commandController.AddMoveCommand(selectedUnit, mouseWorldPos);
+                        }
                     }
                     else
                     {
-                        _commandController.SetMoveCommand(selectedUnit, mouseWorldPos);
+                        if (_attackMoveActive)
+                        {
+                            _commandController.SetAttackMoveCommand(selectedUnit, mouseWorldPos);
+                        }
+                        else
+                        { 
+                            _commandController.SetMoveCommand(selectedUnit, mouseWorldPos);
+                        }
                     }
                 }
             }

@@ -10,7 +10,7 @@ namespace SuddenAttack.Controller.FlowController
     public class SelectionManager
     {
         private IInputManager _inputManager = default;
-        private GameManager _gameManager = null;
+        private UnitManager _gameManager = null;
 
         private Vector3 _pressedWorldPosition;
         private Vector3 _pressedScreenPosition;
@@ -18,7 +18,7 @@ namespace SuddenAttack.Controller.FlowController
 
         private List<IUnit> _selectedUnits = new List<IUnit>();
 
-        public SelectionManager(GameManager gameManager, IInputManager inputManager)
+        public SelectionManager(UnitManager gameManager, IInputManager inputManager)
         {
             _inputManager = inputManager;
             _gameManager = gameManager;

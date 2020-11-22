@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponId: SniperGun
   WeaponCooldown: 1
-  Damage: 25
+  Damage: 18
   Range: 12
   ProjectileSpeed: 50

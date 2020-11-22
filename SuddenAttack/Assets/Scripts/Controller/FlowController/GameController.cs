@@ -23,14 +23,13 @@ namespace SuddenAttack.Controller.FlowController
 
         private BuildingFactoryManager _buildingFactoryManager;
         private UnitFactoryManager _unitFactoryManager;
-        private GameManager _gameManager;
+        private UnitManager _gameManager;
         private CommandManager _commandManager;
         private CombatManager _combatManager;
         private SelectionManager _selectionManager;
         private UnitCreationManager _unitBuildingManager;
         private BehaviorManager _behaviorManager;
         private LocalPlayerCommandController _localPlayerCommandController;
-        //private ICommandFactory _commandFactory;
         private IInputManager _inputManager;
 
         private float _incomeFrequency = 9;
@@ -39,7 +38,7 @@ namespace SuddenAttack.Controller.FlowController
         private List<IBuilding> _buildings = new List<IBuilding>();
 
         [Inject]
-        public void Construct(BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, GameManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
+        public void Construct(BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, UnitManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
         {
             _buildingFactoryManager = buildingFactoryManager;
             _unitFactoryManager = unitFactoryManager;

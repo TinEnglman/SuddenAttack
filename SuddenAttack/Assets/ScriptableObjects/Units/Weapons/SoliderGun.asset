@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponId: SoliderGun
   WeaponCooldown: 0.2
-  Damage: 59
+  Damage: 6
   Range: 4
-  ProjectileSpeed: 20
+  ProjectileSpeed: 60
