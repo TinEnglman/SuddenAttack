@@ -10,6 +10,7 @@ namespace SuddenAttack.Model.Behavior
     {
         private UnitManager _unitManager;
         private CommandController _commandController;
+        private List<IUnit> _currentTargets;
 
         public AttackMoveBehavior(CommandController commandController, UnitManager unitManager)
         {
@@ -19,11 +20,11 @@ namespace SuddenAttack.Model.Behavior
 
         public override void Update(IUnit unit, float dt)
         {
-            var units = GetTargets((IMobileUnit)unit);
+            RefreshTargets((IMobileUnit)unit);
 
-            if (units.Count > 0)
+            if (_currentTargets.Count > 0)
             {
-                EngageTarget(unit, units[0]);
+                EngageTarget(unit, _currentTargets[0]);
             }
             else
             {
@@ -33,32 +34,33 @@ namespace SuddenAttack.Model.Behavior
 
         public override void OnBegin(IUnit unit)
         {
-            var units = GetTargets((IMobileUnit)unit);
+            RefreshTargets((IMobileUnit)unit);
 
-            if (units.Count > 0)
+            if (_currentTargets.Count > 0)
             {
-                EngageTarget(unit, units[0]);
+                EngageTarget(unit, _currentTargets[0]);
             }
         }
 
         public override void OnEnd(IUnit unit)
         {
+            _currentTargets.Clear();
         }
 
         public override bool IsFinished(IUnit unit)
         {
-            return base.IsFinished(unit);
+            return base.IsFinished(unit) || _currentTargets.Count > 0;
         }
 
-        private List<IUnit> GetTargets(IMobileUnit unti) // todo; get closest
+        private void RefreshTargets(IMobileUnit unti) // todo; get closest
         {
-            return _unitManager.GetTargets(unti);
+            _currentTargets = _unitManager.GetTargets(unti);
         }
 
         private void EngageTarget(IUnit unit, IUnit target)
         {
-            _commandController.SetAttackTargetCommand(unit, target);
             _commandController.InjectAttackMoveCommand(unit, Destination);
+            _commandController.InjectAttackTargetCommand(unit, target);
         }
     }
 }

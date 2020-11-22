@@ -19,7 +19,7 @@ MonoBehaviour:
   DisplayName: Solider
   MaxHitPoints: 30
   MoveSpeed: 0.5
-  EngageRange: 12
-  SightRange: 20
+  EngageRange: 8
+  SightRange: 10
   BuildDuration: 15
   Cost: 10
