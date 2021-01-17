@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9518e75636203df49910379761507015, type: 3}
-  m_Name: Tank
+  m_Name: PanzerTank
   m_EditorClassIdentifier: 
-  UnitId: Tank
-  UnitPrefab: {fileID: 1972366221613630025, guid: 4d5edecda4f52b74fa6a8b0b9543a906,
+  UnitId: Panzer
+  UnitPrefab: {fileID: 292408186634446237, guid: c93089a8f3749e1438708e29ed8be2bf,
     type: 3}
-  PrimaryWeapon: {fileID: 11400000, guid: c05746cb7e9cbea4c8754090963a557e, type: 2}
-  DisplayName: Tank
-  MaxHitPoints: 200
-  MoveSpeed: 2
+  PrimaryWeapon: {fileID: 11400000, guid: f9bffd00b0177004c822e60170a84c35, type: 2}
+  DisplayName: Panzer
+  MaxHitPoints: 180
+  MoveSpeed: 1.8
   EngageRange: 16
-  SightRange: 30
+  SightRange: 20
   BuildDuration: 60
-  Cost: 100
+  Cost: 90

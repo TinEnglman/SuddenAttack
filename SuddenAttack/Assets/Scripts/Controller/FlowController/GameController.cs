@@ -62,8 +62,8 @@ namespace SuddenAttack.Controller.FlowController
         private void SetupLevel()
         {
             var building = _buildingFactoryManager.CreateBuilding(-9, -15, "Barracks", LOCAL_PLAYER_TEAM_INDEX);
-            var unit = _unitFactoryManager.CreateUnit("Solider", - 12, -16, LOCAL_PLAYER_TEAM_INDEX);
-            var unit2 = _unitFactoryManager.CreateUnit("Solider", -16, -16, LOCAL_PLAYER_TEAM_INDEX);
+            var unit = _unitFactoryManager.CreateUnit("Tank", - 12, -16, LOCAL_PLAYER_TEAM_INDEX);
+            var unit2 = _unitFactoryManager.CreateUnit("Panzer", -16, -16, LOCAL_PLAYER_TEAM_INDEX);
 
             var aiBuilding = _buildingFactoryManager.CreateBuilding(-9, -5, "Barracks", PROTOTYPE_AI_TEAM_INDEX);
             var aiUnit = _unitFactoryManager.CreateUnit("Solider", -12, -6, PROTOTYPE_AI_TEAM_INDEX);
