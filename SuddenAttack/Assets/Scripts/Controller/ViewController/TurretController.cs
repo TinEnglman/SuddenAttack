@@ -7,9 +7,9 @@ namespace SuddenAttack.Controller.ViewController
     public class TurretController : MonoBehaviour
     {
         [SerializeField]
-        private Animator _animator = null;
-        [SerializeField]
         private GameObject _target = null;
+        [SerializeField]
+        private OrientationController _orientationController = null;
 
 
         public GameObject Target
@@ -48,7 +48,12 @@ namespace SuddenAttack.Controller.ViewController
             {
                 targetAngle = Vector3.Angle(direction, Vector3.up) * (direction.x / Mathf.Abs(direction.x));
             }
-            _animator.SetFloat("Angle", targetAngle);
+
+            if (_orientationController != null)
+            {
+                _orientationController.SetAngle((int)targetAngle);
+            }
+
         }
     }
 }

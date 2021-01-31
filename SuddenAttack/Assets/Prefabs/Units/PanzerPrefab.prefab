@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 292408185713233921}
-  - component: {fileID: 292408185713233923}
   - component: {fileID: 292408185713233920}
   m_Layer: 0
   m_Name: Tank
@@ -33,25 +32,6 @@ Transform:
   m_Father: {fileID: 292408186634446236}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &292408185713233923
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292408185713233950}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 73f1ea8f69d265d49b9212c81444c58a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &292408185713233920
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,6 +93,7 @@ GameObject:
   - component: {fileID: 8518689230287832408}
   - component: {fileID: 4189444134270396877}
   - component: {fileID: 5543594558229144244}
+  - component: {fileID: 8104824234651595625}
   m_Layer: 0
   m_Name: PanzerPrefab
   m_TagString: Untagged
@@ -152,9 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentAngle: 0
-  _animator: {fileID: 292408185713233923}
   _heltBarOverlay: {fileID: 3315404516479134939}
   _defaultTarget: {fileID: 2394522330800449309}
+  _orientationController: {fileID: 8104824234651595625}
 --- !u!114 &8518689230287832408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +192,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8104824234651595625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292408186634446237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46f63b6461ba048b3b02eabcbf3a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orientationTextures:
+  - {fileID: 21300000, guid: 47c09170d2e8acd4684934e148742d3e, type: 3}
+  - {fileID: 21300000, guid: a2007b7e36e40aa47ba8f583c5e9039d, type: 3}
+  - {fileID: 21300000, guid: 871c8d290188dba4ea3895284d95f897, type: 3}
+  - {fileID: 21300000, guid: c476b4aa8cb4698458e2081fd54856a4, type: 3}
+  - {fileID: 21300000, guid: a911c0273107ff14d9943583d05c9bba, type: 3}
+  - {fileID: 21300000, guid: 56464102df29ab746b183966a471dfdb, type: 3}
+  - {fileID: 21300000, guid: aaba5b16949c89b4984c00dff8b19c52, type: 3}
+  - {fileID: 21300000, guid: d232174fcc5d0b148a878180e79bc476, type: 3}
+  _spriteRenrerer: {fileID: 292408185713233920}
 --- !u!1 &2394522330800449309
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,9 +505,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6955595597506168219}
-  - component: {fileID: 5800597123376518569}
   - component: {fileID: 2587625662990527827}
   - component: {fileID: 1580154317030509436}
+  - component: {fileID: 5130835554122889779}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -520,31 +523,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8978656725573565892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.001, y: 0.124, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 292408185713233921}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5800597123376518569
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978656725573565892}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 15ad23b79abdf4a49b25cdcd401ae76d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &2587625662990527827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -582,8 +566,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -1856096926779576650, guid: 864b731fd47ec014e936c443c7e1f36c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 702672d10139359448e62fde420f5903, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -606,5 +589,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc0af70ab48cf8458a705096fff5511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 5800597123376518569}
   _target: {fileID: 0}
+  _orientationController: {fileID: 5130835554122889779}
+--- !u!114 &5130835554122889779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978656725573565892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46f63b6461ba048b3b02eabcbf3a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orientationTextures:
+  - {fileID: 21300000, guid: 702672d10139359448e62fde420f5903, type: 3}
+  - {fileID: 21300000, guid: 2987fa6d8839f8148b25064a9cb4c3ac, type: 3}
+  - {fileID: 21300000, guid: dd70fa09444f9e74b96a237165242351, type: 3}
+  - {fileID: 21300000, guid: 1288e567cf769ec4a82345b707cc9ced, type: 3}
+  - {fileID: 21300000, guid: 6ff7cf93ce020c647ae98b0f9322ad77, type: 3}
+  - {fileID: 21300000, guid: 220ec943a1bd65843b9c7458370dd47e, type: 3}
+  - {fileID: 21300000, guid: 2d1ae73c6c8de1648b9951a6491f76a2, type: 3}
+  - {fileID: 21300000, guid: a566d0b7cbc8a0046bbe8eb415de14db, type: 3}
+  _spriteRenrerer: {fileID: 2587625662990527827}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8204186928970408302}
   - component: {fileID: 3951679374579470159}
   - component: {fileID: 7240558112673024141}
+  - component: {fileID: 2689158609540992491}
   m_Layer: 0
   m_Name: SoliderPrefab
   m_TagString: Untagged
@@ -50,10 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentAngle: 0
-  _animator: {fileID: 968037871999468779}
-  _destination: {x: 0, y: 0, z: 0}
-  _moveSpeed: 0.5
   _heltBarOverlay: {fileID: 1819126841520967725}
+  _defaultTarget: {fileID: 0}
+  _orientationController: {fileID: 2689158609540992491}
 --- !u!114 &3951679374579470159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +94,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &2689158609540992491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968037871566619523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46f63b6461ba048b3b02eabcbf3a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orientationTextures:
+  - {fileID: 6131125475232007207, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: -1303616962300165533, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: 3409067591249154617, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: 3528675646452708837, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: -8515646980160512811, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: -6811484690315536002, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: -116218397964887491, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  - {fileID: 9058954962292213522, guid: c0a33098361d36a4a97731e4da204f81, type: 3}
+  _spriteRenrerer: {fileID: 968037871999468776}
 --- !u!1 &968037871999468778
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +126,6 @@ GameObject:
   m_Component:
   - component: {fileID: 968037871999468777}
   - component: {fileID: 968037871999468776}
-  - component: {fileID: 968037871999468779}
   - component: {fileID: 2764787134646704582}
   m_Layer: 0
   m_Name: Solider
@@ -176,25 +197,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &968037871999468779
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968037871999468778}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 98258476cd040f44b82a65c2677e625d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2764787134646704582
 MonoBehaviour:
   m_ObjectHideFlags: 0

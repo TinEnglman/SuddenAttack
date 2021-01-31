@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1972366220927383509}
-  - component: {fileID: 1972366220927383511}
   - component: {fileID: 1972366220927383508}
   m_Layer: 0
   m_Name: Tank
@@ -33,25 +32,6 @@ Transform:
   m_Father: {fileID: 1972366221613630024}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1972366220927383511
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972366220927383498}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6998725cb3e2e2846b6dc8763ed7e6e2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1972366220927383508
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,8 +93,9 @@ GameObject:
   - component: {fileID: 7595850367749923468}
   - component: {fileID: 2698344664314301977}
   - component: {fileID: 6034642027797857632}
+  - component: {fileID: 8964789810091190771}
   m_Layer: 0
-  m_Name: TankPrefab
+  m_Name: TigerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,11 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentAngle: 0
-  _animator: {fileID: 1972366220927383511}
-  _destination: {x: 0, y: 0, z: 0}
-  _moveSpeed: 1
   _heltBarOverlay: {fileID: 3554248049749871375}
   _defaultTarget: {fileID: 4497576834150973641}
+  _orientationController: {fileID: 8964789810091190771}
 --- !u!114 &7595850367749923468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +192,32 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8964789810091190771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972366221613630025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46f63b6461ba048b3b02eabcbf3a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orientationTextures:
+  - {fileID: 939135229741216776, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: 3546797606076038697, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -725067964382553908, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -1733265685184569640, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -6906423393564937968, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: 3820642845388354355, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: 2022083201632163786, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -2847697472346216393, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -8435117470952187181, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -8839976141019992894, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -8721156212886635549, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  - {fileID: -7619486344110509346, guid: a0fd1c3502e2dda4999b0c8b6bb8589e, type: 3}
+  _spriteRenrerer: {fileID: 1972366220927383508}
 --- !u!1 &2668402403623175250
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,9 +509,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9211737302724895311}
-  - component: {fileID: 5705580565491823229}
   - component: {fileID: 4375388626112842375}
   - component: {fileID: 773566800727567528}
+  - component: {fileID: 268287162504879750}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -528,25 +533,6 @@ Transform:
   m_Father: {fileID: 1972366220927383509}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5705580565491823229
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7190858453457984016}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5ef6140069d42d84398695f472784f5c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &4375388626112842375
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -608,5 +594,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc0af70ab48cf8458a705096fff5511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 5705580565491823229}
   _target: {fileID: 0}
+  _orientationController: {fileID: 268287162504879750}
+--- !u!114 &268287162504879750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7190858453457984016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46f63b6461ba048b3b02eabcbf3a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orientationTextures:
+  - {fileID: -1856096926779576650, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: -8646502552858728767, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 7711115232500897471, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 1984146018248486583, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 3920607022900217437, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 261517686437818026, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: -8341566804655970775, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: -805468815952381086, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 1607318764675371288, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 2454534797712221339, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: -2173252264599876801, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  - {fileID: 6286876289138225520, guid: 864b731fd47ec014e936c443c7e1f36c, type: 3}
+  _spriteRenrerer: {fileID: 4375388626112842375}

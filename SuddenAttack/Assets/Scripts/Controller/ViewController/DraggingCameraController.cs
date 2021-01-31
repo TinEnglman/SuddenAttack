@@ -18,9 +18,9 @@ namespace SuddenAttack.Controller.ViewController
         [SerializeField]
         private float _edgePadding = 10.0f;
         [SerializeField]
-        private Vector3 _cameraPositionMin = new Vector3(-20, 7, -30);
+        private Vector3 _cameraPositionMin = new Vector3(-20, 7, -20);
         [SerializeField]
-        private Vector3 _cameraPositionMax = new Vector3(20, -31, -30);
+        private Vector3 _cameraPositionMax = new Vector3(20, -31, -20);
 
         private Camera _camera;
         private PixelPerfectCamera _pixelPerfectComponent;

@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using SuddenAttack.Gui;
 using SuddenAttack.Model.Units;
+using System.Collections.Generic;
 
 namespace SuddenAttack.Controller.ViewController
 {
     public class UnitController : MonoBehaviour // move moving to behavior
     {
-
         [SerializeField]
         private float _currentAngle = 0f;
         [SerializeField]
-        private Animator _animator = null;
+        private GameObject _heltBarOverlay = default;
         [SerializeField]
-        private GameObject _heltBarOverlay = null;
+        private GameObject _defaultTarget = default; // revisit; unised by solider; refactor
         [SerializeField]
-        private GameObject _defaultTarget = null; // revisit; unised by solider; refactor
+        private OrientationController _orientationController = default;
 
         private SelectionCircleController _selectionCircleController = null;
+
         private bool _isMoving = false;
         private float _currentHelth = 1;
         private float _maxScale = default;
@@ -54,11 +55,22 @@ namespace SuddenAttack.Controller.ViewController
             _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
         }
 
+        private void SetAngle(float angle)
+        {
+
+        }
+
         private void Update()
         {
             float newScale = _currentHelth * _maxScale;
             _heltBarOverlay.transform.localScale = new Vector3(newScale, _maxScale, _maxScale);
-            _animator.SetFloat("Angle", _currentAngle);
+
+            if (_orientationController != null)
+            { 
+                _orientationController.SetAngle((int)_currentAngle);
+            }
+
+
             Vector2 currentPosition = Vector2.one * transform.position;
 
             if (Unit.Position != currentPosition)
