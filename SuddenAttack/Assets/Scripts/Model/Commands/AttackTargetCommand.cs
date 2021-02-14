@@ -19,6 +19,11 @@ namespace SuddenAttack.Model.Commands
 
         public override void Execute()
         {
+            if (Target.HitPoints <= 0)
+            {
+                return;
+            }
+
             float distance = (Unit.Prefab.transform.position - Target.Prefab.transform.position).magnitude;
 
             if (distance > Unit.WeaponData.Range)

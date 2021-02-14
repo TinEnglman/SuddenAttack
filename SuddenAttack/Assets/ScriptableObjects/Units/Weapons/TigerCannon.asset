@@ -15,5 +15,5 @@ MonoBehaviour:
   WeaponId: TigerCannon
   WeaponCooldown: 4
   Damage: 90
-  Range: 12
+  Range: 6
   ProjectileSpeed: 12

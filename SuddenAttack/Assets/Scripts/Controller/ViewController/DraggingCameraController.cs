@@ -11,16 +11,12 @@ namespace SuddenAttack.Controller.ViewController
         //private int DEFAULT_SCREEN_Y = 1080;
         //private int PIXELS_PER_UNIT = 100;
 
-        [SerializeField]
         private bool _lockCamera = false;
-        [SerializeField]
-        private float _cameraSpeed = 1.0f;
-        [SerializeField]
+        private float _cameraSpeed = 0.15f;
         private float _edgePadding = 10.0f;
-        [SerializeField]
-        private Vector3 _cameraPositionMin = new Vector3(-20, 7, -20);
-        [SerializeField]
-        private Vector3 _cameraPositionMax = new Vector3(20, -31, -20);
+        private Vector3 _cameraPositionMin = new Vector3(-20, 7, 0);
+        private Vector3 _cameraPositionMax = new Vector3(20, -31, 0);
+        private float _cameraSize = 3.5f;
 
         private Camera _camera;
         private PixelPerfectCamera _pixelPerfectComponent;
@@ -31,6 +27,7 @@ namespace SuddenAttack.Controller.ViewController
         void Awake()
         {
             _currentDirectionVector = Vector3.zero;
+            _camera.orthographicSize = _cameraSize;
 
             /*
             _pixelPerfectComponent = gameObject.AddComponent<PixelPerfectCamera>();
@@ -51,17 +48,11 @@ namespace SuddenAttack.Controller.ViewController
             _camera = camera;
         }
 
-
         void Update()
         {
-            if (_inputManager.IsPressed(KeyCode.A))
+            if (_inputManager.IsPressed(KeyCode.L))
             {
-                _lockCamera = true;
-            }
-
-            if (_inputManager.IsPressed(KeyCode.B))
-            {
-                _lockCamera = false;
+                _lockCamera = !_lockCamera;
             }
 
             if (_inputManager.IsPressed(KeyCode.KeypadMinus))

@@ -15,5 +15,5 @@ MonoBehaviour:
   WeaponId: SniperGun
   WeaponCooldown: 1
   Damage: 18
-  Range: 12
+  Range: 7
   ProjectileSpeed: 50

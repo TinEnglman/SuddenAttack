@@ -55,11 +55,6 @@ namespace SuddenAttack.Controller.FlowController
             {
                 _attackMoveActive = true;
             }
-
-            if (_inputManager.IsReleased(KeyCode.A))
-            {
-                _attackMoveActive = false;
-            }
         }
 
         private void OnRightMouseDown()

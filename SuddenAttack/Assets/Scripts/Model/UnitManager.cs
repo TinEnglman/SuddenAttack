@@ -103,7 +103,7 @@ namespace SuddenAttack.Model
             List<IUnit> targets = new List<IUnit>();
             foreach (IUnit unit in _moblieUnits)
             {
-                if (source.TeamIndex != unit.TeamIndex && source.Data.EngageRange > (unit.Prefab.transform.position - source.Prefab.transform.position).magnitude)
+                if (source.HitPoints > 0 && source.TeamIndex != unit.TeamIndex && source.Data.EngageRange > (unit.Prefab.transform.position - source.Prefab.transform.position).magnitude)
                 {
                     targets.Add(unit);
                 }

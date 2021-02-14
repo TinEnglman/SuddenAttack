@@ -15,5 +15,5 @@ MonoBehaviour:
   WeaponId: 
   WeaponCooldown: 3
   Damage: 60
-  Range: 10
+  Range: 5
   ProjectileSpeed: 10

@@ -15,5 +15,5 @@ MonoBehaviour:
   WeaponId: SoliderGun
   WeaponCooldown: 0.2
   Damage: 6
-  Range: 4
+  Range: 3
   ProjectileSpeed: 60
