@@ -19,7 +19,6 @@ namespace SuddenAttack.Controller.ViewController
         private SelectionCircleController _selectionCircleController = null;
 
         private bool _isMoving = false;
-        private float _currentHelth = 1;
         private float _maxScale = default;
 
         public IMobileUnit Unit { get; set; }
@@ -32,11 +31,6 @@ namespace SuddenAttack.Controller.ViewController
         public bool IsMoving
         {
             get { return _isMoving; }
-        }
-
-        public float CurrentHelth
-        {
-            set { _currentHelth = value; }
         }
 
         public void Select()
@@ -62,7 +56,7 @@ namespace SuddenAttack.Controller.ViewController
 
         private void Update()
         {
-            float newScale = _currentHelth * _maxScale;
+            float newScale = (Unit.HitPoints / Unit.Data.MaxHitPoints) * _maxScale;
             _heltBarOverlay.transform.localScale = new Vector3(newScale, _maxScale, _maxScale);
 
             if (_orientationController != null)

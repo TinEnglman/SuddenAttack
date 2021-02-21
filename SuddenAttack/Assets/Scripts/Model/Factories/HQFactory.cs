@@ -1,4 +1,5 @@
-﻿using SuddenAttack.Model.Buildings;
+﻿using SuddenAttack.Controller.ViewController;
+using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Data;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace SuddenAttack.Model.Factories
             headQuarters.TeamIndex = teamIndex;
             headQuarters.Prefab.transform.SetPositionAndRotation(position, headQuarters.Prefab.transform.rotation);
             headQuarters.Position = position;
+            var unitController = headQuarters.Prefab.GetComponent<BuildingController>();
+            unitController.Building = headQuarters;
 
             return headQuarters;
         }

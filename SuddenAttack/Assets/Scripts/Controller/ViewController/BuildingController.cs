@@ -7,9 +7,10 @@ namespace SuddenAttack.Controller.ViewController
     public class BuildingController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _heltBarOverlay = null;
-        private SelectionCircleController _selectionCircleController = null;
-        private float _currentHealth = 1;
+        private GameObject _heltBarOverlay = default;
+
+        private SelectionCircleController _selectionCircleController;
+        private float _maxScale;
 
         public IBuilding Building { get; set; }
 
@@ -23,23 +24,16 @@ namespace SuddenAttack.Controller.ViewController
             _selectionCircleController.Deselectct();
         }
 
-        public float CurrentHelth
-        {
-            set { _currentHealth = value; }
-        }
-
         private void Awake()
         {
+            _maxScale = _heltBarOverlay.transform.localScale.x;
             _selectionCircleController = GetComponentInChildren<SelectionCircleController>(); // create dependency
         }
 
         private void Update()
         {
-            var originalScale = _heltBarOverlay.transform.localScale;
-
-            float maxScale = 1f;
-            float newScale = _currentHealth * maxScale;
-            _heltBarOverlay.transform.localScale = new Vector3(newScale, maxScale, maxScale);
+            float newScale = (Building.HitPoints / Building.BuildingData.MaxHitPoints) * _maxScale;
+            _heltBarOverlay.transform.localScale = new Vector3(newScale, _maxScale, _maxScale);
         }
     }
 }

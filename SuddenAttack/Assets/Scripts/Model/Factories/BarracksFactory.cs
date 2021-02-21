@@ -1,4 +1,5 @@
-﻿using SuddenAttack.Model.Buildings;
+﻿using SuddenAttack.Controller.ViewController;
+using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Data;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace SuddenAttack.Model.Factories
             barracks.TeamIndex = teamIndex;
             barracks.Prefab.transform.SetPositionAndRotation(position, barracks.Prefab.transform.rotation);
             barracks.Position = position;
+            var unitController = barracks.Prefab.GetComponent<BuildingController>();
+            unitController.Building = barracks;
 
             return barracks;
         }
