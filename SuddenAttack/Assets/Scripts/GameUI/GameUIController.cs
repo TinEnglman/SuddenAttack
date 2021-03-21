@@ -20,10 +20,6 @@ namespace SuddenAttack.Controller.GameUI
         private TextMeshProUGUI _foundLabel = null;
         [SerializeField]
         private TextMeshProUGUI _unitNameLabel = null;
-        [SerializeField]
-        private Button _buildButton = null;
-        [SerializeField]
-        private Slider _completedSlider = null;
 
         private IInputManager _inputManager = default;
         private SelectionManager _selectionManager = default;
@@ -45,7 +41,7 @@ namespace SuddenAttack.Controller.GameUI
 
         private void Awake()
         {
-            _buildButton.onClick.AddListener(OnBuildButton);
+            //_buildButton.onClick.AddListener(OnBuildButton);
             HideBuildingUI();
             _drawSelecionBox = false;
             _boxSelectionTexture = new Texture2D(1, 1);
@@ -89,6 +85,7 @@ namespace SuddenAttack.Controller.GameUI
 
             _foundLabel.text = "Funds: " + _gameManager.Funds + " $"; // playerManager
 
+            /*
             if (_selectionManager.GetSelectedBuildings().Count == 1)
             {
                 var selectedBuilding = _selectionManager.GetSelectedBuildings()[0];
@@ -101,6 +98,7 @@ namespace SuddenAttack.Controller.GameUI
             {
                 HideBuildingUI();
             }
+            */
         }
 
         private void RefreshBuildingUI(IBuilding building)
@@ -111,15 +109,15 @@ namespace SuddenAttack.Controller.GameUI
 
         private void ShowBuildingUI()
         {
-            _completedSlider.gameObject.SetActive(true);
-            _buildButton.gameObject.SetActive(true);
+            //_completedSlider.gameObject.SetActive(true);
+            //_buildButton.gameObject.SetActive(true);
             _unitNameLabel.gameObject.SetActive(true);
         }
 
         private void HideBuildingUI()
         {
-            _completedSlider.gameObject.SetActive(false);
-            _buildButton.gameObject.SetActive(false);
+            //_completedSlider.gameObject.SetActive(false);
+            //_buildButton.gameObject.SetActive(false);
             _unitNameLabel.gameObject.SetActive(false);
         }
 

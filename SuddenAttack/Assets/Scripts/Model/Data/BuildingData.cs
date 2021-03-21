@@ -14,5 +14,6 @@ namespace SuddenAttack.Model.Data
         public float MaxHitPoints;
         public int BuildDuration;
         public int Cost;
+        public List<UnitData> BuildableUnitList;
     }
 }

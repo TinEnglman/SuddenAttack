@@ -18,5 +18,8 @@ MonoBehaviour:
   PrimaryWeapon: {fileID: 0}
   DisplayName: Barracks
   MaxHitPoints: 1000
-  BuildDuration: 120
+  BuildDuration: 15
   Cost: 150
+  BuildableUnitList:
+  - {fileID: 11400000, guid: 6fccd57eed03b8e49a995e44eaa4adcc, type: 2}
+  - {fileID: 11400000, guid: 60c9f58486b4c9b4baf78cc52b88e62f, type: 2}

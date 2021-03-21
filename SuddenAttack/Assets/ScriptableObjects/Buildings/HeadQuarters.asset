@@ -18,5 +18,8 @@ MonoBehaviour:
   PrimaryWeapon: {fileID: 0}
   DisplayName: Head Quarters
   MaxHitPoints: 2000
-  BuildDuration: 180
+  BuildDuration: 30
   Cost: 300
+  BuildableUnitList:
+  - {fileID: 11400000, guid: b31fb310fc1bc9b4495c90bc6c5ffb4b, type: 2}
+  - {fileID: 11400000, guid: fd6796ebe934805498aba0a2aa18b3d8, type: 2}
