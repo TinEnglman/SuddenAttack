@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using SuddenAttack.Model.Buildings;
-using SuddenAttack.Gui;
+using SuddenAttack.GameUI;
 
 namespace SuddenAttack.Controller.ViewController
 {

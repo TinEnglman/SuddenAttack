@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace SuddenAttack.Ui.Menu
+namespace SuddenAttack.GameUI.Menu
 {
     public class MainMenuController : MonoBehaviour
     {

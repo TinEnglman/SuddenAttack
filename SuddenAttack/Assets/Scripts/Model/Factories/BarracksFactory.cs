@@ -25,7 +25,7 @@ namespace SuddenAttack.Model.Factories
                 Prefab = Object.Instantiate(_buildingData.BuildingPrefab) // todo: add unit transform
             };
 
-
+          
             barracks.TeamIndex = teamIndex;
             barracks.Prefab.transform.SetPositionAndRotation(position, barracks.Prefab.transform.rotation);
             barracks.Position = position;

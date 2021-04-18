@@ -4,6 +4,7 @@ using Zenject;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Controller.FlowController;
 using SuddenAttack.Model.Behavior;
+using SuddenAttack.GameUI;
 
 namespace SuddenAttack.Model
 {
@@ -19,6 +20,8 @@ namespace SuddenAttack.Model
 
             Container.Bind<BuildingFactoryManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<UnitFactoryManager>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle();
+
             Container.Bind<UnitCreationManager>().To<UnitCreationManager>().AsSingle();
             Container.Bind<UnitManager>().To<UnitManager>().AsSingle();
             Container.Bind<SelectionManager>().To<SelectionManager>().AsSingle();

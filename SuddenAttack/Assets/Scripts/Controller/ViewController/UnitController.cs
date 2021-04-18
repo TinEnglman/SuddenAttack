@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using SuddenAttack.Gui;
+using SuddenAttack.GameUI;
 using SuddenAttack.Model.Units;
-using System.Collections.Generic;
 
 namespace SuddenAttack.Controller.ViewController
 {

@@ -9,7 +9,7 @@ using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Commands.Factory;
 using SuddenAttack.Model.Units;
-using SuddenAttack.Ui.Menu;
+using SuddenAttack.GameUI.Menu;
 using SuddenAttack.Controller.ViewController;
 using SuddenAttack.Model.Data;
 using SuddenAttack.Model.Behavior;
@@ -62,6 +62,7 @@ namespace SuddenAttack.Controller.FlowController
         private void SetupLevel()
         {
             var building = _buildingFactoryManager.CreateBuilding(-9, -15, "Barracks", LOCAL_PLAYER_TEAM_INDEX);
+            var building2 = _buildingFactoryManager.CreateBuilding(-4, -15, "HQ", LOCAL_PLAYER_TEAM_INDEX);
             var unit = _unitFactoryManager.CreateUnit("Tank", - 12, -16, LOCAL_PLAYER_TEAM_INDEX);
             var unit2 = _unitFactoryManager.CreateUnit("Panzer", -16, -16, LOCAL_PLAYER_TEAM_INDEX);
             var unit3 = _unitFactoryManager.CreateUnit("Solider", -18, -16, LOCAL_PLAYER_TEAM_INDEX);
@@ -71,6 +72,7 @@ namespace SuddenAttack.Controller.FlowController
             var aiUnit2 = _unitFactoryManager.CreateUnit("Solider", -16, -6, PROTOTYPE_AI_TEAM_INDEX);
 
             _gameManager.AddBuilding(building);
+            _gameManager.AddBuilding(building2);
             _gameManager.AddMobileUnit(unit);
             _gameManager.AddMobileUnit(unit2);
             _gameManager.AddMobileUnit(unit3);

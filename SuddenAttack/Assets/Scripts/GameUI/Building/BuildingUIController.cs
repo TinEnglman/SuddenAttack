@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SuddenAttack.Controller.GameUI
+namespace SuddenAttack.GameUI
 {
     public class BuildingUIController : MonoBehaviour
     {

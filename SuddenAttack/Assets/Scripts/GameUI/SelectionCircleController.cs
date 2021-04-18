@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SuddenAttack.Gui
+namespace SuddenAttack.GameUI
 {
     public class SelectionCircleController : MonoBehaviour
     {

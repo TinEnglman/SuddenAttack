@@ -1,6 +1,6 @@
 ﻿using SuddenAttack.Controller.FlowController;
 using SuddenAttack.Model;
-using SuddenAttack.Ui.Menu;
+using SuddenAttack.GameUI.Menu;
 using SuddenAttack.Model.Buildings;
 using System.Collections.Generic;
 using TMPro;
@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace SuddenAttack.Controller.GameUI
+namespace SuddenAttack.GameUI
 {
 
     public class GameUIController : MonoBehaviour

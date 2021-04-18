@@ -24,8 +24,6 @@ namespace SuddenAttack.Model.Buildings
         protected IUnitFactory _unitFactory; // refactor?
         //protected List<DelayedDamage> _receavedDamage = new List<DelayedDamage>(); // refactor
 
-        public List<string> UnitIds { get { return _unitIds;  } set { _unitIds = value; } }
-
         public AbstractBuilding()
         {
             SpawnOffset = new Vector3(1, 1, 0);

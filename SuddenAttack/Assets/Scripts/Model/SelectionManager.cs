@@ -1,4 +1,5 @@
-﻿using SuddenAttack.Model;
+﻿using SuddenAttack.GameUI;
+using SuddenAttack.Model;
 using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Units;
 using System.Collections.Generic;
@@ -9,8 +10,9 @@ namespace SuddenAttack.Controller.FlowController
 { 
     public class SelectionManager
     {
-        private IInputManager _inputManager = default;
-        private UnitManager _gameManager = null;
+        private IInputManager _inputManager;
+        private UnitManager _gameManager;
+        private UIManager _uiManager;
 
         private Vector3 _pressedWorldPosition;
         private Vector3 _pressedScreenPosition;
@@ -18,10 +20,11 @@ namespace SuddenAttack.Controller.FlowController
 
         private List<IUnit> _selectedUnits = new List<IUnit>();
 
-        public SelectionManager(UnitManager gameManager, IInputManager inputManager)
+        public SelectionManager(UnitManager gameManager, IInputManager inputManager, UIManager uiManager)
         {
             _inputManager = inputManager;
             _gameManager = gameManager;
+            _uiManager = uiManager;
             _localPlayerTeamIndex = 0;
         }
 
@@ -104,6 +107,8 @@ namespace SuddenAttack.Controller.FlowController
         {
             unit.Select();
             _selectedUnits.Add(unit);
+            _uiManager.InGameUIController.SelectedUnit = unit;
+            _uiManager.InGameUIController.Refresh();
         }
 
         private void DeselectUnits()
@@ -113,6 +118,8 @@ namespace SuddenAttack.Controller.FlowController
                 unit.Deselect();
             }
             _selectedUnits.Clear();
+            _uiManager.InGameUIController.SelectedUnit = null;
+            _uiManager.InGameUIController.Refresh();
         }
     }
 }

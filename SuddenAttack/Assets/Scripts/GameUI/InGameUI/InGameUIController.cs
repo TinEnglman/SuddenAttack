@@ -8,16 +8,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace SuddenAttack.Controller.GameUI
+namespace SuddenAttack.GameUI
 {
     public class InGameUIController : MonoBehaviour
     {
         [SerializeField]
-        private List<Button> _gridButtons;
+        private List<Button> _gridButtons = new List<Button>();
         [SerializeField]
-        private TextMeshProUGUI _foundLabel = null;
+        private TextMeshProUGUI _foundLabel = default;
         [SerializeField]
-        private TextMeshProUGUI _unitNameLabel = null;
+        private TextMeshProUGUI _unitNameLabel = default;
 
         private UnitCreationManager _unitCreationManager;
         private UnitManager _unitManager;
@@ -41,12 +41,13 @@ namespace SuddenAttack.Controller.GameUI
             var selectedBuilding = SelectedUnit as IBuilding;
             if (selectedBuilding != null)
             {
-                var unitsId = selectedBuilding.UnitIds;
+                var unitsId = selectedBuilding.BuildingData.BuildableUnitList;
                 int i = 0;
-                foreach (var id in unitsId)
+                foreach (var unitData in unitsId)
                 {
-                    _gridButtons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = id;
+                    _gridButtons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = unitData.DisplayName;
                     _gridButtons[i].gameObject.SetActive(true);
+                    i++;
                 }
             }
 

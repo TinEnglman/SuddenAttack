@@ -14,7 +14,7 @@ namespace SuddenAttack.Model.Buildings
         Vector2 SpawnOffset { get; set; }
         //bool IsSpawning { get; set; }
 
-        List<string> UnitIds { get; set; }
+        //List<string> UnitIds { get; set; }
         //void SetFactory(IUnitFactory factory);
         //IUnitFactory GetFactory();
         //float GetCompletePercent(); // refactor: Create "BuilingManager" or "ProductionManager"
