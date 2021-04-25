@@ -7,44 +7,24 @@ using UnityEngine;
 
 namespace SuddenAttack.Model.Factories
 {
-    public class SniperFactory : IUnitFactory
+    public class SniperFactory : UnitFactoryBase
     {
-        private UnitData _unitData;
-
         public SniperFactory(UnitData unitData)
         {
             _unitData = unitData;
         }
 
-        public IMobileUnit CreateUnit(float x, float y, int teamIndex)
+        protected override IMobileUnit CreateUnitInternal(UnitData unitData, Transform parentTransform)
         {
-            Vector3 position = new Vector3(x, y, 0);
-
-            var sniper = new Sniper(_unitData)
+            var sniper = new Solider(_unitData)
             {
-                Prefab = Object.Instantiate(_unitData.UnitPrefab) // todo: add unit transform
+                Prefab = Object.Instantiate(_unitData.UnitPrefab, parentTransform)
             };
 
-
-            sniper.Position = position;
-            sniper.TeamIndex = teamIndex;
-            sniper.WeaponData = _unitData.PrimaryWeapon; // need base class
-            sniper.HitPoints = _unitData.MaxHitPoints;
-            sniper.Prefab.transform.SetPositionAndRotation(position, sniper.Prefab.transform.rotation);
             var unitController = sniper.Prefab.GetComponent<UnitController>();
             unitController.Unit = sniper;
 
             return sniper;
-        }
-
-        public string GetDisplayName()
-        {
-            return _unitData.DisplayName; // refactor
-        }
-
-        public int GetCost() // refactor
-        {
-            return _unitData.Cost;
         }
     }
 }

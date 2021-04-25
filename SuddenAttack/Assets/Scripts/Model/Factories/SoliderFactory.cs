@@ -7,43 +7,25 @@ using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Model.Factories
 {
-    public class SoliderFactory : IUnitFactory
+    public class SoliderFactory : UnitFactoryBase
     {
-        private UnitData _unitData;
-
         public SoliderFactory(UnitData unitData)
         {
             _unitData = unitData;
         }
 
-        public IMobileUnit CreateUnit(float x, float y, int teamIndex)
+        protected override IMobileUnit CreateUnitInternal(UnitData unitData, Transform parentTransform)
         {
-            Vector3 position = new Vector3(x, y, 0);
-
             var solider = new Solider(_unitData)
             {
-                Prefab = Object.Instantiate(_unitData.UnitPrefab) // todo: add unit transform
+                Prefab = Object.Instantiate(_unitData.UnitPrefab, parentTransform)
             };
 
-            solider.Position = position;
-            solider.TeamIndex = teamIndex;
-            solider.WeaponData = _unitData.PrimaryWeapon;
-            solider.HitPoints = _unitData.MaxHitPoints;
-            solider.Prefab.transform.SetPositionAndRotation(position, solider.Prefab.transform.rotation);
+    
             var unitController = solider.Prefab.GetComponent<UnitController>();
             unitController.Unit = solider;
 
             return solider;
-        }
-
-        public string GetDisplayName()
-        {
-            return _unitData.DisplayName; // refactor
-        }
-
-        public int GetCost() // refactor
-        {
-            return _unitData.Cost;
         }
     }
 }

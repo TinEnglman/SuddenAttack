@@ -16,13 +16,13 @@ namespace SuddenAttack.Model.Factories
             _buildingData = buindingData;
         }
 
-        public IBuilding CreateBuilding(float x, float y, int teamIndex)
+        public IBuilding CreateBuilding(float x, float y, int teamIndex, Transform parentTransform)
         {
             Vector3 position = new Vector3(x, y, 0);
 
             var barracks = new Barracks(_buildingData)
             {
-                Prefab = Object.Instantiate(_buildingData.BuildingPrefab) // todo: add unit transform
+                Prefab = Object.Instantiate(_buildingData.BuildingPrefab, parentTransform) // todo: add unit transform
             };
 
           

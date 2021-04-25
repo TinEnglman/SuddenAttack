@@ -26043,6 +26043,18 @@ Transform:
   m_Father: {fileID: 153938405}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &308722972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6818838358296631912, guid: f5736736d1b48cd4498eca5644ff213f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3986588804989817595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be1f3c919f04ce45a8cba84d921fb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &542103542
 GameObject:
   m_ObjectHideFlags: 0
@@ -31164,7 +31176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -31266,7 +31278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1343750182}
   - component: {fileID: 1343750183}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31899,6 +31911,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3986588804366266613, guid: f5736736d1b48cd4498eca5644ff213f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3986588804366266612, guid: f5736736d1b48cd4498eca5644ff213f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32159,6 +32176,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b31fb310fc1bc9b4495c90bc6c5ffb4b,
         type: 2}
+    - target: {fileID: 1016145626220568538, guid: be46ec2f0d0cefc42a449c3f32be74ca,
+        type: 3}
+      propertyPath: _buildingsParentTransfrom
+      value: 
+      objectReference: {fileID: 2102169782}
+    - target: {fileID: 3725988280611141939, guid: be46ec2f0d0cefc42a449c3f32be74ca,
+        type: 3}
+      propertyPath: _inGameUIController
+      value: 
+      objectReference: {fileID: 308722972}
+    - target: {fileID: 3725988280611141939, guid: be46ec2f0d0cefc42a449c3f32be74ca,
+        type: 3}
+      propertyPath: _gameUIController
+      value: 
+      objectReference: {fileID: 1343750183}
+    - target: {fileID: 1949190871704446727, guid: be46ec2f0d0cefc42a449c3f32be74ca,
+        type: 3}
+      propertyPath: _buildingsParentTransfrom
+      value: 
+      objectReference: {fileID: 306077308}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be46ec2f0d0cefc42a449c3f32be74ca, type: 3}
 --- !u!1001 &4657993714670007363

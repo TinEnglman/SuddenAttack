@@ -31,7 +31,7 @@ namespace SuddenAttack.GameUI
             _unitCreationManager = unitCreationManager;
         }
 
-        public void Refresh() // called form where?
+        public void Refresh()
         {
             foreach (var button in _gridButtons)
             {
@@ -41,17 +41,22 @@ namespace SuddenAttack.GameUI
             var selectedBuilding = SelectedUnit as IBuilding;
             if (selectedBuilding != null)
             {
-                var unitsId = selectedBuilding.BuildingData.BuildableUnitList;
-                int i = 0;
-                foreach (var unitData in unitsId)
-                {
-                    _gridButtons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = unitData.DisplayName;
-                    _gridButtons[i].gameObject.SetActive(true);
-                    i++;
-                }
+                RefreshBuilding(selectedBuilding);
             }
+        }
 
-            
+        public void RefreshBuilding(IBuilding building)
+        {
+            _unitNameLabel.text = building.BuildingData.DisplayName;
+
+            var unitsId = building.BuildingData.BuildableUnitList;
+            int i = 0;
+            foreach (var unitData in unitsId)
+            {
+                _gridButtons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = unitData.DisplayName;
+                _gridButtons[i].gameObject.SetActive(true);
+                i++;
+            }
         }
 
     }

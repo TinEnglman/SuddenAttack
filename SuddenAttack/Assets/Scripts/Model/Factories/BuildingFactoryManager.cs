@@ -7,6 +7,8 @@ namespace SuddenAttack.Model.Factories
 {
     public class BuildingFactoryManager : MonoBehaviour
     {
+        [SerializeField] private Transform _buildingsParentTransfrom = default;
+
         [SerializeField] private BuildingData _hqData = default;
         [SerializeField] private BuildingData _barracksData = default;
 
@@ -26,7 +28,7 @@ namespace SuddenAttack.Model.Factories
                 return null; /// todo error msg
             }
 
-            return _buildingFactories[buildingId].CreateBuilding(x, y, teamIndex);
+            return _buildingFactories[buildingId].CreateBuilding(x, y, teamIndex, _buildingsParentTransfrom);
         }
     }
 }

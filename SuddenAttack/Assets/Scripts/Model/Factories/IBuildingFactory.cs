@@ -7,7 +7,7 @@ namespace SuddenAttack.Model.Factories
 {
     public interface IBuildingFactory
     {
-        IBuilding CreateBuilding(float x, float y, int teamIndex);
+        IBuilding CreateBuilding(float x, float y, int teamIndex, Transform parentTransform);
         string GetDisplayName();
         int GetCost();
     }

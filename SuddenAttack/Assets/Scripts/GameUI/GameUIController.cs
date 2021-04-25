@@ -103,7 +103,7 @@ namespace SuddenAttack.GameUI
 
         private void RefreshBuildingUI(IBuilding building)
         {
-            _unitNameLabel.text = building.BuildingData.DisplayName;
+            //_unitNameLabel.text = building.BuildingData.DisplayName;
             //_buildButton.GetComponentInChildren<TextMeshProUGUI>().text = building.GetFactory().GetDisplayName() + " : " + building.GetFactory().GetCost() + " $ ";
         }
 
@@ -111,14 +111,14 @@ namespace SuddenAttack.GameUI
         {
             //_completedSlider.gameObject.SetActive(true);
             //_buildButton.gameObject.SetActive(true);
-            _unitNameLabel.gameObject.SetActive(true);
+            //_unitNameLabel.gameObject.SetActive(true);
         }
 
         private void HideBuildingUI()
         {
             //_completedSlider.gameObject.SetActive(false);
             //_buildButton.gameObject.SetActive(false);
-            _unitNameLabel.gameObject.SetActive(false);
+            //_unitNameLabel.gameObject.SetActive(false);
         }
 
         private void OnBuildButton()

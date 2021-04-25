@@ -9,6 +9,8 @@ namespace SuddenAttack.Model.Factories
 { 
     public class UnitFactoryManager : MonoBehaviour
     {
+        [SerializeField] private Transform _buildingsParentTransfrom = default;
+
         [SerializeField] private UnitData _soliderData = default;
         [SerializeField] private UnitData _tankData = default;
         [SerializeField] private UnitData _sniperData = default;
@@ -27,7 +29,7 @@ namespace SuddenAttack.Model.Factories
 
         public IMobileUnit CreateUnit(string unitId, float x, float y, int teamIndex)
         {
-            return _unitFactories[unitId].CreateUnit(x, y, teamIndex);
+            return _unitFactories[unitId].CreateUnit(x, y, teamIndex, _buildingsParentTransfrom);
         }
     }
 }
