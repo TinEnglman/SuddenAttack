@@ -2129,6 +2129,7 @@ MonoBehaviour:
   - {fileID: 3986588804896507387}
   _foundLabel: {fileID: 3986588804729690040}
   _unitNameLabel: {fileID: 3986588803425482472}
+  _background: {fileID: 3986588804961233355}
 --- !u!1 &3986588804375657671
 GameObject:
   m_ObjectHideFlags: 0

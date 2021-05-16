@@ -1,4 +1,5 @@
-﻿using SuddenAttack.Model;
+﻿using SuddenAttack.GameUI;
+using SuddenAttack.Model;
 using SuddenAttack.Model.Commands;
 using SuddenAttack.Model.Commands.Factory;
 using SuddenAttack.Model.Units;
@@ -13,6 +14,7 @@ namespace SuddenAttack.Controller.FlowController
         private UnitManager _gameManager;
         private CommandController _commandController;
         private IInputManager _inputManager;
+        private UIManager _uiManager;
         private SelectionManager _selectionManager;
 
         private Vector3 _pressedWorldPosition;
@@ -21,12 +23,13 @@ namespace SuddenAttack.Controller.FlowController
         private bool _queueActive;
         private bool _attackMoveActive;
 
-        public LocalPlayerCommandController(UnitManager gameManager, CommandController commandController, IInputManager inputManager, SelectionManager selectionManager)
+        public LocalPlayerCommandController(UnitManager gameManager, CommandController commandController, IInputManager inputManager, SelectionManager selectionManager, UIManager uiManager)
         {
             _gameManager = gameManager;
             _commandController = commandController;
             _inputManager = inputManager;
             _selectionManager = selectionManager;
+            _uiManager = uiManager;
         }
 
         public void Update()
@@ -67,6 +70,11 @@ namespace SuddenAttack.Controller.FlowController
         {
             Vector2 mouseWorldPos = _inputManager.GetMouseWorldPosition();
             Vector2 mouseScreenPos = _inputManager.GetMouseScreenPosition();
+
+            if (mouseScreenPos.x < _uiManager.InGameUIController.GetScreenWidth())
+            {
+                return;
+            }
 
             IUnit target = GetUnitUnderPointer(mouseWorldPos);
 

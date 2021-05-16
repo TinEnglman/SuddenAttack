@@ -1,5 +1,6 @@
 ﻿using SuddenAttack.Model;
 using SuddenAttack.Model.Buildings;
+using SuddenAttack.Model.Data;
 using SuddenAttack.Model.Units;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace SuddenAttack.GameUI
         private TextMeshProUGUI _foundLabel = default;
         [SerializeField]
         private TextMeshProUGUI _unitNameLabel = default;
+        [SerializeField]
+        RectTransform _background = default;
 
         private UnitCreationManager _unitCreationManager;
         private UnitManager _unitManager;
@@ -54,10 +57,26 @@ namespace SuddenAttack.GameUI
             foreach (var unitData in unitsId)
             {
                 _gridButtons[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = unitData.DisplayName;
+                _gridButtons[i].onClick.RemoveAllListeners();
+                _gridButtons[i].onClick.AddListener(
+                    () =>
+                    {
+                        StartBuilding(building, unitData);
+                    });
+
                 _gridButtons[i].gameObject.SetActive(true);
                 i++;
             }
         }
 
+        public void StartBuilding(IBuilding building, UnitData unitData)
+        {
+            _unitCreationManager.StartBuildingUnit(unitData.UnitId, building, building.TeamIndex);
+        }
+
+        public float GetScreenWidth()
+        {
+            return _background.sizeDelta.x;
+        }
     }
 }

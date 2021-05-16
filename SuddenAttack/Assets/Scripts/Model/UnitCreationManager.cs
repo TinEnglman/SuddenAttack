@@ -1,4 +1,5 @@
 ﻿using SuddenAttack.Model.Buildings;
+using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Units;
 using System.Collections.Generic;
 namespace SuddenAttack.Model
@@ -7,10 +8,12 @@ namespace SuddenAttack.Model
     {
         private Dictionary<IBuilding, UnitCeation> _currentBuildingTime = new Dictionary<IBuilding, UnitCeation>();
         private UnitManager _gameManager;
+        private UnitFactoryManager _unitFactoryManager;
 
-        public UnitCreationManager(UnitManager gameManager)
+        public UnitCreationManager(UnitManager gameManager, UnitFactoryManager unitCreationManager)
         {
             _gameManager = gameManager;
+            _unitFactoryManager = unitCreationManager;
         }
 
         public float GetCompletePercent(IBuilding building)
@@ -27,9 +30,9 @@ namespace SuddenAttack.Model
             return _currentBuildingTime.ContainsKey(building);
         }
 
-        public void StartBuildingUnit(IBuilding building, int teamIndex)
+        public void StartBuildingUnit(string UnitID, IBuilding building, int teamIndex)
         {
-            UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, teamIndex);
+            UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, teamIndex, UnitID);
             _currentBuildingTime.Add(building, unitCreation);
         }
 
@@ -39,14 +42,15 @@ namespace SuddenAttack.Model
             foreach (var pair in _currentBuildingTime)
             {
                 IBuilding currentBuilding = pair.Key;
+                UnitCeation unitCeation = pair.Value;
                 _currentBuildingTime[currentBuilding].BuildCooldown -= dt;
 
                 if (_currentBuildingTime[currentBuilding].BuildCooldown <= 0)
                 {
-                    float x = currentBuilding.SpawnOffset.x;
-                    float y = currentBuilding.SpawnOffset.y;
-                    //IUnit createdUnit = currentBuilding.GetFactory().CreateUnit(x, y, true);
-                    //createdUnits.Add(currentBuilding, createdUnit);
+                    float x = currentBuilding.Position.x + currentBuilding.SpawnOffset.x;
+                    float y = currentBuilding.Position.y + currentBuilding.SpawnOffset.y;
+                    IMobileUnit createdUnit = _unitFactoryManager.CreateUnit(unitCeation.UnitID, x, y, unitCeation.TeamIndex);
+                    createdUnits.Add(currentBuilding, createdUnit);
                 }
             }
 
@@ -65,11 +69,13 @@ namespace SuddenAttack.Model
     {
         public float BuildCooldown { get; set; }
         public int TeamIndex { get; set; }
+        public string UnitID { get; set; }
 
-        public UnitCeation(float buildTime, int teamIndex)
+        public UnitCeation(float buildTime, int teamIndex, string unitID)
         {
             BuildCooldown = buildTime;
             TeamIndex = teamIndex;
+            UnitID = unitID;
         }
     }
 }

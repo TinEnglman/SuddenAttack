@@ -71,6 +71,11 @@ namespace SuddenAttack.Controller.FlowController
             Vector2 mousePos = _inputManager.GetMouseWorldPosition();
             Vector2 pressedPos = _pressedWorldPosition;
 
+            if (_pressedScreenPosition.x < _uiManager.InGameUIController.GetScreenWidth())
+            {
+                return;
+            }
+
             if (_selectedUnits.Count > 0)
             {
                 DeselectUnits();

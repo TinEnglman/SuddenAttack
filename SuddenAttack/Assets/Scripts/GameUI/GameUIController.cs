@@ -41,7 +41,6 @@ namespace SuddenAttack.GameUI
 
         private void Awake()
         {
-            //_buildButton.onClick.AddListener(OnBuildButton);
             HideBuildingUI();
             _drawSelecionBox = false;
             _boxSelectionTexture = new Texture2D(1, 1);
@@ -129,7 +128,7 @@ namespace SuddenAttack.GameUI
             if (_gameManager.Funds >= cost && !_unitCreationManager.IsBuilding(building))
             {
                 _gameManager.Funds -= cost;
-                _unitCreationManager.StartBuildingUnit(building, 0);
+                //_unitCreationManager.StartBuildingUnit(building, 0);
 
             }
         }
