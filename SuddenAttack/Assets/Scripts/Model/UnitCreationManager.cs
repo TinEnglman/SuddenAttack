@@ -6,7 +6,7 @@ namespace SuddenAttack.Model
 {
     public class UnitCreationManager
     {
-        private Dictionary<IBuilding, UnitCeation> _currentBuildingTime = new Dictionary<IBuilding, UnitCeation>();
+        private Dictionary<IBuilding, Queue<UnitCeation>> _currentBuildingTime = new Dictionary<IBuilding, Queue<UnitCeation>>();
         private UnitManager _gameManager;
         private UnitFactoryManager _unitFactoryManager;
 
@@ -22,18 +22,40 @@ namespace SuddenAttack.Model
             {
                 return 0f;
             }
-            return (building.BuildingData.BuildDuration - _currentBuildingTime[building].BuildCooldown) / building.BuildingData.BuildDuration;
+            return (building.BuildingData.BuildDuration - _currentBuildingTime[building].Peek().BuildCooldown) / building.BuildingData.BuildDuration;
         }
 
-        public bool IsBuilding(IBuilding building)
+        public string GetCurrentlyBuiltUnitID(IBuilding building)
         {
-            return _currentBuildingTime.ContainsKey(building);
+            if (!_currentBuildingTime.ContainsKey(building))
+            {
+                return "";
+            }
+
+            return _currentBuildingTime[building].Peek().UnitID;
+        }
+
+
+        public int GetNumBuilding(IBuilding building)
+        {
+            if (!_currentBuildingTime.ContainsKey(building))
+            {
+                return 0;
+            }
+
+            return _currentBuildingTime[building].Count;
         }
 
         public void StartBuildingUnit(string UnitID, IBuilding building, int teamIndex)
         {
             UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, teamIndex, UnitID);
-            _currentBuildingTime.Add(building, unitCreation);
+
+            if (!_currentBuildingTime.ContainsKey(building))
+            {
+                _currentBuildingTime.Add(building, new Queue<UnitCeation>());
+            }
+
+            _currentBuildingTime[building].Enqueue(unitCreation);
         }
 
         public void UpdateBuilding(float dt)
@@ -42,10 +64,10 @@ namespace SuddenAttack.Model
             foreach (var pair in _currentBuildingTime)
             {
                 IBuilding currentBuilding = pair.Key;
-                UnitCeation unitCeation = pair.Value;
-                _currentBuildingTime[currentBuilding].BuildCooldown -= dt;
+                UnitCeation unitCeation = pair.Value.Peek();
+                _currentBuildingTime[currentBuilding].Peek().BuildCooldown -= dt;
 
-                if (_currentBuildingTime[currentBuilding].BuildCooldown <= 0)
+                if (_currentBuildingTime[currentBuilding].Peek().BuildCooldown <= 0)
                 {
                     float x = currentBuilding.Position.x + currentBuilding.SpawnOffset.x;
                     float y = currentBuilding.Position.y + currentBuilding.SpawnOffset.y;
@@ -60,7 +82,7 @@ namespace SuddenAttack.Model
                 IMobileUnit newUnit = pair.Value;
 
                 _gameManager.AddMobileUnit(newUnit);
-                _currentBuildingTime.Remove(building);
+                _currentBuildingTime[building].Dequeue();
             }
         }
     }

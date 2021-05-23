@@ -20,7 +20,13 @@ namespace SuddenAttack.GameUI
         [SerializeField]
         private TextMeshProUGUI _unitNameLabel = default;
         [SerializeField]
+        private TextMeshProUGUI _currentlyBuiltLabel = default;
+        [SerializeField]
+        private TextMeshProUGUI _currentlyBuiltNumberLabel = default;
+        [SerializeField]
         RectTransform _background = default;
+        [SerializeField]
+        private Slider _completedSlider = null;
 
         private UnitCreationManager _unitCreationManager;
         private UnitManager _unitManager;
@@ -72,11 +78,31 @@ namespace SuddenAttack.GameUI
         public void StartBuilding(IBuilding building, UnitData unitData)
         {
             _unitCreationManager.StartBuildingUnit(unitData.UnitId, building, building.TeamIndex);
+            _currentlyBuiltLabel.enabled = true;
+            _currentlyBuiltNumberLabel.enabled = true;
         }
 
         public float GetScreenWidth()
         {
             return _background.sizeDelta.x;
+        }
+
+        private void Awake()
+        {
+            _currentlyBuiltLabel.enabled = false;
+            _currentlyBuiltNumberLabel.enabled = false;
+        }
+
+        private void Update()
+        {
+            var selectedBuilding = SelectedUnit as IBuilding;
+
+            if (selectedBuilding != null)
+            {
+                _completedSlider.normalizedValue = _unitCreationManager.GetCompletePercent(selectedBuilding);
+                _currentlyBuiltLabel.text = _unitCreationManager.GetCurrentlyBuiltUnitID(selectedBuilding);
+                _currentlyBuiltNumberLabel.text = _unitCreationManager.GetNumBuilding(selectedBuilding).ToString();
+            }
         }
     }
 }

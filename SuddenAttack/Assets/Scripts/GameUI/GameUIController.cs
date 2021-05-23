@@ -120,6 +120,7 @@ namespace SuddenAttack.GameUI
             //_unitNameLabel.gameObject.SetActive(false);
         }
 
+        /*
         private void OnBuildButton()
         {
             var building = _selectionManager.GetSelectedBuildings()[0];
@@ -132,6 +133,7 @@ namespace SuddenAttack.GameUI
 
             }
         }
+        */
 
         private void Update()
         {
