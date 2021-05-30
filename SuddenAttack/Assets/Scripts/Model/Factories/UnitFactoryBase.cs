@@ -20,6 +20,7 @@ namespace SuddenAttack.Model.Factories
             unit.Position = position;
             unit.TeamIndex = teamIndex;
             unit.WeaponData = _unitData.PrimaryWeapon; // need base class
+            unit.WeaponCooldown = 0;
             unit.HitPoints = _unitData.MaxHitPoints;
             unit.Prefab.transform.SetPositionAndRotation(position, unit.Prefab.transform.rotation);
 

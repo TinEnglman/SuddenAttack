@@ -10,7 +10,6 @@ namespace SuddenAttack.Model.Behavior
         public IUnit Target { get; set; }
 
         private CombatManager _combatManager;        
-        private float _fireCountdoown;
 
         public AttackingBehavior(CombatManager combatManager)
         {
@@ -19,14 +18,13 @@ namespace SuddenAttack.Model.Behavior
 
         public override void Update(IUnit unit, float dt) // only creates fire instructions for combat manager
         {
-            _fireCountdoown -= dt;
-            float distance = (unit.Prefab.transform.position - Target.Prefab.transform.position).magnitude;
+             float distance = (unit.Prefab.transform.position - Target.Prefab.transform.position).magnitude;
 
-            if (distance <= unit.WeaponData.Range && _fireCountdoown <= 0)
+            if (distance <= unit.WeaponData.Range && unit.WeaponCooldown <= 0)
             {
                 unit.OnAttack(Target);
                 _combatManager.Damage(unit, Target);
-                _fireCountdoown += unit.WeaponData.WeaponCooldown;
+                unit.WeaponCooldown += unit.WeaponData.WeaponCooldown;
             }
             else
             {
@@ -36,9 +34,6 @@ namespace SuddenAttack.Model.Behavior
 
         public override void OnBegin(IUnit unit)
         {
-            unit.OnAttack(Target);
-            _combatManager.Damage(unit, Target);
-            _fireCountdoown = unit.WeaponData.WeaponCooldown;
         }
 
         public override void OnEnd(IUnit unit)

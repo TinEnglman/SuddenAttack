@@ -13,6 +13,7 @@ namespace SuddenAttack.Model.Units
         protected WeaponData _weaponData;
         protected Vector2 _position;
         public float HitPoints { get; set; }
+        public float WeaponCooldown { get; set; }
         public int TeamIndex { get; set; }
 
         public GameObject Prefab
@@ -39,6 +40,8 @@ namespace SuddenAttack.Model.Units
             set { _position = value; }
         }
 
+        
+
         public void Select()
         {
             _prefab.GetComponent<UnitController>().Select(); // refactor after input system refactor
@@ -49,7 +52,14 @@ namespace SuddenAttack.Model.Units
             _prefab.GetComponent<UnitController>().Deselect();
         }
 
-        public abstract void OnUpdate(float dt);
+        public virtual void OnUpdate(float dt)
+        {
+            if (WeaponCooldown > 0)
+            {
+                WeaponCooldown -= dt;
+            }
+        }
+
         public abstract void OnMove(Vector3 destination);
         public abstract void OnAttack(IUnit other);
         public abstract void OnFire();

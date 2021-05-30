@@ -2518,8 +2518,10 @@ MonoBehaviour:
   - {fileID: 3986588803663806749}
   - {fileID: 3986588804234068878}
   - {fileID: 3986588804896507387}
-  _foundLabel: {fileID: 3986588804729690040}
+  _fundLabel: {fileID: 3986588804729690040}
   _unitNameLabel: {fileID: 3986588803425482472}
+  _unitPortrait: {fileID: 3986588804375657669}
+  _currentlyBuiltParent: {fileID: 3986588803962745341}
   _currentlyBuiltLabel: {fileID: 5714275023823841121}
   _currentlyBuiltNumberLabel: {fileID: 1307336639300719712}
   _background: {fileID: 3986588804961233355}
@@ -2536,7 +2538,7 @@ GameObject:
   - component: {fileID: 3986588804375657668}
   - component: {fileID: 3986588804375657669}
   m_Layer: 5
-  m_Name: Image
+  m_Name: UnitPortrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,6 +13,7 @@ namespace SuddenAttack.Model.Units
 
         public override void OnUpdate(float dt)
         {
+            base.OnUpdate(dt);
         }
 
         public override void OnMove(Vector3 destination)

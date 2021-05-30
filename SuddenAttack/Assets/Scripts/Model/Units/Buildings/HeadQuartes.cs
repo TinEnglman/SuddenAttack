@@ -16,6 +16,7 @@ namespace SuddenAttack.Model.Buildings
 
         public override void OnUpdate(float dt)
         {
+            base.OnUpdate(dt);
         }
 
         public override void OnMove(Vector3 destination)

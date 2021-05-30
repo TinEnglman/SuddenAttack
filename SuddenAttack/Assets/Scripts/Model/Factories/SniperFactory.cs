@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Factories
 
         protected override IMobileUnit CreateUnitInternal(UnitData unitData, Transform parentTransform)
         {
-            var sniper = new Solider(_unitData)
+            var sniper = new Sniper(_unitData)
             {
                 Prefab = Object.Instantiate(_unitData.UnitPrefab, parentTransform)
             };

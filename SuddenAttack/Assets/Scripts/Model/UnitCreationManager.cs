@@ -22,12 +22,24 @@ namespace SuddenAttack.Model
             {
                 return 0f;
             }
+
+            if (_currentBuildingTime[building].Count == 0)
+            {
+                return 0f;
+            }
+
             return (building.BuildingData.BuildDuration - _currentBuildingTime[building].Peek().BuildCooldown) / building.BuildingData.BuildDuration;
         }
 
         public string GetCurrentlyBuiltUnitID(IBuilding building)
         {
             if (!_currentBuildingTime.ContainsKey(building))
+            {
+                return "";
+            }
+
+
+            if (_currentBuildingTime[building].Count == 0)
             {
                 return "";
             }
@@ -64,6 +76,12 @@ namespace SuddenAttack.Model
             foreach (var pair in _currentBuildingTime)
             {
                 IBuilding currentBuilding = pair.Key;
+
+                if (pair.Value.Count == 0)
+                {
+                    continue;
+                }
+
                 UnitCeation unitCeation = pair.Value.Peek();
                 _currentBuildingTime[currentBuilding].Peek().BuildCooldown -= dt;
 

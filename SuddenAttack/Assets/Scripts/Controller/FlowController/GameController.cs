@@ -13,6 +13,7 @@ using SuddenAttack.GameUI.Menu;
 using SuddenAttack.Controller.ViewController;
 using SuddenAttack.Model.Data;
 using SuddenAttack.Model.Behavior;
+using SuddenAttack.GameUI;
 
 namespace SuddenAttack.Controller.FlowController
 {
@@ -23,26 +24,25 @@ namespace SuddenAttack.Controller.FlowController
 
         private BuildingFactoryManager _buildingFactoryManager;
         private UnitFactoryManager _unitFactoryManager;
-        private UnitManager _gameManager;
+        private UnitManager _unitManager;
         private CommandManager _commandManager;
         private CombatManager _combatManager;
         private SelectionManager _selectionManager;
         private UnitCreationManager _unitBuildingManager;
         private BehaviorManager _behaviorManager;
         private LocalPlayerCommandController _localPlayerCommandController;
+        private UIManager _uiManager;
         private IInputManager _inputManager;
 
         private float _incomeFrequency = 9;
         private float _incomeCountdown = 0;
 
-        private List<IBuilding> _buildings = new List<IBuilding>();
-
-        [Inject]
-        public void Construct(BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, UnitManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
+       [Inject]
+        public void Construct(UIManager uiManager, BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, UnitManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
         {
             _buildingFactoryManager = buildingFactoryManager;
             _unitFactoryManager = unitFactoryManager;
-            _gameManager = gameManager;
+            _unitManager = gameManager;
             _unitBuildingManager = unitBuildingManager;
             _behaviorManager = behaviorManager;
             _combatManager = combatManager;
@@ -50,6 +50,7 @@ namespace SuddenAttack.Controller.FlowController
             _commandManager = commandManager;
             _selectionManager = selectionManager;
             _localPlayerCommandController = localPlayerCommandController;
+            _uiManager = uiManager;
         }
 
         private void Start()
@@ -71,15 +72,15 @@ namespace SuddenAttack.Controller.FlowController
             var aiUnit = _unitFactoryManager.CreateUnit("Solider", -12, -6, PROTOTYPE_AI_TEAM_INDEX);
             var aiUnit2 = _unitFactoryManager.CreateUnit("Solider", -16, -6, PROTOTYPE_AI_TEAM_INDEX);
 
-            _gameManager.AddBuilding(building);
-            _gameManager.AddBuilding(building2);
-            _gameManager.AddMobileUnit(unit);
-            _gameManager.AddMobileUnit(unit2);
-            _gameManager.AddMobileUnit(unit3);
+            _unitManager.AddBuilding(building);
+            _unitManager.AddBuilding(building2);
+            _unitManager.AddMobileUnit(unit);
+            _unitManager.AddMobileUnit(unit2);
+            _unitManager.AddMobileUnit(unit3);
 
-            _gameManager.AddBuilding(aiBuilding);
-            _gameManager.AddMobileUnit(aiUnit);
-            _gameManager.AddMobileUnit(aiUnit2);
+            _unitManager.AddBuilding(aiBuilding);
+            _unitManager.AddMobileUnit(aiUnit);
+            _unitManager.AddMobileUnit(aiUnit2);
         }
 
         private void Setup()
@@ -94,7 +95,7 @@ namespace SuddenAttack.Controller.FlowController
         {
             float dt = Time.deltaTime;
             _combatManager.Update(dt);
-            _gameManager.Update(dt);
+            _unitManager.Update(dt);
             _unitBuildingManager.UpdateBuilding(dt);
             _behaviorManager.UpdateBehaviors(dt);
             _commandManager.Update();
@@ -139,18 +140,14 @@ namespace SuddenAttack.Controller.FlowController
                 return;
             }
 
-            foreach (var building in _buildings)
+            foreach (var building in _unitManager.Buildings)
             {
                 if (building.TeamIndex == LOCAL_PLAYER_TEAM_INDEX)
                 {
-                    _gameManager.Funds += 25; //building.GetIncome(); // refactor
+                    _unitManager.Funds += building.BuildingData.FundsGeneration; //building.GetIncome(); // refactor
+                    _uiManager.InGameUIController.RefreshFunds();
                 }
             }
-        }
-
-        public void AddMobileUnit(IMobileUnit unit)
-        {
-            _gameManager.AddMobileUnit(unit);
         }
 
         private void OnRightMouseDown()

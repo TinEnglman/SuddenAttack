@@ -16,7 +16,7 @@ namespace SuddenAttack.Model.Factories
 
         protected override IMobileUnit CreateUnitInternal(UnitData unitData, Transform parentTransform)
         {
-            var tank = new Solider(_unitData)
+            var tank = new Tank(_unitData)
             {
                 Prefab = Object.Instantiate(_unitData.UnitPrefab, parentTransform)
             };
