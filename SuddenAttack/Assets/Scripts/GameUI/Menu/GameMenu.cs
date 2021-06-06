@@ -20,6 +20,11 @@ namespace SuddenAttack.GameUI.Menu
             _exitrButton.onClick.AddListener(OnExitButton);
         }
 
+        public void ShowGameMenu()
+        {
+            gameObject.SetActive(true);
+        }
+
         public void OnReturnButton()
         {
             gameObject.SetActive(false);

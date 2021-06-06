@@ -16,6 +16,8 @@ namespace SuddenAttack.GameUI
         [SerializeField]
         private List<Button> _gridButtons = new List<Button>();
         [SerializeField]
+        private Button _cancleBuildingButton = default;
+        [SerializeField]
         private TextMeshProUGUI _fundLabel = default;
         [SerializeField]
         private TextMeshProUGUI _unitNameLabel = default;
@@ -35,14 +37,21 @@ namespace SuddenAttack.GameUI
 
         private UnitCreationManager _unitCreationManager;
         private UnitManager _unitManager;
+        private UIManager _uIManager;
 
         public IUnit SelectedUnit { get; set; }
 
         [Inject]
-        public void Construct(UnitCreationManager unitCreationManager, UnitManager unitManager)
+        public void Construct(UIManager uiManager, UnitCreationManager unitCreationManager, UnitManager unitManager)
         {
             _unitManager = unitManager;
             _unitCreationManager = unitCreationManager;
+            _uIManager = uiManager;
+        }
+
+        public void OnMainMenuButton() // linked to button in editor
+        {
+            _uIManager.GameMenu.ShowGameMenu();
         }
 
         public void Refresh()
@@ -117,12 +126,25 @@ namespace SuddenAttack.GameUI
                 return;
             }
 
-            _unitManager.Funds -= unitData.Cost;
-            _unitCreationManager.StartBuildingUnit(unitData.UnitId, building, building.TeamIndex);
+            _unitCreationManager.StartBuildingUnit(unitData, building, building.TeamIndex);
             _currentlyBuiltLabel.enabled = true;
             _currentlyBuiltNumberLabel.enabled = true;
             RefreshFunds();
         }
+
+        public void CancelBuilding()
+        {
+            var selectedBuilding = SelectedUnit as IBuilding;
+
+            if (selectedBuilding == null)
+            {
+                return;
+            }
+
+            _unitCreationManager.CancelBuildingUnit(selectedBuilding);
+            RefreshFunds();
+        }
+
 
         public float GetScreenWidth()
         {
@@ -134,6 +156,7 @@ namespace SuddenAttack.GameUI
             _currentlyBuiltLabel.enabled = false;
             _currentlyBuiltNumberLabel.enabled = false;
             _currentlyBuiltParent.SetActive(false);
+            _cancleBuildingButton.onClick.AddListener(CancelBuilding);
             Refresh();
         }
 

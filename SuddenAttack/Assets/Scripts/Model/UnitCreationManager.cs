@@ -1,4 +1,5 @@
 ﻿using SuddenAttack.Model.Buildings;
+using SuddenAttack.Model.Data;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Units;
 using System.Collections.Generic;
@@ -7,12 +8,12 @@ namespace SuddenAttack.Model
     public class UnitCreationManager
     {
         private Dictionary<IBuilding, Queue<UnitCeation>> _currentBuildingTime = new Dictionary<IBuilding, Queue<UnitCeation>>();
-        private UnitManager _gameManager;
+        private UnitManager _unitManager;
         private UnitFactoryManager _unitFactoryManager;
 
-        public UnitCreationManager(UnitManager gameManager, UnitFactoryManager unitCreationManager)
+        public UnitCreationManager(UnitManager unitManager, UnitFactoryManager unitCreationManager)
         {
-            _gameManager = gameManager;
+            _unitManager = unitManager;
             _unitFactoryManager = unitCreationManager;
         }
 
@@ -28,7 +29,7 @@ namespace SuddenAttack.Model
                 return 0f;
             }
 
-            return (building.BuildingData.BuildDuration - _currentBuildingTime[building].Peek().BuildCooldown) / building.BuildingData.BuildDuration;
+            return (_currentBuildingTime[building].Peek().UnitData.BuildDuration - _currentBuildingTime[building].Peek().BuildCooldown) / _currentBuildingTime[building].Peek().UnitData.BuildDuration;
         }
 
         public string GetCurrentlyBuiltUnitID(IBuilding building)
@@ -44,7 +45,7 @@ namespace SuddenAttack.Model
                 return "";
             }
 
-            return _currentBuildingTime[building].Peek().UnitID;
+            return _currentBuildingTime[building].Peek().UnitData.UnitId;
         }
 
 
@@ -58,9 +59,10 @@ namespace SuddenAttack.Model
             return _currentBuildingTime[building].Count;
         }
 
-        public void StartBuildingUnit(string UnitID, IBuilding building, int teamIndex)
+        public void StartBuildingUnit(UnitData unitData, IBuilding building, int teamIndex)
         {
-            UnitCeation unitCreation = new UnitCeation(building.BuildingData.BuildDuration, teamIndex, UnitID);
+            _unitManager.Funds -= unitData.Cost;
+            UnitCeation unitCreation = new UnitCeation(unitData, teamIndex);
 
             if (!_currentBuildingTime.ContainsKey(building))
             {
@@ -68,6 +70,17 @@ namespace SuddenAttack.Model
             }
 
             _currentBuildingTime[building].Enqueue(unitCreation);
+        }
+
+        public void CancelBuildingUnit(IBuilding building)
+        {
+            if (_currentBuildingTime[building].Count == 0)
+            {
+                return;
+            }
+
+            _unitManager.Funds += _currentBuildingTime[building].Peek().UnitData.Cost;
+            _currentBuildingTime[building].Dequeue();
         }
 
         public void UpdateBuilding(float dt)
@@ -89,7 +102,7 @@ namespace SuddenAttack.Model
                 {
                     float x = currentBuilding.Position.x + currentBuilding.SpawnOffset.x;
                     float y = currentBuilding.Position.y + currentBuilding.SpawnOffset.y;
-                    IMobileUnit createdUnit = _unitFactoryManager.CreateUnit(unitCeation.UnitID, x, y, unitCeation.TeamIndex);
+                    IMobileUnit createdUnit = _unitFactoryManager.CreateUnit(unitCeation.UnitData.UnitId, x, y, unitCeation.TeamIndex);
                     createdUnits.Add(currentBuilding, createdUnit);
                 }
             }
@@ -99,7 +112,7 @@ namespace SuddenAttack.Model
                 IBuilding building = pair.Key;
                 IMobileUnit newUnit = pair.Value;
 
-                _gameManager.AddMobileUnit(newUnit);
+                _unitManager.AddMobileUnit(newUnit);
                 _currentBuildingTime[building].Dequeue();
             }
         }
@@ -108,14 +121,15 @@ namespace SuddenAttack.Model
     public class UnitCeation
     {
         public float BuildCooldown { get; set; }
-        public int TeamIndex { get; set; }
-        public string UnitID { get; set; }
 
-        public UnitCeation(float buildTime, int teamIndex, string unitID)
+        public UnitData UnitData { get; private set; }
+        public int TeamIndex { get; private set; }
+
+        public UnitCeation(UnitData unitData, int teamIndex)
         {
-            BuildCooldown = buildTime;
+            UnitData = unitData;
+            BuildCooldown = UnitData.BuildDuration;
             TeamIndex = teamIndex;
-            UnitID = unitID;
         }
     }
 }

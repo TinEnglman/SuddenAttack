@@ -26001,18 +26001,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &293717315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3986588804729690040, guid: f5736736d1b48cd4498eca5644ff213f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3986588804989817595}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &301253872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3986588803962745331, guid: f5736736d1b48cd4498eca5644ff213f,
@@ -31324,9 +31312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5bbb3e9f3626445b4bcba798e9f161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameMenuController: {fileID: 1250733554}
-  _foundLabel: {fileID: 293717315}
-  _unitNameLabel: {fileID: 1733174291}
 --- !u!1 &1502044637
 GameObject:
   m_ObjectHideFlags: 0
@@ -31472,18 +31457,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1733174291 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3986588803425482472, guid: f5736736d1b48cd4498eca5644ff213f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3986588804989817595}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1760484968 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 968037871999468778, guid: 9a46e8adc602c08488fa0fb060383d6e,
@@ -32288,6 +32261,11 @@ PrefabInstance:
       propertyPath: _gameUIController
       value: 
       objectReference: {fileID: 1343750183}
+    - target: {fileID: 3725988280611141939, guid: be46ec2f0d0cefc42a449c3f32be74ca,
+        type: 3}
+      propertyPath: _gameMenuController
+      value: 
+      objectReference: {fileID: 1250733554}
     - target: {fileID: 1949190871704446727, guid: be46ec2f0d0cefc42a449c3f32be74ca,
         type: 3}
       propertyPath: _buildingsParentTransfrom

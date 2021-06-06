@@ -13,10 +13,7 @@ namespace SuddenAttack.GameUI
 
     public class GameUIController : MonoBehaviour
     {
-        [SerializeField]
-        private GameMenu _gameMenuController = default;
-
-        private IInputManager _inputManager = default;
+        private IInputManager _inputManager;
         private Texture2D _boxSelectionTexture;
         private bool _drawSelecionBox;
         private Vector3 _pressedScreenPosition;
@@ -26,6 +23,7 @@ namespace SuddenAttack.GameUI
         {
             _inputManager = inputManager;
         }
+
 
         private void Awake()
         {
@@ -72,11 +70,6 @@ namespace SuddenAttack.GameUI
 
         private void Update()
         {
-            if (_inputManager.IsPressed(KeyCode.F10))
-            {
-                _gameMenuController.gameObject.SetActive(true);
-            }
-
             if (_inputManager.IsLeftMouseButtonDown())
             {
                 OnLeftMouseDown();
