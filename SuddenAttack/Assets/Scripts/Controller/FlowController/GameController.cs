@@ -23,7 +23,7 @@ namespace SuddenAttack.Controller.FlowController
         private const int PROTOTYPE_AI_TEAM_INDEX = 1;
 
         private BuildingFactoryManager _buildingFactoryManager;
-        private UnitFactoryManager _unitFactoryManager;
+        private MobileUnitFactoryManager _unitFactoryManager;
         private UnitManager _unitManager;
         private CommandManager _commandManager;
         private CombatManager _combatManager;
@@ -38,7 +38,7 @@ namespace SuddenAttack.Controller.FlowController
         private float _incomeCountdown = 0;
 
        [Inject]
-        public void Construct(UIManager uiManager, BehaviorManager behaviorManager, UnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, UnitManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
+        public void Construct(UIManager uiManager, BehaviorManager behaviorManager, MobileUnitFactoryManager unitFactoryManager, BuildingFactoryManager buildingFactoryManager, UnitManager gameManager, UnitCreationManager unitBuildingManager, CombatManager combatManager, IInputManager inputManager, CommandManager commandManager, SelectionManager selectionManager, LocalPlayerCommandController localPlayerCommandController)
         {
             _buildingFactoryManager = buildingFactoryManager;
             _unitFactoryManager = unitFactoryManager;

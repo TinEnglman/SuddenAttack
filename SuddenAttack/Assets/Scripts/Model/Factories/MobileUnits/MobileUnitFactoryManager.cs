@@ -1,13 +1,11 @@
 ﻿using SuddenAttack.Model.Data;
-using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Units;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace SuddenAttack.Model.Factories
 { 
-    public class UnitFactoryManager : MonoBehaviour
+    public class MobileUnitFactoryManager : MonoBehaviour
     {
         [SerializeField] private Transform _buildingsParentTransfrom = default;
 
@@ -16,7 +14,7 @@ namespace SuddenAttack.Model.Factories
         [SerializeField] private UnitData _sniperData = default;
         [SerializeField] private UnitData _panzetData = default;
 
-        private Dictionary<string, IUnitFactory> _unitFactories = new Dictionary<string, IUnitFactory>();
+        private Dictionary<string, IMobileUnitFactory> _unitFactories = new Dictionary<string, IMobileUnitFactory>();
 
         public void Setup()
         {
@@ -29,6 +27,11 @@ namespace SuddenAttack.Model.Factories
 
         public IMobileUnit CreateUnit(string unitId, float x, float y, int teamIndex)
         {
+            if (!_unitFactories.ContainsKey(unitId))
+            {
+                return null; /// todo error msg
+            }
+
             return _unitFactories[unitId].CreateUnit(x, y, teamIndex, _buildingsParentTransfrom);
         }
     }

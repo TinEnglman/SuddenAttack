@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SuddenAttack.Model.Factories
 {
-    public abstract class UnitFactoryBase : IUnitFactory
+    public abstract class MobileUnitFactoryBase : IMobileUnitFactory
     {
         protected UnitData _unitData;
 
@@ -15,7 +15,7 @@ namespace SuddenAttack.Model.Factories
         {
             Vector3 position = new Vector3(x, y, 0);
 
-            var unit = CreateUnitInternal(_unitData, parentTransform);
+            var unit = CreateUnitInternal(parentTransform);
 
             unit.Position = position;
             unit.TeamIndex = teamIndex;
@@ -27,14 +27,14 @@ namespace SuddenAttack.Model.Factories
             return unit;
         }
 
-        protected abstract IMobileUnit CreateUnitInternal(UnitData unitData, Transform prarentTransform);
+        protected abstract IMobileUnit CreateUnitInternal(Transform prarentTransform);
 
         public string GetDisplayName()
         {
-            return _unitData.DisplayName; // refactor
+            return _unitData.DisplayName;
         }
 
-        public int GetCost() // refactor
+        public int GetCost()
         {
             return _unitData.Cost;
         }

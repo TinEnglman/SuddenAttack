@@ -68,13 +68,13 @@ namespace SuddenAttack.GameUI
                 _unitNameLabel.enabled = false;
             }
 
-            var selectedBuilding = SelectedUnit as IBuilding;
+            IBuilding selectedBuilding = SelectedUnit as IBuilding;
             if (selectedBuilding != null)
             {
                 RefreshBuilding(selectedBuilding);
             }
 
-            var selectedMobileUnit = SelectedUnit as IMobileUnit;
+            IMobileUnit selectedMobileUnit = SelectedUnit as IMobileUnit;
             if (selectedMobileUnit != null)
             {
                 RefreshMobieUnit(selectedMobileUnit);
@@ -134,7 +134,7 @@ namespace SuddenAttack.GameUI
 
         public void CancelBuilding()
         {
-            var selectedBuilding = SelectedUnit as IBuilding;
+            IBuilding selectedBuilding = SelectedUnit as IBuilding;
 
             if (selectedBuilding == null)
             {

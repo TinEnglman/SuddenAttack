@@ -24,7 +24,6 @@ namespace SuddenAttack.GameUI
             _inputManager = inputManager;
         }
 
-
         private void Awake()
         {
             _drawSelecionBox = false;

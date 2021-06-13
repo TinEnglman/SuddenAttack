@@ -32271,6 +32271,11 @@ PrefabInstance:
       propertyPath: _buildingsParentTransfrom
       value: 
       objectReference: {fileID: 306077308}
+    - target: {fileID: 7267884750039427267, guid: be46ec2f0d0cefc42a449c3f32be74ca,
+        type: 3}
+      propertyPath: m_Name
+      value: MobileUnitFactoryManager
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be46ec2f0d0cefc42a449c3f32be74ca, type: 3}
 --- !u!1001 &4657993714670007363

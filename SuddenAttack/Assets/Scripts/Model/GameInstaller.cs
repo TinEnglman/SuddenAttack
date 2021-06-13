@@ -19,7 +19,7 @@ namespace SuddenAttack.Model
             Container.Bind<IInputManager>().FromComponentInNewPrefab(_inputHandler).AsSingle();
 
             Container.Bind<BuildingFactoryManager>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<UnitFactoryManager>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<MobileUnitFactoryManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle();
 
             Container.Bind<UnitCreationManager>().To<UnitCreationManager>().AsSingle();

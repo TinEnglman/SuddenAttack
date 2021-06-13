@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace SuddenAttack.Model.Factories
 {
-    public class SniperFactory : UnitFactoryBase
+    public class SniperFactory : MobileUnitFactoryBase
     {
         public SniperFactory(UnitData unitData)
         {
             _unitData = unitData;
         }
 
-        protected override IMobileUnit CreateUnitInternal(UnitData unitData, Transform parentTransform)
+        protected override IMobileUnit CreateUnitInternal(Transform parentTransform)
         {
             var sniper = new Sniper(_unitData)
             {

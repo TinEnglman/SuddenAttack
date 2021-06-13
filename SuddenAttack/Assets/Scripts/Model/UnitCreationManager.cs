@@ -9,9 +9,9 @@ namespace SuddenAttack.Model
     {
         private Dictionary<IBuilding, Queue<UnitCeation>> _currentBuildingTime = new Dictionary<IBuilding, Queue<UnitCeation>>();
         private UnitManager _unitManager;
-        private UnitFactoryManager _unitFactoryManager;
+        private MobileUnitFactoryManager _unitFactoryManager;
 
-        public UnitCreationManager(UnitManager unitManager, UnitFactoryManager unitCreationManager)
+        public UnitCreationManager(UnitManager unitManager, MobileUnitFactoryManager unitCreationManager)
         {
             _unitManager = unitManager;
             _unitFactoryManager = unitCreationManager;

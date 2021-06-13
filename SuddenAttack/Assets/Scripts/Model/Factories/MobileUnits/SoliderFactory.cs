@@ -7,14 +7,14 @@ using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Model.Factories
 {
-    public class SoliderFactory : UnitFactoryBase
+    public class SoliderFactory : MobileUnitFactoryBase
     {
         public SoliderFactory(UnitData unitData)
         {
             _unitData = unitData;
         }
 
-        protected override IMobileUnit CreateUnitInternal(UnitData unitData, Transform parentTransform)
+        protected override IMobileUnit CreateUnitInternal(Transform parentTransform)
         {
             var solider = new Solider(_unitData)
             {

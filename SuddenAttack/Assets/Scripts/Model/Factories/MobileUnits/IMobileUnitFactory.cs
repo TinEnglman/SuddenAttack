@@ -6,7 +6,7 @@ using SuddenAttack.Model.Data;
 
 namespace SuddenAttack.Model.Factories
 {
-    public interface IUnitFactory
+    public interface IMobileUnitFactory
     {
         IMobileUnit CreateUnit(float x, float y, int teamIndex, Transform parentTransform);
         string GetDisplayName();
