@@ -1,4 +1,4 @@
-﻿using SuddenAttack.Controller.ViewController;
+﻿using SuddenAttack.Controller.ViewController.Units;
 using SuddenAttack.Model.Data;
 using UnityEngine;
 
@@ -24,14 +24,16 @@ namespace SuddenAttack.Model.Units
         {
             var bulletController = Prefab.GetComponent<BulletContoller>();
             bulletController.Target = other.Prefab;
-            bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); //refactor; add projectile exit point
-            bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
-            bulletController.Fire();
             bulletController.enabled = true;
         }
 
         public override void OnFire()
         {
+            var bulletController = Prefab.GetComponent<BulletContoller>();
+
+            bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); //refactor; add projectile exit point
+            bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
+            bulletController.Fire();
         }
 
         public override void OnHit(IUnit other)

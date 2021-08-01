@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SuddenAttack.Controller.ViewController
-{
-    public class HeadQuartersController : MonoBehaviour
+namespace SuddenAttack.Controller.ViewController.Buildings
+{ 
+    public class BarracksController : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()
         {
-
+        
         }
 
         // Update is called once per frame
         void Update()
         {
-
+        
         }
     }
 }

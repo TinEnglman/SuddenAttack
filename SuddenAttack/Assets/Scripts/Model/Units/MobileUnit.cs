@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using SuddenAttack.Model.Data;
-using SuddenAttack.Controller.ViewController;
+using SuddenAttack.Controller.ViewController.Units;
 
 namespace SuddenAttack.Model.Units
 {

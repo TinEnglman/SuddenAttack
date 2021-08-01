@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SuddenAttack.Controller.ViewController;
+using SuddenAttack.Controller.ViewController.Buildings;
 using SuddenAttack.Model.Data;
 using SuddenAttack.Model.Factories;
 using SuddenAttack.Model.Units;

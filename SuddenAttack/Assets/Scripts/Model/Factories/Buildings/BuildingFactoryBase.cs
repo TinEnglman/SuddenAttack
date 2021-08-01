@@ -1,4 +1,4 @@
-﻿using SuddenAttack.Controller.ViewController;
+﻿using SuddenAttack.Controller.ViewController.Buildings;
 using SuddenAttack.Model.Buildings;
 using SuddenAttack.Model.Data;
 using UnityEngine;

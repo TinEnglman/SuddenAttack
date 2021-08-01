@@ -2,7 +2,7 @@
 using SuddenAttack.Model.Buildings;
 using SuddenAttack.GameUI;
 
-namespace SuddenAttack.Controller.ViewController
+namespace SuddenAttack.Controller.ViewController.Buildings
 {
     public class BuildingController : MonoBehaviour
     {

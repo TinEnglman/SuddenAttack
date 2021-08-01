@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SuddenAttack.Controller.ViewController;
 using UnityEngine;
 
-namespace SuddenAttack.Controller.ViewController
+namespace SuddenAttack.Controller.ViewController.Units.Tanks
 {
     public class TurretController : MonoBehaviour
     {

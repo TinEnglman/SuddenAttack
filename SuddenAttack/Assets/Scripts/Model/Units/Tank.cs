@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using SuddenAttack.Model.Data;
-using SuddenAttack.Controller.ViewController;
+using SuddenAttack.Controller.ViewController.Units;
+using SuddenAttack.Controller.ViewController.Units.Tanks;
 
 namespace SuddenAttack.Model.Units
 {
@@ -29,17 +28,19 @@ namespace SuddenAttack.Model.Units
         public override void OnAttack(IUnit other)
         {
             Prefab.GetComponentInChildren<TurretController>().Target = other.Prefab;
-
             var bulletController = Prefab.GetComponent<BulletContoller>();
             bulletController.Target = other.Prefab;
-            bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); // add top of turret; refactor
-            bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
-            bulletController.Fire();
-            bulletController.enabled = true;
         }
 
         public override void OnFire()
         {
+            Prefab.GetComponent<FireController>().OnFire();
+
+            var bulletController = Prefab.GetComponent<BulletContoller>();
+            bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); // add top of turret; refactor
+            bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
+            bulletController.Fire();
+            bulletController.enabled = true;
         }
 
         public override void OnHit(IUnit other)
@@ -50,8 +51,7 @@ namespace SuddenAttack.Model.Units
 
         public override void OnStopAttacking()
         {
-            Prefab.GetComponentInChildren<TurretController>().Target = Prefab.GetComponentInChildren<UnitController>().DefaultTarget; ;
-            //Prefab.GetComponentInChildren<BulletContoller>().Target = null; // revisit; refactor
+            Prefab.GetComponentInChildren<TurretController>().Target = Prefab.GetComponentInChildren<UnitController>().DefaultTarget;
         }
 
         public override void OnStop()

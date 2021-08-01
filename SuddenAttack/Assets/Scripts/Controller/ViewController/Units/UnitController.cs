@@ -2,7 +2,7 @@
 using SuddenAttack.GameUI;
 using SuddenAttack.Model.Units;
 
-namespace SuddenAttack.Controller.ViewController
+namespace SuddenAttack.Controller.ViewController.Units
 {
     public class UnitController : MonoBehaviour // move moving to behavior
     {

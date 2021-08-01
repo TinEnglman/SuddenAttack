@@ -22,7 +22,7 @@ namespace SuddenAttack.Model.Behavior
 
             if (distance <= unit.WeaponData.Range && unit.WeaponCooldown <= 0)
             {
-                unit.OnAttack(Target);
+                unit.OnFire();
                 _combatManager.Damage(unit, Target);
                 unit.WeaponCooldown += unit.WeaponData.WeaponCooldown;
             }
@@ -34,6 +34,7 @@ namespace SuddenAttack.Model.Behavior
 
         public override void OnBegin(IUnit unit)
         {
+            unit.OnAttack(Target);
         }
 
         public override void OnEnd(IUnit unit)
