@@ -9,8 +9,11 @@ namespace SuddenAttack.Controller.ViewController.Units
         [SerializeField]
         private List<Sprite> _orientationTextures = default;
         [SerializeField]
+        private List<Transform> _projectileOffsets = new List<Transform>();
+        [SerializeField]
         private SpriteRenderer _spriteRenrerer = default;
 
+        private int _currentAngle = 0;
         private int _angleQuant = 0;
 
         private void Start()
@@ -20,10 +23,16 @@ namespace SuddenAttack.Controller.ViewController.Units
 
         public void SetAngle(int angle)
         {
-            _spriteRenrerer.sprite = GetTexture(angle);
+            _currentAngle = angle;
+            _spriteRenrerer.sprite = GetTexture();
         }
 
-        public Sprite GetTexture(int angle)
+        public float GetAngle()
+        {
+            return _currentAngle;
+        }
+
+        public int GetIndex(int angle)
         {
             angle += _angleQuant / 2;
 
@@ -32,8 +41,19 @@ namespace SuddenAttack.Controller.ViewController.Units
                 angle += 360;
             }
 
-            int index = angle / _angleQuant;
+            return angle / _angleQuant;
+        }
+
+        public Sprite GetTexture()
+        {
+            int index = GetIndex(_currentAngle);
             return _orientationTextures[index];
+        }
+
+        public Transform GetProjectalOrigin()
+        {
+            int index = GetIndex(_currentAngle);
+            return _projectileOffsets[index];
         }
 
     }

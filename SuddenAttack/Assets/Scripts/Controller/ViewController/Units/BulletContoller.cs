@@ -8,6 +8,7 @@ namespace SuddenAttack.Controller.ViewController.Units
     {
         [SerializeField]
         private GameObject _projectile = null;
+
         private GameObject _target = null;
         private Vector3 _direction;
         private float _projectileSpeed = 1;
@@ -34,9 +35,10 @@ namespace SuddenAttack.Controller.ViewController.Units
         public void Fire()
         {
             _projectile.SetActive(true);
-            _direction = (_target.transform.position - transform.position).normalized;
+            _direction = (_target.transform.position - _projectileOrigin).normalized;
             Vector3 newRotation = new Vector3(0, 0, Vector3.Angle(Vector3.right, _direction));
             newRotation.z *= _direction.y / Mathf.Abs(_direction.y);
+
             _projectile.transform.position = _projectileOrigin;
             _projectile.transform.rotation = Quaternion.Euler(newRotation);
         }

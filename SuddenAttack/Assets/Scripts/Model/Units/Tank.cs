@@ -34,10 +34,15 @@ namespace SuddenAttack.Model.Units
 
         public override void OnFire()
         {
-            Prefab.GetComponent<FireController>().OnFire();
 
+            var fireController = Prefab.GetComponent<FireController>();
+            if (fireController != null) // temp: all tanks should have a fire controller
+            {
+                fireController.OnFire();
+            }
+            var orientationController = Prefab.GetComponentInChildren<TurretController>().gameObject.GetComponent<OrientationController>(); // wonky, refactor candidate
             var bulletController = Prefab.GetComponent<BulletContoller>();
-            bulletController.ProjectileOrigin = Prefab.transform.position + new Vector3(0, 0, 0); // add top of turret; refactor
+            bulletController.ProjectileOrigin = orientationController.GetProjectalOrigin().position;
             bulletController.ProjectileSpeed = _unitData.PrimaryWeapon.ProjectileSpeed;
             bulletController.Fire();
             bulletController.enabled = true;
