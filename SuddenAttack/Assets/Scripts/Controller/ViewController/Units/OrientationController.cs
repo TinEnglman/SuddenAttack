@@ -24,7 +24,10 @@ namespace SuddenAttack.Controller.ViewController.Units
         public void SetAngle(int angle)
         {
             _currentAngle = angle;
+            int index = GetIndex(angle);
+            int resultAngle = -angle + index * _angleQuant;
             _spriteRenrerer.sprite = GetTexture();
+            _spriteRenrerer.transform.rotation = Quaternion.AngleAxis(resultAngle, new Vector3(0, 0, 1));
         }
 
         public float GetAngle()

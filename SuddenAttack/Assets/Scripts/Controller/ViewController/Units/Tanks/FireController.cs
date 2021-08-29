@@ -5,7 +5,7 @@ namespace SuddenAttack.Controller.ViewController.Units.Tanks
 {
     public class FireController : MonoBehaviour
     {
-        private const float FRAME_SPEED = 0.1f;
+        private const float FRAME_INTERVAL = 0.05f;
 
         [SerializeField]
         private SpriteRenderer _spriteRenderer = default;
@@ -42,7 +42,7 @@ namespace SuddenAttack.Controller.ViewController.Units.Tanks
             {
                 _time += Time.deltaTime;
 
-                if (_time > FRAME_SPEED && (_currentIndex + 1 ) == _sprites.Count)
+                if (_time > FRAME_INTERVAL && (_currentIndex + 1 ) == _sprites.Count)
                 {
                     _time = 0;
                     _isFired = false;
@@ -51,7 +51,7 @@ namespace SuddenAttack.Controller.ViewController.Units.Tanks
 
                 }
 
-                if (_time > FRAME_SPEED && (_currentIndex + 1) < _sprites.Count)
+                if (_time > FRAME_INTERVAL && (_currentIndex + 1) < _sprites.Count)
                 {
                     _time = 0;
                     _currentIndex++;
